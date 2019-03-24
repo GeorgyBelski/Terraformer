@@ -12,11 +12,13 @@ public abstract class Tower : MonoBehaviour
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
-    float timerAttack = 0f;
+    protected float timerAttack = 0f;
+
     public float cooldownAbility1 = 10f;
-    float timerAbility1 = 0f;
+    protected float timerAbility1 = 0f;
+
     public float cooldownAbility2 = 15f;
-    float timerAbility2 = 0f;
+    protected float timerAbility2 = 0f;
 
     [Space]
     [Header("References")]
@@ -33,7 +35,11 @@ public abstract class Tower : MonoBehaviour
     {
         target = ChooseTarget();
         LookAtTarger();
+        Shooting();
+        TowerUpdate();
+        ReduceTimers();
     }
+    internal abstract void TowerUpdate();
 
     void ReduceTimers() {
         if (timerAttack > 0) {
@@ -80,9 +86,11 @@ public abstract class Tower : MonoBehaviour
     }
     void Shooting() {
         if (timerAttack <= 0) {
-
+            TowerAttack(target);
+            timerAttack = cooldownAttack;
         }
     }
+    public abstract void TowerAttack(GameObject target);
 
     private void OnDrawGizmos()
     {
