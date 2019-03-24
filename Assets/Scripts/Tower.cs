@@ -23,7 +23,7 @@ public abstract class Tower : MonoBehaviour
     [Space]
     [Header("References")]
     public Transform cannon;
-    public GameObject target;
+    public Enemy target;
     int targetIndex = -1;
 
     void Start()
@@ -54,13 +54,13 @@ public abstract class Tower : MonoBehaviour
             timerAbility2 -= Time.deltaTime;
         }
     }
-    GameObject ChooseTarget() {
+    Enemy ChooseTarget() {
         
         float distanceToTarget = range;
         float distanceTmp = distanceToTarget;
         targetIndex = -1;
         for (int i = 0; i < EnemyManager.enemies.Count; i++) {
-            distanceTmp = (EnemyManager.enemies[i].transform.position - this.transform.position).magnitude;
+            distanceTmp = (EnemyManager.enemies[i].GetPosition() - this.transform.position).magnitude;
             if (distanceTmp < distanceToTarget)
             {
                 targetIndex = i;
@@ -80,7 +80,7 @@ public abstract class Tower : MonoBehaviour
      //   if (cannon) { 
             if (target)
             {
-                cannon.LookAt(target.transform);
+                cannon.LookAt(target.GetPosition());
             }
     //    }
     }
@@ -90,7 +90,7 @@ public abstract class Tower : MonoBehaviour
             timerAttack = cooldownAttack;
         }
     }
-    public abstract void TowerAttack(GameObject target);
+    public abstract void TowerAttack(Enemy target);
 
     private void OnDrawGizmos()
     {
@@ -104,7 +104,10 @@ public abstract class Tower : MonoBehaviour
             else {
                 Gizmos.color = Color.gray;
             }
-            Gizmos.DrawLine(EnemyManager.enemies[i].transform.position, this.transform.position);
+            if (EnemyManager.enemies[i]) {
+                Gizmos.DrawLine(EnemyManager.enemies[i].GetPosition(), this.transform.position);
+            }
+            
         }
 
         //range

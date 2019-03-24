@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElectroTower : Tower
 {
-    public override void TowerAttack(GameObject target)
+    public override void TowerAttack(Enemy target)
     {
         
     }

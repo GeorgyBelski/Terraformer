@@ -6,6 +6,7 @@ public class LaserTower : Tower
 {
     public Transform gunpoint;
     public float duration = 0.3f;
+    public int damageAttack = 50;
     float timerDuration;
     LineRenderer lr;
     Color startLaser, endLaser;
@@ -17,7 +18,7 @@ public class LaserTower : Tower
         startLaser = lr.startColor;
         endLaser = lr.endColor;
     }
-    public override void TowerAttack(GameObject target)
+    public override void TowerAttack(Enemy target)
     {
         if (target) {
             timerDuration = duration;
@@ -25,6 +26,8 @@ public class LaserTower : Tower
             lr.SetPosition(1, target.transform.position);
             lr.startColor = startLaser;
             lr.endColor = endLaser;
+
+            target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
         }
     }
 
