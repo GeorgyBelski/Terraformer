@@ -326,7 +326,7 @@ MonoBehaviour:
     m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
-  antialiasingMode: 3
+  antialiasingMode: 2
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -740,7 +740,7 @@ PrefabInstance:
     - target: {fileID: 7806450487241019077, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.31
+      value: -22.36
       objectReference: {fileID: 0}
     - target: {fileID: 7806450487241019077, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
         type: 3}
