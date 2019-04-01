@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ElectroTower : Tower
 {
+    [Space]
+    [Header("ElectroTower")]
     public Transform gunpoint;
     public float lightningSpeed = 100f;
     public int damageAttack = 50;
@@ -37,37 +39,45 @@ public class ElectroTower : Tower
 
     internal override void TowerUpdate()
     {
+        ChargeControl();
+    }
+
+    
+    void ChargeControl() {
         if (currentLightningCharge)
-        { 
+        {
+            if (target)
+            {
+                fromChargeToTarget = target.GetPosition() - currentLightningCharge.position;
+                float distanceFromChargeToTarget = fromChargeToTarget.magnitude;
+                currentLightningCharge.position = Vector3.Lerp(gunpoint.position, target.GetPosition(), chargeLerpPosition);
+                chargeLerpPosition += lightningSpeed * Time.deltaTime * (range / distanceFromChargeToTarget);
+                if (distanceFromChargeToTarget < 0.2)
+                {
+                    currentLightningCharge.position = target.GetPosition();
+                    DestroyCharge();
+                    target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
+                    chargeLerpPosition = 0;
+                }
+            }
+
             timerChargeLifeTime -= Time.deltaTime;
             if (timerChargeLifeTime <= 0)
             {
                 DestroyCharge();
-            }
-            if (target)
-            {
-                try {
-                    fromChargeToTarget = target.GetPosition() - currentLightningCharge.position;
-                    float distanceFromChargeToTarget = fromChargeToTarget.magnitude;
-                    currentLightningCharge.position = Vector3.Lerp(gunpoint.position, target.GetPosition(), chargeLerpPosition);
-                    chargeLerpPosition += lightningSpeed * Time.deltaTime * (range / distanceFromChargeToTarget);
-                    if (distanceFromChargeToTarget < 0.2) {
-                        currentLightningCharge.position = target.GetPosition();
-                        DestroyCharge();
-                        target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
-                        chargeLerpPosition = 0;
-                    }
-                }
-                catch (Exception e) {
-                    Debug.Log("Exception in TowerUpdate: " + e);
-                }
+                timerChargeLifeTime = 0;
             }
         }
     }
 
-    void DestroyCharge() {
-        Destroy(currentLightningCharge.gameObject);
-        currentLightningCharge = null;
-        chargeLerpPosition = 0;
+    void DestroyCharge()
+    {
+        if (currentLightningCharge)
+        {
+            Destroy(currentLightningCharge.gameObject);
+            currentLightningCharge = null;
+            chargeLerpPosition = 0;
+        }
     }
+
 }

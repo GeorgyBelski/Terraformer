@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LaserTower : Tower
 {
+    [Space]
+    [Header("LaserTower")]
     public Transform gunpoint;
     public float duration = 0.3f;
     public int damageAttack = 50;

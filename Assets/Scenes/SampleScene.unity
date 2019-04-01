@@ -730,12 +730,12 @@ PrefabInstance:
     - target: {fileID: 7806450487241019077, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.31
+      value: -1.421
       objectReference: {fileID: 0}
     - target: {fileID: 7806450487241019077, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8
+      value: 2.804
       objectReference: {fileID: 0}
     - target: {fileID: 7806450487241019077, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
         type: 3}
@@ -781,6 +781,61 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -809.543
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432423, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: TrailModule.mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432423, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: TrailModule.ribbonCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432423, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: TrailModule.splitSubEmitterRibbons
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432423, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 4.501313
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432423, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: RotationBySpeedModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432423, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: RotationBySpeedModule.separateAxes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432423, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: ShapeModule.alignToDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432422, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432422, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: m_ShadowBias
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432422, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: m_MotionVectors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848706040537432424, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b3e30d242c0a6d4183e0364f86b5ce9, type: 3}
@@ -1109,7 +1164,7 @@ PrefabInstance:
     - target: {fileID: 7532716056537121493, guid: 6c767a6979ec47546b20e60deea06abc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.76
+      value: 3.82
       objectReference: {fileID: 0}
     - target: {fileID: 7532716056537121493, guid: 6c767a6979ec47546b20e60deea06abc,
         type: 3}
