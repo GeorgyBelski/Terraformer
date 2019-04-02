@@ -19,7 +19,7 @@ public class LaserTower1 : MonoBehaviour
     [Space]
     [Header("References")]
     public Transform cannon;
-    public GameObject target;
+    public Enemy target;
 
     void Start()
     {
@@ -48,7 +48,7 @@ public class LaserTower1 : MonoBehaviour
             timerAbility2 -= Time.deltaTime;
         }
     }
-    GameObject ChooseTarget()
+    Enemy ChooseTarget()
     {
         float distanceToTarget = range;
         float distanceTmp = distanceToTarget;
