@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public List<Enemy> startEnemies = new List<Enemy>();
-    public static List<Enemy> enemies = new List<Enemy>();
+    public List<GameObject> startEnemies = new List<GameObject>();
+    public static List<GameObject> enemies = new List<GameObject>();
 
     private void Start()
     {
-        foreach(Enemy startEnemy in startEnemies){
+        foreach(GameObject startEnemy in startEnemies){
             enemies.Add(startEnemy);
         }
     }
