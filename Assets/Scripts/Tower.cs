@@ -12,16 +12,17 @@ public abstract class Tower : MonoBehaviour
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
-    float timerAttack = 0f;
-    public float cooldownAbility1 = 10f;
-    float timerAbility1 = 0f;
-    public float cooldownAbility2 = 15f;
-    float timerAbility2 = 0f;
+    protected float timerAttack = 0f;
 
-    [Space]
+    public float cooldownAbility1 = 10f;
+    protected float timerAbility1 = 0f;
+
+    public float cooldownAbility2 = 15f;
+    protected float timerAbility2 = 0f;
+
     [Header("References")]
     public Transform cannon;
-    public GameObject target;
+    public Enemy target;
     int targetIndex = -1;
 
     void Start()
@@ -33,28 +34,42 @@ public abstract class Tower : MonoBehaviour
     {
         target = ChooseTarget();
         LookAtTarger();
+        Shooting();
+        TowerUpdate();
+        ReduceTimers();
     }
+    internal abstract void TowerUpdate();
 
     void ReduceTimers() {
-        if (timerAttack > 0) {
+        if (timerAttack > 0)
+        {
             timerAttack -= Time.deltaTime;
+        }
+        else {
+            timerAttack = 0;
         }
         if (timerAbility1 > 0)
         {
             timerAbility1 -= Time.deltaTime;
         }
+        else {
+            timerAbility1 = 0;
+        }
         if (timerAbility2 > 0)
         {
             timerAbility2 -= Time.deltaTime;
         }
+        else {
+            timerAbility2 = 0;
+        }
     }
-    GameObject ChooseTarget() {
+    Enemy ChooseTarget() {
         
         float distanceToTarget = range;
         float distanceTmp = distanceToTarget;
         targetIndex = -1;
         for (int i = 0; i < EnemyManager.enemies.Count; i++) {
-            distanceTmp = (EnemyManager.enemies[i].transform.position - this.transform.position).magnitude;
+            distanceTmp = (EnemyManager.enemies[i].GetPosition() - this.transform.position).magnitude;
             if (distanceTmp < distanceToTarget)
             {
                 targetIndex = i;
@@ -74,15 +89,17 @@ public abstract class Tower : MonoBehaviour
      //   if (cannon) { 
             if (target)
             {
-                cannon.LookAt(target.transform);
+                cannon.LookAt(target.GetPosition());
             }
     //    }
     }
     void Shooting() {
         if (timerAttack <= 0) {
-
+            TowerAttack(target);
+            timerAttack = cooldownAttack;
         }
     }
+    public abstract void TowerAttack(Enemy target);
 
     private void OnDrawGizmos()
     {
@@ -96,7 +113,10 @@ public abstract class Tower : MonoBehaviour
             else {
                 Gizmos.color = Color.gray;
             }
-            Gizmos.DrawLine(EnemyManager.enemies[i].transform.position, this.transform.position);
+            if (EnemyManager.enemies[i]) {
+                Gizmos.DrawLine(EnemyManager.enemies[i].GetPosition(), this.transform.position);
+            }
+            
         }
 
         //range
