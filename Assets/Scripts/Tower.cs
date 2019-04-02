@@ -20,7 +20,6 @@ public abstract class Tower : MonoBehaviour
     public float cooldownAbility2 = 15f;
     protected float timerAbility2 = 0f;
 
-    [Space]
     [Header("References")]
     public Transform cannon;
     public Enemy target;
@@ -42,16 +41,26 @@ public abstract class Tower : MonoBehaviour
     internal abstract void TowerUpdate();
 
     void ReduceTimers() {
-        if (timerAttack > 0) {
+        if (timerAttack > 0)
+        {
             timerAttack -= Time.deltaTime;
+        }
+        else {
+            timerAttack = 0;
         }
         if (timerAbility1 > 0)
         {
             timerAbility1 -= Time.deltaTime;
         }
+        else {
+            timerAbility1 = 0;
+        }
         if (timerAbility2 > 0)
         {
             timerAbility2 -= Time.deltaTime;
+        }
+        else {
+            timerAbility2 = 0;
         }
     }
     Enemy ChooseTarget() {

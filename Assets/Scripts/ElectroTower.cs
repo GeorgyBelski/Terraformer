@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ElectroTower : Tower
 {
-    [Space]
     [Header("ElectroTower")]
     public Transform gunpoint;
     public float lightningSpeed = 100f;
