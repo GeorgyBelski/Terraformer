@@ -10,6 +10,10 @@ public class ElectroTower : Tower
     public float lightningSpeed = 100f;
     public int damageAttack = 50;
     public GameObject lightningCharge;
+    public GameObject thanderBallPrefab;
+    public float thanderBallSpeed = 20f;
+    GameObject thandetBall;
+    Vector3 thandetBallAim;
     public Transform currentLightningCharge;
     public float explosionTime = 0.4f;
 
@@ -18,9 +22,12 @@ public class ElectroTower : Tower
     float chargeLerpPosition;
     Vector3 fromChargeToTarget;
 
+    
+
+
     private void Start()
     {
-
+        type = TowerType.Electro;
     }
     public override void TowerAttack(Enemy target)
     {
@@ -38,7 +45,8 @@ public class ElectroTower : Tower
 
     internal override void TowerUpdate()
     {
-        ChargeControl();
+            ChargeControl();
+        ThanderBallControl();
     }
 
     
@@ -77,6 +85,45 @@ public class ElectroTower : Tower
             currentLightningCharge = null;
             chargeLerpPosition = 0;
         }
+    }
+
+    public void CastThanderBall( Vector3 aimPosition) {
+        if (IsCastingAbility == true) {
+            return;
+        }
+        
+        TowerManager.availableElectroTowers.Remove(this);
+        thandetBallAim = aimPosition;
+        cannon.LookAt(thandetBallAim);
+        IsCastingAbility = true;
+        Vector3 offsetFromCannon = gunpoint.position - cannon.position;
+        thandetBall = Instantiate(thanderBallPrefab, gunpoint.position + offsetFromCannon, gunpoint.rotation);
+        
+        
+    }
+    void ThanderBallControl() {
+        if (thandetBall) {
+            if (IsCastingAbility) {
+                Vector3 offsetFromCannon = gunpoint.position - cannon.position;
+                thandetBall.transform.position += offsetFromCannon * thanderBallSpeed * Time.deltaTime / 20;
+            }else{
+                Vector3 toAim = thandetBallAim - thandetBall.transform.position;
+                if (toAim.magnitude > 0.15f)
+                {
+                    thandetBall.transform.position += toAim.normalized * thanderBallSpeed * Time.deltaTime;
+                }
+                else {
+                    thandetBall.transform.position = thandetBallAim;
+                }
+                
+            }
+
+        }
+    }
+
+    public void EndCasting() {
+        IsCastingAbility = false;
+        TowerManager.availableElectroTowers.Add(this);
     }
 
 }

@@ -16,6 +16,8 @@ public class LaserTower : Tower
 
     private void Start()
     {
+        type = TowerType.Laser;
+
         lr = gunpoint.GetComponent<LineRenderer>();
         startLaser = lr.startColor;
         endLaser = lr.endColor;
