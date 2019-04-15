@@ -13,6 +13,7 @@ public class ElectroTower : Tower
     public GameObject thanderBallPrefab;
     public float thanderBallSpeed = 20f;
     GameObject thandetBall;
+    Animator thandetBallAnimator;
     Vector3 thandetBallAim;
     public Transform currentLightningCharge;
     public float explosionTime = 0.4f;
@@ -98,8 +99,9 @@ public class ElectroTower : Tower
         IsCastingAbility = true;
         Vector3 offsetFromCannon = gunpoint.position - cannon.position;
         thandetBall = Instantiate(thanderBallPrefab, gunpoint.position + offsetFromCannon, gunpoint.rotation);
-        
-        
+        thandetBallAnimator = thandetBall.GetComponent<Animator>();
+
+
     }
     void ThanderBallControl() {
         if (thandetBall) {
@@ -114,6 +116,7 @@ public class ElectroTower : Tower
                 }
                 else {
                     thandetBall.transform.position = thandetBallAim;
+                    thandetBallAnimator.SetBool("isReachAim", true);
                 }
                 
             }
