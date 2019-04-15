@@ -392,11 +392,12 @@ MonoBehaviour:
   cannon: {fileID: 7532716056096678989}
   target: {fileID: 0}
   gunpoint: {fileID: 7532716055238349617}
-  lightningSpeed: 2
+  lightningLerpSpeed: 2
   damageAttack: 50
   lightningCharge: {fileID: 5848706040537432421, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
     type: 3}
+  currentLightningCharge: {fileID: 0}
   thanderBallPrefab: {fileID: 1326194414083214007, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
     type: 3}
-  currentLightningCharge: {fileID: 0}
+  thanderBallSpeed: 50
   explosionTime: 0.4

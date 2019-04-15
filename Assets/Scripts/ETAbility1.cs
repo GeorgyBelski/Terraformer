@@ -18,7 +18,7 @@ public class ETAbility1 : MonoBehaviour
     public GameObject thunderball;
     public GameObject aimAreaPrefab;
     public Transform aimArea;
-    public Transform tmp;
+    Animator aimAreaAnimator;
 
     ElectroTower casterTower;
     float camRayLength = 90f;
@@ -43,22 +43,10 @@ public class ETAbility1 : MonoBehaviour
         ReduceTimers();
 
         ButtonAvailabilityControl();
-
-        /*
-        if (tmp)
-        {
-            tmp.localScale *= 1.1f;
+        if (Input.GetKey(KeyCode.Q)) {
+            ETA1Activate();
         }
 
-        if (timerCast <= 0) {
-            timerCast = 0;
-            if (tmp) {
-                Destroy(tmp.gameObject);
-                tmp = null;
-
-            }
-        }
-        */
         if (currentState == State.Aiming) {
             Aiming();
             if (Input.GetMouseButtonDown(0))
@@ -77,7 +65,7 @@ public class ETAbility1 : MonoBehaviour
                     RemoveAimArea();
                 }
                 
-             //   RemoveAimArea();
+                RemoveAimArea();
             }
             else if (Input.GetMouseButtonDown(1))
             {
@@ -88,9 +76,8 @@ public class ETAbility1 : MonoBehaviour
         }
     }
 
-    public void ETA1Activate() {
-     //   tmp = Instantiate(thunderball, Vector3.zero, this.transform.rotation).transform;
-
+    public void ETA1Activate()
+    {
         timerCast = castTime;
 
         if (currentState == State.Ready) {
@@ -101,10 +88,17 @@ public class ETAbility1 : MonoBehaviour
 
     }
 
-    private void SetAimArea() {
+    private void SetAimArea()
+    {
         if (!aimArea)
         {
-            aimArea = Instantiate(aimAreaPrefab, Vector3.zero, this.transform.rotation).transform;
+            GameObject aimAreaGameObject = Instantiate(aimAreaPrefab, Vector3.zero, this.transform.rotation);
+            aimArea = aimAreaGameObject.transform;
+            aimAreaAnimator = aimAreaGameObject.GetComponent<Animator>();
+
+        }
+        else {
+            aimAreaAnimator.SetBool("isSetted", false);
         }
     }
 
@@ -151,6 +145,7 @@ public class ETAbility1 : MonoBehaviour
             {
                 currentState = State.Recharging;
                 casterTower.EndCasting();
+
             }
         }
         else{
@@ -159,9 +154,10 @@ public class ETAbility1 : MonoBehaviour
         }
     }
     void RemoveAimArea() {
-        if (aimArea) { 
-            Destroy(aimArea.gameObject);
-            aimArea = null;
+        if (aimArea) {
+            //    Destroy(aimArea.gameObject);
+            //   aimArea = null;
+            aimAreaAnimator.SetBool("isSetted", true);
         }
     }
 
