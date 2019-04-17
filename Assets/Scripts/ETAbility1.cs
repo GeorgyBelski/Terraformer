@@ -43,7 +43,7 @@ public class ETAbility1 : MonoBehaviour
         ReduceTimers();
 
         ButtonAvailabilityControl();
-        if (Input.GetKey(KeyCode.Q)) {
+        if (currentState == State.Ready && Input.GetKey(KeyCode.Q)) {
             ETA1Activate();
         }
 

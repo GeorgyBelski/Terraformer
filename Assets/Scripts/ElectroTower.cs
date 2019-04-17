@@ -36,6 +36,7 @@ public class ElectroTower : Tower
     {
 
         type = TowerType.Electro;
+        thandetBallAim = Vector3.down;
     }
     public override void TowerAttack(Enemy target)
     {
@@ -57,7 +58,8 @@ public class ElectroTower : Tower
         ThanderBallControl();
     }
 
-    
+ // AutoAttack - Charge   
+
     void ChargeControl() {
         if (currentLightningCharge)
         {
@@ -95,6 +97,8 @@ public class ElectroTower : Tower
         }
     }
 
+// Ability 1  - ThanderBall
+
     public void CastThanderBall( Vector3 aimPosition) {
         if (IsCastingAbility == true) {
             return;
@@ -107,12 +111,12 @@ public class ElectroTower : Tower
         Vector3 offsetFromCannon = gunpoint.position - cannon.position;
         if (!thandetBall)
         {
-            thandetBall = Instantiate(thanderBallPrefab, gunpoint.position + offsetFromCannon, gunpoint.rotation);
-            thandetBallAnimator = thandetBall.GetComponent<Animator>();
+            thandetBall = Instantiate(thanderBallPrefab, gunpoint.position + offsetFromCannon/2, cannon.rotation);
+            thandetBallAnimator = thandetBall.GetComponentInChildren<Animator>();
         }
         else {
-            thandetBall.transform.position = gunpoint.position + offsetFromCannon;
-            thandetBall.transform.rotation = gunpoint.rotation;
+            thandetBall.transform.position = gunpoint.position + offsetFromCannon/2;
+            thandetBall.transform.rotation = cannon.rotation;
             thandetBallAnimator.SetBool("isReachAim", false);
         }
         
@@ -120,10 +124,10 @@ public class ElectroTower : Tower
 
     }
     void ThanderBallControl() {
-        if (thandetBall) {
+        if (thandetBallAim != Vector3.down) { // analog to  'thandetBallAim != null';
             if (IsCastingAbility) {
                 Vector3 offsetFromCannon = gunpoint.position - cannon.position;
-                thandetBall.transform.position += offsetFromCannon * thanderBallSpeed * Time.deltaTime / 20;
+                thandetBall.transform.position += offsetFromCannon * thanderBallSpeed * Time.deltaTime / 32;
                 previousDistanceToAim = float.PositiveInfinity;
             }
             else{
@@ -137,6 +141,7 @@ public class ElectroTower : Tower
                 else {
                     thandetBall.transform.position = thandetBallAim;
                     thandetBallAnimator.SetBool("isReachAim", true);
+                    thandetBallAim = Vector3.down; // analog to  'thandetBallAim = null';
                 }
                 
             }

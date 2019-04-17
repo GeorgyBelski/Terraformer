@@ -40,10 +40,9 @@ public abstract class Tower : MonoBehaviour
         if (!IsCastingAbility) { 
             target = ChooseTarget();
             LookAtTarger();
-        }
-        if (!castingAbility) {
             Shooting();
         }
+
         TowerUpdate();
         ReduceTimers();
     }
