@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBarController : MonoBehaviour
+public class SpriteController : MonoBehaviour
 {
     Transform actor;
     Vector3 fromPlayerToBar;
-    Quaternion StableRotation;
 
     void Start()
     {
         actor = transform.root;
         fromPlayerToBar = this.transform.position - actor.transform.position;
-        StableRotation = Camera.main.transform.rotation;
-        this.transform.rotation = StableRotation;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         this.transform.position = actor.transform.position + fromPlayerToBar;
-        this.transform.rotation = StableRotation;
+        this.transform.rotation = Camera.main.transform.rotation;
     }
 }

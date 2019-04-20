@@ -4,11 +4,16 @@ using UnityEngine;
 
 public abstract class Tower : MonoBehaviour
 {
+    public enum TowerType { Electro, Laser };
+    public TowerType type;
+
     [Header("Main Attributes")]
     public int range = 8;
     public Color color;
     public Material gizmoMaterial;
-
+    public bool isSelected;
+    bool castingAbility;
+    public bool IsCastingAbility { get => castingAbility; set => castingAbility = value; }
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
@@ -32,9 +37,12 @@ public abstract class Tower : MonoBehaviour
 
     void Update()
     {
-        target = ChooseTarget();
-        LookAtTarger();
-        Shooting();
+        if (!IsCastingAbility) { 
+            target = ChooseTarget();
+            LookAtTarger();
+            Shooting();
+        }
+
         TowerUpdate();
         ReduceTimers();
     }
