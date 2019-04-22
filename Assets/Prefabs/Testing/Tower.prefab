@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4757540688449307455}
   - component: {fileID: 6036724130242733892}
   - component: {fileID: 351361487}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tower
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 6028549366507352208}
   - component: {fileID: 1637668847277125337}
   - component: {fileID: 5996312850429117186}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 8430193186520949507}
   - component: {fileID: 4289154011085500974}
   - component: {fileID: 2723358675831736328}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
