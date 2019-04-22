@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8193904619243790427}
   - component: {fileID: 8193904619243790424}
   - component: {fileID: 8497654064772312683}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AimArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

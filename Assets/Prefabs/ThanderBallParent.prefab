@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7017228567069846820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ThanderBallParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,6 +42,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ThanderBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326194414083214007, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1326194414083214013, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
         type: 3}
