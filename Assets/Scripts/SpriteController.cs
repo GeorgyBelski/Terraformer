@@ -13,7 +13,7 @@ public class SpriteController : MonoBehaviour
         fromPlayerToBar = this.transform.position - actor.transform.position;
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         this.transform.position = actor.transform.position + fromPlayerToBar;
         this.transform.rotation = Camera.main.transform.rotation;
