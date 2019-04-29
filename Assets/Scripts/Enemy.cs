@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    public ThirdPersonCharacter character;
+    public EnemyEffectsController effectsController;
+
     [Range(10, 1000)]
     public int maxHealth = 100;
 
@@ -15,12 +19,16 @@ public class Enemy : MonoBehaviour, IDamageable
     [Space]
     [Header("References")]
     public Image healthBar;
+    public Text[] damagePoints = new Text[3];
+    public Animator[] damagePointAnimators = new Animator[3];
+    public short damagePointIndex = 0;
+    // Vector3 capsuleCenter;
 
     float healthRatio;
 
     void Start()
     {
-        
+        // capsuleCenter = GetComponent<CapsuleCollider>().center;
     }
 
     void Update()
@@ -33,6 +41,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (health > 0)
         {
             health -= value;
+            PopUpDamagePoint(value);
         }
         else {
             health = 0;
@@ -54,6 +63,18 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public Vector3 GetPosition()
     {
-        return this.transform.position;
+         
+        return this.transform.position + Vector3.up * 1.3f;
     }
+
+    void PopUpDamagePoint(int value)
+    {
+        damagePoints[damagePointIndex].text = value.ToString();
+        damagePointAnimators[damagePointIndex].SetBool("isDamaged", true);
+        damagePointIndex++;
+        if (damagePointIndex == damagePoints.Length) {
+            damagePointIndex = 0;
+        }
+    }
+
 }

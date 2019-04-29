@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ElectroTower : Tower
 {
     [Header("ElectroTower")]
     public Transform gunpoint;
+    
 
     [Header("AutoAttack")]
     public float lightningLerpSpeed = 100f;
