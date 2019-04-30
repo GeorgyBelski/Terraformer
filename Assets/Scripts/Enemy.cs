@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, IDamageable
             health -= value;
             PopUpDamagePoint(value);
         }
-        else {
+        if(health <= 0) {
             health = 0;
             EnemyManager.enemies.Remove(this);
         }
