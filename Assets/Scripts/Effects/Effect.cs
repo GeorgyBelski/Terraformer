@@ -10,6 +10,18 @@ public abstract class Effect
     public float lifetime = 2f;
     public float timerLifetime;
 
+    public static Effect Create(Type type) {
+        if (type == Type.Burning)
+        {
+            return new BurningEffect();
+        }
+        else if(type == Type.Stan)
+        {
+            return new StanEffect();
+        }
+        return null;
+    }
+
     public void ReduceLifeTimer() {
         if (timerLifetime <= 0)
         {

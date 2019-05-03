@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class BurningEffect : Effect
 {
-    public GameObject flame;
     public int damage; // in half a second
     public float timerDamage = 0.3f;
 
-    public BurningEffect(float lifetime, float timerLifetime, int damage)
-    {
-        this.type = Type.Burning;
-        Set(lifetime, timerLifetime, damage);
+    public BurningEffect() {
+        this.type = Effect.Type.Burning;
     }
 
-
     public void Set(float lifetime, float timerLifetime, int damage) {
+        
         this.lifetime = lifetime;
         this.timerLifetime = timerLifetime;
         this.damage = damage;
@@ -34,5 +31,5 @@ public class BurningEffect : Effect
         }
     }
 
-
+    
 }

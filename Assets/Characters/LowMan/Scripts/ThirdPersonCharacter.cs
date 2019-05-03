@@ -27,7 +27,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		float m_CapsuleHeight;
 		public Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
-		bool m_Crouching;
+		public bool m_Crouching;
 
 
 		void Start()
@@ -54,7 +54,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
-			m_ForwardAmount = move.z;
+            if (!m_Crouching)
+            {
+                m_ForwardAmount = move.z;
+            }
+            else {
+                m_ForwardAmount = 0f;
+            }
+			    
 
 			ApplyExtraTurnRotation();
 
@@ -68,14 +75,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				HandleAirborneMovement();
 			}
 
-			ScaleCapsuleForCrouching(crouch);
+		//	ScaleCapsuleForCrouching(crouch);
 			PreventStandingInLowHeadroom();
 
 			// send input and other state parameters to the animator
 			UpdateAnimator(move);
 		}
 
-
+/*
 		void ScaleCapsuleForCrouching(bool crouch)
 		{
 			if (m_IsGrounded && crouch)
@@ -99,7 +106,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_Crouching = false;
 			}
 		}
-
+*/
 		void PreventStandingInLowHeadroom()
 		{
 			// prevent standing up in crouch-only zones

@@ -24,10 +24,13 @@ public class ElectroTower : Tower
     [Header("ThandetBall")]
     public GameObject thanderBallPrefab;
     public float thanderBallSpeed = 20f;
+    public float thanderBallEffectRadius = 2.19f;
     GameObject thandetBall;
     Animator thandetBallAnimator;
     SphereCollider thandetBallCollider;
     Vector3 thandetBallAim;
+    Collider[] hitThanderBallColliders;
+
 
     float previousDistanceToAim;
     public float explosionTime = 0.4f;
@@ -39,6 +42,7 @@ public class ElectroTower : Tower
 
         type = TowerType.Electro;
         thandetBallAim = Vector3.down;
+        hitThanderBallColliders = new Collider[10];
     }
     public override void TowerAttack(Enemy target)
     {
@@ -115,6 +119,8 @@ public class ElectroTower : Tower
         {
             thandetBall = Instantiate(thanderBallPrefab, gunpoint.position + offsetFromCannon/2, cannon.rotation);
             thandetBallAnimator = thandetBall.GetComponentInChildren<Animator>();
+            thandetBallCollider = thandetBall.GetComponentInChildren<SphereCollider>();
+            thandetBallCollider.enabled = false;
         }
         else {
             thandetBall.transform.position = gunpoint.position + offsetFromCannon/2;
@@ -128,8 +134,8 @@ public class ElectroTower : Tower
     void ThanderBallControl() {
         if (thandetBallAim != Vector3.down) { // analog to  'thandetBallAim != null';
             if (IsCastingAbility) {
-                Vector3 offsetFromCannon = gunpoint.position - cannon.position;
-                thandetBall.transform.position += offsetFromCannon * thanderBallSpeed * Time.deltaTime / 32;
+                Vector3 ofsetFromCannon = gunpoint.position - cannon.position;
+                thandetBall.transform.position += ofsetFromCannon * thanderBallSpeed * Time.deltaTime / 32;
                 previousDistanceToAim = float.PositiveInfinity;
             }
             else{
@@ -143,11 +149,25 @@ public class ElectroTower : Tower
                 else {
                     thandetBall.transform.position = thandetBallAim;
                     thandetBallAnimator.SetBool("isReachAim", true);
+                    ApplyThanderBallEffects(thandetBallAim, thanderBallEffectRadius );
                     thandetBallAim = Vector3.down; // analog to  'thandetBallAim = null';
                 }
                 
             }
 
+        }
+    }
+
+    private void ApplyThanderBallEffects(Vector3 center, float radius)
+    {      
+        int hittedEnemysNumber = Physics.OverlapSphereNonAlloc(center, radius, hitThanderBallColliders, EnemyManager.enemyLayerMask);
+     //   Debug.Log("hittedEnemysNumber: " + hittedEnemysNumber);
+        for (int i=0; i < hittedEnemysNumber; i++)
+        {
+            //  hitColliders[i].SendMessage("AddDamage");
+            //    Debug.Log(hitThanderBallColliders[i]);
+            hitThanderBallColliders[i].GetComponent<EnemyEffectsController>().AddStan(2);
+            hitThanderBallColliders[i] = null;
         }
     }
 
