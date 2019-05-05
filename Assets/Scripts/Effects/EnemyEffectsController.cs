@@ -80,7 +80,7 @@ public class EnemyEffectsController : MonoBehaviour
             vertigo.SetActive(false);
           //  tpCharacter.m_AnimSpeedMultiplier = 1f;
           //  tpCharacter.m_StationaryTurnSpeed = 180f;
-            tpCharacter.m_Crouching = false;
+            tpCharacter.m_Stan = false;
             navAgent.speed = 1;
         }
     }
@@ -122,7 +122,7 @@ public class EnemyEffectsController : MonoBehaviour
         EnableVertigo();
         //  tpCharacter.m_AnimSpeedMultiplier = 0f;
        // tpCharacter.m_MoveSpeedMultiplier = 0f;
-        tpCharacter.m_Crouching = true;
+        tpCharacter.m_Stan = true;
         navAgent.speed = 0;
     }
 

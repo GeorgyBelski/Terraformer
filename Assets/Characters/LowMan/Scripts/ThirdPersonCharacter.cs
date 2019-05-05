@@ -25,12 +25,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		float m_ForwardAmount;
 		Vector3 m_GroundNormal;
 		float m_CapsuleHeight;
-		public Vector3 m_CapsuleCenter;
+		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		public bool m_Crouching;
+        public bool m_Stan;
 
 
-		void Start()
+
+        void Start()
 		{
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
@@ -128,7 +130,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
-			m_Animator.SetBool("OnGround", m_IsGrounded);
+            m_Animator.SetBool("Stan", m_Stan);
+            m_Animator.SetBool("OnGround", m_IsGrounded);
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
