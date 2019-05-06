@@ -27,7 +27,7 @@ public class LaserTower : Tower
         if (target) {
             timerDuration = duration;
             lr.SetPosition(0, gunpoint.position);
-            lr.SetPosition(1, target.transform.position + new Vector3(0, 1, 0));
+            lr.SetPosition(1, target.transform.position);
             lr.startColor = startLaser;
             lr.endColor = endLaser;
 
