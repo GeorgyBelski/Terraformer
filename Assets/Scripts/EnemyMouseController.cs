@@ -20,14 +20,19 @@ public class EnemyMouseController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(2))
+        /*if (Input.GetMouseButtonDown(2))
         {
             ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                agent.SetDestination(hit.point);
+                //
             }
         }
+        */
+        //if (agent.destination)
+        //{
+
+        //}
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             character.Move(agent.desiredVelocity, false, false);
@@ -37,4 +42,12 @@ public class EnemyMouseController : MonoBehaviour
         }
         
     }
+
+    public void setDest(Transform obj)
+    {
+        agent.SetDestination(obj.position);
+    }
+
+
+
 }
