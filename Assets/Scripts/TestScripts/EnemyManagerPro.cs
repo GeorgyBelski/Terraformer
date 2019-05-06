@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyManagerPro : MonoBehaviour
 {
     public List<Enemy> startEnemies = new List<Enemy>();
-    public static List<Enemy> enemiesDamage = new List<Enemy>();
-    public static List<Enemy> enemiesHealers = new List<Enemy>();
+    //public static List<Enemy> enemiesDamage = new List<Enemy>();
+    //public static List<Enemy> enemiesHealers = new List<Enemy>();
     public static List<Enemy> enemies = new List<Enemy>();
     //public static List<HealBase> healBases = new List<HealBase>();
 
@@ -14,15 +14,15 @@ public class EnemyManagerPro : MonoBehaviour
 
     private void Start()
     {
-        enemiesMap.Add("Damager", enemiesDamage);
-        enemiesMap.Add("Healer", enemiesHealers);
-        foreach (Enemy startEnemy in startEnemies)
-        {
-            enemies.Add(startEnemy);
+        //enemiesMap.Add("Damager", enemiesDamage);
+        //enemiesMap.Add("Healer", enemiesHealers);
+        //foreach (Enemy startEnemy in startEnemies)
+        //{
+            //enemies.Add(startEnemy);
             //enemiesMap.Add("Damage", startEnemy);
-        }
-        enemiesDamage.Add(startEnemies[1]);//Testing
-        enemiesHealers.Add(startEnemies[0]);
+        //}
+        //enemiesDamage.Add(startEnemies[1]);//Testing
+        //enemiesHealers.Add(startEnemies[0]);
         //enemiesHealers.Add(startEnemies[2]);
     }
 
@@ -30,10 +30,21 @@ public class EnemyManagerPro : MonoBehaviour
 
     public static void addEnemy(string name, Enemy enem)
     {
+        if (enemiesMap.ContainsKey(name))
+        {
+            enemiesMap[name].Add(enem);
+            enemies.Add(enem);
+        }
+        else
+        {
+            //List<Enemy> enemiesDamage = new List<Enemy>();
+            enemiesMap.Add(name, new List<Enemy>());
+            enemiesMap[name].Add(enem);
+            enemies.Add(enem);
+        }
         //enemiesMap.Add(name, enem);
-        //print(enemiesMap[name]);
-        enemiesMap[name].Add(enem);
-        enemies.Add(enem);
+        print(enemiesMap[name]);
+        
         
     }
 

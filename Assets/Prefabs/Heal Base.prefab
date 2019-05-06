@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 54777331221548622}
   - component: {fileID: 1772361876839422169}
   - component: {fileID: 5691318349596143737}
+  - component: {fileID: 815574347422796512}
   m_Layer: 0
   m_Name: Heal Base
   m_TagString: Untagged
@@ -390,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healpower: 50
-  radius: 10
+  radius: 4
   liveTime: 20
   healRate: 2
   StartPoint: {fileID: 2407488622040583472}
@@ -424,6 +425,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
+  healthBar: {fileID: 8189187154717802135}
+--- !u!114 &815574347422796512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691318349596143735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100
   healthBar: {fileID: 8189187154717802135}
 --- !u!1 &6923754185757006641
 GameObject:

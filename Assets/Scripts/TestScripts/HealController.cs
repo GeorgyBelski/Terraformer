@@ -44,6 +44,7 @@ public class HealController : MonoBehaviour
         //enem = GetComponent<Enemy>();
         //float min;
         lr.startColor = startHeal;
+        EnemyManagerPro.addEnemy("Healer", GetComponent<Enemy>());
         lr.endColor = endHeal;
     }
 

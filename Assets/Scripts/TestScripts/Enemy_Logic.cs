@@ -26,6 +26,7 @@ public class Enemy_Logic : MonoBehaviour
         realcheckTime = checkTime;
         emk = GetComponent<EnemyMouseController>();
         enem = GetComponent<Enemy>();
+        EnemyManagerPro.addEnemy("Damager", enem);
         //float min;
 
     }
