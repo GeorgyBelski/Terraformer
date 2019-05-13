@@ -24,12 +24,17 @@ public class HealController : MonoBehaviour
     private EnemyMouseController emk;
     public float duration = 0.5f;
     private float realDuration;
+
+    public float movementRate = 1f;
+    private float realMovementRate;
+
     bool line = false;
     private float startwidth;
     private ThirdPersonCharacter tpch;
 
     void Start()
     {
+        realMovementRate = movementRate;
         tpch = GetComponent<ThirdPersonCharacter>();
         realCastHealBaseRate = castHealBaseRate;
         realDuration = duration;
@@ -46,6 +51,7 @@ public class HealController : MonoBehaviour
         lr.startColor = startHeal;
         EnemyManagerPro.addEnemy("Healer", GetComponent<Enemy>());
         lr.endColor = endHeal;
+
     }
 
     void Update()
@@ -53,7 +59,7 @@ public class HealController : MonoBehaviour
         realCastHealBaseRate -= Time.deltaTime;
         if (line && target)
         {
-            target.ApplyDamage(-(int)healingPower/20, target.GetPosition(), Vector3.zero); // Testing!!!
+            target.ApplyDamage(-(int)healingPower / 20, target.GetPosition(), Vector3.zero); // Testing!!!
             lr.widthMultiplier = startwidth;
             realDuration -= Time.deltaTime;
             lr.SetPosition(0, healpoint.position);
@@ -68,7 +74,7 @@ public class HealController : MonoBehaviour
             }
         }
 
-        if(realCastHealBaseRate <= 0)
+        if (realCastHealBaseRate <= 0)
         {
             Instantiate(healBase, transform.position, transform.rotation, null);
             //tpch.ScaleCapsuleForCrouching(true);
@@ -77,7 +83,26 @@ public class HealController : MonoBehaviour
 
         realHealingTime -= Time.deltaTime;
         state_heal();
+        if(emk.agent.remainingDistance <= emk.agent.stoppingDistance)
+        {
+            realMovementRate -= Time.deltaTime;
+        }
+        if (realMovementRate <= 0)
+        {
+            realMovementRate = movementRate;
+            state_Walking();
+        }
+    }
 
+    private void state_Walking()
+    {
+       
+        Vector3 target = new Vector3(this.transform.position.x + Random.Range(-3f, 3f), this.transform.position.y, this.transform.position.z + Random.Range(-3f, 3f));
+        //Transform tr; // Fix!
+        //tr.position = target;
+        //emk.setDest(tr);
+        emk.agent.SetDestination(target);
+        
     }
 
     private void state_heal()
