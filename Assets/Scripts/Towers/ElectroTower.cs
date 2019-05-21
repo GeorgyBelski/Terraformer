@@ -158,10 +158,21 @@ public class ElectroTower : Tower
         }
     }
 
+    bool debug_draw;
+    Vector3 center;
+    float size;
+
     private void ApplyThanderBallEffects(Vector3 center, float radius)
     {      
         int hittedEnemysNumber = Physics.OverlapSphereNonAlloc(center, radius, hitThanderBallColliders, EnemyManager.enemyLayerMask);
-     //   Debug.Log("hittedEnemysNumber: " + hittedEnemysNumber);
+
+        {
+            debug_draw = true;
+            this.center = center;
+            this.size = radius;
+
+        }
+        Debug.Log("hittedEnemysNumber: " + hittedEnemysNumber);
         for (int i=0; i < hittedEnemysNumber; i++)
         {
             //  hitColliders[i].SendMessage("AddDamage");
@@ -174,6 +185,11 @@ public class ElectroTower : Tower
     public void EndCasting() {
         IsCastingAbility = false;
         TowerManager.availableElectroTowers.Add(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(center, size);
     }
 
 }
