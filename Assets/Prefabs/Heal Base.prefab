@@ -296,6 +296,8 @@ GameObject:
   - component: {fileID: 1772361876839422169}
   - component: {fileID: 5691318349596143737}
   - component: {fileID: 815574347422796512}
+  - component: {fileID: 1173806323797490558}
+  - component: {fileID: 697666250140818683}
   m_Layer: 0
   m_Name: Heal Base
   m_TagString: Untagged
@@ -374,7 +376,7 @@ BoxCollider:
   m_GameObject: {fileID: 5691318349596143735}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -391,7 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healpower: 50
-  radius: 4
+  radius: 5
   liveTime: 20
   healRate: 2
   StartPoint: {fileID: 2407488622040583472}
@@ -408,9 +410,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  effectsController: {fileID: 0}
   maxHealth: 100
   health: 100
   healthBar: {fileID: 8189187154717802135}
+  damagePoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damagePointAnimators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damagePointIndex: 0
 --- !u!114 &5691318349596143737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,14 +431,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5691318349596143735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  effectsController: {fileID: 0}
   maxHealth: 100
   health: 0
   healthBar: {fileID: 8189187154717802135}
+  damagePoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damagePointAnimators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damagePointIndex: 0
 --- !u!114 &815574347422796512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,14 +457,70 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5691318349596143735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  effectsController: {fileID: 0}
   maxHealth: 100
   health: 100
   healthBar: {fileID: 8189187154717802135}
+  damagePoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damagePointAnimators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damagePointIndex: 0
+--- !u!114 &1173806323797490558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691318349596143735}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  effectsController: {fileID: 0}
+  maxHealth: 100
+  health: 0
+  healthBar: {fileID: 8189187154717802135}
+  damagePoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damagePointAnimators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damagePointIndex: 0
+--- !u!114 &697666250140818683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691318349596143735}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea435cc035cfb243b836b52243778f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisEnemy: {fileID: 1772361876839422169}
+  tpCharacter: {fileID: 0}
+  navAgent: {fileID: 0}
+  flamePrefab: {fileID: 0}
+  flame: {fileID: 0}
+  vertigoPrefab: {fileID: 0}
+  vertigo: {fileID: 0}
 --- !u!1 &6923754185757006641
 GameObject:
   m_ObjectHideFlags: 0
