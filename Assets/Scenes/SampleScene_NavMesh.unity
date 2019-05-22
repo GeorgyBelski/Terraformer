@@ -762,10 +762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dde25d668ecb2e4db037d0ad499a8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEnemies:
-  - {fileID: 371407608}
-  - {fileID: 2023985912}
-  - {fileID: 5691318349596143738}
 --- !u!1001 &1091266596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1018,7 +1014,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 813ea08da0e9ba141bcddee469f3c9fa, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fa9489d3a9aedcb4690da67e064dee35, type: 2}
 --- !u!4 &1381445686
 Transform:
   m_ObjectHideFlags: 0
@@ -1728,6 +1724,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2902143820882433143, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 2902143820882433139, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1907,30 +1909,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 374236585, guid: 26137252f19587844a5f0b289b71b71e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.3999939
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26137252f19587844a5f0b289b71b71e, type: 3}
---- !u!1 &3236513020560041560 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3236513020866106311, guid: 26137252f19587844a5f0b289b71b71e,
-    type: 3}
-  m_PrefabInstance: {fileID: 3236513020560041559}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3236513020560041561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3236513020560041560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &5691318349596143735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,8 +1960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  effectsController: {fileID: 0}
   maxHealth: 100
   health: 0
   healthBar: {fileID: 1577396946}
@@ -1990,6 +1972,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   damagePointIndex: 0
+  character: {fileID: 0}
+  effectsController: {fileID: 0}
 --- !u!114 &5691318349596143738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2003,8 +1987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  effectsController: {fileID: 0}
   maxHealth: 100
   health: 0
   healthBar: {fileID: 0}
@@ -2017,6 +1999,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   damagePointIndex: 0
+  character: {fileID: 0}
+  effectsController: {fileID: 0}
 --- !u!1001 &5784288501547192994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2182,11 +2166,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserTower
       objectReference: {fileID: 0}
-    - target: {fileID: 6015777778884135385, guid: 0337bdfcdac9efd43baee395d73fe29e,
-        type: 3}
-      propertyPath: damageBurning
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6015777778884135390, guid: 0337bdfcdac9efd43baee395d73fe29e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2200,7 +2179,7 @@ PrefabInstance:
     - target: {fileID: 6015777778884135390, guid: 0337bdfcdac9efd43baee395d73fe29e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.76
+      value: -8.64
       objectReference: {fileID: 0}
     - target: {fileID: 6015777778884135390, guid: 0337bdfcdac9efd43baee395d73fe29e,
         type: 3}
@@ -2241,6 +2220,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998274765810947965, guid: 0337bdfcdac9efd43baee395d73fe29e,
+        type: 3}
+      propertyPath: maxHealth
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998274765810947965, guid: 0337bdfcdac9efd43baee395d73fe29e,
+        type: 3}
+      propertyPath: health
+      value: 2000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0337bdfcdac9efd43baee395d73fe29e, type: 3}
@@ -2343,7 +2332,7 @@ PrefabInstance:
     - target: {fileID: 7532716056537121493, guid: 6c767a6979ec47546b20e60deea06abc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.82
+      value: -8.85
       objectReference: {fileID: 0}
     - target: {fileID: 7532716056537121493, guid: 6c767a6979ec47546b20e60deea06abc,
         type: 3}
@@ -2353,7 +2342,7 @@ PrefabInstance:
     - target: {fileID: 7532716056537121493, guid: 6c767a6979ec47546b20e60deea06abc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.82
+      value: 3.88
       objectReference: {fileID: 0}
     - target: {fileID: 7532716056537121493, guid: 6c767a6979ec47546b20e60deea06abc,
         type: 3}
@@ -2393,11 +2382,6 @@ PrefabInstance:
     - target: {fileID: 7532716056537121493, guid: 6c767a6979ec47546b20e60deea06abc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7532716056537121494, guid: 6c767a6979ec47546b20e60deea06abc,
-        type: 3}
-      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

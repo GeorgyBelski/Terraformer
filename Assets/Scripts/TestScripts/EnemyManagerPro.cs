@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyManagerPro : MonoBehaviour
 {
-    public List<Enemy> startEnemies = new List<Enemy>();
+    public static int enemyLayerMask;
+    // public List<Enemy> startEnemies = new List<Enemy>();
     //public static List<Enemy> enemiesDamage = new List<Enemy>();
     //public static List<Enemy> enemiesHealers = new List<Enemy>();
     public static List<Enemy> enemies = new List<Enemy>();
@@ -14,12 +15,13 @@ public class EnemyManagerPro : MonoBehaviour
 
     private void Start()
     {
+        enemyLayerMask = LayerMask.GetMask("Enemy");
         //enemiesMap.Add("Damager", enemiesDamage);
         //enemiesMap.Add("Healer", enemiesHealers);
         //foreach (Enemy startEnemy in startEnemies)
         //{
-            //enemies.Add(startEnemy);
-            //enemiesMap.Add("Damage", startEnemy);
+        //enemies.Add(startEnemy);
+        //enemiesMap.Add("Damage", startEnemy);
         //}
         //enemiesDamage.Add(startEnemies[1]);//Testing
         //enemiesHealers.Add(startEnemies[0]);
@@ -48,7 +50,7 @@ public class EnemyManagerPro : MonoBehaviour
         
     }
 
-    public static void removeEnemie(string name, Enemy enem)
+    public static void RemoveEnemie(string name, Enemy enem)
     {
         enemies.Remove(enem);
         //enemiesMap[enem.getName].Remove(enem);

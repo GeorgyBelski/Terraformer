@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 200029528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.97, y: 0.76, z: 0}
+  m_LocalScale: {x: 0.969, y: 0.64, z: 0}
   m_Children: []
   m_Father: {fileID: 1468490028}
   m_RootOrder: 2
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.095426396, g: 0.7924528, b: 0, a: 0.7058824}
+  m_Color: {r: 1, g: 0, b: 0.15346527, a: 0.7058824}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.917
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -407,7 +407,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 2.116}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 300, y: 27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1468490031
 Canvas:
@@ -986,7 +986,6 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.2
-  m_Crouching: 0
   m_Stan: 0
 --- !u!114 &1488545809
 MonoBehaviour:
@@ -1287,6 +1286,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1468490028}
     m_Modifications:
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1391,16 +1400,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}

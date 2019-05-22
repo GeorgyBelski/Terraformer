@@ -42,7 +42,7 @@ public class HealBase : MonoBehaviour
 
         if(liveTime <= 0)
         {
-            EnemyManagerPro.removeEnemie("Healer", this.GetComponent<Enemy>());
+            EnemyManagerPro.RemoveEnemie("Healer", this.GetComponent<Enemy>());
             Destroy(gameObject);
         }
 

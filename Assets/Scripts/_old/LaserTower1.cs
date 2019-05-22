@@ -48,14 +48,15 @@ public class LaserTower1 : MonoBehaviour
             timerAbility2 -= Time.deltaTime;
         }
     }
+
     Enemy ChooseTarget()
     {
         float distanceToTarget = range;
         float distanceTmp = distanceToTarget;
         int targetIndex = -1;
-        for (int i = 0; i < EnemyManager.enemies.Count; i++)
+        for (int i = 0; i < EnemyManagerPro.enemies.Count; i++)
         {
-            distanceTmp = (EnemyManager.enemies[i].transform.position - this.transform.position).magnitude;
+            distanceTmp = (EnemyManagerPro.enemies[i].transform.position - this.transform.position).magnitude;
             if (distanceTmp < distanceToTarget)
             {
                 targetIndex = i;
@@ -68,7 +69,7 @@ public class LaserTower1 : MonoBehaviour
         }
         else
         {
-            return EnemyManager.enemies[targetIndex];
+            return EnemyManagerPro.enemies[targetIndex];
         }
 
     }

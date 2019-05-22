@@ -52,7 +52,7 @@ public class EnemyMouseController : MonoBehaviour
         */
     }
 
-    public void setDest(Transform obj)
+    public void SetDest(Transform obj)
     {
         agent.SetDestination(obj.position);
     }

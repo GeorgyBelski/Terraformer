@@ -164,7 +164,7 @@ public class ElectroTower : Tower
 
     private void ApplyThanderBallEffects(Vector3 center, float radius)
     {      
-        int hittedEnemysNumber = Physics.OverlapSphereNonAlloc(center, radius, hitThanderBallColliders, EnemyManager.enemyLayerMask);
+        int hittedEnemysNumber = Physics.OverlapSphereNonAlloc(center, radius, hitThanderBallColliders, EnemyManagerPro.enemyLayerMask);
 
         {
             debug_draw = true;
@@ -186,10 +186,10 @@ public class ElectroTower : Tower
         IsCastingAbility = false;
         TowerManager.availableElectroTowers.Add(this);
     }
-
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(center, size);
     }
-
+    */
 }

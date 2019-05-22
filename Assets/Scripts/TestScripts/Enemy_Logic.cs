@@ -78,7 +78,7 @@ public class Enemy_Logic : MonoBehaviour
                 }
             }
             //Debug.Log(destTower.position);
-            emk.setDest(destTower);
+            emk.SetDest(destTower);
             //isAttack = true;
         }
         else
@@ -104,7 +104,7 @@ public class Enemy_Logic : MonoBehaviour
                 }
             }
             //Debug.Log("going");
-            emk.setDest(destHel);
+            emk.SetDest(destHel);
         }
         
     }
