@@ -49,7 +49,7 @@ public class HealController : MonoBehaviour
         //enem = GetComponent<Enemy>();
         //float min;
         lr.startColor = startHeal;
-        EnemyManagerPro.addEnemy("Healer", GetComponent<Enemy>());
+        EnemyManagerPro.AddEnemy(GetComponent<Enemy>());
         lr.endColor = endHeal;
 
     }
@@ -108,27 +108,27 @@ public class HealController : MonoBehaviour
     private void state_heal()
     {
         
-        if (EnemyManagerPro.enemiesMap["Damager"].Count > 0 && realHealingTime <= 0)
+        if (EnemyManagerPro.enemiesMap[EnemyType.Solder].Count > 0 && realHealingTime <= 0)
         {
             float min = -1;
             target = null;
             //Debug.Log("checking Heal");
             //min = Vector3.Distance(EnemyManagerPro.enemiesMap["Damager"][0].gameObject.transform.position, transform.position);
             //Transform dest = EnemyManagerPro.enemiesMap["Damager"][0].gameObject.transform;
-            for (int i = 0; i < EnemyManagerPro.enemiesMap["Damager"].Count; i++)
+            for (int i = 0; i < EnemyManagerPro.enemiesMap[EnemyType.Solder].Count; i++)
             {
-                if(EnemyManagerPro.enemiesMap["Damager"][i].GetHealthRatio() < 1)
+                if(EnemyManagerPro.enemiesMap[EnemyType.Solder][i].GetHealthRatio() < 1)
                 {
                     if (min == -1)
                     {
-                        target = EnemyManagerPro.enemiesMap["Damager"][i];
+                        target = EnemyManagerPro.enemiesMap[EnemyType.Solder][i];
                         min = Vector3.Distance(target.gameObject.transform.position, transform.position);
                     }
                     else
                     {
-                        if(min > Vector3.Distance(EnemyManagerPro.enemiesMap["Damager"][i].gameObject.transform.position, transform.position))
+                        if(min > Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Solder][i].gameObject.transform.position, transform.position))
                         {
-                            target = EnemyManagerPro.enemiesMap["Damager"][i];
+                            target = EnemyManagerPro.enemiesMap[EnemyType.Solder][i];
                             min = Vector3.Distance(target.gameObject.transform.position, transform.position);
 
                         }

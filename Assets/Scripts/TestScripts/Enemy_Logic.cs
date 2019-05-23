@@ -26,7 +26,7 @@ public class Enemy_Logic : MonoBehaviour
         realcheckTime = checkTime;
         emk = GetComponent<EnemyMouseController>();
         enem = GetComponent<Enemy>();
-        EnemyManagerPro.addEnemy("Damager", enem);
+        EnemyManagerPro.AddEnemy(enem);
         //float min;
 
     }
@@ -88,14 +88,14 @@ public class Enemy_Logic : MonoBehaviour
     }
     void state_GiveUp()
     {
-        if(EnemyManagerPro.enemiesMap["Healer"].Count > 0)
+        if(EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0)
         {
             //Debug.Log("checking Heal");
-            min = Vector3.Distance(EnemyManagerPro.enemiesMap["Healer"][0].gameObject.transform.position, transform.position);
-            destHel = EnemyManagerPro.enemiesMap["Healer"][0].gameObject.transform;
-            for (int i = 0; i < EnemyManagerPro.enemiesMap["Healer"].Count; i++)
+            min = Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position, transform.position);
+            destHel = EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform;
+            for (int i = 0; i < EnemyManagerPro.enemiesMap[EnemyType.Healer].Count; i++)
             {
-                Transform current_dist = EnemyManagerPro.enemiesMap["Healer"][i].gameObject.transform;
+                Transform current_dist = EnemyManagerPro.enemiesMap[EnemyType.Healer][i].gameObject.transform;
 
                 if (min > Vector3.Distance(current_dist.position, transform.position))
                 {

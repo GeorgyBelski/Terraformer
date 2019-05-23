@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
+public enum EnemyType { Solder, Healer};
+
 public class Enemy : Damageable
 {
+    
     public ThirdPersonCharacter character;
     public EnemyEffectsController effectsController;
-
+    public EnemyType type;
     /*
    [Range(10, 1000)]
    public int maxHealth = 100;
@@ -32,7 +35,8 @@ public class Enemy : Damageable
         // capsuleCenter = GetComponent<CapsuleCollider>().center;
         if (!EnemyManagerPro.enemies.Contains(this)) {
             //   EnemyManagerPro.enemies.Add(this);
-            EnemyManagerPro.enemies.Add(this);
+            // EnemyManagerPro.enemies.Add(this);
+            EnemyManagerPro.AddEnemy(this);
         }
     }
 

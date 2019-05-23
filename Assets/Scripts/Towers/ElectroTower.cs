@@ -163,7 +163,7 @@ public class ElectroTower : Tower
     float size;
 
     private void ApplyThanderBallEffects(Vector3 center, float radius)
-    {      
+    {    /*  
         int hittedEnemysNumber = Physics.OverlapSphereNonAlloc(center, radius, hitThanderBallColliders, EnemyManagerPro.enemyLayerMask);
 
         {
@@ -179,6 +179,14 @@ public class ElectroTower : Tower
             //    Debug.Log(hitThanderBallColliders[i]);
             hitThanderBallColliders[i].GetComponent<EnemyEffectsController>().AddStan(2);
             hitThanderBallColliders[i] = null;
+        }
+        */
+        foreach (Enemy enemy in EnemyManagerPro.enemies) {
+            Vector3 distanceToEnemy = enemy.transform.position - center;
+            if (distanceToEnemy.magnitude <= radius) {
+                Debug.Log("ApplyThanderBallEffects on enemy: " + enemy);
+                enemy.effectsController.AddStun(2);
+            }
         }
     }
 
