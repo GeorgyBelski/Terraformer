@@ -22,7 +22,7 @@ public class HealBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemyManagerPro.addEnemy("Healer", this.GetComponent<Enemy>());
+     //   EnemyManagerPro.AddEnemy(this.GetComponent<Enemy>());
         HealCast.healPower = healpower;
         HealCast.radius = radius;
         realHealRate = healRate;
@@ -42,7 +42,7 @@ public class HealBase : MonoBehaviour
 
         if(liveTime <= 0)
         {
-            EnemyManagerPro.removeEnemie("Healer", this.GetComponent<Enemy>());
+            EnemyManagerPro.RemoveEnemy(this.GetComponent<Enemy>());
             Destroy(gameObject);
         }
 

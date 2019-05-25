@@ -18,13 +18,13 @@ public abstract class Tower : MonoBehaviour
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
     protected float timerAttack = 0f;
-
+    /*
     public float cooldownAbility1 = 10f;
     protected float timerAbility1 = 0f;
 
     public float cooldownAbility2 = 15f;
     protected float timerAbility2 = 0f;
-
+    */
     [Header("References")]
     public Transform cannon;
     public Enemy target;
@@ -56,6 +56,7 @@ public abstract class Tower : MonoBehaviour
         else {
             timerAttack = 0;
         }
+        /*
         if (timerAbility1 > 0)
         {
             timerAbility1 -= Time.deltaTime;
@@ -70,14 +71,15 @@ public abstract class Tower : MonoBehaviour
         else {
             timerAbility2 = 0;
         }
+        */
     }
     Enemy ChooseTarget() {
         
         float distanceToTarget = range;
         float distanceTmp = distanceToTarget;
         targetIndex = -1;
-        for (int i = 0; i < EnemyManager.enemies.Count; i++) {
-            distanceTmp = (EnemyManager.enemies[i].GetPosition() - this.transform.position).magnitude;
+        for (int i = 0; i < EnemyManagerPro.enemies.Count; i++) {
+            distanceTmp = (EnemyManagerPro.enemies[i].GetPosition() - this.transform.position).magnitude;
             if (distanceTmp < distanceToTarget)
             {
                 targetIndex = i;
@@ -89,7 +91,7 @@ public abstract class Tower : MonoBehaviour
             return null;
         }
         else {
-            return EnemyManager.enemies[targetIndex];
+            return EnemyManagerPro.enemies[targetIndex];
         }
             
     }
@@ -112,7 +114,7 @@ public abstract class Tower : MonoBehaviour
     private void OnDrawGizmos()
     {
         // link to enemy
-        for (int i = 0; i < EnemyManager.enemies.Count; i++)
+        for (int i = 0; i < EnemyManagerPro.enemies.Count; i++)
         {
             if (i == targetIndex)
             {
@@ -121,8 +123,8 @@ public abstract class Tower : MonoBehaviour
             else {
                 Gizmos.color = Color.gray;
             }
-            if (EnemyManager.enemies[i]) {
-                Gizmos.DrawLine(EnemyManager.enemies[i].GetPosition(), this.transform.position);
+            if (EnemyManagerPro.enemies[i]) {
+                Gizmos.DrawLine(EnemyManagerPro.enemies[i].GetPosition(), this.transform.position);
             }
             
         }

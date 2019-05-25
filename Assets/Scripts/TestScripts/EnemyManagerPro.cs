@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class EnemyManagerPro : MonoBehaviour
 {
-    public List<Enemy> startEnemies = new List<Enemy>();
+    public static int enemyLayerMask;
+    // public List<Enemy> startEnemies = new List<Enemy>();
     //public static List<Enemy> enemiesDamage = new List<Enemy>();
     //public static List<Enemy> enemiesHealers = new List<Enemy>();
     public static List<Enemy> enemies = new List<Enemy>();
     //public static List<HealBase> healBases = new List<HealBase>();
 
-    public static Dictionary<string, List<Enemy>> enemiesMap= new Dictionary<string, List<Enemy>>();
+    public static Dictionary<EnemyType, List<Enemy>> enemiesMap= new Dictionary<EnemyType, List<Enemy>>();
 
     private void Start()
     {
+        enemyLayerMask = LayerMask.GetMask("Enemy");
         //enemiesMap.Add("Damager", enemiesDamage);
         //enemiesMap.Add("Healer", enemiesHealers);
         //foreach (Enemy startEnemy in startEnemies)
         //{
-            //enemies.Add(startEnemy);
-            //enemiesMap.Add("Damage", startEnemy);
+        //enemies.Add(startEnemy);
+        //enemiesMap.Add("Damage", startEnemy);
         //}
         //enemiesDamage.Add(startEnemies[1]);//Testing
         //enemiesHealers.Add(startEnemies[0]);
@@ -28,31 +30,31 @@ public class EnemyManagerPro : MonoBehaviour
 
     //public static void 
 
-    public static void addEnemy(string name, Enemy enem)
+    public static void AddEnemy(Enemy enemy)
     {
-        if (enemiesMap.ContainsKey(name))
+        if (enemiesMap.ContainsKey(enemy.type))
         {
-            enemiesMap[name].Add(enem);
-            enemies.Add(enem);
+            enemiesMap[enemy.type].Add(enemy);
+            enemies.Add(enemy);
         }
         else
         {
             //List<Enemy> enemiesDamage = new List<Enemy>();
-            enemiesMap.Add(name, new List<Enemy>());
-            enemiesMap[name].Add(enem);
-            enemies.Add(enem);
+            enemiesMap.Add(enemy.type, new List<Enemy>());
+            enemiesMap[enemy.type].Add(enemy);
+            enemies.Add(enemy);
         }
         //enemiesMap.Add(name, enem);
-        print(enemiesMap[name]);
+        print(enemiesMap[enemy.type]);
         
         
     }
 
-    public static void removeEnemie(string name, Enemy enem)
+    public static void RemoveEnemy(Enemy enemy)
     {
-        enemies.Remove(enem);
+        enemies.Remove(enemy);
         //enemiesMap[enem.getName].Remove(enem);
-        enemiesMap[name].Remove(enem);
+        enemiesMap[enemy.type].Remove(enemy);
     }
 
     public static bool checking(Enemy enem)

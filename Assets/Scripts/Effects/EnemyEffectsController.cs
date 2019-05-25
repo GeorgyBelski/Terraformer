@@ -7,6 +7,9 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class EnemyEffectsController : MonoBehaviour
 {
+    public bool enableBurning = true;
+    public bool enableStun = true;
+    
     public Enemy thisEnemy;
     public ThirdPersonCharacter tpCharacter;
     public NavMeshAgent navAgent;
@@ -110,13 +113,20 @@ public class EnemyEffectsController : MonoBehaviour
     }
 
     public void AddBurning(int damage) {
+        if (!enableBurning) {
+            return;
+        }
         BurningEffect burningEffect = (BurningEffect)AddEffect(Effect.Type.Burning);
         burningEffect.Set(2, 2, damage);
         EnableFlame();
 
     }
 
-    public void AddStan(float duration) {
+    public void AddStun(float duration) {
+        if (!enableStun)
+        {
+            return;
+        }
         StanEffect stanEffect = (StanEffect)AddEffect(Effect.Type.Stan);
         stanEffect.Set(2);
         EnableVertigo();

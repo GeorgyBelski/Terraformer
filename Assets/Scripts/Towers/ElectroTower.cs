@@ -158,10 +158,21 @@ public class ElectroTower : Tower
         }
     }
 
+    bool debug_draw;
+    Vector3 center;
+    float size;
+
     private void ApplyThanderBallEffects(Vector3 center, float radius)
-    {      
-        int hittedEnemysNumber = Physics.OverlapSphereNonAlloc(center, radius, hitThanderBallColliders, EnemyManager.enemyLayerMask);
-     //   Debug.Log("hittedEnemysNumber: " + hittedEnemysNumber);
+    {    /*  
+        int hittedEnemysNumber = Physics.OverlapSphereNonAlloc(center, radius, hitThanderBallColliders, EnemyManagerPro.enemyLayerMask);
+
+        {
+            debug_draw = true;
+            this.center = center;
+            this.size = radius;
+
+        }
+        Debug.Log("hittedEnemysNumber: " + hittedEnemysNumber);
         for (int i=0; i < hittedEnemysNumber; i++)
         {
             //  hitColliders[i].SendMessage("AddDamage");
@@ -169,11 +180,24 @@ public class ElectroTower : Tower
             hitThanderBallColliders[i].GetComponent<EnemyEffectsController>().AddStan(2);
             hitThanderBallColliders[i] = null;
         }
+        */
+        foreach (Enemy enemy in EnemyManagerPro.enemies) {
+            Vector3 distanceToEnemy = enemy.transform.position - center;
+            if (distanceToEnemy.magnitude <= radius) {
+                Debug.Log("ApplyThanderBallEffects on enemy: " + enemy);
+                enemy.effectsController.AddStun(2);
+            }
+        }
     }
 
     public void EndCasting() {
         IsCastingAbility = false;
         TowerManager.availableElectroTowers.Add(this);
     }
-
+    /*
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(center, size);
+    }
+    */
 }
