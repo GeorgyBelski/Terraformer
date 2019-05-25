@@ -32,6 +32,8 @@ public class HealController : MonoBehaviour
     private float startwidth;
     private ThirdPersonCharacter tpch;
 
+    private List<Enemy> forheal;
+
     void Start()
     {
         realMovementRate = movementRate;
@@ -115,24 +117,32 @@ public class HealController : MonoBehaviour
             //Debug.Log("checking Heal");
             //min = Vector3.Distance(EnemyManagerPro.enemiesMap["Damager"][0].gameObject.transform.position, transform.position);
             //Transform dest = EnemyManagerPro.enemiesMap["Damager"][0].gameObject.transform;
+            //forheal = new List<Enemy>();
             for (int i = 0; i < EnemyManagerPro.enemiesMap[EnemyType.Solder].Count; i++)
             {
-                if(EnemyManagerPro.enemiesMap[EnemyType.Solder][i].GetHealthRatio() < 1)
+                if (EnemyManagerPro.enemiesMap[EnemyType.Solder][i].GetHealthRatio() < 1)
                 {
-                    if (min == -1)
-                    {
-                        target = EnemyManagerPro.enemiesMap[EnemyType.Solder][i];
-                        min = Vector3.Distance(target.gameObject.transform.position, transform.position);
-                    }
-                    else
-                    {
-                        if(min > Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Solder][i].gameObject.transform.position, transform.position))
+                    if (Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Solder][i].gameObject.transform.position, transform.position) < healingDist) { 
+                        if (min == -1)
                         {
                             target = EnemyManagerPro.enemiesMap[EnemyType.Solder][i];
-                            min = Vector3.Distance(target.gameObject.transform.position, transform.position);
+                            min = EnemyManagerPro.enemiesMap[EnemyType.Solder][i].GetHealthRatio();
+                        }
+                        else
+                        {
+                            if (min > EnemyManagerPro.enemiesMap[EnemyType.Solder][i].GetHealthRatio())
+                            {
+                                target = EnemyManagerPro.enemiesMap[EnemyType.Solder][i];
+                                min = EnemyManagerPro.enemiesMap[EnemyType.Solder][i].GetHealthRatio();
 
+                            }
                         }
                     }
+                    /*if(Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Solder][i].gameObject.transform.position, transform.position) < healingDist)
+                    {
+                        forheal.Add(EnemyManagerPro.enemiesMap[EnemyType.Solder][i]);
+                    }
+                    */
                     //min = Vector3.Distance(EnemyManagerPro.enemiesMap["Damager"][0].gameObject.transform.position, transform.position);
                     
                     //EnemyManagerPro.enemiesMap["Healer"][i].ApplyDamage(100, EnemyManagerPro.enemiesMap["Healer"][i].GetPosition(), Vector3.zero);
@@ -146,8 +156,9 @@ public class HealController : MonoBehaviour
                 }
                 */
             }
-            if(target && min <= healingDist)
-            {
+
+            //if (target && min <= healingDist)
+            
                 line = true;
                 //emk.setDest(target.transform);
                 lr.SetPosition(0, healpoint.position);
@@ -156,7 +167,8 @@ public class HealController : MonoBehaviour
                 lr.endColor = endHeal;
                 //target.ApplyDamage(-(int)healingPower, target.GetPosition(), Vector3.zero); // Change ApplyDamage
                 realHealingTime = healingRate;
-            }
+            
+            
         }
     }
 

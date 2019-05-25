@@ -45,7 +45,7 @@ public class EnemyManagerPro : MonoBehaviour
             enemies.Add(enemy);
         }
         //enemiesMap.Add(name, enem);
-        print(enemiesMap[enemy.type]);
+        //print(enemiesMap[enemy.type]);
         
         
     }
