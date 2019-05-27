@@ -130,7 +130,7 @@ public class Enemy_Logic : MonoBehaviour
             //Debug.Log("checking Heal");
             targetTower = null;
             Vector3 fromHealerToEnemy;
-            min = Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position, transform.position);
+            min = float.PositiveInfinity;
         //    destHel = EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position;
             for (int i = 0; i < EnemyManagerPro.enemiesMap[EnemyType.Healer].Count; i++)
             {
