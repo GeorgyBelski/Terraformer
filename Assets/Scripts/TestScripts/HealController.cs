@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 public class HealController : MonoBehaviour
 {
+    [Header("Reference")]
+    public ThirdPersonCharacter character;
+
     [Header("Heling")]
     
     public Transform healpoint;
@@ -109,7 +113,12 @@ public class HealController : MonoBehaviour
 
     private void state_heal()
     {
-        
+        if (character.m_Stun) {
+            target = null;
+            lr.widthMultiplier = 0;
+            line = false;
+            return;
+        }
         if (EnemyManagerPro.enemiesMap[EnemyType.Solder].Count > 0 && realHealingTime <= 0)
         {
             float min = -1;
@@ -160,6 +169,8 @@ public class HealController : MonoBehaviour
             //if (target && min <= healingDist)
             
                 line = true;
+            try
+            {
                 //emk.setDest(target.transform);
                 lr.SetPosition(0, healpoint.position);
                 lr.SetPosition(1, target.transform.position + new Vector3(0, 1, 0));
@@ -167,6 +178,10 @@ public class HealController : MonoBehaviour
                 lr.endColor = endHeal;
                 //target.ApplyDamage(-(int)healingPower, target.GetPosition(), Vector3.zero); // Change ApplyDamage
                 realHealingTime = healingRate;
+            }
+            catch (System.NullReferenceException e) {
+                print(e);
+            }
             
             
         }

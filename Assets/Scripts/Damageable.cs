@@ -44,9 +44,11 @@ public abstract class Damageable : MonoBehaviour
         {
             health = 0;
             RemoveFromList();
+            ApplyDeath();
         }
     }
     public abstract void RemoveFromList();
+    public abstract void ApplyDeath();
 
     public float CalcHealthRatio()
     {
@@ -71,6 +73,7 @@ public abstract class Damageable : MonoBehaviour
 
     void PopUpDamagePoint(int value)
     {
+
         damagePoints[damagePointIndex].text = value.ToString();
         damagePointAnimators[damagePointIndex].SetBool("isDamaged", true);
         damagePointIndex++;

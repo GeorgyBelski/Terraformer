@@ -832,7 +832,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.7
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -852,8 +852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 8517936802816459570}
-  effectsController: {fileID: 169837765437980810}
   maxHealth: 1000
   health: 1000
   healthBar: {fileID: 200029530}
@@ -866,6 +864,10 @@ MonoBehaviour:
   - {fileID: 1432963774}
   - {fileID: 733342095}
   damagePointIndex: 0
+  character: {fileID: 8517936802816459570}
+  effectsController: {fileID: 169837765437980810}
+  type: 0
+  animator: {fileID: 5213773373790622136}
 --- !u!114 &3906704713362425632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea435cc035cfb243b836b52243778f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableBurning: 1
+  enableStun: 1
   thisEnemy: {fileID: 371407608}
   tpCharacter: {fileID: 8517936802816459570}
   navAgent: {fileID: 2476953925411371985}
@@ -986,7 +990,7 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.2
-  m_Stan: 0
+  m_Stun: 0
 --- !u!114 &1488545809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,11 +998,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2623192909609195406}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08fd8260d18ef5642861181f5ce9cff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5213773373790622136}
 --- !u!1 &2770942973066065843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,7 +1163,7 @@ PrefabInstance:
     - target: {fileID: 13700000, guid: 7e15121f5f042ed46aba81406403f2d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2019ad135fac453488b693f57027201c, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bbff2c79bac0c246ad28db2e66d1d77, type: 2}
     - target: {fileID: 100068, guid: 7e15121f5f042ed46aba81406403f2d2, type: 3}
       propertyPath: m_Layer
       value: 12

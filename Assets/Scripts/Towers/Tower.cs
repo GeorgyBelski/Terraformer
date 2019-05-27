@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TowerType { Electro, Laser };
+
 public abstract class Tower : MonoBehaviour
 {
-    public enum TowerType { Electro, Laser };
+    
     public TowerType type;
 
     [Header("Main Attributes")]
@@ -27,6 +29,7 @@ public abstract class Tower : MonoBehaviour
     */
     [Header("References")]
     public Transform cannon;
+    public TowerHealth towerHealth;
     public Enemy target;
     int targetIndex = -1;
 

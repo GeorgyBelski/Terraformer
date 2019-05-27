@@ -17,7 +17,7 @@ public abstract class Effect
         }
         else if(type == Type.Stan)
         {
-            return new StanEffect();
+            return new StunEffect();
         }
         return null;
     }

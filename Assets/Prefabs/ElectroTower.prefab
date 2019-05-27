@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.597507, b: 0.21226418, a: 1}
+  m_Color: {r: 1, g: 0.35099667, b: 0.33490568, a: 0}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.4811321, g: 0, b: 0.086286865, a: 1}
+  m_EffectColor: {r: 0.3490566, g: 0.04116233, b: 0.04116233, a: 1}
   m_EffectDistance: {x: 1.1, y: -1}
   m_UseGraphicAlpha: 0
 --- !u!95 &1376367255
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.597507, b: 0.21226418, a: 1}
+  m_Color: {r: 1, g: 0.35099667, b: 0.33490568, a: 0}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.4811321, g: 0, b: 0.086286865, a: 1}
+  m_EffectColor: {r: 0.3490566, g: 0.04116233, b: 0.04116233, a: 1}
   m_EffectDistance: {x: 1.1, y: -1}
   m_UseGraphicAlpha: 0
 --- !u!95 &1578352024
@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.597507, b: 0.21226418, a: 1}
+  m_Color: {r: 1, g: 0.35099667, b: 0.33490568, a: 0}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.4811321, g: 0, b: 0.086286865, a: 1}
+  m_EffectColor: {r: 0.3490566, g: 0.04116233, b: 0.04116233, a: 1}
   m_EffectDistance: {x: 1.1, y: -1}
   m_UseGraphicAlpha: 0
 --- !u!95 &1844635073
@@ -1165,6 +1165,7 @@ MonoBehaviour:
   isSelected: 0
   cooldownAttack: 1
   cannon: {fileID: 7532716056096678989}
+  towerHealth: {fileID: 1605180230303121764}
   target: {fileID: 0}
   gunpoint: {fileID: 7532716055238349617}
   lightningLerpSpeed: 2
