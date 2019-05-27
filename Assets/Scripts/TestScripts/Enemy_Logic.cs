@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Logic : MonoBehaviour
 {
-
+    public Animator animator;
     private EnemyMouseController emk;
     private Enemy enem;
-    private Transform destTower = null;
+    private Vector3? destTower = null;
+    private Vector3? destHel = null;
+    private Tower targetTower;
     private bool isGoingToDist = false;
     private bool isStand = true;
     private bool isGiveUp = false;
@@ -15,11 +18,14 @@ public class Enemy_Logic : MonoBehaviour
 
     private bool isRush = false;
 
-    private Transform destHel = null;
+    
     private float checkTime = 0.5f;//change!!!!!!!!!!!!!!!!!!!!!
     private float realcheckTime;//change!!!!!!!!!!!!!!!!!!!!!
     private float brawe = 0; //= Random.RandomRange(0.1f, 0.7f);
     private float min;
+
+    public bool IsAttack { get => isAttack; set { isAttack = value; animator.SetBool("Attack", value); } }
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +34,7 @@ public class Enemy_Logic : MonoBehaviour
         realcheckTime = checkTime;
         emk = GetComponent<EnemyMouseController>();
         enem = GetComponent<Enemy>();
-        EnemyManagerPro.AddEnemy(enem);
+     //   EnemyManagerPro.AddEnemy(enem);
         //float min;
 
     }
@@ -61,10 +67,10 @@ public class Enemy_Logic : MonoBehaviour
         {
             //print(Vector3.Distance(destTower.position, transform.position));
             //print(emk.agent.remainingDistance);
-            if (Vector3.Distance(destTower.position, transform.position) < 5 && emk.agent.remainingDistance < emk.agent.stoppingDistance)
+            if (Vector3.Distance((Vector3)destTower, transform.position) < 5 && emk.agent.remainingDistance < emk.agent.stoppingDistance)
             {
                 isGoingToDist = false;
-                isAttack = true;
+                IsAttack = true;
                 stateAttack();
             }
         }
@@ -86,22 +92,29 @@ public class Enemy_Logic : MonoBehaviour
     {
         if (TowerManager.towers.Count > 0)
         {
-            min = Vector3.Distance(TowerManager.towers[0].gameObject.transform.position, transform.position);
-            destTower = TowerManager.towers[0].gameObject.transform;
-
+            // min = Vector3.Distance(TowerManager.towers[0].transform.position, transform.position);
+            min = float.PositiveInfinity;
+            // destTower = TowerManager.towers[0].transform;
+            Vector3 fromTargetTowerToEnemy;
             //Debug.Log(TowerManager.towers.Count);
             for (int i = 0; i < TowerManager.towers.Count; i++)
             {
-                Transform current_dist = TowerManager.towers[i].transform;
+                Vector3? current_dist = TowerManager.towers[i].transform.position;
+                
 
-                if (min > Vector3.Distance(current_dist.position, transform.position))
+                if (min > Vector3.Distance((Vector3)current_dist, transform.position))
                 {
-                    min = Vector3.Distance(current_dist.position, transform.position);
-                    destTower = current_dist;
+                    min = Vector3.Distance((Vector3)current_dist, transform.position);
+                //    destTower = TowerManager.towers[i].transform;
+                //    destTower.position = current_dist;
+                    targetTower = TowerManager.towers[i];
                 }
             }
             //Debug.Log(destTower.position);
-            emk.SetDest(destTower);
+            fromTargetTowerToEnemy = transform.position - targetTower.transform.position;
+            destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
+         //   destTower.position = targetTower.transform.position - fromTargetTowerToEnemy.normalized;
+            emk.SetDest((Vector3)destTower);
             isGoingToDist = true;
             //isAttack = true;
         }
@@ -115,27 +128,33 @@ public class Enemy_Logic : MonoBehaviour
         if(EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0)
         {
             //Debug.Log("checking Heal");
+            targetTower = null;
+
             min = Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position, transform.position);
-            destHel = EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform;
+            destHel = EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position;
             for (int i = 0; i < EnemyManagerPro.enemiesMap[EnemyType.Healer].Count; i++)
             {
-                Transform current_dist = EnemyManagerPro.enemiesMap[EnemyType.Healer][i].gameObject.transform;
+                Vector3 current_dist = EnemyManagerPro.enemiesMap[EnemyType.Healer][i].gameObject.transform.position;
 
-                if (min > Vector3.Distance(current_dist.position, transform.position))
+                if (min > Vector3.Distance(current_dist, transform.position))
                 {
-                    min = Vector3.Distance(current_dist.position, transform.position);
+                    min = Vector3.Distance(current_dist, transform.position);
                     destHel = current_dist;
                 }
             }
             //Debug.Log("going");
-            emk.SetDest(destHel);
+            emk.SetDest((Vector3)destHel);
         }
         
     }
-
+    /*
     public bool getAttackState()
     {
-        return isAttack;
+        return IsAttack;
+    }
+    */
+    public void Attack() {
+        targetTower.towerHealth.ApplyDamage(30, Vector3.zero, Vector3.zero);
     }
 
     public void check()
@@ -148,7 +167,7 @@ public class Enemy_Logic : MonoBehaviour
             //Debug.Log("checking");
             isStand = false;
             isGoingToDist = false;
-            isAttack = false;
+            IsAttack = false;
             //state_Attack();
             stateGiveUp();
             isGiveUp = true;
@@ -171,24 +190,24 @@ public class Enemy_Logic : MonoBehaviour
             }
             else
             {
-                if (isAttack)
+                if (IsAttack)
                 {
-                    if (!destTower)
+                    if (destTower != null)
                     {
                         isStand = false;
-                        isAttack = false;
+                        IsAttack = false;
                         isGiveUp = false;
                         stateGoToDestanation();
                     }
                     else
                     {
-                        isAttack = true;
+                        IsAttack = true;
                     }
                 }
                 else
                 {
                     isStand = false;
-                    isAttack = false;
+                    IsAttack = false;
                     isGiveUp = false;
                     stateGoToDestanation();
                     //isGoingToDist = true;

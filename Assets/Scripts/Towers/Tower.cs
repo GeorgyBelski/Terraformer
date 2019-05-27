@@ -29,6 +29,7 @@ public abstract class Tower : MonoBehaviour
     */
     [Header("References")]
     public Transform cannon;
+    public TowerHealth towerHealth;
     public Enemy target;
     int targetIndex = -1;
 

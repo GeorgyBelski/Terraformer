@@ -1165,6 +1165,7 @@ MonoBehaviour:
   isSelected: 0
   cooldownAttack: 1
   cannon: {fileID: 7532716056096678989}
+  towerHealth: {fileID: 1605180230303121764}
   target: {fileID: 0}
   gunpoint: {fileID: 7532716055238349617}
   lightningLerpSpeed: 2

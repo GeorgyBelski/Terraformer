@@ -1090,6 +1090,7 @@ MonoBehaviour:
   isSelected: 0
   cooldownAttack: 1
   cannon: {fileID: 6015777778795571989}
+  towerHealth: {fileID: 6998274765810947965}
   target: {fileID: 0}
   gunpoint: {fileID: 6015777777595496274}
   beamDuration: 0.3
