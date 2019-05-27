@@ -8,9 +8,11 @@ public class Enemy_Logic : MonoBehaviour
     private EnemyMouseController emk;
     private Enemy enem;
     private Transform destTower = null;
-    private bool isAttack = false;
+    private bool isGoingToDist = false;
     private bool isStand = true;
     private bool isGiveUp = false;
+    private bool isAttack = false;
+
     private bool isRush = false;
 
     private Transform destHel = null;
@@ -34,6 +36,7 @@ public class Enemy_Logic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         realcheckTime -= Time.deltaTime;
         if(realcheckTime <= 0)
         {
@@ -42,6 +45,8 @@ public class Enemy_Logic : MonoBehaviour
             check();
             
         }
+        //print(emk.agent.remainingDistance < emk.agent.stoppingDistance);
+        //print(Vector3.Distance(destTower.position, transform.position));
         if (isStand)
         {
             check();
@@ -49,6 +54,18 @@ public class Enemy_Logic : MonoBehaviour
             //isGiveUp = false;
             //state_Attack();
  
+        }
+
+        if (isGoingToDist)
+        {
+            //print(Vector3.Distance(destTower.position, transform.position));
+            //print(emk.agent.remainingDistance);
+            if (Vector3.Distance(destTower.position, transform.position) < 5 && emk.agent.remainingDistance < emk.agent.stoppingDistance)
+            {
+                isGoingToDist = false;
+                isAttack = true;
+                state_Attack();
+            }
         }
         
         //if (isGiveUp == true)
@@ -60,6 +77,11 @@ public class Enemy_Logic : MonoBehaviour
     }
 
     void state_Attack()
+    {
+        //Debug.Log(isAttack + " " + destTower + "ATAKING");
+    }
+
+    void state_Go_To_Destanation()
     {
         if (TowerManager.towers.Count > 0)
         {
@@ -79,6 +101,7 @@ public class Enemy_Logic : MonoBehaviour
             }
             //Debug.Log(destTower.position);
             emk.SetDest(destTower);
+            isGoingToDist = true;
             //isAttack = true;
         }
         else
@@ -109,6 +132,11 @@ public class Enemy_Logic : MonoBehaviour
         
     }
 
+    public bool getAttackState()
+    {
+        return isAttack;
+    }
+
     public void check()
     {
         
@@ -118,10 +146,11 @@ public class Enemy_Logic : MonoBehaviour
         {
             //Debug.Log("checking");
             isStand = false;
-            isAttack = false;
-            isGiveUp = true;
+            isGoingToDist = false;
+            
             //state_Attack();
             state_GiveUp();
+            isGiveUp = true;
         }
         else
         {
@@ -130,9 +159,10 @@ public class Enemy_Logic : MonoBehaviour
                 if(heals > 0.5 + brawe/2)
                 {
                     isStand = false;
-                    isAttack = true;
+                   
                     isGiveUp = false;
-                    state_Attack();
+                    state_Go_To_Destanation();
+                    //
                 }
                 else
                 {
@@ -141,10 +171,26 @@ public class Enemy_Logic : MonoBehaviour
             }
             else
             {
-                isStand = false;
-                isAttack = true;
-                isGiveUp = false;
-                state_Attack();
+                if (isAttack)
+                {
+                    if (!destTower)
+                    {
+                        isStand = false;
+                        
+                        isGiveUp = false;
+                        state_Go_To_Destanation();
+                        //isGoingToDist = true;
+                    }
+                }
+                else
+                {
+                    isStand = false;
+                    
+                    isGiveUp = false;
+                    state_Go_To_Destanation();
+                    //isGoingToDist = true;
+                }
+                
             }
 
             /*
