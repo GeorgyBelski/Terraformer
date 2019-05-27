@@ -28,7 +28,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
-        public bool m_Stan;
+        public bool m_Stun;
 
 
 
@@ -130,7 +130,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
-            m_Animator.SetBool("Stan", m_Stan);
+            m_Animator.SetBool("Stun", m_Stun);
             m_Animator.SetBool("OnGround", m_IsGrounded);
 			if (!m_IsGrounded)
 			{

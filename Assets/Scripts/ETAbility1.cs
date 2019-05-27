@@ -112,7 +112,7 @@ public class ETAbility1 : MonoBehaviour
                 aimArea.position = floorHit.point;
                 TowerManager.ClearSelection();
 
-                casterTower = (ElectroTower)TowerManager.GetNearestTower(aimArea, Tower.TowerType.Electro);
+                casterTower = (ElectroTower)TowerManager.GetNearestTower(aimArea, TowerType.Electro);
                 if (casterTower) {
                     casterTower.isSelected = true;
                 }

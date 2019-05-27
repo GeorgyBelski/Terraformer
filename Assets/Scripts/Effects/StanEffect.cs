@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StanEffect : Effect
+public class StunEffect : Effect
 {
-    public StanEffect() {
+    public StunEffect() {
         this.type = Effect.Type.Stan;
     }
 

@@ -83,7 +83,7 @@ public class EnemyEffectsController : MonoBehaviour
             vertigo.SetActive(false);
           //  tpCharacter.m_AnimSpeedMultiplier = 1f;
           //  tpCharacter.m_StationaryTurnSpeed = 180f;
-            tpCharacter.m_Stan = false;
+            tpCharacter.m_Stun = false;
             navAgent.speed = 1;
         }
     }
@@ -127,12 +127,12 @@ public class EnemyEffectsController : MonoBehaviour
         {
             return;
         }
-        StanEffect stanEffect = (StanEffect)AddEffect(Effect.Type.Stan);
-        stanEffect.Set(2);
+        StunEffect stunEffect = (StunEffect)AddEffect(Effect.Type.Stan);
+        stunEffect.Set(2);
         EnableVertigo();
         //  tpCharacter.m_AnimSpeedMultiplier = 0f;
        // tpCharacter.m_MoveSpeedMultiplier = 0f;
-        tpCharacter.m_Stan = true;
+        tpCharacter.m_Stun = true;
         navAgent.speed = 0;
     }
 

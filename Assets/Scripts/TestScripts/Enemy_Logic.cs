@@ -91,7 +91,7 @@ public class Enemy_Logic : MonoBehaviour
             //Debug.Log(TowerManager.towers.Count);
             for (int i = 0; i < TowerManager.towers.Count; i++)
             {
-                Transform current_dist = TowerManager.towers[i].gameObject.transform;
+                Transform current_dist = TowerManager.towers[i].transform;
 
                 if (min > Vector3.Distance(current_dist.position, transform.position))
                 {

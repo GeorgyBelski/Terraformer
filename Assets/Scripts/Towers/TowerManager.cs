@@ -33,7 +33,7 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    public static Tower GetNearestTower(Transform target, Tower.TowerType type) {
+    public static Tower GetNearestTower(Transform target, TowerType type) {
         float minDistance = float.PositiveInfinity;
         int nearestTowerIndex = -1;
         for (int i = 0; i < TowerManager.towers.Count; i++)

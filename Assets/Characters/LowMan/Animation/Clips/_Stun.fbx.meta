@@ -67,7 +67,7 @@ ModelImporter:
     400060: LowManSpine2
     2100000: MazeLowMan
     4300000: LowMan
-    7400000: Stan
+    7400000: Stun
     9500000: //RootNode
     13700000: LowMan
     2186277476908879412: ImportLogs
@@ -103,7 +103,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Stan
+      name: Stun
       takeName: mixamo.com
       firstFrame: 31
       lastFrame: 118
