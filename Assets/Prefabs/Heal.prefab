@@ -642,7 +642,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0.7
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -660,8 +660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 762130184}
-  effectsController: {fileID: 7932900423740752727}
   maxHealth: 1000
   health: 1000
   healthBar: {fileID: 1609642471}
@@ -674,6 +672,10 @@ MonoBehaviour:
   - {fileID: 2777279045438413874}
   - {fileID: 8091981014352900014}
   damagePointIndex: 2
+  character: {fileID: 762130184}
+  effectsController: {fileID: 7932900423740752727}
+  type: 1
+  animator: {fileID: 762130185}
 --- !u!114 &762130189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,14 +767,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dcb0023d81be1849bccc1dc507dce82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 762130184}
   healpoint: {fileID: 8029352006667555970}
-  healingRate: 5
-  healingDist: 2
+  healingRate: 3
+  healingDist: 20
   healingPower: 100
   healBase: {fileID: 5691318349596143735, guid: d90044f2846ed9446b56dc1bb9c6251c,
     type: 3}
   castHealBaseRate: 15
   duration: 0.5
+  movementRate: 2
 --- !u!114 &762130184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,11 +794,10 @@ MonoBehaviour:
   m_JumpPower: 6
   m_GravityMultiplier: 2
   m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
-  m_AnimSpeedMultiplier: 1
+  m_MoveSpeedMultiplier: 0.5
+  m_AnimSpeedMultiplier: 0.5
   m_GroundCheckDistance: 0.2
-  m_Crouching: 0
-  m_Stan: 0
+  m_Stun: 0
 --- !u!114 &7932900423740752727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,6 +810,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea435cc035cfb243b836b52243778f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableBurning: 1
+  enableStun: 1
   thisEnemy: {fileID: 371407608}
   tpCharacter: {fileID: 762130184}
   navAgent: {fileID: 762130190}
@@ -1110,7 +1115,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 2.116}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 300, y: 27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1440081795
 Canvas:
@@ -1272,7 +1277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.07910865, g: 0.6509434, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.15346527, a: 0.7058824}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1284,7 +1289,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.917
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

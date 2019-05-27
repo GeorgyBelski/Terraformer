@@ -22,4 +22,9 @@ public class TowerHealth : Damageable
     {
         TowerManager.towers.Remove(thisTowet);
     }
+
+    public override void ApplyDeath()
+    {
+        
+    }
 }

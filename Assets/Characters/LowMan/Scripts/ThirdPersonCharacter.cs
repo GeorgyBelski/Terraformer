@@ -78,7 +78,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 
 		//	ScaleCapsuleForCrouching(crouch);
-			PreventStandingInLowHeadroom();
+		//	PreventStandingInLowHeadroom();
 
 			// send input and other state parameters to the animator
 			UpdateAnimator(move);
@@ -108,7 +108,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_Crouching = false;
 			}
 		}
-*/
+
 		void PreventStandingInLowHeadroom()
 		{
 			// prevent standing up in crouch-only zones
@@ -122,14 +122,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				}
 			}
 		}
-
+*/
 
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters
 			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
-			m_Animator.SetBool("Crouch", m_Crouching);
+		//	m_Animator.SetBool("Crouch", m_Crouching);
             m_Animator.SetBool("Stun", m_Stun);
             m_Animator.SetBool("OnGround", m_IsGrounded);
 			if (!m_IsGrounded)

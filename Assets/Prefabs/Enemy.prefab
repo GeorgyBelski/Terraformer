@@ -867,6 +867,7 @@ MonoBehaviour:
   character: {fileID: 8517936802816459570}
   effectsController: {fileID: 169837765437980810}
   type: 0
+  animator: {fileID: 5213773373790622136}
 --- !u!114 &3906704713362425632
 MonoBehaviour:
   m_ObjectHideFlags: 0

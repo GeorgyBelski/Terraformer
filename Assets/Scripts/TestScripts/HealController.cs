@@ -6,6 +6,9 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class HealController : MonoBehaviour
 {
+    [Header("Reference")]
+    public ThirdPersonCharacter character;
+
     [Header("Heling")]
     
     public Transform healpoint;
@@ -110,7 +113,12 @@ public class HealController : MonoBehaviour
 
     private void state_heal()
     {
-        
+        if (character.m_Stun) {
+            target = null;
+            lr.widthMultiplier = 0;
+            line = false;
+            return;
+        }
         if (EnemyManagerPro.enemiesMap[EnemyType.Solder].Count > 0 && realHealingTime <= 0)
         {
             float min = -1;

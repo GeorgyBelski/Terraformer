@@ -184,7 +184,7 @@ public class ElectroTower : Tower
         foreach (Enemy enemy in EnemyManagerPro.enemies) {
             Vector3 distanceToEnemy = enemy.transform.position - center;
             if (distanceToEnemy.magnitude <= radius) {
-                Debug.Log("ApplyThanderBallEffects on enemy: " + enemy);
+              //  Debug.Log("ApplyThanderBallEffects on enemy: " + enemy);
                 enemy.effectsController.AddStun(2);
             }
         }

@@ -129,9 +129,9 @@ public class Enemy_Logic : MonoBehaviour
         {
             //Debug.Log("checking Heal");
             targetTower = null;
-
+            Vector3 fromHealerToEnemy;
             min = Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position, transform.position);
-            destHel = EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position;
+        //    destHel = EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position;
             for (int i = 0; i < EnemyManagerPro.enemiesMap[EnemyType.Healer].Count; i++)
             {
                 Vector3 current_dist = EnemyManagerPro.enemiesMap[EnemyType.Healer][i].gameObject.transform.position;
@@ -143,6 +143,8 @@ public class Enemy_Logic : MonoBehaviour
                 }
             }
             //Debug.Log("going");
+            fromHealerToEnemy = transform.position - (Vector3)destHel;
+            destHel = (Vector3)destHel + fromHealerToEnemy.normalized;
             emk.SetDest((Vector3)destHel);
         }
         
@@ -154,7 +156,7 @@ public class Enemy_Logic : MonoBehaviour
     }
     */
     public void Attack() {
-        targetTower.towerHealth.ApplyDamage(30, Vector3.zero, Vector3.zero);
+        targetTower.towerHealth.ApplyDamage(40, Vector3.zero, Vector3.zero);
     }
 
     public void check()
