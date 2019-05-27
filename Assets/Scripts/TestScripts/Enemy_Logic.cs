@@ -40,6 +40,7 @@ public class Enemy_Logic : MonoBehaviour
         realcheckTime -= Time.deltaTime;
         if(realcheckTime <= 0)
         {
+            //print(isAttack);
             realcheckTime = checkTime;
             
             check();
@@ -64,7 +65,7 @@ public class Enemy_Logic : MonoBehaviour
             {
                 isGoingToDist = false;
                 isAttack = true;
-                state_Attack();
+                stateAttack();
             }
         }
         
@@ -76,12 +77,12 @@ public class Enemy_Logic : MonoBehaviour
         //Debug.Log(enem.GetHealthRatio());
     }
 
-    void state_Attack()
+    void stateAttack()
     {
         //Debug.Log(isAttack + " " + destTower + "ATAKING");
     }
 
-    void state_Go_To_Destanation()
+    void stateGoToDestanation()
     {
         if (TowerManager.towers.Count > 0)
         {
@@ -109,7 +110,7 @@ public class Enemy_Logic : MonoBehaviour
             isStand = true;
         }
     }
-    void state_GiveUp()
+    void stateGiveUp()
     {
         if(EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0)
         {
@@ -147,9 +148,9 @@ public class Enemy_Logic : MonoBehaviour
             //Debug.Log("checking");
             isStand = false;
             isGoingToDist = false;
-            
+            isAttack = false;
             //state_Attack();
-            state_GiveUp();
+            stateGiveUp();
             isGiveUp = true;
         }
         else
@@ -159,14 +160,13 @@ public class Enemy_Logic : MonoBehaviour
                 if(heals > 0.5 + brawe/2)
                 {
                     isStand = false;
-                   
                     isGiveUp = false;
-                    state_Go_To_Destanation();
+                    stateGoToDestanation();
                     //
                 }
                 else
                 {
-                    state_GiveUp();
+                    stateGiveUp();
                 }
             }
             else
@@ -176,32 +176,24 @@ public class Enemy_Logic : MonoBehaviour
                     if (!destTower)
                     {
                         isStand = false;
-                        
+                        isAttack = false;
                         isGiveUp = false;
-                        state_Go_To_Destanation();
-                        //isGoingToDist = true;
+                        stateGoToDestanation();
+                    }
+                    else
+                    {
+                        isAttack = true;
                     }
                 }
                 else
                 {
                     isStand = false;
-                    
+                    isAttack = false;
                     isGiveUp = false;
-                    state_Go_To_Destanation();
+                    stateGoToDestanation();
                     //isGoingToDist = true;
-                }
-                
+                }        
             }
-
-            /*
-            if(isGiveUp && heals > 0.5f) { 
-
-            }
-            else
-            {
-                
-            }
-            */
         }
     }
 }
