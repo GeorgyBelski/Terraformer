@@ -186,6 +186,7 @@ public class ElectroTower : Tower
             if (distanceToEnemy.magnitude <= radius) {
               //  Debug.Log("ApplyThanderBallEffects on enemy: " + enemy);
                 enemy.effectsController.AddStun(2);
+                enemy.ApplyDamage(100, Vector3.zero, Vector3.zero);
             }
         }
     }

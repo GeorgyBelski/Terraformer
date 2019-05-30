@@ -119,6 +119,10 @@ public class HealController : MonoBehaviour
             line = false;
             return;
         }
+        if (!EnemyManagerPro.enemiesMap.ContainsKey(EnemyType.Solder))
+        {
+            return;
+        }
         if (EnemyManagerPro.enemiesMap[EnemyType.Solder].Count > 0 && realHealingTime <= 0)
         {
             float min = -1;
