@@ -1089,6 +1089,7 @@ MonoBehaviour:
   gizmoMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   isSelected: 0
   cooldownAttack: 1
+  timerAttack: 0
   cannon: {fileID: 6015777778795571989}
   towerHealth: {fileID: 6998274765810947965}
   target: {fileID: 0}
@@ -1120,7 +1121,7 @@ MonoBehaviour:
   - {fileID: 8331066699509348273}
   - {fileID: 1178945682058409591}
   damagePointIndex: 0
-  thisTowet: {fileID: 6015777778884135385}
+  thisTower: {fileID: 6015777778884135385}
 --- !u!1 &8185675416490534824
 GameObject:
   m_ObjectHideFlags: 0
