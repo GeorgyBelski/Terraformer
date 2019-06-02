@@ -35,7 +35,7 @@ public class Logic : MonoBehaviour
 
             randPos = Random.Range(0f, 360f);
             spawnPortalCooldown = basicSpawnPortalCooldown;
-            Instantiate(portal, new Vector3(17 * Mathf.Sin(randPos), 0.5f, 17 * Mathf.Cos(randPos)), this.transform.rotation, null);
+            Instantiate(portal, new Vector3(23 * Mathf.Sin(randPos), 0.5f, 23 * Mathf.Cos(randPos)), this.transform.rotation, null);
         }
     }
 

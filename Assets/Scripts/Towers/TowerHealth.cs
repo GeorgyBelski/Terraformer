@@ -28,9 +28,10 @@ public class TowerHealth : Damageable
         //RemoveFromList();
         //Destroy(thisTowet.gameObject);
         
-        Material mt = thisTowet.gameObject.GetComponent<Material>();//.SetColor(Color.gray);
+        Material mt = thisTowet.gameObject.GetComponent<Renderer>().material;//.SetColor(Color.gray);
         //thisTowet.GetComponent<Material>
-        //.color = Color.gray;
+        mt.color = Color.gray;
+        thisTowet.gizmoMaterial.color = Color.gray;
         thisTowet.cooldownAttack = float.PositiveInfinity;
         thisTowet.timerAttack = float.PositiveInfinity;
        

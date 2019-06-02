@@ -39,7 +39,7 @@ public class ElectroTower : Tower
 
     private void Start()
     {
-
+        TowerManager.AddTower(this);
         type = TowerType.Electro;
         thandetBallAim = null;
         hitThanderBallColliders = new Collider[10];
