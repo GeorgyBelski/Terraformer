@@ -166,13 +166,16 @@ public class Enemy_Logic : MonoBehaviour
         //Debug.Log(heals + " " + brawe);
         if((heals - brawe) <= 0 && heals != 0) //Логика состояний
         {
-            //Debug.Log("checking");
-            isStand = false;
-            isGoingToDist = false;
-            IsAttack = false;
-            //state_Attack();
-            stateGiveUp();
-            isGiveUp = true;
+            if(EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0) { 
+                //Debug.Log("checking");
+                isStand = false;
+                isGoingToDist = false;
+                IsAttack = false;
+                //state_Attack();
+                stateGiveUp();
+                isGiveUp = true;
+            }
+
         }
         else
         {

@@ -25,6 +25,14 @@ public class TowerHealth : Damageable
 
     public override void ApplyDeath()
     {
+        //RemoveFromList();
+        //Destroy(thisTowet.gameObject);
         
+        Material mt = thisTowet.gameObject.GetComponent<Material>();//.SetColor(Color.gray);
+        //thisTowet.GetComponent<Material>
+        //.color = Color.gray;
+        thisTowet.cooldownAttack = float.PositiveInfinity;
+        thisTowet.timerAttack = float.PositiveInfinity;
+       
     }
 }

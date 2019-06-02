@@ -19,7 +19,7 @@ public abstract class Tower : MonoBehaviour
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
-    protected float timerAttack = 0f;
+    public float timerAttack = 0f;
     /*
     public float cooldownAbility1 = 10f;
     protected float timerAbility1 = 0f;
