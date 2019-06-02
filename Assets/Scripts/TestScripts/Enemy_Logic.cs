@@ -166,7 +166,7 @@ public class Enemy_Logic : MonoBehaviour
         //Debug.Log(heals + " " + brawe);
         if((heals - brawe) <= 0 && heals != 0) //Логика состояний
         {
-            if(EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0) { 
+            if(EnemyManagerPro.enemiesMap.ContainsKey(EnemyType.Healer) && EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0) { 
                 //Debug.Log("checking");
                 isStand = false;
                 isGoingToDist = false;

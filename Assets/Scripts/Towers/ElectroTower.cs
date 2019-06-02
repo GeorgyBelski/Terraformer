@@ -30,6 +30,7 @@ public class ElectroTower : Tower
     SphereCollider thandetBallCollider;
     Vector3? thandetBallAim;
     Collider[] hitThanderBallColliders;
+    List<Enemy> ThanderBallTargets;
 
 
     float previousDistanceToAim;
@@ -39,10 +40,12 @@ public class ElectroTower : Tower
 
     private void Start()
     {
-
+        base.Start();
         type = TowerType.Electro;
+
         thandetBallAim = null;
         hitThanderBallColliders = new Collider[10];
+        ThanderBallTargets = new List<Enemy>();
     }
     public override void TowerAttack(Enemy target)
     {
@@ -186,11 +189,19 @@ public class ElectroTower : Tower
             if (distanceToEnemy.magnitude <= radius) {
               //  Debug.Log("ApplyThanderBallEffects on enemy: " + enemy);
                 enemy.effectsController.AddStun(2);
-                enemy.ApplyDamage(100, Vector3.zero, Vector3.zero);
+                ThanderBallTargets.Add(enemy);      
             }
         }
-    }
+        ApplyDanageToTargets(ThanderBallTargets, 100);
 
+
+    }
+    void ApplyDanageToTargets(List<Enemy> enemiesList, int damage){
+        foreach (Enemy enemy in enemiesList) {
+            enemy.ApplyDamage(damage, Vector3.zero, Vector3.zero);
+        }
+        enemiesList.Clear();
+    }
     public void EndCasting() {
         IsCastingAbility = false;
         TowerManager.availableElectroTowers.Add(this);

@@ -33,9 +33,9 @@ public abstract class Tower : MonoBehaviour
     public Enemy target;
     int targetIndex = -1;
 
-    void Start()
+    protected void Start()
     {
-
+        TowerManager.AddTower(this);
     }
 
     void Update()
