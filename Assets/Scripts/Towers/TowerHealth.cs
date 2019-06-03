@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TowerHealth : Damageable
 {
-    public Tower thisTowet;
+    public Tower thisTower;
 
 
     void Start()
@@ -15,12 +15,15 @@ public class TowerHealth : Damageable
     void Update()
     {
         base.CalcHealthRatio();
+       /* if (health == 0 && TowerManager.towers.Contains(thisTower)){
+            RemoveFromList();
+        }*/
     }
 
 
     public override void RemoveFromList()
     {
-        TowerManager.towers.Remove(thisTowet);
+        TowerManager.RemoveTower(thisTower);
     }
 
     public override void ApplyDeath()

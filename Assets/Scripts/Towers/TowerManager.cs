@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
-    public List<Tower> startTowers = new List<Tower>();
     public static List<Tower> towers = new List<Tower>();
 
     public static List<ElectroTower> availableElectroTowers = new List<ElectroTower>();
@@ -12,12 +11,15 @@ public class TowerManager : MonoBehaviour
 
     public static float selectedTowerRange = 1.5f;
 
+ //   public int TowerCount = 0;
+
     private void Start()
     {
-        foreach (Tower startTower in startTowers)
-        {
-            AddTower(startTower);
-        }
+
+    }
+
+    void Update() {
+     //   TowerCount = towers.Count;
     }
 
     public static void AddTower(Tower tower)
@@ -30,6 +32,18 @@ public class TowerManager : MonoBehaviour
         else if (tower is LaserTower)
         {
             availableLaserTowers.Add((LaserTower)tower);
+        }
+    }
+
+    public static void RemoveTower(Tower tower) {
+        towers.Remove(tower);
+        if (tower.type == TowerType.Electro)
+        {
+            availableElectroTowers.Remove((ElectroTower)tower);
+        }
+        else if (tower.type == TowerType.Laser)
+        {
+            availableLaserTowers.Remove((LaserTower)tower);
         }
     }
 
