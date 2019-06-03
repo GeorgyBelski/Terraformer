@@ -169,6 +169,8 @@ public class HealController : MonoBehaviour
                 }
                 */
             }
+            if (target == null)
+                return;
 
             //if (target && min <= healingDist)
             
