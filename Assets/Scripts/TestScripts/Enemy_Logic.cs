@@ -134,6 +134,9 @@ public class Enemy_Logic : MonoBehaviour
         //    destHel = EnemyManagerPro.enemiesMap[EnemyType.Healer][0].gameObject.transform.position;
             for (int i = 0; i < EnemyManagerPro.enemiesMap[EnemyType.Healer].Count; i++)
             {
+                if (EnemyManagerPro.enemiesMap[EnemyType.Healer][i] == null) {
+                    return;
+                }
                 Vector3 current_dist = EnemyManagerPro.enemiesMap[EnemyType.Healer][i].gameObject.transform.position;
 
                 if (min > Vector3.Distance(current_dist, transform.position))
