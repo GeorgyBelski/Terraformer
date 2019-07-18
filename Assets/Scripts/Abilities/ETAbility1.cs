@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ETAbility1 : MonoBehaviour
-{
+public class ETAbility1 : AbilityButtonController
+{/*
     public enum State { Ready, Aiming, Casting, Recharging};
     public State currentState = State.Ready;
     public float castTime = 2.0f;
@@ -15,7 +15,7 @@ public class ETAbility1 : MonoBehaviour
     public Color buttomTintRecharging;
 
     public Transform gunpoint;
-    public GameObject thunderball;
+   // public GameObject thunderball;
     public GameObject aimAreaPrefab;
     public Transform aimArea;
     Animator aimAreaAnimator;
@@ -170,5 +170,10 @@ public class ETAbility1 : MonoBehaviour
         {
             button.interactable = true;
         }
+    }
+    */
+    public override void TowerCastAreaAbility(Tower casterTower, Vector3 aimAreaPosition)
+    {
+        ((ElectroTower)casterTower).CastThanderBall(aimArea.position);
     }
 }

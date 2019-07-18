@@ -29,7 +29,7 @@ public class ElectroTower : Tower
     Animator thandetBallAnimator;
     SphereCollider thandetBallCollider;
     Vector3? thandetBallAim;
-    Collider[] hitThanderBallColliders;
+    //Collider[] hitThanderBallColliders;
     List<Enemy> ThanderBallTargets;
 
 
@@ -44,7 +44,7 @@ public class ElectroTower : Tower
         type = TowerType.Electro;
 
         thandetBallAim = null;
-        hitThanderBallColliders = new Collider[10];
+     //   hitThanderBallColliders = new Collider[10];
         ThanderBallTargets = new List<Enemy>();
     }
     public override void TowerAttack(Enemy target)

@@ -527,6 +527,12 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!1 &541811198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8208597059277847092, guid: 4bca82e3b0c02614382afc1187f7bae3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2902143821286048677}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &563996545 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7532716056537121323, guid: 6c767a6979ec47546b20e60deea06abc,
@@ -1245,6 +1251,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dde25d668ecb2e4db037d0ad499a8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1062497212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2902143821281523190, guid: 4bca82e3b0c02614382afc1187f7bae3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2902143821286048677}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1091266596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2006,6 +2018,21 @@ PrefabInstance:
       propertyPath: castTime
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2902143820328577125, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 1062497212}
+    - target: {fileID: 2902143821281523184, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5268415477328583201, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 541811198}
     - target: {fileID: 2902143820882433136, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
       propertyPath: m_PixelPerfect
@@ -2292,6 +2319,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaserTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015777778884135385, guid: 0337bdfcdac9efd43baee395d73fe29e,
+        type: 3}
+      propertyPath: color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015777778884135385, guid: 0337bdfcdac9efd43baee395d73fe29e,
+        type: 3}
+      propertyPath: color.g
+      value: 0.6914602
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015777778884135385, guid: 0337bdfcdac9efd43baee395d73fe29e,
+        type: 3}
+      propertyPath: color.b
+      value: 0.6084906
       objectReference: {fileID: 0}
     - target: {fileID: 6015777778884135390, guid: 0337bdfcdac9efd43baee395d73fe29e,
         type: 3}
