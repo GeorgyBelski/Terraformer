@@ -1066,6 +1066,7 @@ GameObject:
   - component: {fileID: 1605180230303121764}
   - component: {fileID: 1639266349364210301}
   - component: {fileID: 1357415371704481169}
+  - component: {fileID: 1583912539}
   m_Layer: 0
   m_Name: ElectroTower
   m_TagString: Tower
@@ -1205,7 +1206,7 @@ MonoBehaviour:
   - {fileID: 1578352024}
   - {fileID: 1376367255}
   damagePointIndex: 0
-  thisTowet: {fileID: 7532716056537121323}
+  thisTower: {fileID: 0}
 --- !u!208 &1639266349364210301
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -1238,6 +1239,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!136 &1583912539
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532716056537121489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7532716055160325984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1245,16 +1260,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 244022217}
     m_Modifications:
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1359,6 +1364,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}

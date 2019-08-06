@@ -22,6 +22,7 @@ public class Shoping : MonoBehaviour
     private bool selectedLazerBool = false;
     private bool isPlacing = false;
     private GameObject realTimeTowerPlace;
+    private GameObject selectedTower;
 
     private ColorBlock defaultColor;
     private Button bSelected;
@@ -38,34 +39,47 @@ public class Shoping : MonoBehaviour
     }
     public void SelectElectroTower(Button b)
     {
-        if (!selectedElectroBool)
-        {
+        isPlacing = true;
+        selectedTower = electroTower;
+        selectB(b);
+        realTimeTowerPlace = Instantiate(towerPlace, Vector3.zero, this.transform.rotation);
+        mt = realTimeTowerPlace.gameObject.GetComponent<Renderer>().material;
+    }
+
+    public void SelectLazerTower(Button b)
+    {
+        isPlacing = true;
+        selectedTower = lazerTower;
+        selectB(b);
+        realTimeTowerPlace = Instantiate(towerPlace, Vector3.zero, this.transform.rotation);
+        mt = realTimeTowerPlace.gameObject.GetComponent<Renderer>().material;
+
+        //Debug.Log("Lazer");
+    }
+
+    private void selectB(Button b)
+    {
+        if (isPlacing) { 
             bSelected = b;
             defaultColor = b.colors;
             ColorBlock cb = b.colors;// = selectedTowerColor;
             cb.normalColor = selectedTowerColor;
             cb.highlightedColor = selectedTowerColor;
             b.colors = cb;
-            selectedElectroBool = true;
-            isPlacing = true;
-            realTimeTowerPlace = Instantiate(towerPlace, Vector3.zero, this.transform.rotation);
-            mt = realTimeTowerPlace.gameObject.GetComponent<Renderer>().material;
+            //selectedElectroBool = true;
+            //isPlacing = true;
         }
         else
         {
             bSelected = null;
             b.colors = defaultColor;
-            selectedElectroBool = false;
-            isPlacing = false;
             Destroy(realTimeTowerPlace);
         }
-        
-        //Debug.Log("Electro");
     }
 
-    public void SelectLazerTower()
+    private void placeTower()
     {
-        //Debug.Log("Lazer");
+        Instantiate(selectedTower, realTimeTowerPlace.transform.position, realTimeTowerPlace.transform.rotation);
     }
 
     void Update()
@@ -76,8 +90,8 @@ public class Shoping : MonoBehaviour
             RaycastHit floorHit;
             if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
             {
-                
-                realTimeTowerPlace.transform.position = new Vector3(floorHit.point.x, floorHit.point.y + realTimeTowerPlace.transform.localScale.y - 0.3f, floorHit.point.z);
+
+                realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y + realTimeTowerPlace.transform.localScale.y - 0.3f, System.Convert.ToInt32(floorHit.point.z));
                 if (realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower)
                 {
                     // = new Material();//.SetColor(Color.red);
@@ -101,14 +115,21 @@ public class Shoping : MonoBehaviour
                 //transform.LookAt(new Vector3(floorHit.point.x, transform.position.y, floorHit.point.z));
                 if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower)
                 {
-
-                    Instantiate(electroTower, realTimeTowerPlace.transform.position, realTimeTowerPlace.transform.rotation);
-                    Destroy(realTimeTowerPlace);
+                    placeTower();
+                    //Instantiate(electroTower, realTimeTowerPlace.transform.position, realTimeTowerPlace.transform.rotation);
+                    //Destroy(realTimeTowerPlace);
                     //agent.
                     //isPlacing = false;
-                    SelectElectroTower(bSelected);
+                    isPlacing = false;
+                    selectB(bSelected);
+                    //SelectElectroTower(bSelected);
                 }
             }
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            isPlacing = false;
+            selectB(bSelected);
         }
     }
 

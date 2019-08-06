@@ -990,6 +990,7 @@ GameObject:
   - component: {fileID: 6015777778884135385}
   - component: {fileID: 6998274765810947965}
   - component: {fileID: 5893686480769145596}
+  - component: {fileID: 1610031922}
   m_Layer: 0
   m_Name: LaserTower
   m_TagString: Tower
@@ -1122,7 +1123,7 @@ MonoBehaviour:
   - {fileID: 8331066699509348273}
   - {fileID: 1178945682058409591}
   damagePointIndex: 0
-  thisTowet: {fileID: 6015777778884135385}
+  thisTower: {fileID: 0}
 --- !u!54 &5893686480769145596
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1139,6 +1140,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!136 &1610031922
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015777778884135378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8185675416490534824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,11 +1235,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280114582322313786}
     m_Modifications:
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
-      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1329,6 +1339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}
