@@ -11,9 +11,9 @@ public class CreepGenerator : MonoBehaviour
     Vector3[] vertices;
 
     int[] triangles;
-    //   List<int> triangles;
 
-    int radius = 20, diameter;
+    int radius = 20;
+    int diameter;
 
     void Start()
     {
@@ -56,15 +56,16 @@ public class CreepGenerator : MonoBehaviour
         int triangleIndex = 0;
         for (int z = 0; z < diameter; z++)
         {
-            for (int x= 0; x<diameter; x++)
+            for (int x = 0; x<diameter; x++)
             {
                 if (vertices[vertexIndex + 0].magnitude < radius
                     && vertices[vertexIndex + diameter + 1].magnitude < radius
                     && vertices[vertexIndex + 1].magnitude < radius)
                 {
-                    triangles[triangleIndex + 0] = vertexIndex + 0;
-                    triangles[triangleIndex + 1] = vertexIndex + diameter + 1;
-                    triangles[triangleIndex + 2] = vertexIndex + 1;
+                    
+                    triangles[triangleIndex + 0] = vertexIndex + diameter + 1;
+                    triangles[triangleIndex + 1] = vertexIndex + 1;
+                    triangles[triangleIndex + 2] = vertexIndex;
                 }
                 if (vertices[vertexIndex + 1].magnitude < radius
                     && vertices[vertexIndex + diameter + 1].magnitude < radius
