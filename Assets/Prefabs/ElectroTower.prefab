@@ -1212,7 +1212,7 @@ MonoBehaviour:
   - {fileID: 1578352024}
   - {fileID: 1376367255}
   damagePointIndex: 0
-  thisTower: {fileID: 0}
+  thisTower: {fileID: 7532716056537121323}
 --- !u!208 &1639266349364210301
 NavMeshObstacle:
   m_ObjectHideFlags: 0

@@ -82,6 +82,9 @@ public abstract class Tower : MonoBehaviour
         float distanceTmp = distanceToTarget;
         targetIndex = -1;
         for (int i = 0; i < EnemyManagerPro.enemies.Count; i++) {
+            if (EnemyManagerPro.enemies[i] == null) {
+                return null;
+            }
             distanceTmp = (EnemyManagerPro.enemies[i].GetPosition() - this.transform.position).magnitude;
             if (distanceTmp < distanceToTarget)
             {
