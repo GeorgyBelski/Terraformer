@@ -219,8 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce114c82b442d44a95278b25b89c049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpTextAnimator: {fileID: 733342095}
-  rect: {fileID: 733342099}
+  popUpTextAnimator: {fileID: 0}
+  rect: {fileID: 0}
 --- !u!1 &1432963769
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,8 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce114c82b442d44a95278b25b89c049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpTextAnimator: {fileID: 1432963774}
-  rect: {fileID: 1432963770}
+  popUpTextAnimator: {fileID: 0}
+  rect: {fileID: 0}
 --- !u!1 &1468490027
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,8 +701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce114c82b442d44a95278b25b89c049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpTextAnimator: {fileID: 2315369588194038545}
-  rect: {fileID: 1684980367}
+  popUpTextAnimator: {fileID: 0}
+  rect: {fileID: 0}
 --- !u!1 &1748691048
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,17 +854,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
-  health: 1000
+  maxHealth: 100
+  health: 0
   healthBar: {fileID: 200029530}
   damagePoints:
-  - {fileID: 1684980370}
-  - {fileID: 1432963775}
-  - {fileID: 733342100}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   damagePointAnimators:
-  - {fileID: 2315369588194038545}
-  - {fileID: 1432963774}
-  - {fileID: 733342095}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   damagePointIndex: 0
   character: {fileID: 8517936802816459570}
   effectsController: {fileID: 169837765437980810}
@@ -970,7 +970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_OverrideArea: 0
   m_Area: 0
-  m_IgnoreFromBuild: 1
+  m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
 --- !u!114 &8517936802816459570
 MonoBehaviour:
@@ -1157,7 +1157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.000005896732
+      value: 0.000005956295
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
       propertyPath: m_LocalPosition.x
