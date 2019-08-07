@@ -126,7 +126,7 @@ public class Shoping : MonoBehaviour
                 }
             }
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && isPlacing == true)
         {
             isPlacing = false;
             selectB(bSelected);
