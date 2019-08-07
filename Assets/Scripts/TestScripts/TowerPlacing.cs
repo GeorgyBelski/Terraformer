@@ -6,17 +6,17 @@ public class TowerPlacing : MonoBehaviour
 {
     public bool isOnTower = false;
     
-    private void OnTriggerEnter(/*LayerMask lay*/ Collider other)
+    private void OnTriggerStay(/*LayerMask lay*/ Collider other)
     {
         /*
         if(lay.value == LayerMask.GetMask("Tower")){
 
         }
         */
-        Debug.Log("+");
+        //Debug.Log("+");
         if (other.CompareTag("Tower")){
             isOnTower = true;
-            Debug.Log("+");
+            //Debug.Log("+");
         }
     }
 
