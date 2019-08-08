@@ -192,11 +192,11 @@ public class ElectroTower : Tower
                 ThanderBallTargets.Add(enemy);      
             }
         }
-        ApplyDanageToTargets(ThanderBallTargets, 100);
+        ApplyDamageToTargets(ThanderBallTargets, 100);
 
 
     }
-    void ApplyDanageToTargets(List<Enemy> enemiesList, int damage){
+    void ApplyDamageToTargets(List<Enemy> enemiesList, int damage){
         foreach (Enemy enemy in enemiesList) {
             enemy.ApplyDamage(damage, Vector3.zero, Vector3.zero);
         }

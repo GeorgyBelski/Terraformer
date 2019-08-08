@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Transparent_Glow
   m_Shader: {fileID: 4800000, guid: b7839dad95683814aa64166edc107ae2, type: 3}
-  m_ShaderKeywords: _RECEIVE_SHADOWS_OFF
-  m_LightmapFlags: 6
+  m_ShaderKeywords: _EMISSION _RECEIVE_SHADOWS_OFF
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3050
@@ -102,12 +102,12 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 3.0672052, g: 3.0672052, b: 3.0672052, a: 0.3647059}
+    - _BaseColor: {r: 3.0672052, g: 3.0672052, b: 3.0672052, a: 1}
     - _BaseColorAddSubDiff: {r: -1, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1.7207954, g: 1.7207954, b: 1.7207954, a: 0.105882354}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.33490568, g: 1, b: 0.9035713, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &996520273313936810
 MonoBehaviour:

@@ -655,8 +655,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   range: 10
-  color: {r: 1, g: 0.6359584, b: 0.5707547, a: 1}
+  rangeColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0}
   gizmoMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  rangelineMaterial: {fileID: 2100000, guid: a6b798d74865a9e4e855fa60ca076075, type: 2}
   isSelected: 0
   cooldownAttack: 1
   timerAttack: 0
@@ -806,6 +807,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280114582322313786}
     m_Modifications:
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -910,16 +921,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}

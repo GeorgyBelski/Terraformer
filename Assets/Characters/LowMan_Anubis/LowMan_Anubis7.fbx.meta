@@ -1,138 +1,391 @@
 fileFormatVersion: 2
 guid: 6f4dccda69a59e04db8fd5c5e1cc79ca
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: default1
-    100002: Helmet0
-    100004: LowMan
-    100006: //RootNode
-    100008: mixamorig:Head
-    100010: mixamorig:HeadTop_End
-    100012: mixamorig:Hips
-    100014: mixamorig:LeftArm
-    100016: mixamorig:LeftFoot
-    100018: mixamorig:LeftForeArm
-    100020: mixamorig:LeftHand
-    100022: mixamorig:LeftHandIndex1
-    100024: mixamorig:LeftHandIndex2
-    100026: mixamorig:LeftHandIndex3
-    100028: mixamorig:LeftHandIndex4
-    100030: mixamorig:LeftHandMiddle1
-    100032: mixamorig:LeftHandMiddle2
-    100034: mixamorig:LeftHandMiddle3
-    100036: mixamorig:LeftHandMiddle4
-    100038: mixamorig:LeftHandThumb1
-    100040: mixamorig:LeftHandThumb2
-    100042: mixamorig:LeftHandThumb3
-    100044: mixamorig:LeftHandThumb4
-    100046: mixamorig:LeftLeg
-    100048: mixamorig:LeftShoulder
-    100050: mixamorig:LeftToe_End
-    100052: mixamorig:LeftToeBase
-    100054: mixamorig:LeftUpLeg
-    100056: mixamorig:Neck
-    100058: mixamorig:RightArm
-    100060: mixamorig:RightFoot
-    100062: mixamorig:RightForeArm
-    100064: mixamorig:RightHand
-    100066: mixamorig:RightHandIndex1
-    100068: mixamorig:RightHandIndex2
-    100070: mixamorig:RightHandIndex3
-    100072: mixamorig:RightHandIndex4
-    100074: mixamorig:RightHandMiddle1
-    100076: mixamorig:RightHandMiddle2
-    100078: mixamorig:RightHandMiddle3
-    100080: mixamorig:RightHandMiddle4
-    100082: mixamorig:RightHandThumb1
-    100084: mixamorig:RightHandThumb2
-    100086: mixamorig:RightHandThumb3
-    100088: mixamorig:RightHandThumb4
-    100090: mixamorig:RightLeg
-    100092: mixamorig:RightShoulder
-    100094: mixamorig:RightToe_End
-    100096: mixamorig:RightToeBase
-    100098: mixamorig:RightUpLeg
-    100100: mixamorig:Spine
-    100102: mixamorig:Spine1
-    100104: mixamorig:Spine2
-    100106: SholderStrap0
-    400000: default1
-    400002: Helmet0
-    400004: LowMan
-    400006: //RootNode
-    400008: mixamorig:Head
-    400010: mixamorig:HeadTop_End
-    400012: mixamorig:Hips
-    400014: mixamorig:LeftArm
-    400016: mixamorig:LeftFoot
-    400018: mixamorig:LeftForeArm
-    400020: mixamorig:LeftHand
-    400022: mixamorig:LeftHandIndex1
-    400024: mixamorig:LeftHandIndex2
-    400026: mixamorig:LeftHandIndex3
-    400028: mixamorig:LeftHandIndex4
-    400030: mixamorig:LeftHandMiddle1
-    400032: mixamorig:LeftHandMiddle2
-    400034: mixamorig:LeftHandMiddle3
-    400036: mixamorig:LeftHandMiddle4
-    400038: mixamorig:LeftHandThumb1
-    400040: mixamorig:LeftHandThumb2
-    400042: mixamorig:LeftHandThumb3
-    400044: mixamorig:LeftHandThumb4
-    400046: mixamorig:LeftLeg
-    400048: mixamorig:LeftShoulder
-    400050: mixamorig:LeftToe_End
-    400052: mixamorig:LeftToeBase
-    400054: mixamorig:LeftUpLeg
-    400056: mixamorig:Neck
-    400058: mixamorig:RightArm
-    400060: mixamorig:RightFoot
-    400062: mixamorig:RightForeArm
-    400064: mixamorig:RightHand
-    400066: mixamorig:RightHandIndex1
-    400068: mixamorig:RightHandIndex2
-    400070: mixamorig:RightHandIndex3
-    400072: mixamorig:RightHandIndex4
-    400074: mixamorig:RightHandMiddle1
-    400076: mixamorig:RightHandMiddle2
-    400078: mixamorig:RightHandMiddle3
-    400080: mixamorig:RightHandMiddle4
-    400082: mixamorig:RightHandThumb1
-    400084: mixamorig:RightHandThumb2
-    400086: mixamorig:RightHandThumb3
-    400088: mixamorig:RightHandThumb4
-    400090: mixamorig:RightLeg
-    400092: mixamorig:RightShoulder
-    400094: mixamorig:RightToe_End
-    400096: mixamorig:RightToeBase
-    400098: mixamorig:RightUpLeg
-    400100: mixamorig:Spine
-    400102: mixamorig:Spine1
-    400104: mixamorig:Spine2
-    400106: SholderStrap0
-    2100000: lambert_LowMan
-    2100002: lambert_SholderStrap
-    2300000: default1
-    2300002: Helmet0
-    3300000: default1
-    3300002: Helmet0
-    4300000: default1
-    4300002: LowMan
-    4300004: SholderStrap0
-    4300006: Helmet0
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: LowMan
-    13700002: SholderStrap0
-    2186277476908879412: ImportLogs
-    7973541674914708964: Helmet0
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: default1
+  - first:
+      1: 100002
+    second: Helmet0
+  - first:
+      1: 100004
+    second: LowMan
+  - first:
+      1: 100006
+    second: //RootNode
+  - first:
+      1: 100008
+    second: mixamorig:Head
+  - first:
+      1: 100010
+    second: mixamorig:HeadTop_End
+  - first:
+      1: 100012
+    second: mixamorig:Hips
+  - first:
+      1: 100014
+    second: mixamorig:LeftArm
+  - first:
+      1: 100016
+    second: mixamorig:LeftFoot
+  - first:
+      1: 100018
+    second: mixamorig:LeftForeArm
+  - first:
+      1: 100020
+    second: mixamorig:LeftHand
+  - first:
+      1: 100022
+    second: mixamorig:LeftHandIndex1
+  - first:
+      1: 100024
+    second: mixamorig:LeftHandIndex2
+  - first:
+      1: 100026
+    second: mixamorig:LeftHandIndex3
+  - first:
+      1: 100028
+    second: mixamorig:LeftHandIndex4
+  - first:
+      1: 100030
+    second: mixamorig:LeftHandMiddle1
+  - first:
+      1: 100032
+    second: mixamorig:LeftHandMiddle2
+  - first:
+      1: 100034
+    second: mixamorig:LeftHandMiddle3
+  - first:
+      1: 100036
+    second: mixamorig:LeftHandMiddle4
+  - first:
+      1: 100038
+    second: mixamorig:LeftHandThumb1
+  - first:
+      1: 100040
+    second: mixamorig:LeftHandThumb2
+  - first:
+      1: 100042
+    second: mixamorig:LeftHandThumb3
+  - first:
+      1: 100044
+    second: mixamorig:LeftHandThumb4
+  - first:
+      1: 100046
+    second: mixamorig:LeftLeg
+  - first:
+      1: 100048
+    second: mixamorig:LeftShoulder
+  - first:
+      1: 100050
+    second: mixamorig:LeftToe_End
+  - first:
+      1: 100052
+    second: mixamorig:LeftToeBase
+  - first:
+      1: 100054
+    second: mixamorig:LeftUpLeg
+  - first:
+      1: 100056
+    second: mixamorig:Neck
+  - first:
+      1: 100058
+    second: mixamorig:RightArm
+  - first:
+      1: 100060
+    second: mixamorig:RightFoot
+  - first:
+      1: 100062
+    second: mixamorig:RightForeArm
+  - first:
+      1: 100064
+    second: mixamorig:RightHand
+  - first:
+      1: 100066
+    second: mixamorig:RightHandIndex1
+  - first:
+      1: 100068
+    second: mixamorig:RightHandIndex2
+  - first:
+      1: 100070
+    second: mixamorig:RightHandIndex3
+  - first:
+      1: 100072
+    second: mixamorig:RightHandIndex4
+  - first:
+      1: 100074
+    second: mixamorig:RightHandMiddle1
+  - first:
+      1: 100076
+    second: mixamorig:RightHandMiddle2
+  - first:
+      1: 100078
+    second: mixamorig:RightHandMiddle3
+  - first:
+      1: 100080
+    second: mixamorig:RightHandMiddle4
+  - first:
+      1: 100082
+    second: mixamorig:RightHandThumb1
+  - first:
+      1: 100084
+    second: mixamorig:RightHandThumb2
+  - first:
+      1: 100086
+    second: mixamorig:RightHandThumb3
+  - first:
+      1: 100088
+    second: mixamorig:RightHandThumb4
+  - first:
+      1: 100090
+    second: mixamorig:RightLeg
+  - first:
+      1: 100092
+    second: mixamorig:RightShoulder
+  - first:
+      1: 100094
+    second: mixamorig:RightToe_End
+  - first:
+      1: 100096
+    second: mixamorig:RightToeBase
+  - first:
+      1: 100098
+    second: mixamorig:RightUpLeg
+  - first:
+      1: 100100
+    second: mixamorig:Spine
+  - first:
+      1: 100102
+    second: mixamorig:Spine1
+  - first:
+      1: 100104
+    second: mixamorig:Spine2
+  - first:
+      1: 100106
+    second: SholderStrap0
+  - first:
+      4: 400000
+    second: default1
+  - first:
+      4: 400002
+    second: Helmet0
+  - first:
+      4: 400004
+    second: LowMan
+  - first:
+      4: 400006
+    second: //RootNode
+  - first:
+      4: 400008
+    second: mixamorig:Head
+  - first:
+      4: 400010
+    second: mixamorig:HeadTop_End
+  - first:
+      4: 400012
+    second: mixamorig:Hips
+  - first:
+      4: 400014
+    second: mixamorig:LeftArm
+  - first:
+      4: 400016
+    second: mixamorig:LeftFoot
+  - first:
+      4: 400018
+    second: mixamorig:LeftForeArm
+  - first:
+      4: 400020
+    second: mixamorig:LeftHand
+  - first:
+      4: 400022
+    second: mixamorig:LeftHandIndex1
+  - first:
+      4: 400024
+    second: mixamorig:LeftHandIndex2
+  - first:
+      4: 400026
+    second: mixamorig:LeftHandIndex3
+  - first:
+      4: 400028
+    second: mixamorig:LeftHandIndex4
+  - first:
+      4: 400030
+    second: mixamorig:LeftHandMiddle1
+  - first:
+      4: 400032
+    second: mixamorig:LeftHandMiddle2
+  - first:
+      4: 400034
+    second: mixamorig:LeftHandMiddle3
+  - first:
+      4: 400036
+    second: mixamorig:LeftHandMiddle4
+  - first:
+      4: 400038
+    second: mixamorig:LeftHandThumb1
+  - first:
+      4: 400040
+    second: mixamorig:LeftHandThumb2
+  - first:
+      4: 400042
+    second: mixamorig:LeftHandThumb3
+  - first:
+      4: 400044
+    second: mixamorig:LeftHandThumb4
+  - first:
+      4: 400046
+    second: mixamorig:LeftLeg
+  - first:
+      4: 400048
+    second: mixamorig:LeftShoulder
+  - first:
+      4: 400050
+    second: mixamorig:LeftToe_End
+  - first:
+      4: 400052
+    second: mixamorig:LeftToeBase
+  - first:
+      4: 400054
+    second: mixamorig:LeftUpLeg
+  - first:
+      4: 400056
+    second: mixamorig:Neck
+  - first:
+      4: 400058
+    second: mixamorig:RightArm
+  - first:
+      4: 400060
+    second: mixamorig:RightFoot
+  - first:
+      4: 400062
+    second: mixamorig:RightForeArm
+  - first:
+      4: 400064
+    second: mixamorig:RightHand
+  - first:
+      4: 400066
+    second: mixamorig:RightHandIndex1
+  - first:
+      4: 400068
+    second: mixamorig:RightHandIndex2
+  - first:
+      4: 400070
+    second: mixamorig:RightHandIndex3
+  - first:
+      4: 400072
+    second: mixamorig:RightHandIndex4
+  - first:
+      4: 400074
+    second: mixamorig:RightHandMiddle1
+  - first:
+      4: 400076
+    second: mixamorig:RightHandMiddle2
+  - first:
+      4: 400078
+    second: mixamorig:RightHandMiddle3
+  - first:
+      4: 400080
+    second: mixamorig:RightHandMiddle4
+  - first:
+      4: 400082
+    second: mixamorig:RightHandThumb1
+  - first:
+      4: 400084
+    second: mixamorig:RightHandThumb2
+  - first:
+      4: 400086
+    second: mixamorig:RightHandThumb3
+  - first:
+      4: 400088
+    second: mixamorig:RightHandThumb4
+  - first:
+      4: 400090
+    second: mixamorig:RightLeg
+  - first:
+      4: 400092
+    second: mixamorig:RightShoulder
+  - first:
+      4: 400094
+    second: mixamorig:RightToe_End
+  - first:
+      4: 400096
+    second: mixamorig:RightToeBase
+  - first:
+      4: 400098
+    second: mixamorig:RightUpLeg
+  - first:
+      4: 400100
+    second: mixamorig:Spine
+  - first:
+      4: 400102
+    second: mixamorig:Spine1
+  - first:
+      4: 400104
+    second: mixamorig:Spine2
+  - first:
+      4: 400106
+    second: SholderStrap0
+  - first:
+      21: 2100000
+    second: lambert_LowMan
+  - first:
+      21: 2100002
+    second: lambert_SholderStrap
+  - first:
+      23: 2300000
+    second: default1
+  - first:
+      23: 2300002
+    second: Helmet0
+  - first:
+      33: 3300000
+    second: default1
+  - first:
+      33: 3300002
+    second: Helmet0
+  - first:
+      43: 4300000
+    second: default1
+  - first:
+      43: 4300002
+    second: LowMan
+  - first:
+      43: 4300004
+    second: SholderStrap0
+  - first:
+      43: 4300006
+    second: Helmet0
+  - first:
+      74: 7400000
+    second: Take 001
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: LowMan
+  - first:
+      137: 13700002
+    second: SholderStrap0
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
+  - first:
+      1773428102: 7973541674914708964
+    second: Helmet0
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert_LowMan
     second: {fileID: 2100000, guid: 00cb820b80c1c414b881e148c9cd133e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert_SholderStrap
+    second: {fileID: 2100000, guid: df83b97db131e234686d6ca3f8dccdaf, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -159,7 +412,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 7400000
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -167,6 +449,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -174,18 +457,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -194,10 +478,11 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: mixamorig:Hips
       humanName: Hips
@@ -797,6 +1082,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
