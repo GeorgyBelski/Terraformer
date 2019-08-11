@@ -120,6 +120,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1187376393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6199817431043864997, guid: 017d5e1f7b57eab4e9d762d710209315,
+    type: 3}
+  m_PrefabInstance: {fileID: 6199817432585198691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1187376394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187376393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf925250396a73144b0d8f6d105396c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1258423255
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +324,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Creep_Mesh
       objectReference: {fileID: 0}
+    - target: {fileID: 6199817431043864997, guid: 017d5e1f7b57eab4e9d762d710209315,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6199817431043865002, guid: 017d5e1f7b57eab4e9d762d710209315,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -359,6 +382,11 @@ PrefabInstance:
     - target: {fileID: 6199817431043865002, guid: 017d5e1f7b57eab4e9d762d710209315,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199817431043865001, guid: 017d5e1f7b57eab4e9d762d710209315,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
