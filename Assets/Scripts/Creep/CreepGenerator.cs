@@ -60,63 +60,54 @@ public class CreepGenerator : MonoBehaviour
         triangles = new int[diameter * diameter * 6];
         int vertexIndex = 0;
         int angleIndex = 0;
+        float furtherVertexMagnitude;
+        float[] diagonalMagnitudes = new float[2];
+        PoligonOrientation currentOrientatin;
         for (int z = -radius * coefficient; z < radius * coefficient; z++)
         {
             for (int x = -radius * coefficient; x < radius * coefficient; x++)
             {
                 if (x < 0 && z < 0)
                 {
-                    if (vertices[vertexIndex + 0].magnitude < radius) // (x*x + z*z < radius*radius)
-                    {
-                        FillTriangle(true, PoligonOrientation.LeftDown, vertexIndex, angleIndex);
-                        FillTriangle(false, PoligonOrientation.LeftDown, vertexIndex, angleIndex);
-                    }
-                    else if (vertices[vertexIndex + diameter + 1].magnitude < radius
-                                && vertices[vertexIndex + 1].magnitude < radius)
-                    {
-                        FillTriangle(false, PoligonOrientation.LeftDown, vertexIndex, angleIndex);
-                    }
+                    furtherVertexMagnitude = vertices[vertexIndex + 0].magnitude;
+                    diagonalMagnitudes[0] = vertices[vertexIndex + diameter + 1].magnitude;
+                    diagonalMagnitudes[1] = vertices[vertexIndex + 1].magnitude;
+                    currentOrientatin = PoligonOrientation.LeftDown;
                 }
                 else if (x >= 0 && z < 0)
                 {
-                    if (vertices[vertexIndex + 1].magnitude < radius) // (x*x + z*z < radius*radius)
-                    {
-                        FillTriangle(true, PoligonOrientation.RightDown, vertexIndex, angleIndex);
-                        FillTriangle(false, PoligonOrientation.RightDown, vertexIndex, angleIndex);
-                    }
-                    else if (vertices[vertexIndex + diameter + 2].magnitude < radius
-                                && vertices[vertexIndex].magnitude < radius)
-                    {
-                        FillTriangle(false, PoligonOrientation.RightDown, vertexIndex, angleIndex);
-                    }
+                    furtherVertexMagnitude = vertices[vertexIndex + 1].magnitude;
+                    diagonalMagnitudes[0] = vertices[vertexIndex + diameter + 2].magnitude;
+                    diagonalMagnitudes[1] = vertices[vertexIndex].magnitude;
+                    currentOrientatin = PoligonOrientation.RightDown;
                 }
                 else if (x < 0 && z >= 0)
                 {
-                    if (vertices[vertexIndex + diameter + 1].magnitude < radius) // (x*x + z*z < radius*radius)
-                    {
-                        FillTriangle(true, PoligonOrientation.LeftUp, vertexIndex, angleIndex);
-                        FillTriangle(false, PoligonOrientation.LeftUp, vertexIndex, angleIndex);
-                    }
-                    else if (vertices[vertexIndex + diameter + 2].magnitude < radius
-                                && vertices[vertexIndex].magnitude < radius)
-                    {
-                        FillTriangle(false, PoligonOrientation.LeftUp, vertexIndex, angleIndex);
-                    }
+                    furtherVertexMagnitude = vertices[vertexIndex + diameter + 1].magnitude;
+                    diagonalMagnitudes[0] = vertices[vertexIndex + diameter + 2].magnitude;
+                    diagonalMagnitudes[1] = vertices[vertexIndex].magnitude;
+                    currentOrientatin = PoligonOrientation.LeftUp;
                 }
                 else //if(x >= 0 && z >= 0 )
                 {
-                    if (vertices[vertexIndex + diameter + 2].magnitude < radius) // (x*x + z*z < radius*radius)
-                    {
-                        FillTriangle(true, PoligonOrientation.RightUp, vertexIndex, angleIndex);
-                        FillTriangle(false, PoligonOrientation.RightUp, vertexIndex, angleIndex);
-                    }
-                    else if (vertices[vertexIndex + diameter + 1].magnitude < radius
-                                && vertices[vertexIndex + 1].magnitude < radius)
-                    {
-                        FillTriangle(false, PoligonOrientation.RightUp, vertexIndex, angleIndex);
-                    }
+                    furtherVertexMagnitude = vertices[vertexIndex + diameter + 2].magnitude;
+                    diagonalMagnitudes[0] = vertices[vertexIndex + diameter + 1].magnitude;
+                    diagonalMagnitudes[1] = vertices[vertexIndex + 1].magnitude;
+                    currentOrientatin = PoligonOrientation.RightUp;
+
                 }
-/*
+
+                if (furtherVertexMagnitude <= radius) // (x*x + z*z < radius*radius)
+                {
+                    FillTriangle(true, currentOrientatin, vertexIndex, angleIndex);
+                    FillTriangle(false, currentOrientatin, vertexIndex, angleIndex);
+                }
+                else if (diagonalMagnitudes[0] <= radius && diagonalMagnitudes[1] <= radius)
+                {
+                    FillTriangle(false, currentOrientatin, vertexIndex, angleIndex);
+                }
+
+            /*
                 if (vertices[vertexIndex + 0].magnitude < radius
                     && vertices[vertexIndex + diameter * coefficient + 1].magnitude < radius
                     && vertices[vertexIndex + 1].magnitude < radius)
@@ -135,9 +126,9 @@ public class CreepGenerator : MonoBehaviour
                     triangles[angleIndex + 4] = vertexIndex + diameter * coefficient + 1;
                     triangles[angleIndex + 5] = vertexIndex + diameter * coefficient + 2;
                 }
-*/
+            */
 
-                    vertexIndex++;
+                vertexIndex++;
                 angleIndex += 6;
             }
             vertexIndex++;
@@ -204,6 +195,8 @@ public class CreepGenerator : MonoBehaviour
     }
     void Update()
     {
+        if (radius <= 0) radius = 1;
+        if (coefficient <= 0) coefficient = 1;
         if (previousRadius != radius || previousCoefficient!= coefficient) {
             previousRadius = radius;
             previousCoefficient = coefficient;
