@@ -5,30 +5,53 @@ using UnityEngine;
 
 public class CreepHexagonGenerator : MonoBehaviour
 {
-    List<GameObject> hexagons = new List<GameObject>();
-    
+    [Range(1,49)]
+    public int radius = 3;
+    public int coefficient = 1;
+    int previousRadius;
+    int previousCoefficient;
+    const int matrixDemension = 101;
+    const int matrixCoordinateCenter = matrixDemension / 2;
+//    List<GameObject> hexagons = new List<GameObject>();
+    int[,] coordinates = new int[matrixDemension, matrixDemension];
+    GameObject[,] hexagons = new GameObject[matrixDemension, matrixDemension];
+    Vector3 hexaZ, hexaX;
     void Start()
     {
-        hexagons.Add(CreateHexagon(0,0));
+        previousRadius = radius;
+        previousCoefficient = coefficient;
+
+        Vector3 rightUpVertexDirection = Quaternion.AngleAxis(60, Vector3.up) * Vector3.forward;
+        hexaZ = (rightUpVertexDirection + Vector3.forward) * coefficient;
+        hexaX = new Vector3(rightUpVertexDirection.x, 0, 0) * 2 * coefficient;
+/*
+        hexagons.Add(CreateHexagon(0, 0));
+        hexagons.Add(CreateHexagon(1, 0));
+        hexagons.Add(CreateHexagon(0, 1));
+*/
+        UpdateCreep();
     }
 
     GameObject CreateHexagon(int x, int z)
     {
+        if (coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] == 1)
+        { return null; }
+
         Vector3[] vertices = new Vector3[6];
         int[] triangles = new int[4 * 3];
-        Mesh mesh;
-
-        GameObject hexagon = new GameObject();
-        hexagon.name = "hexagon";
+        GameObject hexagon = new GameObject("hexagon_" + x + "," + z);
+        coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = 1;
+        hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = hexagon;
+        hexagon.transform.position = hexaX * x + hexaZ * z;
         hexagon.transform.SetParent(this.transform);
         MeshFilter hexagonMeshFilter = hexagon.AddComponent<MeshFilter>();
         MeshRenderer hexagonMeshRenderer = hexagon.AddComponent<MeshRenderer>();
         hexagonMeshRenderer.material = this.GetComponent<MeshRenderer>().material;
 
-        mesh = new Mesh();
+        Mesh mesh = new Mesh();
         hexagonMeshFilter.mesh = mesh;
 
-        Vector3 hexagonVertex = Vector3.forward;
+        Vector3 hexagonVertex = Vector3.forward * coefficient;
         for (int i = 0; i < 6; i++)
         {
             vertices[i] = hexagonVertex;
@@ -56,14 +79,34 @@ public class CreepHexagonGenerator : MonoBehaviour
         return hexagon;
     }
 
-    private void UpdateHexagonMesh(Mesh mesh, Vector3[] vertices, int[] triangles)
+
+    void UpdateCreep()
+    {
+        for (int z = -radius; z <= radius; z++)
+        {
+            for (int x = -radius; x <= radius; x++)
+            {
+                if (x * z > 0)
+                {
+                    if (Mathf.Abs(x) + Mathf.Abs(z) <= radius) {
+                        CreateHexagon(x, z);
+                    }
+                }
+                else
+                {
+                    CreateHexagon(x, z);
+                }
+            }
+        }
+    }
+
+    void UpdateHexagonMesh(Mesh mesh, Vector3[] vertices, int[] triangles)
     {
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
 
         mesh.RecalculateNormals();
-
     }
 
     void Update()
@@ -74,8 +117,8 @@ public class CreepHexagonGenerator : MonoBehaviour
     private void OnDrawGizmos()
     {
         Vector3[] vertices = null;
-        if (hexagons.Count > 0) {
-            vertices = hexagons[0].GetComponent<MeshFilter>().mesh.vertices;
+        if (hexagons[0,0] != null) {
+            vertices = hexagons[0,0].GetComponent<MeshFilter>().mesh.vertices;
         }
         if (vertices == null)
             return;
