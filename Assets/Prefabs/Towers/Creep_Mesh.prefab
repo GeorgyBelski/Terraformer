@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6199817431043865003}
   - component: {fileID: 6199817431043864996}
   - component: {fileID: 6199817431043865001}
+  - component: {fileID: 1187376394}
   m_Layer: 0
   m_Name: Creep_Mesh
   m_TagString: Untagged
@@ -86,10 +87,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6199817431043864997}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 139be0d3febb1dc4e9b378c90f6d25e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
+  radius: 43
+  coefficient: 2
+--- !u!114 &1187376394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6199817431043864997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf925250396a73144b0d8f6d105396c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 3
   coefficient: 2

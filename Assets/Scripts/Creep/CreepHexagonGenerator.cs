@@ -12,108 +12,162 @@ public class CreepHexagonGenerator : MonoBehaviour
     int previousCoefficient;
     const int matrixDemension = 101;
     const int matrixCoordinateCenter = matrixDemension / 2;
-//    List<GameObject> hexagons = new List<GameObject>();
-    int[,] coordinates = new int[matrixDemension, matrixDemension];
-    GameObject[,] hexagons = new GameObject[matrixDemension, matrixDemension];
-    Vector3 hexaZ, hexaX;
+    Dictionary<GameObject, Hexagon> meshHexagonMap = new Dictionary<GameObject, Hexagon>();
+    static int[,] coordinates = new int[matrixDemension, matrixDemension];
+    static Hexagon[,] hexagons = new Hexagon[matrixDemension, matrixDemension];
+    static Vector3 hexaZ, hexaX;
     void Start()
     {
-        previousRadius = radius;
-        previousCoefficient = coefficient;
 
         Vector3 rightUpVertexDirection = Quaternion.AngleAxis(60, Vector3.up) * Vector3.forward;
         hexaZ = (rightUpVertexDirection + Vector3.forward) * coefficient;
         hexaX = new Vector3(rightUpVertexDirection.x, 0, 0) * 2 * coefficient;
-/*
-        hexagons.Add(CreateHexagon(0, 0));
-        hexagons.Add(CreateHexagon(1, 0));
-        hexagons.Add(CreateHexagon(0, 1));
-*/
+
         UpdateCreep();
     }
 
-    GameObject CreateHexagon(int x, int z)
+  //  [System.Serializable]
+    public class Hexagon 
     {
-        if (coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] == 1)
-        { return null; }
+        int coordinatHexaX, coordinatHexaZ;
+        CreepHexagonGenerator parentCreep;
+        GameObject hexagonGObject;
 
-        Vector3[] vertices = new Vector3[6];
-        int[] triangles = new int[4 * 3];
-        GameObject hexagon = new GameObject("hexagon_" + x + "," + z);
-        coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = 1;
-        hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = hexagon;
-        hexagon.transform.position = hexaX * x + hexaZ * z;
-        hexagon.transform.SetParent(this.transform);
-        MeshFilter hexagonMeshFilter = hexagon.AddComponent<MeshFilter>();
-        MeshRenderer hexagonMeshRenderer = hexagon.AddComponent<MeshRenderer>();
-        hexagonMeshRenderer.material = this.GetComponent<MeshRenderer>().material;
+        Mesh mesh;
+        Vector3[] vertices;
+        int[] triangles;
 
-        Mesh mesh = new Mesh();
-        hexagonMeshFilter.mesh = mesh;
+        int coefficient;
 
-        Vector3 hexagonVertex = Vector3.forward * coefficient;
-        for (int i = 0; i < 6; i++)
+        public Hexagon(CreepHexagonGenerator parent, int x, int z)
         {
-            vertices[i] = hexagonVertex;
-            hexagonVertex = Quaternion.AngleAxis(60, Vector3.up) * hexagonVertex;
+            if (hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] != null)
+            { return; }
+            this.parentCreep = parent;
+            coordinatHexaX = x;
+            coordinatHexaZ = z;
+            coefficient = parentCreep.coefficient;
+            vertices = new Vector3[6];
+            triangles = new int[4 * 3];
+            hexagonGObject = new GameObject("hexagon_" + x + "," + z);
+
+            coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = 1;
+            hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = this;
+            parentCreep.meshHexagonMap.Add(hexagonGObject, this);
+
+            hexagonGObject.transform.position = hexaX * x + hexaZ * z;
+            hexagonGObject.transform.SetParent(parentCreep.transform);
+            MeshFilter hexagonMeshFilter = hexagonGObject.AddComponent<MeshFilter>();
+            MeshRenderer hexagonMeshRenderer = hexagonGObject.AddComponent<MeshRenderer>();
+            hexagonMeshRenderer.material = parentCreep.GetComponent<MeshRenderer>().material;
+
+            mesh = new Mesh();
+            hexagonMeshFilter.mesh = mesh;
+
+            Vector3 hexagonVertex = Vector3.forward * coefficient + parentCreep.transform.position;
+            for (int i = 0; i < 6; i++)
+            {
+                vertices[i] = hexagonVertex;
+                hexagonVertex = Quaternion.AngleAxis(60, Vector3.up) * hexagonVertex;
+            }
+
+            triangles[0] = 0;
+            triangles[1] = 2;
+            triangles[2] = 4;
+
+            triangles[3] = 0;
+            triangles[4] = 1;
+            triangles[5] = 2;
+
+            triangles[6] = 2;
+            triangles[7] = 3;
+            triangles[8] = 4;
+
+            triangles[9] = 4;
+            triangles[10] = 5;
+            triangles[11] = 0;
+
+            UpdateHexagonMesh();
         }
 
-        triangles[0] = 0;
-        triangles[1] = 2;
-        triangles[2] = 4;
+        void UpdateHexagonMesh()
+        {
+            mesh.Clear();
+            mesh.vertices = vertices;
+            mesh.triangles = triangles;
+            mesh.RecalculateNormals();
+        }
 
-        triangles[3] = 0;
-        triangles[4] = 1;
-        triangles[5] = 2;
+        public void Delete()
+        {
+            coordinates[coordinatHexaX + matrixCoordinateCenter, coordinatHexaZ + matrixCoordinateCenter] = 0;
+            hexagons[coordinatHexaX + matrixCoordinateCenter, coordinatHexaZ + matrixCoordinateCenter] = null;
+            parentCreep.meshHexagonMap.Remove(hexagonGObject);
+            Destroy(hexagonGObject);
+        }
+    }
 
-        triangles[6] = 2;
-        triangles[7] = 3;
-        triangles[8] = 4;
-
-        triangles[9] = 4;
-        triangles[10] = 5;
-        triangles[11] = 0;
-
-        UpdateHexagonMesh(mesh, vertices, triangles);
-
-        return hexagon;
+    public void CreateHexagon(int x, int z)
+    { 
+        if (x * z > 0)
+        {
+            if (Mathf.Abs(x) + Mathf.Abs(z) <= radius)
+            {
+                new Hexagon(this, x, z);
+            }
+        }
+        else
+        {
+            new Hexagon(this, x, z);
+        }
     }
 
 
     void UpdateCreep()
     {
-        for (int z = -radius; z <= radius; z++)
+        if (previousRadius != radius)
         {
-            for (int x = -radius; x <= radius; x++)
+            if (radius < previousRadius) {
+                ReduceSurface();
+                return;
+            }
+            for (int z = -radius; z <= radius; z++)
             {
-                if (x * z > 0)
-                {
-                    if (Mathf.Abs(x) + Mathf.Abs(z) <= radius) {
-                        CreateHexagon(x, z);
-                    }
-                }
-                else
+                for (int x = -radius; x <= radius; x++)
                 {
                     CreateHexagon(x, z);
                 }
             }
-        }
+            previousRadius = radius;
+        }   
+    }
+    void ReduceSurface(){
+
+
+
+        previousRadius = radius;
     }
 
-    void UpdateHexagonMesh(Mesh mesh, Vector3[] vertices, int[] triangles)
-    {
-        mesh.Clear();
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
 
-        mesh.RecalculateNormals();
+    void DeleteHexagon(int x, int y)
+    {
+        hexagons[x + matrixCoordinateCenter, y + matrixCoordinateCenter].Delete();
+    }
+
+    void DeleteHexagon(GameObject hexagonGObject)
+    {
+        meshHexagonMap.TryGetValue(hexagonGObject, out Hexagon hexagon);
+        if (hexagon != null)
+        {
+            hexagon.Delete();
+        }
     }
 
     void Update()
     {
-        
+        UpdateCreep();
     }
-
+/*
     private void OnDrawGizmos()
     {
         Vector3[] vertices = null;
@@ -130,4 +184,5 @@ public class CreepHexagonGenerator : MonoBehaviour
             //      Handles.DrawSphere(i,vertices[i], this.transform.rotation, .1f);
         }
     }
+*/
 }
