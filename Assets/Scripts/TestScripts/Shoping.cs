@@ -14,6 +14,9 @@ public class Shoping : MonoBehaviour
     public GameObject electroTower;
     public GameObject lazerTower;
 
+    [Header("Buttons")]
+    public List<Button> buttons;
+
     float camRayLength = 60f;
     public int floorMask;
 
@@ -39,6 +42,9 @@ public class Shoping : MonoBehaviour
     }
     public void SelectElectroTower(Button b)
     {
+        if (isPlacing)
+            Cancel();
+
         isPlacing = true;
         selectedTower = electroTower;
         selectB(b);
@@ -48,6 +54,9 @@ public class Shoping : MonoBehaviour
 
     public void SelectLazerTower(Button b)
     {
+        if (isPlacing)
+            Cancel();
+
         isPlacing = true;
         selectedTower = lazerTower;
         selectB(b);
@@ -84,6 +93,12 @@ public class Shoping : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Alpha1))
+            SelectElectroTower(buttons[0]);
+
+        if (Input.GetKeyUp(KeyCode.Alpha2))
+            SelectLazerTower(buttons[1]);
+
         if (isPlacing)
         {
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -131,6 +146,12 @@ public class Shoping : MonoBehaviour
             isPlacing = false;
             selectB(bSelected);
         }
+    }
+
+    public void Cancel()
+    {
+        isPlacing = false;
+        selectB(bSelected);
     }
 
 }

@@ -6,17 +6,23 @@ using UnityEngine;
 public class Enemy_Logic : MonoBehaviour
 {
     public Animator animator;
-    private EnemyMouseController emk;
+    public EnemyMouseController emk;
     private Enemy enem;
+    private GameObject leader;
     private Vector3? destTower = null;
     private Vector3? destHel = null;
     private Tower targetTower;
+
     private bool isGoingToDist = false;
     private bool isStand = true;
     private bool isGiveUp = false;
     private bool isAttack = false;
+    private bool isSquad = false;
 
+    private bool isLeader = false;
     private bool isRush = false;
+
+    private List<GameObject> Squad;
 
     
     private float checkTime = 0.5f;//change!!!!!!!!!!!!!!!!!!!!!
@@ -117,6 +123,7 @@ public class Enemy_Logic : MonoBehaviour
             emk.SetDest((Vector3)destTower);
             isGoingToDist = true;
             //isAttack = true;
+            
         }
         else
         {
@@ -158,16 +165,109 @@ public class Enemy_Logic : MonoBehaviour
         return IsAttack;
     }
     */
+
+
+
     public void Attack() {
         targetTower.towerHealth.ApplyDamage(40, Vector3.zero, Vector3.zero);
     }
 
+/// <summary>
+/// /////////////////////////////////SQUADS
+/// </summary>
+
+    private Vector3 tempDestPosition;
+    void stateFoloving()
+    {
+
+        EnemyMouseController em = leader.GetComponent<Enemy_Logic>().emk;
+        //print(leader.transform.position);
+        //if(em.GetDest() != null)
+        Vector3 posTemp;// = leader.transform.position - tempDestPosition;
+        posTemp = em.GetDest() - tempDestPosition;
+        //print(posTemp);
+        emk.SetDest(posTemp);
+        // print(em.GetDest());
+        //check();
+        
+        //Vector3 tempPos = leader
+    }
+
+    public void setSquad(GameObject leader)
+    {
+        //Start();
+        tempDestPosition = leader.transform.position - this.transform.position;
+        this.leader = leader;
+        isSquad = true;
+        //check();
+    }
+
+    public void setLeaderSquad(List<GameObject> squad)
+    {
+        //Start();
+        this.Squad = squad;
+        isLeader = true;
+    }
+
+    public void cancelSquad()
+    {
+        //print(2);
+        isSquad = false;
+        check();
+    }
+
+/// <summary>
+/// /////////////////////////////////SQUADS
+/// </summary>
+
     public void check()
     {
-        
+        //print(-1);
         float heals = enem.GetHealthRatio();
+
+        if (heals <= 0.8 && isSquad)
+        {
+            //print(10);
+            cancelSquad();
+        }
+
+        if(heals <= 0.7 && isLeader)
+        {
+            //print(0);
+            isLeader = false;
+            check();
+            
+        }
+
+        if (isSquad && leader)
+        {
+            print(1);
+            stateFoloving();
+            return;
+        }
+        if (!isLeader && Squad != null)
+        {
+            print(1);
+            for(int i = 0; i < Squad.Count; i++)
+            {
+                Squad[i].GetComponent<Enemy_Logic>().cancelSquad();
+                
+
+            }
+            isLeader = false;
+            Squad = null;
+        }
+
+        
+
+        
+        
+
+
+
+
         //Debug.Log(heals + " " + brawe);
-        if((heals - brawe) <= 0 && heals != 0) //Логика состояний
+        if ((heals - brawe) <= 0 && heals != 0) //Логика состояний
         {
             if(EnemyManagerPro.enemiesMap.ContainsKey(EnemyType.Healer) && EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0) { 
                 //Debug.Log("checking");
@@ -178,13 +278,19 @@ public class Enemy_Logic : MonoBehaviour
                 stateGiveUp();
                 isGiveUp = true;
             }
+            else
+            {
+                isStand = false;
+                isGiveUp = false;
+                stateGoToDestanation();
+            }
 
         }
         else
         {
             if (isGiveUp)
             {
-                if(heals > 0.5 + brawe/2)
+                if(heals > 0.5 + brawe/2 || EnemyManagerPro.enemiesMap[EnemyType.Healer].Count == 0)
                 {
                     isStand = false;
                     isGiveUp = false;
