@@ -20,6 +20,7 @@ public class CreepHexagonGenerator : MonoBehaviour
     //Animation Wave
     float period =2;
     public float riseTime = 0.8f;
+    public float risingHeight = 0.5f;
     float[] timerRiseTime;
     float[] timerPeriod;
     float[] offset;
@@ -37,8 +38,12 @@ public class CreepHexagonGenerator : MonoBehaviour
      /* timerRiseTime = new float[radius+1];
         timerPeriod = new float[radius+1];
         offset = new float[radius+1];
-        */
+        
         UpdateCreep();
+        for (int i = 0; i < 360; i++) {
+            float j = (float)i / 100;
+            Debug.Log("sin("+j+"):" + Mathf.Sin(j));
+        }*/
     }
 
   //  [System.Serializable]
@@ -132,11 +137,14 @@ public class CreepHexagonGenerator : MonoBehaviour
             mesh.Clear();
             mesh.vertices = vertices;
             mesh.triangles = triangles;
-      /*      mesh.RecalculateNormals();*/
+            mesh.RecalculateNormals();
             var normals = new List<Vector3>();
-            foreach (Vector3 vertex in vertices)
+            for (int i = 0; i<12; i++)
             {
-                normals.Add(Vector3.up);
+                if(i<6)
+                    normals.Add(Vector3.up);
+                else
+                    normals.Add(mesh.normals[i]);
             }
             mesh.SetNormals(normals);
         }
@@ -214,9 +222,9 @@ public class CreepHexagonGenerator : MonoBehaviour
 
     void DeleteHexagon(int x, int z)
     {
-        if (hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] != null)
+        if (GetHexagon(x, z) != null)
         {
-            hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter].Delete();
+            GetHexagon(x, z).Delete();
         }
     }
 
@@ -253,15 +261,15 @@ public class CreepHexagonGenerator : MonoBehaviour
         if (timerPeriod[i] <= 0)
         {
             timerRiseTime[i] += Time.deltaTime;
-            offset[i] = Mathf.Sin(timerRiseTime[i] * 6 / riseTime);
-            if (offset[i] > 0)
+            offset[i] = CalculateOffset(i);
+            if (timerRiseTime[i] <= 2 * riseTime)
             {
                 RiseHexagons(i, hexagonFirstCircle);
 
-                if (timerRiseTime[i] > riseTime/8 && i+1 <= radius)
+                if (timerRiseTime[i] > riseTime && i+1 <= radius)
                 {
                     timerRiseTime[i+1] += Time.deltaTime;
-                    offset[i+1] = Mathf.Sin(timerRiseTime[i+1] * 5 / riseTime);
+                    offset[i+1] = CalculateOffset(i+1);
                     RiseHexagons(i+1, hexagonSecondCircle);
                 }
             }
@@ -294,7 +302,11 @@ public class CreepHexagonGenerator : MonoBehaviour
         }
         
     }
-
+    float CalculateOffset(int i)
+    {
+      //    return Mathf.Sin(timerRiseTime[i] * 6 / riseTime);
+        return Mathf.Sin(timerRiseTime[i] * Mathf.PI / riseTime - Mathf.PI / 2) * 0.5f + 0.5f;
+    }
     List<Hexagon> SelectHexagonCircle(int circleRadius)
     {
         //if (circleRadius > radius) { return null; }
@@ -302,6 +314,13 @@ public class CreepHexagonGenerator : MonoBehaviour
         for (int j = 0; j <= circleRadius; j++)
         {
             hexagonCircle.Add(GetHexagon(circleRadius - j, j));
+            hexagonCircle.Add(GetHexagon(-circleRadius + j, -j));
+            if (j != 0) {
+                hexagonCircle.Add(GetHexagon(circleRadius, -j));
+                hexagonCircle.Add(GetHexagon(-circleRadius, j));
+                hexagonCircle.Add(GetHexagon(j, -circleRadius));
+                hexagonCircle.Add(GetHexagon(-j, circleRadius));
+            }
         }
         return hexagonCircle;
     }
@@ -309,24 +328,25 @@ public class CreepHexagonGenerator : MonoBehaviour
     void RiseHexagon(int i, Hexagon hexagon)
     {
         //if (i > radius) { return; }
-        hexagon.hexagonGObject.transform.position = hexagon.originalPosition + Vector3.up * offset[i];
+        hexagon.hexagonGObject.transform.position = hexagon.originalPosition + Vector3.up * risingHeight * offset[i];
     }
 
     void RiseHexagons(int i, List<Hexagon> hexagonCircle) {
         //if (i > radius) { return; }
-
-        foreach (Hexagon hexagon in hexagonCircle)
+        hexagonCircle.ForEach(hexagon => RiseHexagon(i, hexagon));
+      /*  foreach (Hexagon hexagon in hexagonCircle)
         {
             RiseHexagon(i, hexagon);
-        }
+        }*/
     }
 
     void ResetHexagons(List<Hexagon> hexagonCircle)
     {
-        foreach (Hexagon hexagon in hexagonCircle)
+        hexagonCircle.ForEach(hexagon => hexagon.ResetPosition());
+      /*  foreach (Hexagon hexagon in hexagonCircle)
         {
             hexagon.ResetPosition();
-        }
+        }*/
     }
 
 

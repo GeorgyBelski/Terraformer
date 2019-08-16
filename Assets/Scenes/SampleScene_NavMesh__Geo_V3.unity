@@ -807,12 +807,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Creep_Mesh
       objectReference: {fileID: 0}
-    - target: {fileID: 6199817431043864997, guid: 017d5e1f7b57eab4e9d762d710209315,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000,
-        type: 0}
     - target: {fileID: 6199817431043865002, guid: 017d5e1f7b57eab4e9d762d710209315,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -866,20 +860,6 @@ PrefabInstance:
     - target: {fileID: 6199817431043865002, guid: 017d5e1f7b57eab4e9d762d710209315,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6199817431043865001, guid: 017d5e1f7b57eab4e9d762d710209315,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6199817431043864996, guid: 017d5e1f7b57eab4e9d762d710209315,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7c2ae1cd864c6a242b5e613d9cc31cc4, type: 2}
-    - target: {fileID: 1187376394, guid: 017d5e1f7b57eab4e9d762d710209315, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1014,6 +994,11 @@ PrefabInstance:
     - target: {fileID: 4525447540756528603, guid: 8071588b1e7224640a3999d3fd6231f7,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4525447540756528603, guid: 8071588b1e7224640a3999d3fd6231f7,
+        type: 3}
+      propertyPath: isGlobal
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

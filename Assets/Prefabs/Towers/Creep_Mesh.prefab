@@ -16,7 +16,7 @@ GameObject:
   m_Layer: 0
   m_Name: Creep_Mesh
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6bbff2c79bac0c246ad28db2e66d1d77, type: 2}
+  - {fileID: 2100000, guid: 7c2ae1cd864c6a242b5e613d9cc31cc4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139be0d3febb1dc4e9b378c90f6d25e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 43
+  radius: 30
   coefficient: 2
 --- !u!114 &1187376394
 MonoBehaviour:
@@ -106,5 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf925250396a73144b0d8f6d105396c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 6
   coefficient: 2
+  riseTime: 0.24
+  risingHeight: 0.23
