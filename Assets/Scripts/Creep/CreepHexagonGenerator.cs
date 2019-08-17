@@ -12,6 +12,7 @@ public class CreepHexagonGenerator : MonoBehaviour
     int previousCoefficient;
     const int matrixDemension = 101;
     const int matrixCoordinateCenter = matrixDemension / 2;
+    static GameObject hexagonPrefab = null;
     Dictionary<GameObject, Hexagon> meshHexagonMap = new Dictionary<GameObject, Hexagon>();
     static int[,] coordinates = new int[matrixDemension, matrixDemension];
     static Hexagon[,] hexagons = new Hexagon[matrixDemension, matrixDemension];
@@ -66,69 +67,81 @@ public class CreepHexagonGenerator : MonoBehaviour
             { return; }
             this.parentCreep = parent;
             coordinatHexaX = x;
-            
             coordinatHexaZ = z;
             coefficient = parentCreep.coefficient;
-            vertices = new Vector3[12];
-            triangles = new int[4 * 3 + 12 *3];
-            hexagonGObject = new GameObject("hexagon_" + x + "," + z);
+
+            if (hexagonPrefab == null)
+            {
+                hexagonGObject = new GameObject("hexagon_" + x + "," + z);
+                hexagonGObject.transform.position = hexaX * x + hexaZ * z;
+                hexagonPrefab = hexagonGObject;
+
+                MeshFilter hexagonMeshFilter = hexagonGObject.AddComponent<MeshFilter>();
+                MeshRenderer hexagonMeshRenderer = hexagonGObject.AddComponent<MeshRenderer>();
+                hexagonMeshRenderer.material = parentCreep.GetComponent<MeshRenderer>().material;
+                
+                vertices = new Vector3[12];
+                triangles = new int[4 * 3 + 12 *3];
+                mesh = new Mesh();
+                hexagonMeshFilter.mesh = mesh;
+
+                Vector3 hexagonVertex = Vector3.forward * coefficient + parentCreep.transform.position;
+                for (int j = 0; j < 2; j++)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        vertices[i + j * 6] = hexagonVertex;
+                        hexagonVertex = Quaternion.AngleAxis(60, Vector3.up) * hexagonVertex;
+                    }
+                    hexagonVertex = Vector3.forward * coefficient + parentCreep.transform.position + Vector3.down;
+                }
+                triangles[0] = 0;
+                triangles[1] = 2;
+                triangles[2] = 4;
+
+                triangles[3] = 0;
+                triangles[4] = 1;
+                triangles[5] = 2;
+
+                triangles[6] = 2;
+                triangles[7] = 3;
+                triangles[8] = 4;
+
+                triangles[9] = 4;
+                triangles[10] = 5;
+                triangles[11] = 0;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    triangles[12 + i * 6 + 0] = i;
+                    triangles[12 + i * 6 + 1] = i + 6;
+                    triangles[12 + i * 6 + 2] = i + 7;
+                    triangles[12 + i * 6 + 3] = i + 7;
+                    triangles[12 + i * 6 + 4] = i + 1;
+                    triangles[12 + i * 6 + 5] = i;
+                }
+                triangles[42] = 5;
+                triangles[43] = 11;
+                triangles[44] = 6;
+
+                triangles[45] = 6;
+                triangles[46] = 0;
+                triangles[47] = 5;
+
+                UpdateHexagonMesh();
+            }
+            else
+            {
+                hexagonGObject = Instantiate(hexagonPrefab, hexaX * x + hexaZ * z, hexagonPrefab.transform.rotation);
+            }
             
             coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = 1;
             hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = this;
             parentCreep.meshHexagonMap.Add(hexagonGObject, this);
 
-            hexagonGObject.transform.position = hexaX * x + hexaZ * z;
+            
             hexagonGObject.transform.SetParent(parentCreep.transform);
-            MeshFilter hexagonMeshFilter = hexagonGObject.AddComponent<MeshFilter>();
-            MeshRenderer hexagonMeshRenderer = hexagonGObject.AddComponent<MeshRenderer>();
-            hexagonMeshRenderer.material = parentCreep.GetComponent<MeshRenderer>().material;
-
-            mesh = new Mesh();
-            hexagonMeshFilter.mesh = mesh;
-
-            Vector3 hexagonVertex = Vector3.forward * coefficient + parentCreep.transform.position;
-            for(int j = 0; j < 2; j++) { 
-                for (int i = 0; i < 6; i++)
-                {
-                    vertices[i+j*6] = hexagonVertex;
-                    hexagonVertex = Quaternion.AngleAxis(60, Vector3.up) * hexagonVertex;
-                }
-                hexagonVertex = Vector3.forward * coefficient + parentCreep.transform.position + Vector3.down;
-            }
-            triangles[0] = 0;
-            triangles[1] = 2;
-            triangles[2] = 4;
-
-            triangles[3] = 0;
-            triangles[4] = 1;
-            triangles[5] = 2;
-
-            triangles[6] = 2;
-            triangles[7] = 3;
-            triangles[8] = 4;
-
-            triangles[9] = 4;
-            triangles[10] = 5;
-            triangles[11] = 0;
-
-            for (int i = 0; i < 5; i++)
-            {
-                triangles[12 + i * 6 + 0] = i;
-                triangles[12 + i * 6 + 1] = i + 6;
-                triangles[12 + i * 6 + 2] = i + 7;
-                triangles[12 + i * 6 + 3] = i + 7;
-                triangles[12 + i * 6 + 4] = i + 1;
-                triangles[12 + i * 6 + 5] = i;
-            }
-            triangles[42] = 5;
-            triangles[43] = 11;
-            triangles[44] = 6;
-
-            triangles[45] = 6;
-            triangles[46] = 0;
-            triangles[47] = 5;
-
-            UpdateHexagonMesh();
+            
             originalPosition = hexagonGObject.transform.position;
         }
 
