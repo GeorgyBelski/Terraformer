@@ -103,6 +103,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1326194414083214009, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.82031584
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326194414083214009, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.4481132
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326194414083214009, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326194414083214009, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.3066038
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326194414083214009, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.57880473
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326194414083214009, guid: 459f33acb5c95d548ab03a3cb7fa46ef,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 459f33acb5c95d548ab03a3cb7fa46ef, type: 3}
 --- !u!4 &7017228565832226552 stripped
