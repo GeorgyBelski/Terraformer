@@ -12,6 +12,7 @@ public class LaserTower : Tower
     public int damageBurning = 5;
     float timerDuration;
     LineRenderer lr;
+    Material lrMaterial;
     Color startLaser, endLaser;
     
 
@@ -21,6 +22,12 @@ public class LaserTower : Tower
         type = TowerType.Laser;
 
         lr = gunpoint.GetComponent<LineRenderer>();
+        lrMaterial = lr.material;
+        if (!lr)
+        {
+            lr = gunpoint.gameObject.AddComponent<LineRenderer>();
+        }
+
         startLaser = lr.startColor;
         endLaser = lr.endColor;
     }
@@ -44,14 +51,17 @@ public class LaserTower : Tower
         {
             float ratioDuration = timerDuration / beamDuration;
             timerDuration -= Time.deltaTime;
-            lr.startColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
-            lr.endColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
+            lr.enabled = true;
+
+          //  lr.startColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
+            //     lr.endColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
+            lrMaterial.SetColor("_BaseColor", new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration));
+            lrMaterial.SetColor("_EmissionColor", new Color(1 + ratioDuration, 0, 0));
             lr.widthMultiplier = ratioDuration;
         }
         else
         {
-            lr.startColor = new Color(0, 0, 0, 0);
-            lr.endColor = new Color(0, 0, 0, 0);
+            lr.enabled = false;
         }
     }
 }

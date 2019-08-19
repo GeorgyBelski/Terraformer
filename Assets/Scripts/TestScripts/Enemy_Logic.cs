@@ -159,7 +159,9 @@ public class Enemy_Logic : MonoBehaviour
     }
     */
     public void Attack() {
-        targetTower.towerHealth.ApplyDamage(40, Vector3.zero, Vector3.zero);
+        if (targetTower) { 
+            targetTower.towerHealth.ApplyDamage(40, Vector3.zero, Vector3.zero);
+        }
     }
 
     public void check()

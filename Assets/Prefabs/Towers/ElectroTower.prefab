@@ -1169,8 +1169,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   range: 8
-  color: {r: 0.5137255, g: 0.9294118, b: 1, a: 1}
+  rangeColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 0}
   gizmoMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  rangelineMaterial: {fileID: 2100000, guid: a6b798d74865a9e4e855fa60ca076075, type: 2}
   isSelected: 0
   cooldownAttack: 1
   timerAttack: 0
@@ -1180,7 +1181,7 @@ MonoBehaviour:
   gunpoint: {fileID: 7532716055238349617}
   lightningLerpSpeed: 2
   damageAttack: 50
-  lightningCharge: {fileID: 5848706040537432421, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
+  lightningChargePrefab: {fileID: 5848706040537432421, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
     type: 3}
   currentLightningCharge: {fileID: 0}
   thanderBallPrefab: {fileID: 7017228567069846747, guid: 8b1e0a5237994ac47b61a76d7786c05c,
@@ -1252,6 +1253,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 244022217}
     m_Modifications:
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1357,15 +1368,20 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 7701119216240502193, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 5615429418157641000, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
-      propertyPath: m_Layer
-      value: 12
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}
