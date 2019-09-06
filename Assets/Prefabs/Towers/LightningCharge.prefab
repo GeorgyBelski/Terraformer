@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7806450487241019077}
   - component: {fileID: 2286123303485532915}
   - component: {fileID: 7232601208126745874}
-  - component: {fileID: 4905896797362093478}
   - component: {fileID: 5848706040537432423}
   - component: {fileID: 5848706040537432422}
   - component: {fileID: 5848706040537432424}
@@ -61,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: acb3185c72776f54496aa44452e2370b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &4905896797362093478
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5848706040537432421}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &5848706040537432423
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4074,7 +4060,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 0.53
       minScalar: 1
       maxCurve:
         serializedVersion: 2

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ public class LaserTower : Tower
 {
     [Space]
     [Header("LaserTower")]
-    public Transform gunpoint;
+    //   public Transform gunpoint;
+    [Header("AutoAttack")]
     public float beamDuration = 0.3f;
     public int damageAttack = 50;
     public int damageBurning = 5;
@@ -14,7 +16,9 @@ public class LaserTower : Tower
     LineRenderer lr;
     Material lrMaterial;
     Color startLaser, endLaser;
-    
+
+    [Header("ThandetBallAbility")]
+    public ScorchingRayAbility scorchingRayAbility;
 
     private void Start()
     {
@@ -63,5 +67,16 @@ public class LaserTower : Tower
         {
             lr.enabled = false;
         }
+    }
+
+    public void CastScorchingRay(Vector3 aimPosition)
+    {
+        scorchingRayAbility.Cast(aimPosition);
+    }
+
+    public override void EndCasting()
+    {
+        IsCastingAbility = false;
+        TowerManager.availableLaserTowers.Add(this);
     }
 }

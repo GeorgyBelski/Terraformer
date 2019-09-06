@@ -30,6 +30,7 @@ public abstract class Tower : MonoBehaviour
     */
     [Header("References")]
     public Transform cannon;
+    public Transform gunpoint;
     public TowerHealth towerHealth;
     public Enemy target;
     int targetIndex = -1;
@@ -70,22 +71,6 @@ public abstract class Tower : MonoBehaviour
         else {
             timerAttack = 0;
         }
-        /*
-        if (timerAbility1 > 0)
-        {
-            timerAbility1 -= Time.deltaTime;
-        }
-        else {
-            timerAbility1 = 0;
-        }
-        if (timerAbility2 > 0)
-        {
-            timerAbility2 -= Time.deltaTime;
-        }
-        else {
-            timerAbility2 = 0;
-        }
-        */
     }
     Enemy ChooseTarget() {
         
@@ -126,6 +111,10 @@ public abstract class Tower : MonoBehaviour
             timerAttack = cooldownAttack;
         }
     }
+    public void RotateCannon(Vector3 targetPosition)
+    {
+        cannon.LookAt(targetPosition);
+    }
     public abstract void TowerAttack(Enemy target);
 
     private void OnDrawGizmos()
@@ -162,4 +151,6 @@ public abstract class Tower : MonoBehaviour
     //    GL.End();
 
     }
+
+    public abstract void EndCasting();
 }

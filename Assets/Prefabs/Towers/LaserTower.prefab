@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 6015777778884135389}
   - component: {fileID: 6015777778884135385}
   - component: {fileID: 6998274765810947965}
+  - component: {fileID: 2474435889650568810}
   - component: {fileID: 5893686480769145596}
   - component: {fileID: -8775343536148839861}
   m_Layer: 13
@@ -655,19 +656,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   range: 10
-  rangeColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0}
+  rangeColor: {r: 1, g: 0.6101561, b: 0.5254902, a: 1}
   gizmoMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   rangelineMaterial: {fileID: 2100000, guid: a6b798d74865a9e4e855fa60ca076075, type: 2}
   isSelected: 0
   cooldownAttack: 1
   timerAttack: 0
   cannon: {fileID: 6015777778795571989}
+  gunpoint: {fileID: 6015777777595496274}
   towerHealth: {fileID: 6998274765810947965}
   target: {fileID: 0}
-  gunpoint: {fileID: 6015777777595496274}
   beamDuration: 0.3
   damageAttack: 50
-  damageBurning: 4
+  damageBurning: 6
+  scorchingRayAbility: {fileID: 2474435889650568810}
 --- !u!114 &6998274765810947965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +695,25 @@ MonoBehaviour:
   - {fileID: 589672654857002378}
   damagePointIndex: 0
   thisTower: {fileID: 6015777778884135385}
+--- !u!114 &2474435889650568810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015777778884135378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f58c7f29a6dec45ac7264ea62fc106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 6015777778884135385}
+  castTime: 0.5
+  damage: 100
+  scorchingRayPrefab: {fileID: 8219149149034830646, guid: e1c24bb85ae25a24fa6d9d5695d00946,
+    type: 3}
+  speed: 50
+  effectRadius: 2.19
 --- !u!54 &5893686480769145596
 Rigidbody:
   m_ObjectHideFlags: 0
