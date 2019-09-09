@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public class CameraMoveController : MonoBehaviour
     
     Vector3 focusPointPosition;
     public Vector2 mousPosition , mousPreviousPosition;
-    public bool isMoving, isRotaring;
+    public bool isMovingByBorderTouch, isMovingByDrag, isRotaring;
     public Vector3 direction;
 
     [Header("Reference")]
@@ -20,6 +21,11 @@ public class CameraMoveController : MonoBehaviour
  //   float distanceToFocusPoint;
 
     public float panoramaSpeedLerpCoefficient;
+
+    Ray rayToGround;
+    Vector3 mousPreviousGroundPosition, mousCurrentGroundPosition;
+    int groundLayerMask = (1<<9);
+    RaycastHit hitGround;
 
     void Start()
     {
@@ -32,21 +38,82 @@ public class CameraMoveController : MonoBehaviour
     {
         MoveByTouchingBorders();
         RotateByDrag();
+        MoveByDrag();
 
     }
+
+    private void FixedUpdate()
+    {
+        CulculateGroundPositionsForMove();
+    }
+
+    void MoveByDrag() {
+        if (isMovingByDrag)
+        {
+            focusPointPosition = cameraFocusPoint.position;
+            focusPointPosition += mousPreviousGroundPosition - mousCurrentGroundPosition;
+            ClampFocusPointPosition(focusPointPosition);
+            cameraFocusPoint.position = focusPointPosition;
+        }     
+    }
+
+    private void CulculateGroundPositionsForMove()
+    {
+        if (Input.GetMouseButtonDown(2))
+        {
+            Vector3? hit = GetHitGroundPoint();
+            if (hit != null)
+            {
+                mousPreviousGroundPosition = (Vector3)hit;
+                mousCurrentGroundPosition = mousPreviousGroundPosition;
+                isMovingByDrag = true;
+            }
+            else { return; }
+        }
+        else if (Input.GetMouseButton(2))
+        {
+            Vector3? hit = GetHitGroundPoint();
+            if (hit != null)
+            {
+                // cameraFocusPoint.position +=  mousPreviousGroundPosition - (Vector3)hit;
+                // mousPreviousGroundPosition = (Vector3)hit;
+                mousCurrentGroundPosition = (Vector3)hit;
+                if (!isMovingByDrag) {
+                    mousPreviousGroundPosition = mousCurrentGroundPosition;
+                    isMovingByDrag = true;
+                }
+            }
+            else { return; }
+        }
+        else 
+        {
+            mousPreviousGroundPosition = mousCurrentGroundPosition;
+            isMovingByDrag = false;
+        }
+    }
+    Vector3? GetHitGroundPoint()
+    {
+        rayToGround = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(rayToGround, out hitGround, 100f, groundLayerMask))
+        {
+            return hitGround.point;
+        }
+        return null;
+    }
+
     void RotateByDrag() {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             mousPreviousPosition = Input.mousePosition;
             isRotaring = true;
         }
-        else if(Input.GetMouseButton(0))
+        else if(Input.GetMouseButton(1))
         {
-                float screenXDistance = Input.mousePosition.x - mousPreviousPosition.x;
-                float rotateY = screenXDistance / (Screen.width - borderThickness*2) * 360;
-                cameraFocusPoint.Rotate(0, rotateY, 0);
-                mousPreviousPosition = Input.mousePosition;
+            float screenXDistance = Input.mousePosition.x - mousPreviousPosition.x;
+            float rotateY = screenXDistance / (Screen.width - borderThickness*2) * 360;
+            cameraFocusPoint.Rotate(0, rotateY, 0);
+            mousPreviousPosition = Input.mousePosition;
         }
         else if(Input.GetMouseButtonUp(0)){
             isRotaring = false;
@@ -63,7 +130,7 @@ public class CameraMoveController : MonoBehaviour
             || (mousPosition.x >= Screen.width - borderThickness && mousPosition.x < Screen.width + borderThickness*3)
             || (mousPosition.x < borderThickness && mousPosition.x > -borderThickness*3))
         {
-            isMoving = true;
+            isMovingByBorderTouch = true;
             direction.x = mousPosition.x - Screen.width / 2;
             direction.z = mousPosition.y - Screen.height / 2;
             if (Input.GetKey(KeyCode.LeftAlt))
@@ -86,7 +153,7 @@ public class CameraMoveController : MonoBehaviour
         {
             //   direction = Vector3.zero;
             //    panoramaSpeedLerpCoefficient = 0.1f;
-            if (isMoving)
+            if (isMovingByBorderTouch)
             {
                 if (panoramaSpeedLerpCoefficient > 0.1)
                 {
@@ -94,20 +161,27 @@ public class CameraMoveController : MonoBehaviour
                 }
                 else
                 {
-                    isMoving = false;
+                    isMovingByBorderTouch = false;
                     panoramaSpeedLerpCoefficient = 0.1f;
                 }
             }
 
         }
 
-        if (isMoving)
+        if (isMovingByBorderTouch)
         {
             focusPointPosition += (cameraFocusPoint.localRotation * Vector3.Lerp(Vector3.zero, direction, panoramaSpeedLerpCoefficient)) * panoramaSpeed * Time.deltaTime;
-            focusPointPosition.x = Mathf.Clamp(focusPointPosition.x, -panoramaLimit.x, panoramaLimit.x);
-            focusPointPosition.z = Mathf.Clamp(focusPointPosition.z, -panoramaLimit.y, panoramaLimit.y);
+            ClampFocusPointPosition(focusPointPosition);
 
             cameraFocusPoint.position = focusPointPosition;
         }
+
+        
     }
+
+    void ClampFocusPointPosition(Vector3 position)
+        {
+            focusPointPosition.x = Mathf.Clamp(position.x, -panoramaLimit.x, panoramaLimit.x);
+            focusPointPosition.z = Mathf.Clamp(position.z, -panoramaLimit.y, panoramaLimit.y);
+        }
 }

@@ -206,7 +206,17 @@ public abstract class AbilityButtonController : MonoBehaviour
 
     void ButtonAvailabilityControl()
     {
-        if (TowerManager.availableElectroTowers.Count == 0)
+        int availableTowersCount = 0;
+        if (castTowerType == TowerType.Electro)
+        {
+            availableTowersCount = TowerManager.availableElectroTowers.Count;
+        }
+        else if (castTowerType == TowerType.Laser)
+        {
+            availableTowersCount = TowerManager.availableLaserTowers.Count;
+        }
+
+        if (availableTowersCount == 0)
         {
             button.interactable = false;
         }
