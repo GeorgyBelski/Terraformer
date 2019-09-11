@@ -141,97 +141,10 @@ public class ElectroTower : Tower
     {
         thanderBallAbility.Cast(aimPosition);
     }
-/*
-    public void CastThanderBall( Vector3 aimPosition) {
-        if (IsCastingAbility == true) {
-            return;
-        }
-        
-        TowerManager.availableElectroTowers.Remove(this);
-        thandetBallAim = aimPosition;
-        cannon.LookAt((Vector3)thandetBallAim);
-        IsCastingAbility = true;
-        Vector3 offsetFromCannon = gunpoint.position - cannon.position;
-        if (!thandetBall)
-        {
-            thandetBall = Instantiate(thanderBallPrefab, gunpoint.position + offsetFromCannon/2, cannon.rotation);
-            thandetBallAnimator = thandetBall.GetComponentInChildren<Animator>();
-            thandetBallCollider = thandetBall.GetComponentInChildren<SphereCollider>();
-            thandetBallCollider.enabled = false;
-
-            thandetBallTrailMaterial = thandetBall.GetComponentInChildren<ParticleSystemRenderer>().trailMaterial;
-         //   Debug.Log("thandetBallTrailMaterial: " + thandetBallTrailMaterial);
-            thandetBallTrailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
-        }
-        else {
-            thandetBall.transform.position = gunpoint.position + offsetFromCannon/2;
-            thandetBall.transform.rotation = cannon.rotation;
-            thandetBallAnimator.SetBool("isReachAim", false);
-        }
-        
-
-
-    }
-    void ThanderBallControl() {
-        if (thandetBallAim != null) { // analog to  'thandetBallAim != null';
-            if (IsCastingAbility) {
-                Vector3 ofsetFromCannon = gunpoint.position - cannon.position;
-                thandetBall.transform.position += ofsetFromCannon * thanderBallSpeed * Time.deltaTime / 32;
-                previousDistanceToAim = float.PositiveInfinity;
-            }
-            else{
-                Vector3 toAim = (Vector3)thandetBallAim - thandetBall.transform.position;
-                float distanceTOAim = toAim.magnitude;
-                if (distanceTOAim > 0.15f && previousDistanceToAim > distanceTOAim)
-                {
-                    previousDistanceToAim = distanceTOAim;
-                    thandetBall.transform.position += toAim.normalized * thanderBallSpeed * Time.deltaTime;
-                }
-                else {
-                    thandetBall.transform.position = (Vector3)thandetBallAim;
-                    thandetBallAnimator.SetBool("isReachAim", true);
-                    ApplyThanderBallEffects((Vector3)thandetBallAim, thanderBallEffectRadius );
-                    thandetBallAim = null; // analog to  'thandetBallAim = null';
-                }
-                
-            }
-
-        }
-    }
-
-    private void ApplyThanderBallEffects(Vector3 center, float radius)
-    {    
-        EnemyManagerPro.enemies.ForEach(enemy => 
-            {
-                Vector3 distanceToEnemy = enemy.transform.position - center;
-                if (distanceToEnemy.magnitude <= radius)
-                {
-                    enemy.effectsController.AddStun(2);
-                    thanderBallTargets.Add(enemy);
-                }
-            });
-
-        ApplyDamageToTargets(thanderBallTargets, thanderBallDamage);
-    }
-    
-    void ApplyDamageToTargets(List<Enemy> enemiesList, int damage){
-        foreach (Enemy enemy in enemiesList) {
-            enemy.ApplyDamage(damage, Vector3.zero, Vector3.zero);
-        }
-        enemiesList.Clear();
-    }
-
-
-*/
 
     public override void EndCasting() {
         IsCastingAbility = false;
         TowerManager.availableElectroTowers.Add(this);
     }
-    /*
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(center, size);
-    }
-    */
+
 }

@@ -1071,6 +1071,7 @@ GameObject:
   - component: {fileID: 7532716056537121323}
   - component: {fileID: 1605180230303121764}
   - component: {fileID: 5870178027991076530}
+  - component: {fileID: 1354494127388490066}
   - component: {fileID: 1639266349364210301}
   - component: {fileID: 1357415371704481169}
   m_Layer: 0
@@ -1177,9 +1178,9 @@ MonoBehaviour:
   cooldownAttack: 1
   timerAttack: 0
   cannon: {fileID: 7532716056096678989}
+  gunpoint: {fileID: 7532716055238349617}
   towerHealth: {fileID: 1605180230303121764}
   target: {fileID: 0}
-  gunpoint: {fileID: 7532716055238349617}
   lightningLerpSpeed: 2
   damageAttack: 50
   lightningChargePrefab: {fileID: 5848706040537432421, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
@@ -1230,6 +1231,19 @@ MonoBehaviour:
     type: 3}
   speed: 80
   effectRadius: 2.19
+--- !u!114 &1354494127388490066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532716056537121489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef47c1920f9934e83613c762513b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerIsClicked: 0
 --- !u!208 &1639266349364210301
 NavMeshObstacle:
   m_ObjectHideFlags: 0

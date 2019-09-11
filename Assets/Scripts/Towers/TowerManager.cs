@@ -11,15 +11,19 @@ public class TowerManager : MonoBehaviour
 
     public static float selectedTowerRange = 1.5f;
 
- //   public int TowerCount = 0;
+    int towerEnemyLayerMask = (1 << 13 | 1 << 12);
+    int towerLayer = 13;
+    public static Tower selectedTower;
+
 
     private void Start()
     {
 
     }
 
-    void Update() {
-     //   TowerCount = towers.Count;
+    void FixedUpdate() {
+        //   TowerCount = towers.Count;
+        SelectTower();
     }
 
     public static void AddTower(Tower tower)
@@ -71,6 +75,29 @@ public class TowerManager : MonoBehaviour
     public static void ClearSelection() {
         foreach (Tower tower in towers) {
             tower.isSelected = false;
+        }
+    }
+
+    public void SelectTower()
+    {
+
+        if (AbilityButtonController.aimingAbility == null && Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100f, towerEnemyLayerMask))
+            {
+                if (hit.transform.gameObject.layer == towerLayer)
+                {
+                    if (selectedTower) { selectedTower.isSelected = false; }
+
+                    selectedTower = hit.transform.gameObject.GetComponent<Tower>();
+                    selectedTower.isSelected = true;
+                }
+                
+            }
+            
         }
     }
 }
