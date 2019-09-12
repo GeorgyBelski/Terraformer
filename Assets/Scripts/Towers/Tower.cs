@@ -13,8 +13,8 @@ public abstract class Tower : MonoBehaviour
     public int range = 8;
     public Color rangeColor;
     public Material gizmoMaterial;
-    public Material rangelineMaterial;
-    public bool isSelected;
+    public Material rangeLineMaterial;
+    public bool isHighlighted;
     bool castingAbility;
     public bool IsCastingAbility { get => castingAbility; set => castingAbility = value; }
 
@@ -33,8 +33,11 @@ public abstract class Tower : MonoBehaviour
     public Transform gunpoint;
     public TowerHealth towerHealth;
     public Enemy target;
+
     int targetIndex = -1;
     LineRenderer rangeline;
+    Material towerMaterial;
+    Color highlightedColor;
 
     protected void Start()
     {
@@ -44,10 +47,13 @@ public abstract class Tower : MonoBehaviour
             rangeline = gameObject.AddComponent<LineRenderer>();
         }
         rangeline.positionCount = 72;
-        rangeline.material = rangelineMaterial;
+        rangeline.material = rangeLineMaterial;
         rangeline.textureMode = LineTextureMode.RepeatPerSegment;
         rangeline.widthMultiplier = 0.05f;
         rangeline.loop = true;
+
+        towerMaterial = GetComponent<MeshRenderer>().material;
+        highlightedColor = new Color(1, 1, .5f);
     }
 
     void Update()
@@ -60,6 +66,7 @@ public abstract class Tower : MonoBehaviour
 
         TowerUpdate();
         ReduceTimers();
+        HighlightTower();
     }
     internal abstract void TowerUpdate();
 
@@ -153,4 +160,16 @@ public abstract class Tower : MonoBehaviour
     }
 
     public abstract void EndCasting();
+
+    void HighlightTower()
+    {
+        if (isHighlighted && towerMaterial.GetColor("Color_19495AAD") != highlightedColor)
+        {
+            towerMaterial.SetColor("Color_19495AAD", highlightedColor);
+        }
+        else if(!isHighlighted && towerMaterial.GetColor("Color_19495AAD") != Color.black)
+        {
+            towerMaterial.SetColor("Color_19495AAD", Color.black);
+        }
+    }
 }

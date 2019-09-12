@@ -57,7 +57,7 @@ public class GizmoManager : MonoBehaviour
         foreach (Tower tower in TowerManager.towers)
         {
             DrawRange(tower, tower.rangeColor, tower.range, Vector3.forward);
-            if (tower.isSelected) {
+            if (tower.isHighlighted) {
                 DrawRange(tower, Color.yellow, TowerManager.selectedTowerRange , rotatingCompassDirection, 15);
             }
         }

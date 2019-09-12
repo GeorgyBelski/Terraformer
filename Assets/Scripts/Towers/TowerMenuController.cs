@@ -11,6 +11,7 @@ public class TowerMenuController : MonoBehaviour
     public Image TowerMenu;
     public Tower tower;
     Material material;
+    public bool isSelected;
 
     void Start()
     {
@@ -24,17 +25,17 @@ public class TowerMenuController : MonoBehaviour
 
     void ShowTowerMenu()
     {
-        if ((tower.isSelected && !TowerMenu.enabled) ||(!tower.isSelected && TowerMenu.enabled))
+        if ((isSelected && !TowerMenu.enabled) ||(!isSelected && TowerMenu.enabled))
         {
-            TowerMenu.enabled = tower.isSelected;
-            if (tower.isSelected)
+            TowerMenu.enabled = isSelected;
+        /*    if (tower.isSelected)
             {
                 material.SetColor("Color_19495AAD", Color.yellow);
             }
             else
             {
                 material.SetColor("Color_19495AAD", Color.black);
-            }
+            }*/
         }
     }
 }

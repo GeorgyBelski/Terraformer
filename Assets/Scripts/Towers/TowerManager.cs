@@ -13,7 +13,7 @@ public class TowerManager : MonoBehaviour
 
     int towerEnemyLayerMask = (1 << 13 | 1 << 12);
     int towerLayer = 13;
-    public static Tower selectedTower;
+    public static TowerMenuController selectedTower;
 
 
     private void Start()
@@ -21,7 +21,7 @@ public class TowerManager : MonoBehaviour
 
     }
 
-    void FixedUpdate() {
+    void LateUpdate() {
         //   TowerCount = towers.Count;
         SelectTower();
     }
@@ -72,10 +72,11 @@ public class TowerManager : MonoBehaviour
         return TowerManager.towers[nearestTowerIndex];
     }
 
-    public static void ClearSelection() {
-        foreach (Tower tower in towers) {
-            tower.isSelected = false;
-        }
+    public static void ClearHighlighting() {
+      /*  foreach (Tower tower in towers) {
+            tower.isHighlighted = false;
+        }*/
+        towers.ForEach(tower => tower.isHighlighted = false);
     }
 
     public void SelectTower()
@@ -90,14 +91,18 @@ public class TowerManager : MonoBehaviour
             {
                 if (hit.transform.gameObject.layer == towerLayer)
                 {
-                    if (selectedTower) { selectedTower.isSelected = false; }
+                    if (selectedTower){selectedTower.isSelected = false; }
 
-                    selectedTower = hit.transform.gameObject.GetComponent<Tower>();
+                    selectedTower = hit.transform.gameObject.GetComponent<TowerMenuController>();
                     selectedTower.isSelected = true;
                 }
                 
             }
             
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (selectedTower) { selectedTower.isSelected = false; }
         }
     }
 }
