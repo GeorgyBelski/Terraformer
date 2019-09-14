@@ -13,7 +13,7 @@ public class TowerManager : MonoBehaviour
 
     int towerEnemyLayerMask = (1 << 13 | 1 << 12);
     int towerLayer = 13;
-    public static TowerMenuController selectedTower;
+    public static Tower selectedTower;
 
 
     private void Start()
@@ -93,7 +93,7 @@ public class TowerManager : MonoBehaviour
                 {
                     if (selectedTower){selectedTower.isSelected = false; }
 
-                    selectedTower = hit.transform.gameObject.GetComponent<TowerMenuController>();
+                    selectedTower = hit.transform.gameObject.GetComponent<Tower>();
                     selectedTower.isSelected = true;
                 }
                 

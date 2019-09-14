@@ -3,19 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TargetingType { Nearest, MostVurnerable, MostHardy };
+
 public class TowerMenuController : MonoBehaviour
 {
- //   public bool towerIsClicked;
+    
 
     [Header("References")]
     public Image TowerMenu;
     public Tower tower;
     Material material;
-    public bool isSelected;
+    
+
+    [Header("Targeting Buttons")]
+    public Button NearestButton;
+    public Button VurnerableButton;
+    public Button HardyButton;
+    public Button previousSelectedTargetingButton;
 
     void Start()
     {
         material = GetComponent<MeshRenderer>().material;
+        previousSelectedTargetingButton = NearestButton;
+        ClickButton(NearestButton);
     }
 
     void Update()
@@ -25,9 +35,9 @@ public class TowerMenuController : MonoBehaviour
 
     void ShowTowerMenu()
     {
-        if ((isSelected && !TowerMenu.enabled) ||(!isSelected && TowerMenu.enabled))
+        if ((tower.isSelected && !TowerMenu.IsActive()) ||(!tower.isSelected && TowerMenu.IsActive()))
         {
-            TowerMenu.enabled = isSelected;
+            TowerMenu.gameObject.SetActive(tower.isSelected);
         /*    if (tower.isSelected)
             {
                 material.SetColor("Color_19495AAD", Color.yellow);
@@ -38,4 +48,24 @@ public class TowerMenuController : MonoBehaviour
             }*/
         }
     }
+
+
+    public void ClickButton(Button clickedButton)
+    {
+        previousSelectedTargetingButton.interactable = true;
+        clickedButton.interactable = false;
+        previousSelectedTargetingButton = clickedButton;
+        if (clickedButton == NearestButton)
+        {
+            tower.targetingType = TargetingType.Nearest;
+        }
+        else if (clickedButton == VurnerableButton)
+        {
+            tower.targetingType = TargetingType.MostVurnerable;
+        }
+        else {
+            tower.targetingType = TargetingType.MostHardy;
+        }
+    }
+
 }

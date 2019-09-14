@@ -47,10 +47,11 @@ public class ElectroTower : Tower
     {
         base.Start();
         type = TowerType.Electro;
+        
 
-     //   thandetBallAim = null;
-     //   hitThanderBallColliders = new Collider[10];
-    //    thanderBallTargets = new List<Enemy>();
+        //   thandetBallAim = null;
+        //   hitThanderBallColliders = new Collider[10];
+        //    thanderBallTargets = new List<Enemy>();
     }
     public override void TowerAttack(Enemy target)
     {
