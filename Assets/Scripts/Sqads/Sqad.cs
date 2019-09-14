@@ -10,7 +10,8 @@ public abstract class Sqad : MonoBehaviour
     public int columnsSize;
     public float columnsRange;
     public GameObject next;
-    public List<GameObject> SquadMembers;
+    public List<PartOfSquad> SquadMembers;
+    public Enemy_Logic leaderLogic;
 
     public Sqad(GameObject leader, GameObject enemie, int columnsCount, int columnsSize, float columnsRange)
     {
@@ -38,25 +39,38 @@ public abstract class Sqad : MonoBehaviour
         return (float)(Mathf.PI * angle / 180);
     }
 
-    /*public void spawn(Vector3 position, Quaternion rotation)
-   {
-       print(position);
-       next = Instantiate(leader, position, rotation);
-       print(next.transform.position);
-       next.transform.LookAt(Vector3.zero);
-       Instantiate(enemie, new Vector3(Mathf.Sin(next.transform.eulerAngles.y) + 0.5f, position.y, Mathf.Cos(next.transform.eulerAngles.y) + 0.5f), rotation);
-       Instantiate(enemie, new Vector3(Mathf.Sin(next.transform.eulerAngles.y) + 1f, position.y, Mathf.Cos(next.transform.eulerAngles.y) + 1f), rotation);
-       Instantiate(enemie, new Vector3(Mathf.Sin(next.transform.eulerAngles.y) + 1.5f, position.y, Mathf.Cos(next.transform.eulerAngles.y) + 1.5f), rotation);
-       //position = new Vector3(position.x, position.y, position.z);
+    protected LeaderOfSqad formateLeader(GameObject leader)
+    {
+        LeaderOfSqad sqadController = leader.AddComponent<LeaderOfSqad>();
+        leaderLogic = leader.GetComponent<Enemy_Logic>();
+        sqadController.setEnemyLogicScript(leaderLogic);
 
+        activateSquadLogic(sqadController, leaderLogic);
 
-       for(int i = 0; i < columnsCount; i++)
-       {
-           for(int y = 0; y < columnsSize; y++)
-           {
+        leader.transform.LookAt(Vector3.zero);
+        return sqadController;
+    }
+    
+    protected PartOfSquad formatePart(GameObject part)
+    {
+        PartOfSquad partController = part.AddComponent<PartOfSquad>();
+        part.transform.LookAt(Vector3.zero);
+        Enemy_Logic partlogic = part.GetComponent<Enemy_Logic>();
 
-           }
-       }
+        ////////////////////////////////////////////////////
+        partController.setEnemyLogicScript(partlogic);
 
-   }*/
+        activateSquadLogic(partController, partlogic);
+        return partController;
+    }
+
+    private void activateSquadLogic(Enemy_Logic controller, Enemy_Logic mainpart)
+    {
+        controller.animator = mainpart.animator;
+        controller.emk = mainpart.emk;
+        controller.enem = mainpart.enem;
+        mainpart.enabled = false;
+    }
+
+   
 }

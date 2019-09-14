@@ -9,6 +9,7 @@ public class Logic : MonoBehaviour
     public float basicSpawnPortalCooldown = 15f;
     //public List<Sqad> sqads;
     public GameObject enemie;
+    public GameObject leader;
 
     public GameObject portal;
     //private static GameObject[] tower;
@@ -35,7 +36,7 @@ public class Logic : MonoBehaviour
             //Instantiate(enemie, new Vector3(23 * Mathf.Sin(randPos), 0.5f, 23 * Mathf.Cos(randPos)), new Quaternion(0, 0, 0, 0));
             //randPos = Random.Range(0f, 360f);
             spawnPortalCooldown = basicSpawnPortalCooldown;
-            spawnSqad(Sqad.Formation.Circle);
+            spawnSqad(Sqad.Formation.Square);
 
         }   
     /* 
@@ -63,15 +64,15 @@ public class Logic : MonoBehaviour
         {
             case Sqad.Formation.Square:
                 randPos = Random.Range(0f, 360f);
-                new SquadFormationSquare(enemie, enemie, 4, 3, 1f, 25, randPos);
+                new SquadFormationSquare(leader, enemie, 2, 3, 1f, 25, randPos);
                 break;
             case Sqad.Formation.Straight:
                 randPos = Random.Range(0f, 360f);
-                new SquadFormationSquare(enemie, enemie, 1, 5, 0.75f, 25, randPos);
+                new SquadFormationSquare(leader, enemie, 1, 0, 0.75f, 25, randPos);
                 break;
             case Sqad.Formation.Circle:
                 randPos = Random.Range(0f, 360f);
-                new SquadFormationCircle(enemie, enemie, 1, 10, 2, 25, randPos);
+                new SquadFormationCircle(leader, enemie, 1, 10, 2, 25, randPos);
                 break;
         }
     }

@@ -6,6 +6,9 @@ public class TowerManager : MonoBehaviour
 {
     public static List<Tower> towers = new List<Tower>();
 
+    public static Tower terraformer { get; set; }
+   // public Terraformer terraformer
+
     public static List<ElectroTower> availableElectroTowers = new List<ElectroTower>();
     public static List<LaserTower> availableLaserTowers = new List<LaserTower>();
 

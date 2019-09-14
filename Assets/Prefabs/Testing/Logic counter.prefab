@@ -67,6 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -88,7 +89,7 @@ BoxCollider:
   m_GameObject: {fileID: 2797863612406404595}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -104,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe001a7c70c86b646933ab643ffdb7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicTowerCount: 200
-  basicEnemyCount: 10
   basicSpawnPortalCooldown: 15
+  enemie: {fileID: 2623192909609195406, guid: da5415a432dac38419376531d70065e1, type: 3}
+  leader: {fileID: 8968871776893842170, guid: ee79144eaa76b7a48a1cc52e89902a86, type: 3}
   portal: {fileID: 6903544648249112996, guid: b3e2afbb038065c409732bd7e1c93313, type: 3}
