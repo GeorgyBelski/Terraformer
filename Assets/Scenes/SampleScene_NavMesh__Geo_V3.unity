@@ -761,21 +761,6 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 4000
       objectReference: {fileID: 0}
-    - target: {fileID: 3511062594756489677, guid: da5415a432dac38419376531d70065e1,
-        type: 3}
-      propertyPath: m_IgnoreFromBuild
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3511062594756489677, guid: da5415a432dac38419376531d70065e1,
-        type: 3}
-      propertyPath: m_OverrideArea
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3511062594756489677, guid: da5415a432dac38419376531d70065e1,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8804390195762881590, guid: da5415a432dac38419376531d70065e1,
         type: 3}
       propertyPath: m_Layer
@@ -1045,6 +1030,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3511062594756489677, guid: da5415a432dac38419376531d70065e1,
+        type: 3}
+      propertyPath: m_IgnoreFromBuild
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3511062594756489677, guid: da5415a432dac38419376531d70065e1,
+        type: 3}
+      propertyPath: m_OverrideArea
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3511062594756489677, guid: da5415a432dac38419376531d70065e1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da5415a432dac38419376531d70065e1, type: 3}
@@ -1832,7 +1832,7 @@ PrefabInstance:
     - target: {fileID: 4525447541126041643, guid: 8071588b1e7224640a3999d3fd6231f7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.45
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 4525447541126041643, guid: 8071588b1e7224640a3999d3fd6231f7,
         type: 3}
@@ -1894,6 +1894,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 4525447540756528602, guid: 8071588b1e7224640a3999d3fd6231f7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8071588b1e7224640a3999d3fd6231f7, type: 3}
 --- !u!1 &1450265894

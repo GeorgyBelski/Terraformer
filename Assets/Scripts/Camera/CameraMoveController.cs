@@ -15,7 +15,8 @@ public class CameraMoveController : MonoBehaviour
     public Vector2 mousPosition , mousPreviousPosition;
     public bool isMovingByBorderTouch, isMovingByDrag, isRotaring;
     public Vector3 direction;
-
+    public float FarthestZoom;
+    public float NearestZoom;
     [Header("Reference")]
     public Transform cameraFocusPoint;
  //   float distanceToFocusPoint;
@@ -29,6 +30,8 @@ public class CameraMoveController : MonoBehaviour
 
     void Start()
     {
+        FarthestZoom = transform.localPosition.magnitude;
+        NearestZoom = 10f;
         panoramaSpeedLerpCoefficient = 0.1f;
         focusPointPosition = cameraFocusPoint.position;
  //       distanceToFocusPoint = Vector3.Distance(transform.position, focusPointPosition);
@@ -39,12 +42,25 @@ public class CameraMoveController : MonoBehaviour
         MoveByTouchingBorders();
         RotateByDrag();
         MoveByDrag();
-
+        Zoom();
     }
 
     private void FixedUpdate()
     {
         CulculateGroundPositionsForMove();
+    }
+
+    void Zoom()
+    {
+        var scroll = Input.mouseScrollDelta.y;
+        if (scroll > 0 && transform.localPosition.magnitude > NearestZoom)
+        {
+            this.transform.position += this.transform.rotation * Vector3.forward;
+        }
+        else if (scroll < 0 && transform.localPosition.magnitude < FarthestZoom)
+        {
+            this.transform.position -= this.transform.rotation * Vector3.forward;
+        }
     }
 
     void MoveByDrag() {
