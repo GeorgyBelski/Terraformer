@@ -30,7 +30,7 @@ public class CameraMoveController : MonoBehaviour
 
     void Start()
     {
-        FarthestZoom = transform.localPosition.magnitude;
+        FarthestZoom = transform.localPosition.magnitude + 8f;
         NearestZoom = 10f;
         panoramaSpeedLerpCoefficient = 0.1f;
         focusPointPosition = cameraFocusPoint.position;
