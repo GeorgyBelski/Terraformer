@@ -66,8 +66,7 @@ public class CreepHexagonGenerator : MonoBehaviour
 
         public Hexagon(CreepHexagonGenerator parent, int x, int z)
         {
-            if (hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] != null)
-            { return; }
+            
             this.parentCreep = parent;
             coordinatHexaX = x;
             coordinatHexaZ = z;
@@ -189,7 +188,10 @@ public class CreepHexagonGenerator : MonoBehaviour
     }
 
     public void CreateHexagon(int x, int z)
-    { 
+    {
+        if (GetHexagon(x, z) != null)
+        { return; }
+
         if (x * z > 0)
         {
             if (Mathf.Abs(x) + Mathf.Abs(z) <= radius)
@@ -212,7 +214,7 @@ public class CreepHexagonGenerator : MonoBehaviour
         if (previousRadius != radius)
         {
             if (radius < previousRadius) {
-                externalCircle.Clear();
+             //   externalCircle.Clear();
                 ReduceSurface();
                 return;
             }
@@ -239,9 +241,14 @@ public class CreepHexagonGenerator : MonoBehaviour
             timerScaleExternalCircleTime -= Time.deltaTime;
             
             externalCircle = SelectHexagonCircle(radius);
+            float hexagonScale = 0;
             externalCircle.ForEach(hexgon => 
             {
-                hexgon.hexagonGObject.transform.localScale = (scaleExternalCircleTime - timerScaleExternalCircleTime) / scaleExternalCircleTime * Vector3.one;
+                hexagonScale = (scaleExternalCircleTime - timerScaleExternalCircleTime) / scaleExternalCircleTime;
+                if (hexagonScale > 0.99f)
+                { hexagonScale = 1; }
+
+                hexgon.hexagonGObject.transform.localScale = hexagonScale * Vector3.one;
             });
         }
     }
@@ -345,6 +352,7 @@ public class CreepHexagonGenerator : MonoBehaviour
       //    return Mathf.Sin(timerRiseTime[i] * 6 / riseTime);
         return Mathf.Sin(timerRiseTime[i] * Mathf.PI / riseTime - Mathf.PI / 2) * 0.5f + 0.5f;
     }
+
     List<Hexagon> SelectHexagonCircle(int circleRadius)
     {
         //if (circleRadius > radius) { return null; }
