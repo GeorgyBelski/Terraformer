@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GizmoManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GizmoManager : MonoBehaviour
     [Range(10, 100)]
     public float gizmoRotationSpeed = 10f;
     Vector3 rotatingCompassDirection;
-
+    public GizmoSubset gizmoSubset;
     void Start()
     {
         rotatingCompassDirection = Vector3.forward;
@@ -17,6 +18,7 @@ public class GizmoManager : MonoBehaviour
     void Update()
     {
         rotatingCompassDirection = Quaternion.AngleAxis(gizmoRotationSpeed * Time.deltaTime, Vector3.up) * rotatingCompassDirection;
+     //   ScriptableRenderContext.DrawGizmos();
     }
     /*
     void OnDrawGizmos()
@@ -45,7 +47,7 @@ public class GizmoManager : MonoBehaviour
     */
     void OnPostRender()
     {
-        
+        gizmoSubset = new GizmoSubset();
         GL.Begin(GL.LINES);
         if (gizmoMaterial)
         { 
@@ -54,7 +56,7 @@ public class GizmoManager : MonoBehaviour
         
         foreach (Tower tower in TowerManager.towers)
         {
-            DrawRange(tower, tower.color, tower.range, Vector3.forward);
+            DrawRange(tower, tower.rangeColor, tower.range, Vector3.forward);
             if (tower.isSelected) {
                 DrawRange(tower, Color.yellow, TowerManager.selectedTowerRange , rotatingCompassDirection, 15);
             }
@@ -65,10 +67,14 @@ public class GizmoManager : MonoBehaviour
  
     }
 
+
+
     void DrawRange(Tower tower, Color lineColor , float radius , Vector3 compassDirection, float degree = 5) // compassDirection = Vector3.forward
-    { 
+    {
+        
         if (tower)
         {
+            
             Vector3 compass = radius * compassDirection;
             GL.Color(lineColor);
             for (int i = 0; i < (int)360f/degree; i++)

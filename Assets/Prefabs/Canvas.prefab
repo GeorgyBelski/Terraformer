@@ -700,7 +700,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.559
+  m_FillAmount: 0.74
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -749,7 +749,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2902143820328577125}
-        m_MethodName: ETA1Activate
+        m_MethodName: Activate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -770,19 +770,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2902143820328577054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0343060d9c5c4b94d8ee9edc6ec1c305, type: 3}
+  m_Script: {fileID: 11500000, guid: 55b869e79e4922a41ae4022d4004da83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   key: 113
   castTowerType: 0
   currentState: 0
-  castTime: 0.8
-  timerCast: 0
   coolDown: 2
   timerCoolDown: 0
   buttomTintReady: {r: 1, g: 1, b: 1, a: 1}
-  buttomTintRecharging: {r: 1, g: 0.9018647, b: 0.3726415, a: 1}
-  parent: {fileID: 2902143821281523190}
+  buttomTintRecharging: {r: 0.8490566, g: 0.82854235, b: 0.19624422, a: 1}
+  parent: {fileID: 0}
   gunpoint: {fileID: 0}
   aimAreaPrefab: {fileID: 8193904619243790425, guid: f50310deb7799ae4e9125563ac3c3cf0,
     type: 3}
@@ -1947,8 +1945,9 @@ GameObject:
   - component: {fileID: 7560139060333393088}
   - component: {fileID: 8570450794880800509}
   - component: {fileID: 5268415477328583201}
+  - component: {fileID: 468299217}
   m_Layer: 5
-  m_Name: ElectroTowerA1Button
+  m_Name: LaserTowerA1Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2008,7 +2007,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.559
+  m_FillAmount: 0.7
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -2057,7 +2056,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5268415477328583201}
-        m_MethodName: ETA1Activate
+        m_MethodName: Activate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2076,21 +2075,42 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8864031473027826336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0343060d9c5c4b94d8ee9edc6ec1c305, type: 3}
+  m_Script: {fileID: 11500000, guid: 55b869e79e4922a41ae4022d4004da83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   key: 119
   castTowerType: 0
   currentState: 0
-  castTime: 0.8
-  timerCast: 0
   coolDown: 2
   timerCoolDown: 0
   buttomTintReady: {r: 1, g: 1, b: 1, a: 1}
-  buttomTintRecharging: {r: 1, g: 0.9018647, b: 0.3726415, a: 1}
-  parent: {fileID: 8208597059277847092}
+  buttomTintRecharging: {r: 0.8113208, g: 0.7884736, b: 0.14925243, a: 1}
+  parent: {fileID: 0}
+  gunpoint: {fileID: 0}
+  aimAreaPrefab: {fileID: 8193904619243790425, guid: f50310deb7799ae4e9125563ac3c3cf0,
+    type: 3}
+--- !u!114 &468299217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864031473027826336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b47a9af78e51b243a693077e5e7bb72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: 119
+  castTowerType: 1
+  currentState: 0
+  coolDown: 1
+  timerCoolDown: 0
+  buttomTintReady: {r: 1, g: 1, b: 1, a: 1}
+  buttomTintRecharging: {r: 0.8117647, g: 0.588342, b: 0.14901958, a: 1}
+  parent: {fileID: 0}
   gunpoint: {fileID: 0}
   aimAreaPrefab: {fileID: 8193904619243790425, guid: f50310deb7799ae4e9125563ac3c3cf0,
     type: 3}

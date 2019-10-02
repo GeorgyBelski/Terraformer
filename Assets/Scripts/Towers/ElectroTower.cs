@@ -7,35 +7,40 @@ using UnityEngine;
 public class ElectroTower : Tower
 {
     [Header("ElectroTower")]
-    public Transform gunpoint;
+   // public Transform gunpoint;
     
 
     [Header("AutoAttack")]
     public float lightningLerpSpeed = 100f;
     public int damageAttack = 50;
-    public GameObject lightningCharge;
+    public GameObject lightningChargePrefab;
+    ParticleSystem lightningChargeParticleSys;
     public Transform currentLightningCharge;
+    float lightningChargeSize;
+    bool enableCharge;
+    Material chargeTrailMaterial;
 
     float chargeLifeTime = 0.5f;
     float timerChargeLifeTime;
     float chargeLerpPosition;
     Vector3 fromChargeToTarget;
 
-    [Header("ThandetBall")]
+    [Header("ThandetBallAbility")]
+    public ThanderBallAbility thanderBallAbility;
+/*
     public GameObject thanderBallPrefab;
+    public int thanderBallDamage = 100;
     public float thanderBallSpeed = 20f;
     public float thanderBallEffectRadius = 2.19f;
     GameObject thandetBall;
+    Material thandetBallTrailMaterial;
     Animator thandetBallAnimator;
     SphereCollider thandetBallCollider;
     Vector3? thandetBallAim;
     //Collider[] hitThanderBallColliders;
-    List<Enemy> ThanderBallTargets;
+    List<Enemy> thanderBallTargets;
+*/
 
-
-    float previousDistanceToAim;
-    public float explosionTime = 0.4f;
-    float timerExplosionTime;
 
 
     private void Start()
@@ -43,20 +48,30 @@ public class ElectroTower : Tower
         base.Start();
         type = TowerType.Electro;
 
-        thandetBallAim = null;
+     //   thandetBallAim = null;
      //   hitThanderBallColliders = new Collider[10];
-        ThanderBallTargets = new List<Enemy>();
+    //    thanderBallTargets = new List<Enemy>();
     }
     public override void TowerAttack(Enemy target)
     {
         if (target)
         {
-            if (currentLightningCharge) {
-                DestroyCharge();
+            if (!currentLightningCharge)
+            {
+                //  DestroyCharge();
+                currentLightningCharge = Instantiate(lightningChargePrefab, gunpoint.position, gunpoint.rotation).transform;
+                lightningChargeParticleSys = currentLightningCharge.GetComponent<ParticleSystem>();
+               chargeTrailMaterial = currentLightningCharge.GetComponent<ParticleSystemRenderer>().trailMaterial;
+                chargeTrailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
+                lightningChargeSize = currentLightningCharge.localScale.x;
             }
-            currentLightningCharge = Instantiate(lightningCharge, gunpoint.position, gunpoint.rotation).transform;
+            else {
+                currentLightningCharge.position = gunpoint.position;
+            }
+            enableCharge = true;
             timerChargeLifeTime = chargeLifeTime;
-
+            EnableChargeParticlesEmission(true);
+            currentLightningCharge.localScale = new Vector3(lightningChargeSize, lightningChargeSize, lightningChargeSize);
 
         }
     }
@@ -64,7 +79,7 @@ public class ElectroTower : Tower
     internal override void TowerUpdate()
     {
             ChargeControl();
-        ThanderBallControl();
+     //   ThanderBallControl();
     }
 
  // AutoAttack - Charge   
@@ -72,30 +87,44 @@ public class ElectroTower : Tower
     void ChargeControl() {
         if (currentLightningCharge)
         {
-            if (target)
+            if (target && enableCharge)
             {
                 fromChargeToTarget = target.GetPosition() - currentLightningCharge.position;
                 float distanceFromChargeToTarget = fromChargeToTarget.magnitude;
                 currentLightningCharge.position = Vector3.Lerp(gunpoint.position, target.GetPosition(), chargeLerpPosition);
                 chargeLerpPosition += lightningLerpSpeed * Time.deltaTime * (range / distanceFromChargeToTarget);
-                if (distanceFromChargeToTarget < 0.2)
+
+
+                if (distanceFromChargeToTarget < 0.1)
                 {
                     currentLightningCharge.position = target.GetPosition();
-                    DestroyCharge();
+                    currentLightningCharge.localScale *= 1.7f;
+                    //   DestroyCharge();
+                    enableCharge = false;
+                    EnableChargeParticlesEmission(false);
                     target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
                     chargeLerpPosition = 0;
                 }
             }
 
             timerChargeLifeTime -= Time.deltaTime;
-            if (timerChargeLifeTime <= 0)
+            if (timerChargeLifeTime < 0.1 && currentLightningCharge.localScale.x > 0.1f)
             {
-                DestroyCharge();
+                currentLightningCharge.localScale /= 6;
+            }
+                if (timerChargeLifeTime <= 0)
+            {
+                //   DestroyCharge();
+                EnableChargeParticlesEmission(false);
                 timerChargeLifeTime = 0;
             }
         }
     }
-
+    void EnableChargeParticlesEmission(bool isEmission)
+    {
+        var emission = lightningChargeParticleSys.emission;
+        emission.enabled = isEmission;
+    }
     void DestroyCharge()
     {
         if (currentLightningCharge)
@@ -108,6 +137,11 @@ public class ElectroTower : Tower
 
 // Ability 1  - ThanderBall
 
+    public void CastThanderBall(Vector3 aimPosition)
+    {
+        thanderBallAbility.Cast(aimPosition);
+    }
+/*
     public void CastThanderBall( Vector3 aimPosition) {
         if (IsCastingAbility == true) {
             return;
@@ -124,6 +158,10 @@ public class ElectroTower : Tower
             thandetBallAnimator = thandetBall.GetComponentInChildren<Animator>();
             thandetBallCollider = thandetBall.GetComponentInChildren<SphereCollider>();
             thandetBallCollider.enabled = false;
+
+            thandetBallTrailMaterial = thandetBall.GetComponentInChildren<ParticleSystemRenderer>().trailMaterial;
+         //   Debug.Log("thandetBallTrailMaterial: " + thandetBallTrailMaterial);
+            thandetBallTrailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
         }
         else {
             thandetBall.transform.position = gunpoint.position + offsetFromCannon/2;
@@ -161,48 +199,32 @@ public class ElectroTower : Tower
         }
     }
 
-    bool debug_draw;
-    Vector3 center;
-    float size;
-
     private void ApplyThanderBallEffects(Vector3 center, float radius)
-    {    /*  
-        int hittedEnemysNumber = Physics.OverlapSphereNonAlloc(center, radius, hitThanderBallColliders, EnemyManagerPro.enemyLayerMask);
+    {    
+        EnemyManagerPro.enemies.ForEach(enemy => 
+            {
+                Vector3 distanceToEnemy = enemy.transform.position - center;
+                if (distanceToEnemy.magnitude <= radius)
+                {
+                    enemy.effectsController.AddStun(2);
+                    thanderBallTargets.Add(enemy);
+                }
+            });
 
-        {
-            debug_draw = true;
-            this.center = center;
-            this.size = radius;
-
-        }
-        Debug.Log("hittedEnemysNumber: " + hittedEnemysNumber);
-        for (int i=0; i < hittedEnemysNumber; i++)
-        {
-            //  hitColliders[i].SendMessage("AddDamage");
-            //    Debug.Log(hitThanderBallColliders[i]);
-            hitThanderBallColliders[i].GetComponent<EnemyEffectsController>().AddStan(2);
-            hitThanderBallColliders[i] = null;
-        }
-        */
-        foreach (Enemy enemy in EnemyManagerPro.enemies) {
-            Vector3 distanceToEnemy = enemy.transform.position - center;
-            if (distanceToEnemy.magnitude <= radius) {
-              //  Debug.Log("ApplyThanderBallEffects on enemy: " + enemy);
-                enemy.effectsController.AddStun(2);
-                ThanderBallTargets.Add(enemy);      
-            }
-        }
-        ApplyDanageToTargets(ThanderBallTargets, 100);
-
-
+        ApplyDamageToTargets(thanderBallTargets, thanderBallDamage);
     }
-    void ApplyDanageToTargets(List<Enemy> enemiesList, int damage){
+    
+    void ApplyDamageToTargets(List<Enemy> enemiesList, int damage){
         foreach (Enemy enemy in enemiesList) {
             enemy.ApplyDamage(damage, Vector3.zero, Vector3.zero);
         }
         enemiesList.Clear();
     }
-    public void EndCasting() {
+
+
+*/
+
+    public override void EndCasting() {
         IsCastingAbility = false;
         TowerManager.availableElectroTowers.Add(this);
     }

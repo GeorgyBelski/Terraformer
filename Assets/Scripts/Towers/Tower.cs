@@ -11,8 +11,9 @@ public abstract class Tower : MonoBehaviour
 
     [Header("Main Attributes")]
     public int range = 8;
-    public Color color;
+    public Color rangeColor;
     public Material gizmoMaterial;
+    public Material rangelineMaterial;
     public bool isSelected;
     bool castingAbility;
     public bool IsCastingAbility { get => castingAbility; set => castingAbility = value; }
@@ -29,13 +30,24 @@ public abstract class Tower : MonoBehaviour
     */
     [Header("References")]
     public Transform cannon;
+    public Transform gunpoint;
     public TowerHealth towerHealth;
     public Enemy target;
     int targetIndex = -1;
+    LineRenderer rangeline;
 
     protected void Start()
     {
         TowerManager.AddTower(this);
+        rangeline = gameObject.GetComponent<LineRenderer>();
+        if (!rangeline) { 
+            rangeline = gameObject.AddComponent<LineRenderer>();
+        }
+        rangeline.positionCount = 72;
+        rangeline.material = rangelineMaterial;
+        rangeline.textureMode = LineTextureMode.RepeatPerSegment;
+        rangeline.widthMultiplier = 0.05f;
+        rangeline.loop = true;
     }
 
     void Update()
@@ -59,22 +71,6 @@ public abstract class Tower : MonoBehaviour
         else {
             timerAttack = 0;
         }
-        /*
-        if (timerAbility1 > 0)
-        {
-            timerAbility1 -= Time.deltaTime;
-        }
-        else {
-            timerAbility1 = 0;
-        }
-        if (timerAbility2 > 0)
-        {
-            timerAbility2 -= Time.deltaTime;
-        }
-        else {
-            timerAbility2 = 0;
-        }
-        */
     }
     Enemy ChooseTarget() {
         
@@ -115,6 +111,10 @@ public abstract class Tower : MonoBehaviour
             timerAttack = cooldownAttack;
         }
     }
+    public void RotateCannon(Vector3 targetPosition)
+    {
+        cannon.LookAt(targetPosition);
+    }
     public abstract void TowerAttack(Enemy target);
 
     private void OnDrawGizmos()
@@ -124,30 +124,33 @@ public abstract class Tower : MonoBehaviour
         {
             if (i == targetIndex)
             {
-                Gizmos.color = Color.green;
-            }
-            else {
-                Gizmos.color = Color.gray;
-            }
-            if (EnemyManagerPro.enemies[i]) {
+                Gizmos.color = new Color(1, 0.4f, 0.3f);
+             //   if (EnemyManagerPro.enemies[i]) {
                 Gizmos.DrawLine(EnemyManagerPro.enemies[i].GetPosition(), this.transform.position);
+            //    }
             }
+        //    else { Gizmos.color = Color.gray;}
+            
             
         }
 
         //range
         Vector3 compass = range * Vector3.forward;
-        GL.Begin(GL.LINES);
-        if(gizmoMaterial)
-            gizmoMaterial.SetPass(0);
-        GL.Color(color);
+    //    GL.Begin(GL.LINES);
+    //    if(gizmoMaterial)
+    //        gizmoMaterial.SetPass(0);
+    //    GL.Color(rangeColor);
         for (int i = 0; i < 72; i++)
         {
-            Vector3 circlPoint = transform.position - Vector3.up + compass;
-            GL.Vertex(circlPoint);
+            Vector3 circlPoint = transform.position  + compass;
+            circlPoint.y = 0.1f;
+    //        GL.Vertex(circlPoint);
+            if (rangeline) rangeline.SetPosition(i, circlPoint);
             compass = Quaternion.AngleAxis(5, Vector3.up) * compass;//  —\|/—\|/ rotate the radius vector around planeNormal axis on 10 degrees.
         }
-        GL.End();
+    //    GL.End();
 
     }
+
+    public abstract void EndCasting();
 }

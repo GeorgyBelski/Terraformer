@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4525447540756528583}
   - component: {fileID: 4525447540756528604}
   - component: {fileID: 4525447540756528603}
+  - component: {fileID: 1776924797}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -48,9 +49,10 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -107,9 +109,12 @@ MonoBehaviour:
   panoramaLimit: {x: 20, y: 20}
   panoramaSpeed: 15
   borderThickness: 10
-  cameraFocusPoint: {fileID: 4525447541126041643}
-  mousPosition: {x: 0, y: 0, z: 0}
+  mousPosition: {x: 0, y: 0}
+  mousPreviousPosition: {x: 0, y: 0}
   isMoving: 0
+  isRotaring: 0
+  direction: {x: 0, y: 0, z: 0}
+  cameraFocusPoint: {fileID: 4525447541126041643}
   panoramaSpeedLerpCoefficient: 0
 --- !u!81 &4525447540756528583
 AudioListener:
@@ -196,6 +201,26 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &1776924797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525447540756528582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_RendererOverrideOption: 1
+  m_RendererData: {fileID: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &4525447541126041642
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,6 +288,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

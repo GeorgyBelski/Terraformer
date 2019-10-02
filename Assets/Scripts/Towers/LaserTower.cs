@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,14 +7,18 @@ public class LaserTower : Tower
 {
     [Space]
     [Header("LaserTower")]
-    public Transform gunpoint;
+    //   public Transform gunpoint;
+    [Header("AutoAttack")]
     public float beamDuration = 0.3f;
     public int damageAttack = 50;
     public int damageBurning = 5;
     float timerDuration;
     LineRenderer lr;
+    Material lrMaterial;
     Color startLaser, endLaser;
-    
+
+    [Header("ThandetBallAbility")]
+    public ScorchingRayAbility scorchingRayAbility;
 
     private void Start()
     {
@@ -21,6 +26,12 @@ public class LaserTower : Tower
         type = TowerType.Laser;
 
         lr = gunpoint.GetComponent<LineRenderer>();
+        lrMaterial = lr.material;
+        if (!lr)
+        {
+            lr = gunpoint.gameObject.AddComponent<LineRenderer>();
+        }
+
         startLaser = lr.startColor;
         endLaser = lr.endColor;
     }
@@ -44,14 +55,28 @@ public class LaserTower : Tower
         {
             float ratioDuration = timerDuration / beamDuration;
             timerDuration -= Time.deltaTime;
-            lr.startColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
-            lr.endColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
+            lr.enabled = true;
+
+          //  lr.startColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
+            //     lr.endColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
+            lrMaterial.SetColor("_BaseColor", new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration));
+            lrMaterial.SetColor("_EmissionColor", new Color(1 + ratioDuration, 0, 0));
             lr.widthMultiplier = ratioDuration;
         }
         else
         {
-            lr.startColor = new Color(0, 0, 0, 0);
-            lr.endColor = new Color(0, 0, 0, 0);
+            lr.enabled = false;
         }
+    }
+
+    public void CastScorchingRay(Vector3 aimPosition)
+    {
+        scorchingRayAbility.Cast(aimPosition);
+    }
+
+    public override void EndCasting()
+    {
+        IsCastingAbility = false;
+        TowerManager.availableLaserTowers.Add(this);
     }
 }
