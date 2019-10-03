@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Terraformer : Tower
 {
+    public override void EndCasting()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void TowerAttack(Enemy target)
     {
         //throw new System.NotImplementedException();
