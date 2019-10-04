@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6199817431043864996}
   - component: {fileID: 6199817431043865001}
   - component: {fileID: 1187376394}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Creep_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
@@ -106,7 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf925250396a73144b0d8f6d105396c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 6
+  radius: 1
   coefficient: 2
+  isExpanding: 0
   riseTime: 0.24
   risingHeight: 0.23
+  scaleExternalCircleTime: 0.3
