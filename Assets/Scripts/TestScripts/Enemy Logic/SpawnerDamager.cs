@@ -14,7 +14,10 @@ public class SpawnerDamager : Enemy_Logic
 
     private float realChargingTime;
     private bool isChargingReady = false;
+    private bool isHealingJump = false;
     private Material cristalMaterial;
+
+    private Vector3 dest;
 
     public override void Attack()
     {
@@ -26,7 +29,7 @@ public class SpawnerDamager : Enemy_Logic
     {
         cristalMaterial = powerCristall.GetComponent<Renderer>().material;
         //readyToJump();
-        realChargingTime = 0;
+        realChargingTime = chargingTime;
         base.Start();
     }
 
@@ -63,8 +66,9 @@ public class SpawnerDamager : Enemy_Logic
         isChargingReady = true;
     }
 
-    void jump()
+    void jump(Vector3 jumpPos)
     {
+        transform.position = dest;
         isChargingReady = false;
         realChargingTime = 0;
         charging();
@@ -72,68 +76,29 @@ public class SpawnerDamager : Enemy_Logic
 
     public override void check()
     {
-        float heals = enem.GetHealthRatio();
-        if ((heals - brawe) <= 0 && heals != 0) //Логика состояний
-        {
-            if (EnemyManagerPro.enemiesMap.ContainsKey(EnemyType.Healer) && EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0)
-            {
-                //Debug.Log("checking");
-                isStand = false;
-                isGoingToDest = false;
-                IsAttack = false;
-                //state_Attack();
-                stateGiveUp();
-                isGiveUp = true;
-            }
-            else
-            {
-                isStand = false;
-                isGiveUp = false;
-                stateGoToDestanation();
-            }
+        if (isGoingToDest && isHealingJump)
+            isHealingJump = false;
 
-        }
-        else
+        if (isChargingReady)
         {
-            if (isGiveUp)
+
+
+            if (isGoingToDest)
             {
-                if (heals > 0.5 + brawe / 2 || EnemyManagerPro.enemiesMap[EnemyType.Healer].Count == 0)
-                {
-                    isStand = false;
-                    isGiveUp = false;
-                    stateGoToDestanation();
-                    //
-                }
-                else
-                {
-                    stateGiveUp();
-                }
+                dest = emk.GetDest();
+                if (Vector3.Distance(emk.GetDest(), transform.position) < jumpDistance)
+                    jump(dest);
             }
-            else
+            if (isGiveUp && !isHealingJump)
             {
-                if (IsAttack)
-                {
-                    if (destTower == null)
-                    {
-                        isStand = false;
-                        IsAttack = false;
-                        isGiveUp = false;
-                        stateGoToDestanation();
-                    }
-                    else
-                    {
-                        IsAttack = true;
-                    }
-                }
-                else
-                {
-                    isStand = false;
-                    IsAttack = false;
-                    isGiveUp = false;
-                    stateGoToDestanation();
-                    //isGoingToDist = true;
-                }
+                isHealingJump = true;
+                transform.LookAt(emk.GetDest());
+                //print(transform.eulerAngles.x + "; " + transform.eulerAngles.z);
+                dest = new Vector3(transform.position.x + Mathf.Sin(Sqad.DegreeToRadian(transform.eulerAngles.y)) * jumpDistance, transform.position.y, transform.position.z + Mathf.Cos(Sqad.DegreeToRadian(transform.eulerAngles.y)) * jumpDistance);
+                jump(dest);
             }
         }
+           
+        base.check();
     }
 }

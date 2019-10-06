@@ -27,6 +27,8 @@ public class Tank : Enemy_Logic
     }
     public override void check()
     {
+
+
         //print(isAttack + " " + isStand + " " + isGoingToDest);
         //print(-1);
         float heals = enem.GetHealthRatio();
