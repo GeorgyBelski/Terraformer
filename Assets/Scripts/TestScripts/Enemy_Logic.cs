@@ -228,7 +228,7 @@ public abstract class Enemy_Logic : MonoBehaviour
             {
                 if (IsAttack)
                 {
-                    if (destTower == null)
+                    if (destTower != null)
                     {
                         isStand = false;
                         IsAttack = false;
