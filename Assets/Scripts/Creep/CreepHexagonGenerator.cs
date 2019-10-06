@@ -19,25 +19,30 @@ public class CreepHexagonGenerator : MonoBehaviour
     static Vector3 hexaZ, hexaX;
 
     //Animation Wave
-    float period =2;
+    public bool isExpanding;
     public float riseTime = 0.8f;
     public float risingHeight = 0.5f;
-    float[] timerRiseTime;
-    float[] timerPeriod;
-    float[] offset;
+    public float scaleExternalCircleTime = 0.3f;
+    float timerScaleExternalCircleTime;
+    bool isLockExpancion = false;
+    float[] timerRiseTime;      // own for each circle
+    float[] offset;             // own for each circle
     int circleRadius = 1;
+    int expandedRadius = 0;
     bool isCircleSelected = false;
     List<Hexagon> hexagonFirstCircle = null;
     List<Hexagon> hexagonSecondCircle = null;
-
+    List<Hexagon> externalCircle = null;
+    List<Hexagon>[] Circles = null;
     void Start()
     {
 
         Vector3 rightUpVertexDirection = Quaternion.AngleAxis(60, Vector3.up) * Vector3.forward;
         hexaZ = (rightUpVertexDirection + Vector3.forward) * coefficient;
         hexaX = new Vector3(rightUpVertexDirection.x, 0, 0) * 2 * coefficient;
-     /* timerRiseTime = new float[radius+1];
-        timerPeriod = new float[radius+1];
+        Circles = new List<Hexagon>[matrixCoordinateCenter];
+        timerRiseTime = new float[radius+1];
+     /*
         offset = new float[radius+1];
         
         UpdateCreep();
@@ -63,8 +68,7 @@ public class CreepHexagonGenerator : MonoBehaviour
 
         public Hexagon(CreepHexagonGenerator parent, int x, int z)
         {
-            if (hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] != null)
-            { return; }
+            
             this.parentCreep = parent;
             coordinatHexaX = x;
             coordinatHexaZ = z;
@@ -133,6 +137,16 @@ public class CreepHexagonGenerator : MonoBehaviour
             else
             {
                 hexagonGObject = Instantiate(hexagonPrefab, hexaX * x + hexaZ * z, hexagonPrefab.transform.rotation);
+
+                // place for landscape alinement!
+                /*
+                Mesh mesh = hexagonGObject.GetComponent<MeshFilter>().mesh;
+                this.mesh = mesh;
+                this.vertices = mesh.vertices;
+                vertices[0] += Vector3.up;
+                this.triangles = mesh.triangles;
+                UpdateHexagonMesh();
+               */
             }
             
             coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = 1;
@@ -172,12 +186,16 @@ public class CreepHexagonGenerator : MonoBehaviour
 
         public void ResetPosition()
         {
-            hexagonGObject.transform.position = originalPosition;
+            if (hexagonGObject)
+            { hexagonGObject.transform.position = originalPosition; }
         }
     }
 
     public void CreateHexagon(int x, int z)
-    { 
+    {
+        if (GetHexagon(x, z) != null)
+        { return; }
+
         if (x * z > 0)
         {
             if (Mathf.Abs(x) + Mathf.Abs(z) <= radius)
@@ -189,6 +207,7 @@ public class CreepHexagonGenerator : MonoBehaviour
         {
             new Hexagon(this, x, z);
         }
+
     }
     Hexagon GetHexagon(int x, int z)
     {
@@ -199,25 +218,53 @@ public class CreepHexagonGenerator : MonoBehaviour
         if (previousRadius != radius)
         {
             if (radius < previousRadius) {
+             //   externalCircle.Clear();
                 ReduceSurface();
                 return;
             }
+
             for (int z = -radius; z <= radius; z++)
             {
                 for (int x = -radius; x <= radius; x++)
                 {
-                    CreateHexagon(x, z);
+                    CreateHexagon(x, z);  
                 }
             }
-            previousRadius = radius;
-
+            
+            float externalTimerRiseTime = timerRiseTime[previousRadius];
             timerRiseTime = new float[radius+1];
-            timerPeriod = new float[radius+1];
+            timerRiseTime[previousRadius] = externalTimerRiseTime;
             offset = new float[radius+1];
-        }   
+            previousRadius = radius;
+        }
+        
+    }
+
+    void ScaleExternalCircle()
+    {
+        if (timerScaleExternalCircleTime > 0)
+        {
+            timerScaleExternalCircleTime -= Time.deltaTime;
+            if (externalCircle == null)
+            {   externalCircle = SelectHexagonCircle(radius); }
+
+            float hexagonScale = 0;
+            externalCircle.ForEach(hexgon => 
+            {
+                hexagonScale = (scaleExternalCircleTime - timerScaleExternalCircleTime) / scaleExternalCircleTime;
+                if (hexagonScale > 0.99f)
+                {
+                    hexagonScale = 1;
+                    externalCircle = null;
+                }
+
+                hexgon.hexagonGObject.transform.localScale = hexagonScale * Vector3.one;
+            });
+        }
     }
     void ReduceSurface(){
         for (int i = radius + 1; i <= previousRadius; i++) {
+            Circles[i] = null;
             for (int j = 0; j <= previousRadius; j++)
             {
                 DeleteHexagon(i - j, j);
@@ -252,88 +299,99 @@ public class CreepHexagonGenerator : MonoBehaviour
 
     void Update()
     {
-        UpdateCreep();
         MakeWave();
+        UpdateCreep();
+        ScaleExternalCircle();
     }
 
     void MakeWave()
     {
+        if (!isExpanding)
+        { return; }
+
         int i = circleRadius;
-        //i - circle radius
+
+        if (!isLockExpancion)
+        {
+            isLockExpancion = true;
+            expandedRadius = radius + 1;
+        }
 
         if (!isCircleSelected) {
             hexagonFirstCircle = SelectHexagonCircle(i);
-            if(i + 1 <= radius)
-            {
-                hexagonSecondCircle = SelectHexagonCircle(i+1);
-            }
-      //      Debug.Log("hexagonFirstCircle: " + hexagonFirstCircle.Count);
-      //      Debug.Log("hexagonSecondCircle: " + hexagonSecondCircle.Count);
             isCircleSelected = true;
         } 
-        if (timerPeriod[i] <= 0)
+
+        timerRiseTime[i] += Time.deltaTime;
+        offset[i] = CalculateOffset(i);
+        if (timerRiseTime[i] <= 2 * riseTime)
         {
-            timerRiseTime[i] += Time.deltaTime;
-            offset[i] = CalculateOffset(i);
-            if (timerRiseTime[i] <= 2 * riseTime)
-            {
-                RiseHexagons(i, hexagonFirstCircle);
+            RiseHexagons(i, hexagonFirstCircle);
 
-                if (timerRiseTime[i] > riseTime && i+1 <= radius)
-                {
-                    timerRiseTime[i+1] += Time.deltaTime;
-                    offset[i+1] = CalculateOffset(i+1);
-                    RiseHexagons(i+1, hexagonSecondCircle);
-                }
-            }
-            else
+            if (timerRiseTime[i] > riseTime && i + 1 <= radius)
             {
-                isCircleSelected = false;
-                offset[i] = 0;
-                timerRiseTime[i] = 0;
-                ResetHexagons(hexagonFirstCircle);
-                if (i + 1 > radius)
-                {
-                    timerPeriod[1] = period;
-                    circleRadius = 1;
-                }
-                else
-                {
-                    circleRadius++;
-                }
-
+                timerRiseTime[i + 1] += Time.deltaTime;
+                offset[i + 1] = CalculateOffset(i + 1);
+                hexagonSecondCircle = SelectHexagonCircle(i + 1);
+                RiseHexagons(i + 1, hexagonSecondCircle);
             }
-            
+            if (timerRiseTime[i] > 2*riseTime - scaleExternalCircleTime && i + 1 == expandedRadius)
+            {              
+                if (radius < matrixCoordinateCenter && timerScaleExternalCircleTime <= 0)
+                {
+                    radius = expandedRadius;
+                    timerScaleExternalCircleTime = scaleExternalCircleTime;
+                }
+            }  
         }
         else
         {
-            
-            timerPeriod[i] -= Time.deltaTime;
-            if (timerPeriod[i] < 0) {
-                timerPeriod[i] = 0;
+            isCircleSelected = false;
+            offset[i] = 0;
+            timerRiseTime[i] = 0;
+            ResetHexagons(hexagonFirstCircle);
+            if (i+1 > expandedRadius)
+            {
+                isExpanding = false;
+                isLockExpancion = false;
+                circleRadius = 1;        
             }
-        }
-        
+            else
+            {
+                circleRadius++;
+            }
+        }             
     }
+
     float CalculateOffset(int i)
     {
-      //    return Mathf.Sin(timerRiseTime[i] * 6 / riseTime);
         return Mathf.Sin(timerRiseTime[i] * Mathf.PI / riseTime - Mathf.PI / 2) * 0.5f + 0.5f;
     }
+
     List<Hexagon> SelectHexagonCircle(int circleRadius)
     {
         //if (circleRadius > radius) { return null; }
-        var hexagonCircle = new List<Hexagon>();
-        for (int j = 0; j <= circleRadius; j++)
+        List<Hexagon> hexagonCircle;
+        if (Circles[circleRadius] == null)
         {
-            hexagonCircle.Add(GetHexagon(circleRadius - j, j));
-            hexagonCircle.Add(GetHexagon(-circleRadius + j, -j));
-            if (j != 0) {
-                hexagonCircle.Add(GetHexagon(circleRadius, -j));
-                hexagonCircle.Add(GetHexagon(-circleRadius, j));
-                hexagonCircle.Add(GetHexagon(j, -circleRadius));
-                hexagonCircle.Add(GetHexagon(-j, circleRadius));
+         //   Debug.Log("Circle: "+ circleRadius);
+            hexagonCircle = new List<Hexagon>();
+            for (int j = 0; j <= circleRadius; j++)
+            {
+                hexagonCircle.Add(GetHexagon(circleRadius - j, j));
+                hexagonCircle.Add(GetHexagon(-circleRadius + j, -j));
+                if (j != 0)
+                {
+                    hexagonCircle.Add(GetHexagon(circleRadius, -j));
+                    hexagonCircle.Add(GetHexagon(-circleRadius, j));
+                    hexagonCircle.Add(GetHexagon(j, -circleRadius));
+                    hexagonCircle.Add(GetHexagon(-j, circleRadius));
+                }
             }
+            Circles[circleRadius] = hexagonCircle;
+        }
+        else {
+            return Circles[circleRadius];
         }
         return hexagonCircle;
     }
@@ -341,49 +399,18 @@ public class CreepHexagonGenerator : MonoBehaviour
     void RiseHexagon(int i, Hexagon hexagon)
     {
         //if (i > radius) { return; }
-        hexagon.hexagonGObject.transform.position = hexagon.originalPosition + Vector3.up * risingHeight * offset[i];
+        if (hexagon != null)
+        { hexagon.hexagonGObject.transform.position = hexagon.originalPosition + Vector3.up * risingHeight * offset[i]; }
     }
 
     void RiseHexagons(int i, List<Hexagon> hexagonCircle) {
         //if (i > radius) { return; }
         hexagonCircle.ForEach(hexagon => RiseHexagon(i, hexagon));
-      /*  foreach (Hexagon hexagon in hexagonCircle)
-        {
-            RiseHexagon(i, hexagon);
-        }*/
     }
 
     void ResetHexagons(List<Hexagon> hexagonCircle)
     {
         hexagonCircle.ForEach(hexagon => hexagon.ResetPosition());
-      /*  foreach (Hexagon hexagon in hexagonCircle)
-        {
-            hexagon.ResetPosition();
-        }*/
     }
 
-
-
-
-/*
-    void OnDrawGizmos()
-    {
-      //  Debug.Log("GetHexagon(0,0) : " + GetHexagon(0, 0));
-        Vector3[] vertices = null;
-        if (GetHexagon(0, 0) != null) {
-            vertices = GetHexagon(0, 0).hexagonGObject.GetComponent<MeshFilter>().mesh.vertices;
-         //   Debug.Log("vertices.Length : " + vertices.Length);
-            Gizmos.DrawSphere(vertices[0], .04f);
-        }
-        if (vertices == null)
-            return;
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            Gizmos.DrawSphere(vertices[i], .04f);
-          //        Gizmos.DrawIcon(vertices[i] + Vector3.up * 0.3f, "1", false);
-            Handles.Label(vertices[i] + Vector3.up * 0.4f, i.ToString());
-          //        Handles.DrawSphere(i,vertices[i], this.transform.rotation, .1f);
-        }
-    }
-*/
 }

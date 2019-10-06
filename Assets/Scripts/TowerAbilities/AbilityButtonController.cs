@@ -25,6 +25,7 @@ public abstract class AbilityButtonController : MonoBehaviour
     Animator aimAreaAnimator;
 
     Tower casterTower;
+    Tower previousHighlightedTower;
     float camRayLength = 90f;
     int groundMask;
     Vector3 mousePos;
@@ -67,7 +68,9 @@ public abstract class AbilityButtonController : MonoBehaviour
                     buttonImage.color = buttomTintRecharging;
                     timerCoolDown = coolDown;
                 //    timerCast = castTime;
-                    TowerManager.ClearSelection();
+                //    TowerManager.ClearHighlighting();
+                    casterTower.isHighlighted = false;
+                    previousHighlightedTower = null;
                     ///   casterTower.CastThanderBall(aimArea.position);
                     TowerCastAreaAbility(casterTower);
                     outLineImage.enabled = false;
@@ -97,6 +100,11 @@ public abstract class AbilityButtonController : MonoBehaviour
         RemoveAimArea();
         outLineImage.enabled = false;
         aimingAbility = null;
+        if (casterTower)
+        {
+            casterTower.isHighlighted = false;
+        }
+        previousHighlightedTower = null;
     }
     public void Activate()
     {
@@ -140,7 +148,7 @@ public abstract class AbilityButtonController : MonoBehaviour
             {
                 mousePos = floorHit.point;
                 aimArea.position = floorHit.point;
-                TowerManager.ClearSelection();
+            //    TowerManager.ClearHighlighting();
                 Tower nearestTower = TowerManager.GetNearestTower(aimArea, castTowerType);
                 if (castTowerType == TowerType.Electro)
                 {
@@ -151,10 +159,11 @@ public abstract class AbilityButtonController : MonoBehaviour
                     casterTower = (LaserTower)nearestTower;
                 }
                 
-                if (casterTower)
+                if (casterTower && casterTower != previousHighlightedTower)
                 {
-                    casterTower.isSelected = true;
-                 //   print("Aiming tower: " + casterTower);
+                    casterTower.isHighlighted = true;
+                    if (previousHighlightedTower) { previousHighlightedTower.isHighlighted = false; }
+                    previousHighlightedTower = casterTower;
                 }
 
             }
@@ -206,7 +215,17 @@ public abstract class AbilityButtonController : MonoBehaviour
 
     void ButtonAvailabilityControl()
     {
-        if (TowerManager.availableElectroTowers.Count == 0)
+        int availableTowersCount = 0;
+        if (castTowerType == TowerType.Electro)
+        {
+            availableTowersCount = TowerManager.availableElectroTowers.Count;
+        }
+        else if (castTowerType == TowerType.Laser)
+        {
+            availableTowersCount = TowerManager.availableLaserTowers.Count;
+        }
+
+        if (availableTowersCount == 0)
         {
             button.interactable = false;
         }

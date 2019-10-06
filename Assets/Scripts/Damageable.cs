@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public abstract class Damageable : MonoBehaviour
 {
 
-    [Range(10, 3000)]
+    [Range(10, 4000)]
     public int maxHealth = 100;
 
-    [Range(0, 3000)]
+    [Range(0, 4000)]
     public int health;
     int previousHealth = -1;
 
@@ -21,7 +21,7 @@ public abstract class Damageable : MonoBehaviour
     public short damagePointIndex = 0;
     // Vector3 capsuleCenter;
 
-    protected float healthRatio;
+    public float healthRatio;
 
     void Start()
     {
