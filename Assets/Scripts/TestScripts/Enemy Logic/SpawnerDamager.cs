@@ -46,7 +46,7 @@ public class SpawnerDamager : Enemy_Logic
             else
             {
                 readyToJump();
-                print("=");
+                //print("=");
             } 
         }
 
@@ -55,7 +55,7 @@ public class SpawnerDamager : Enemy_Logic
 
     void charging()
     {
-        print("+");
+        //print("+");
         chargeBar.fillAmount = realChargingTime / chargingTime;
         
         //cristalMaterial.color = new Color(255 - (100 / chargingTime * realChargingTime), 0 + (100 / chargingTime * realChargingTime), 0);
