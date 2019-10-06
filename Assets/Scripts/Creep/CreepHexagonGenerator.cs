@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+public enum HexCoordinatStatus {Void, Attend, Damaged };
+
 public class CreepHexagonGenerator : MonoBehaviour
 {
+    public static int creepLayer = 14;
+
     [Range(1,49)]
     public int radius = 3;
     public int coefficient = 1;
@@ -13,13 +17,17 @@ public class CreepHexagonGenerator : MonoBehaviour
     const int matrixDemension = 101;
     const int matrixCoordinateCenter = matrixDemension / 2;
     static GameObject hexagonPrefab = null;
-    Dictionary<GameObject, Hexagon> meshHexagonMap = new Dictionary<GameObject, Hexagon>();
-    static int[,] coordinates = new int[matrixDemension, matrixDemension];
+    public static Dictionary<GameObject, Hexagon> meshHexagonMap = new Dictionary<GameObject, Hexagon>();
+    static HexCoordinatStatus[,] coordinates = new HexCoordinatStatus[matrixDemension, matrixDemension];
     static Hexagon[,] hexagons = new Hexagon[matrixDemension, matrixDemension];
+
     static Vector3 hexaZ, hexaX;
+    public static List<Hexagon> damagedHexagons;
 
     //Animation Wave
     public bool isExpanding;
+    bool isExpandingFinished = true;
+    public bool isRepairing;
     public float riseTime = 0.8f;
     public float risingHeight = 0.5f;
     public float scaleExternalCircleTime = 0.3f;
@@ -34,6 +42,7 @@ public class CreepHexagonGenerator : MonoBehaviour
     List<Hexagon> hexagonSecondCircle = null;
     List<Hexagon> externalCircle = null;
     List<Hexagon>[] Circles = null;
+    
     void Start()
     {
 
@@ -42,6 +51,7 @@ public class CreepHexagonGenerator : MonoBehaviour
         hexaX = new Vector3(rightUpVertexDirection.x, 0, 0) * 2 * coefficient;
         Circles = new List<Hexagon>[matrixCoordinateCenter];
         timerRiseTime = new float[radius+1];
+        damagedHexagons = new List<Hexagon>();
      /*
         offset = new float[radius+1];
         
@@ -55,7 +65,7 @@ public class CreepHexagonGenerator : MonoBehaviour
   //  [System.Serializable]
     public class Hexagon 
     {
-        int coordinatHexaX, coordinatHexaZ;
+        public int coordinatHexaX, coordinatHexaZ;
         public Vector3 originalPosition;
         CreepHexagonGenerator parentCreep;
         public GameObject hexagonGObject;
@@ -133,11 +143,13 @@ public class CreepHexagonGenerator : MonoBehaviour
                 triangles[47] = 5;
 
                 UpdateHexagonMesh();
+                hexagonGObject.layer = creepLayer;
+                hexagonGObject.AddComponent<MeshCollider>();
             }
             else
             {
                 hexagonGObject = Instantiate(hexagonPrefab, hexaX * x + hexaZ * z, hexagonPrefab.transform.rotation);
-
+                
                 // place for landscape alinement!
                 /*
                 Mesh mesh = hexagonGObject.GetComponent<MeshFilter>().mesh;
@@ -149,9 +161,9 @@ public class CreepHexagonGenerator : MonoBehaviour
                */
             }
             
-            coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = 1;
+            coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = HexCoordinatStatus.Attend;
             hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = this;
-            parentCreep.meshHexagonMap.Add(hexagonGObject, this);
+            meshHexagonMap.Add(hexagonGObject, this);
 
             
             hexagonGObject.transform.SetParent(parentCreep.transform);
@@ -178,10 +190,27 @@ public class CreepHexagonGenerator : MonoBehaviour
 
         public void Delete()
         {
-            coordinates[coordinatHexaX + matrixCoordinateCenter, coordinatHexaZ + matrixCoordinateCenter] = 0;
+            coordinates[coordinatHexaX + matrixCoordinateCenter, coordinatHexaZ + matrixCoordinateCenter] = HexCoordinatStatus.Void;
             hexagons[coordinatHexaX + matrixCoordinateCenter, coordinatHexaZ + matrixCoordinateCenter] = null;
-            parentCreep.meshHexagonMap.Remove(hexagonGObject);
+            meshHexagonMap.Remove(hexagonGObject);
             Destroy(hexagonGObject);
+            if (damagedHexagons.Contains(this))
+            {
+                damagedHexagons.Remove(this);
+            }
+           // hexagonGObject.SetActive(false);
+        }
+
+        public void DamageHexagon()
+        {
+
+            int x = this.coordinatHexaX, z = this.coordinatHexaZ;
+            if (parentCreep.GetCoordinateStatus(x, z) == HexCoordinatStatus.Damaged)
+            { return; }
+            damagedHexagons.Add(this);
+            coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = HexCoordinatStatus.Damaged;
+            hexagonGObject.transform.localScale = Vector3.one * 0.4f;
+            // hexagon.Delete();
         }
 
         public void ResetPosition()
@@ -189,6 +218,15 @@ public class CreepHexagonGenerator : MonoBehaviour
             if (hexagonGObject)
             { hexagonGObject.transform.position = originalPosition; }
         }
+    }
+
+    void Update()
+    {
+
+        ExpandCreep();
+        UpdateCreep();
+        ScaleExternalCircle();
+        RepairHexagons();
     }
 
     public void CreateHexagon(int x, int z)
@@ -213,6 +251,12 @@ public class CreepHexagonGenerator : MonoBehaviour
     {
         return hexagons[x + matrixCoordinateCenter, z + matrixCoordinateCenter];
     }
+    HexCoordinatStatus GetCoordinateStatus(int x, int z)
+    {
+        return coordinates[x + matrixCoordinateCenter,z + matrixCoordinateCenter];
+    }
+
+
     void UpdateCreep()
     {
         if (previousRadius != radius)
@@ -252,14 +296,23 @@ public class CreepHexagonGenerator : MonoBehaviour
             externalCircle.ForEach(hexgon => 
             {
                 hexagonScale = (scaleExternalCircleTime - timerScaleExternalCircleTime) / scaleExternalCircleTime;
-                if (hexagonScale > 0.99f)
+                if (hexagonScale > 1)
                 {
                     hexagonScale = 1;
-                    externalCircle = null;
+                    
                 }
 
                 hexgon.hexagonGObject.transform.localScale = hexagonScale * Vector3.one;
             });
+            if (hexagonScale == 1)
+            {
+                externalCircle = null;
+                
+                if (!isExpandingFinished)
+                { isExpanding = true; }
+                
+            }
+            
         }
     }
     void ReduceSurface(){
@@ -287,7 +340,7 @@ public class CreepHexagonGenerator : MonoBehaviour
             GetHexagon(x, z).Delete();
         }
     }
-
+    /*
     void DeleteHexagon(GameObject hexagonGObject)
     {
         meshHexagonMap.TryGetValue(hexagonGObject, out Hexagon hexagon);
@@ -296,18 +349,44 @@ public class CreepHexagonGenerator : MonoBehaviour
             hexagon.Delete();
         }
     }
+    */
 
-    void Update()
+    public void RepairHexagons()
     {
-        MakeWave();
-        UpdateCreep();
-        ScaleExternalCircle();
+        if (!isRepairing)
+        { return; }
+        if (damagedHexagons.Count == 0)
+        { isRepairing = false; }
+        damagedHexagons.ForEach(hexagon =>
+        {
+            coordinates[hexagon.coordinatHexaX + matrixCoordinateCenter, hexagon.coordinatHexaZ + matrixCoordinateCenter] = HexCoordinatStatus.Attend;
+            // hexagon.hexagonGObject.transform.localScale =Vector3.one;
+            if (externalCircle == null)
+            {
+                externalCircle = new List<Hexagon>();
+                timerScaleExternalCircleTime = scaleExternalCircleTime;
+            }
+            externalCircle.Add(hexagon);
+        });
+        
+        damagedHexagons.Clear();
+      //  isRepairing = false;
     }
 
-    void MakeWave()
+
+
+
+    void ExpandCreep()
     {
         if (!isExpanding)
-        { return; }
+        { return;}
+
+        if (damagedHexagons.Count > 0)
+        {
+            isExpanding = false;
+            return;
+        }else
+        { isExpandingFinished = false;}
 
         int i = circleRadius;
 
@@ -341,6 +420,7 @@ public class CreepHexagonGenerator : MonoBehaviour
                 {
                     radius = expandedRadius;
                     timerScaleExternalCircleTime = scaleExternalCircleTime;
+                    
                 }
             }  
         }
@@ -353,6 +433,7 @@ public class CreepHexagonGenerator : MonoBehaviour
             if (i+1 > expandedRadius)
             {
                 isExpanding = false;
+                isExpandingFinished = true;
                 isLockExpancion = false;
                 circleRadius = 1;        
             }
