@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class Terraformer : Tower
 {
-    public override void EndCasting()
+    new void Start()
     {
-        throw new System.NotImplementedException();
+        TowerManager.terraformer = this;
+    }
+
+    void Update()
+    {
+
     }
 
     public override void TowerAttack(Enemy target)
     {
-        //throw new System.NotImplementedException();
+
     }
 
     internal override void TowerUpdate()
     {
-        //throw new System.NotImplementedException();
+        
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void EndCasting()
     {
-        TowerManager.terraformer = this;
-        base.Start();
+
     }
 }
