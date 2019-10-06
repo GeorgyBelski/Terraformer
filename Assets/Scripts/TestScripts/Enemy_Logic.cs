@@ -3,92 +3,83 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Logic : MonoBehaviour
+public enum TypeOfEnemy { Damager, Tank, Saboteur };
+
+public abstract class Enemy_Logic : MonoBehaviour
 {
+    [Header("Enemy Controllers")]
     public Animator animator;
-    private EnemyMouseController emk;
-    private Enemy enem;
-    private Vector3? destTower = null;
-    private Vector3? destHel = null;
-    private Tower targetTower;
-    private bool isGoingToDist = false;
-    private bool isStand = true;
-    private bool isGiveUp = false;
-    private bool isAttack = false;
+    public EnemyMouseController emk;
+    public Enemy enem;
+    //public NavMeshAgent navAgent;
 
-    private bool isRush = false;
+    [Header("Priority Check Timer")]
+    public float checkTime = 0.5f;
 
-    
-    private float checkTime = 0.5f;//change!!!!!!!!!!!!!!!!!!!!!
-    private float realcheckTime;//change!!!!!!!!!!!!!!!!!!!!!
-    private float brawe = 0; //= Random.RandomRange(0.1f, 0.7f);
-    private float min;
+
+    protected Vector3? destTower = null;
+    protected Vector3? destHel = null;
+    protected Tower targetTower;
+
+    public bool isGoingToDest = false;
+    protected bool isStand = true;
+    protected bool isGiveUp = false;
+    protected bool isAttack = false;
+
+    protected bool isRush = false;
+
+
+
+    protected float realcheckTime;//change!!!!!!!!!!!!!!!!!!!!!
+    protected float brawe = 0; //= Random.RandomRange(0.1f, 0.7f);
+    protected float min;
+    protected float tempNavAgentSpeed;
 
     public bool IsAttack { get => isAttack; set { isAttack = value; animator.SetBool("Attack", value); } }
 
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
+       
         brawe = Random.Range(0.1f, 0.7f);
         realcheckTime = checkTime;
-        emk = GetComponent<EnemyMouseController>();
-        enem = GetComponent<Enemy>();
-     //   EnemyManagerPro.AddEnemy(enem);
-        //float min;
-
+        tempNavAgentSpeed = emk.agent.speed;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
+        //print("+");
 
         realcheckTime -= Time.deltaTime;
         if(realcheckTime <= 0)
         {
-            //print(isAttack);
             realcheckTime = checkTime;
-            
             check();
-            
         }
-        //print(emk.agent.remainingDistance < emk.agent.stoppingDistance);
-        //print(Vector3.Distance(destTower.position, transform.position));
         if (isStand)
         {
             check();
-            //isStand = false;
-            //isGiveUp = false;
-            //state_Attack();
- 
         }
 
-        if (isGoingToDist)
+        if (isGoingToDest)
         {
-            //print(Vector3.Distance(destTower.position, transform.position));
-            //print(emk.agent.remainingDistance);
             if (Vector3.Distance((Vector3)destTower, transform.position) < 5 && emk.agent.remainingDistance < emk.agent.stoppingDistance)
             {
-                isGoingToDist = false;
+                isGoingToDest = false;
                 IsAttack = true;
                 stateAttack();
             }
         }
-        
-        //if (isGiveUp == true)
-        //{
-        //   state_Attack();
-
-        //}
-        //Debug.Log(enem.GetHealthRatio());
     }
 
-    void stateAttack()
+    protected void stateAttack()
     {
         //Debug.Log(isAttack + " " + destTower + "ATAKING");
     }
 
-    void stateGoToDestanation()
+    protected void stateGoToDestanation()
     {
         if (TowerManager.towers.Count > 0)
         {
@@ -115,15 +106,30 @@ public class Enemy_Logic : MonoBehaviour
             destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
          //   destTower.position = targetTower.transform.position - fromTargetTowerToEnemy.normalized;
             emk.SetDest((Vector3)destTower);
-            isGoingToDist = true;
+            isGoingToDest = true;
             //isAttack = true;
+            
         }
         else
         {
             isStand = true;
         }
     }
-    void stateGiveUp()
+
+    protected void stateGoToDestanation(TowerType destTowerType) 
+    {
+        
+        Vector3 fromTargetTowerToEnemy;
+        targetTower = TowerManager.GetNearestTower(this.transform, destTowerType);
+        fromTargetTowerToEnemy = transform.position - targetTower.transform.position;
+        destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
+        emk.SetDest((Vector3)destTower);
+        isGoingToDest = true;
+        print(destTower);
+
+    }
+
+    protected void stateGiveUp()
     {
         if(EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0)
         {
@@ -158,27 +164,47 @@ public class Enemy_Logic : MonoBehaviour
         return IsAttack;
     }
     */
-    public void Attack() {
-        if (targetTower) { 
-            targetTower.towerHealth.ApplyDamage(40, Vector3.zero, Vector3.zero);
-        }
-    }
 
-    public void check()
+
+
+    public abstract void Attack();
+    //{
+    //targetTower.towerHealth.ApplyDamage(damage, Vector3.zero, Vector3.zero);
+    //}
+
+    /// <summary>
+    /// /////////////////////////////////SQUADS
+    /// </summary>
+
+   
+
+/// <summary>
+/// /////////////////////////////////SQUADS
+/// </summary>
+
+    public virtual void check()
     {
-        
+        //print("+");
+        //print("+");
+        //print(-1);
         float heals = enem.GetHealthRatio();
         //Debug.Log(heals + " " + brawe);
-        if((heals - brawe) <= 0 && heals != 0) //Логика состояний
+        if ((heals - brawe) <= 0 && heals != 0) //Логика состояний
         {
             if(EnemyManagerPro.enemiesMap.ContainsKey(EnemyType.Healer) && EnemyManagerPro.enemiesMap[EnemyType.Healer].Count > 0) { 
                 //Debug.Log("checking");
                 isStand = false;
-                isGoingToDist = false;
+                isGoingToDest = false;
                 IsAttack = false;
                 //state_Attack();
                 stateGiveUp();
                 isGiveUp = true;
+            }
+            else
+            {
+                isStand = false;
+                isGiveUp = false;
+                stateGoToDestanation();
             }
 
         }
@@ -186,7 +212,7 @@ public class Enemy_Logic : MonoBehaviour
         {
             if (isGiveUp)
             {
-                if(heals > 0.5 + brawe/2)
+                if(heals > 0.5 + brawe/2 || EnemyManagerPro.enemiesMap[EnemyType.Healer].Count == 0)
                 {
                     isStand = false;
                     isGiveUp = false;

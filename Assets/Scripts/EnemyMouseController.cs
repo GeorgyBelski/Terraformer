@@ -57,6 +57,11 @@ public class EnemyMouseController : MonoBehaviour
         agent.SetDestination(posicion);
     }
 
+    public Vector3 GetDest()
+    {
+        return agent.destination;
+    }
+
 
 
 }
