@@ -13,6 +13,7 @@ public class Enemy : Damageable
     public EnemyEffectsController effectsController;
     public EnemyType type;
     public Animator animator;
+    public SpurtFXController spurtFXController;
     /*
    [Range(10, 1000)]
    public int maxHealth = 100;
@@ -67,6 +68,8 @@ public class Enemy : Damageable
     public void DestroyUnit()
     {
         Destroy(this.gameObject);
+        if (spurtFXController)
+        { spurtFXController.Destroy(); }
     }
 
     /*

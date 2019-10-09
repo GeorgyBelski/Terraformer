@@ -9,5 +9,6 @@ public class SpurtWaveDeactivator : MonoBehaviour
     public void StopShowSpurtWave()
     {
         animator.SetBool("show", false);
+        this.gameObject.SetActive(false);
     }
 }

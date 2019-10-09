@@ -39,6 +39,7 @@ public abstract class Tower : MonoBehaviour
 
     int targetIndex = -1;
     LineRenderer rangeline;
+    Vector3 previousPosition;
     Material towerMaterial;
     Color highlightedColor;
 
@@ -211,7 +212,7 @@ public abstract class Tower : MonoBehaviour
     }
     void ShowRange()
     {
-        if (previousRange != range)
+        if (previousRange != range || previousPosition != transform.position)
         {
             Vector3 compass = range * Vector3.forward;
             for (int i = 0; i < 72; i++)
@@ -222,6 +223,7 @@ public abstract class Tower : MonoBehaviour
                 compass = Quaternion.AngleAxis(5, Vector3.up) * compass;//  —\|/—\|/ rotate the radius vector around planeNormal axis on 10 degrees.
             }
             previousRange = range;
+            previousPosition = transform.position;
         }
 
         if (isSelected)
