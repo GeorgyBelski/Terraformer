@@ -69,7 +69,7 @@ public class LeaderOfSqad : Enemy_Logic
 
 
         //print(disabledEnemyLogic.isGoingToDest);
-        if(Vector3.Distance(transform.position, emk.GetDest()) < 1 && isLeader && disabledEnemyLogic.isGoingToDest)
+        if(Vector3.Distance(transform.position, emk.GetDest()) < 2 && isLeader && disabledEnemyLogic.isGoingToDest)
         {
             isLeader = false;
             check();
@@ -88,14 +88,16 @@ public class LeaderOfSqad : Enemy_Logic
         {
             //print("+");
             disabledEnemyLogic.enabled = true;
-            this.enabled = false;
-            Destroy(this);
+            
+            
             for (int i = 0; i < Squad.Count; i++)
             {
                 Squad[i].cancelSquad();
             }
             isLeader = false;
             Squad = null;
+            this.enabled = false;
+            Destroy(this);
         }
 
         disabledEnemyLogic.check();
