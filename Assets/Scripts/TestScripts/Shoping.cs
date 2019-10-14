@@ -12,12 +12,18 @@ public class Shoping : MonoBehaviour
 
     [Header("Towers Prefabs")]
     public GameObject electroTower;
+    public float electroTowerPrice;
     public GameObject lazerTower;
+    public float lazerTowerPrice;
+
+    public Text uiElectroTowerPrice;
+    public Text uiLazerTowerPrice;
 
     [Header("Buttons")]
     public List<Button> buttons;
 
     float camRayLength = 60f;
+    public ResourceManager resManager;
     public int floorMask;
 
 
@@ -26,6 +32,7 @@ public class Shoping : MonoBehaviour
     private bool isPlacing = false;
     private GameObject realTimeTowerPlace;
     private GameObject selectedTower;
+    private float currPrice;
 
     private ColorBlock defaultColor;
     private Button bSelected;
@@ -35,6 +42,8 @@ public class Shoping : MonoBehaviour
 
     void Start()
     {
+        uiElectroTowerPrice.text = electroTowerPrice.ToString();
+        uiLazerTowerPrice.text = lazerTowerPrice.ToString();
         floorMask = LayerMask.GetMask("Ground");
         //defaultColor = 
         selectedTowerColor = Color.green;
@@ -47,6 +56,7 @@ public class Shoping : MonoBehaviour
 
         isPlacing = true;
         selectedTower = electroTower;
+        currPrice = electroTowerPrice;
         selectB(b);
         realTimeTowerPlace = Instantiate(towerPlace, Vector3.zero, this.transform.rotation);
         mt = realTimeTowerPlace.gameObject.GetComponent<Renderer>().material;
@@ -59,6 +69,7 @@ public class Shoping : MonoBehaviour
 
         isPlacing = true;
         selectedTower = lazerTower;
+        currPrice = lazerTowerPrice;
         selectB(b);
         realTimeTowerPlace = Instantiate(towerPlace, Vector3.zero, this.transform.rotation);
         mt = realTimeTowerPlace.gameObject.GetComponent<Renderer>().material;
@@ -107,37 +118,21 @@ public class Shoping : MonoBehaviour
             {
 
                 realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y + realTimeTowerPlace.transform.localScale.y - 0.3f, System.Convert.ToInt32(floorHit.point.z));
-                if (realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower)
+                if (realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower || resManager.resource < currPrice)
                 {
-                    // = new Material();//.SetColor(Color.red);
                     mt.color = new Color(1, 0, 0, 0.5f);
-                    //mt.color.a = 100;
-
-
                 }
                 else
                 {
                     mt.color = new Color(0, 1, 0, 0.5f);
                 }
-                //Debug.Log(Input.GetMouseButtonDown(0));
-
-                /* Vector3 playerToMouse = floorHit.point - transform.position;
-                   playerToMouse.y = 0f;
-
-                   Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-                   rb.MoveRotation(newRotation);
-                */
-                //transform.LookAt(new Vector3(floorHit.point.x, transform.position.y, floorHit.point.z));
-                if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower)
+               
+                if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower && resManager.resource >= currPrice)
                 {
+                    resManager.removeResource(currPrice);
                     placeTower();
-                    //Instantiate(electroTower, realTimeTowerPlace.transform.position, realTimeTowerPlace.transform.rotation);
-                    //Destroy(realTimeTowerPlace);
-                    //agent.
-                    //isPlacing = false;
                     isPlacing = false;
                     selectB(bSelected);
-                    //SelectElectroTower(bSelected);
                 }
             }
         }
