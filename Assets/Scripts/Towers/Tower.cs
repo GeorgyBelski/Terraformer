@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TowerType { Electro, Laser, Terraformerw };
 
@@ -37,6 +38,10 @@ public abstract class Tower : MonoBehaviour
     public TowerHealth towerHealth;
     public Enemy target;
 
+    [Header("Symbiosis")]
+    public Tower symbiosisTower;
+    public Button symbiosisButton;
+
     int targetIndex = -1;
     LineRenderer rangeline;
     Vector3 previousPosition;
@@ -46,6 +51,7 @@ public abstract class Tower : MonoBehaviour
     protected void Start()
     {
         TowerManager.AddTower(this);
+        TowerManager.transformTowerMap.Add(this.transform, this);
         rangeline = gameObject.GetComponent<LineRenderer>();
         if (!rangeline) { 
             rangeline = gameObject.AddComponent<LineRenderer>();
@@ -249,5 +255,21 @@ public abstract class Tower : MonoBehaviour
         {
             towerMaterial.SetColor("Color_19495AAD", Color.black);
         }
+    }
+
+    public void SetSymbiosis(Tower partner)
+    {
+        symbiosisTower = partner;
+        partner.symbiosisTower = this;   
+    }
+
+    public void BreakSymbiosis()
+    {
+        if (symbiosisTower)
+        {
+            symbiosisTower.symbiosisTower = null;
+            symbiosisTower = null;
+        }
+        
     }
 }

@@ -21,6 +21,9 @@ public class TowerMenuController : MonoBehaviour
     public Button HardyButton;
     public Button previousSelectedTargetingButton;
 
+    [Header("Symbiosis Buttons")]
+    public Button SymbiosisButton;
+
     void Start()
     {
         material = GetComponent<MeshRenderer>().material;
@@ -38,14 +41,6 @@ public class TowerMenuController : MonoBehaviour
         if ((tower.isSelected && !TowerMenu.IsActive()) ||(!tower.isSelected && TowerMenu.IsActive()))
         {
             TowerMenu.gameObject.SetActive(tower.isSelected);
-        /*    if (tower.isSelected)
-            {
-                material.SetColor("Color_19495AAD", Color.yellow);
-            }
-            else
-            {
-                material.SetColor("Color_19495AAD", Color.black);
-            }*/
         }
     }
 
@@ -65,6 +60,19 @@ public class TowerMenuController : MonoBehaviour
         }
         else {
             tower.targetingType = TargetingType.MostHardy;
+        }
+    }
+
+    public void SymbiosisClickButton(Button clickedButton)
+    {
+        if (!tower.symbiosisTower)
+        {
+            TowerManager.towerLookingForSymbiosisPartner = tower;
+            Debug.Log("TowerManager.towerLookingForSymbiosisPartner = " + tower);
+        }
+        else
+        {
+
         }
     }
 
