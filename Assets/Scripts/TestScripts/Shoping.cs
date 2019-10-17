@@ -23,7 +23,7 @@ public class Shoping : MonoBehaviour
     public List<Button> buttons;
 
     float camRayLength = 60f;
-    public ResourceManager resManager;
+    //public ResourceManager resManager;
     public int floorMask;
 
 
@@ -118,7 +118,7 @@ public class Shoping : MonoBehaviour
             {
 
                 realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y + realTimeTowerPlace.transform.localScale.y - 0.3f, System.Convert.ToInt32(floorHit.point.z));
-                if (realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower || resManager.resource < currPrice)
+                if (realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower || ResourceManager.resourceST < currPrice)
                 {
                     mt.color = new Color(1, 0, 0, 0.5f);
                 }
@@ -127,9 +127,9 @@ public class Shoping : MonoBehaviour
                     mt.color = new Color(0, 1, 0, 0.5f);
                 }
                
-                if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower && resManager.resource >= currPrice)
+                if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower && ResourceManager.resourceST >= currPrice)
                 {
-                    resManager.removeResource(currPrice);
+                    ResourceManager.removeResource(currPrice);
                     placeTower();
                     isPlacing = false;
                     selectB(bSelected);

@@ -33,6 +33,26 @@ public abstract class Damageable : MonoBehaviour
         CalcHealthRatio();
     }
 
+    public void Repair()
+    {
+        float repaircost = ResourceManager.RepairCost;
+        float resourses = ResourceManager.resourceST;
+        float value = 1 - healthRatio;
+        if (resourses > 100 * value * repaircost)
+        {
+            health = maxHealth;
+            ResourceManager.removeResource(100 * value * repaircost);
+            //CalcHealthRatio();
+        }
+        else
+        {
+            healthRatio = resourses * repaircost / 100;
+            CalcHealthRatio();
+            ResourceManager.removeResource(resourses);
+        }
+            //(int)((healthRatio + value) * maxHealth);
+    }
+
     public void ApplyDamage(int value, Vector3 shootPoint, Vector3 direction)
     {
         if (health > 0)

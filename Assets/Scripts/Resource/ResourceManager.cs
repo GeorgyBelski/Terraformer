@@ -5,65 +5,66 @@ using UnityEngine.UI;
 
 public class ResourceManager : MonoBehaviour
 {
+    [Header("Resourses")]
     public float resource;
     public float resourceMax = 10000;
 
+    [Header("HUD")]
     public Text resourceCounter;
+    public Image resourcefiller;
+    public Image incomefiller;
 
+    public static float resourceST;
+    public static float resourceMaxST;
 
-    public Image resourcefiller
-    {
-        get { return resourcefiller2; }
-        set { resourcefiller2 = value; }
-    }
-
-//        {
-//        get => resourcefiller2;
-//        set => resourcefiller2 = value;
-//    }
-
-    public static Image resourcefiller2;
-
-    public Image incomefiller
-    {
-        get => incomeFilerST;
-        set => incomeFilerST = value;
-    }
-
+    public static Text resourceCounterST;
+    public static Image resourcefillerST;
     public static Image incomeFilerST;
-    private static float income;
 
+    public static float RepairCost = 0.5f;
+    
 
-
+    //private static float income;
+    //        {
+    //        get => resourcefiller2;
+    //        set => resourcefiller2 = value;
+    //    }
     void Start()
     {
+        resourceST = resource;
+        resourceMaxST = resourceMax;
+
+        resourceCounterST = resourceCounter;
+        resourcefillerST = resourcefiller;
+        incomeFilerST = incomefiller;
+
         fillResourceFiller();
         resourceCounter.text = resource.ToString();
         incomefiller.fillAmount = 0;
     }
 
-    public void addResource(float count)
+    public static void addResource(float count)
     {
-        resource += count;
-        if (resource > resourceMax)
-            resource = resourceMax;
+        resourceST += count;
+        if (resourceST > resourceMaxST)
+            resourceST = resourceMaxST;
         fillResourceFiller();
     }
 
-    public void removeResource(float count)
+    public static void removeResource(float count)
     {
-        if (resource - count < 0)
+        if (resourceST - count < 0)
             return;
 
-        resource -= count;
+        resourceST -= count;
         fillResourceFiller();
     }
 
-    private void fillResourceFiller()
+    private static void fillResourceFiller()
     {
         //print("+");
-        resourcefiller2.fillAmount = resource / resourceMax;
-        resourceCounter.text = resource.ToString();
+        resourcefillerST.fillAmount = resourceST / resourceMaxST;
+        resourceCounterST.text = resourceST.ToString();
     }
 
     private static void fillIncomeFiller()
