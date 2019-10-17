@@ -40,7 +40,8 @@ public abstract class Tower : MonoBehaviour
 
     [Header("Symbiosis")]
     public Tower symbiosisTower;
-    public Button symbiosisButton;
+    public TowerMenuController towerMenuController;
+    public bool isSymbiosisInstalled =false;
 
     int targetIndex = -1;
     LineRenderer rangeline;
@@ -260,13 +261,20 @@ public abstract class Tower : MonoBehaviour
     public void SetSymbiosis(Tower partner)
     {
         symbiosisTower = partner;
-        partner.symbiosisTower = this;   
+        partner.symbiosisTower = this;
+        towerMenuController.StartInstallingSymbiosis();
     }
 
     public void BreakSymbiosis()
     {
         if (symbiosisTower)
         {
+            isSymbiosisInstalled = false;
+            symbiosisTower.isSymbiosisInstalled = false;
+
+            symbiosisTower.towerMenuController.ResetSymbiosisCircleBar().ResetSymbiosisTimers();
+            towerMenuController.ResetSymbiosisCircleBar().ResetSymbiosisTimers();
+
             symbiosisTower.symbiosisTower = null;
             symbiosisTower = null;
         }

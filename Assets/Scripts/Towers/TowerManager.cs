@@ -119,6 +119,12 @@ public class TowerManager : MonoBehaviour
 
     public void LookingForSymbiosis()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            towerLookingForSymbiosisPartner = null;
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+            highlightedTower = null;
+        }
         if (!towerLookingForSymbiosisPartner)
         {
             return;
