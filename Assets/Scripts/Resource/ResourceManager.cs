@@ -21,7 +21,7 @@ public class ResourceManager : MonoBehaviour
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 
-    public static float RepairCost = 0.5f;
+    public static float RepairCost = 1f;
     
 
     //private static float income;
