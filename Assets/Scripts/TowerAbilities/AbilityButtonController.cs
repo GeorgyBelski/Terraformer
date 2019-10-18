@@ -150,8 +150,9 @@ public abstract class AbilityButtonController : MonoBehaviour
                 aimArea.position = floorHit.point;
             //    TowerManager.ClearHighlighting();
                 Tower nearestTower = TowerManager.GetNearestTower(aimArea, castTowerType);
-                if (nearestTower == null) { Cancel(); }
-                if (nearestTower == previousHighlightedTower)
+                if (nearestTower == null)
+                { Cancel(); }
+                else if (nearestTower == previousHighlightedTower)
                 { return; }
                 if (castTowerType == TowerType.Electro)
                 {
