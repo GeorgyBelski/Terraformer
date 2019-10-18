@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TowerType { Electro, Laser, Terraformerw };
 
@@ -37,14 +38,21 @@ public abstract class Tower : MonoBehaviour
     public TowerHealth towerHealth;
     public Enemy target;
 
+    [Header("Symbiosis")]
+    public Tower symbiosisTower;
+    public TowerMenuController towerMenuController;
+    public bool isSymbiosisInstalled =false;
+
     int targetIndex = -1;
     LineRenderer rangeline;
+    Vector3 previousPosition;
     Material towerMaterial;
     Color highlightedColor;
 
     protected void Start()
     {
         TowerManager.AddTower(this);
+        TowerManager.transformTowerMap.Add(this.transform, this);
         rangeline = gameObject.GetComponent<LineRenderer>();
         if (!rangeline) { 
             rangeline = gameObject.AddComponent<LineRenderer>();
@@ -192,7 +200,7 @@ public abstract class Tower : MonoBehaviour
         cannon.LookAt(targetPosition);
     }
     public abstract void TowerAttack(Enemy target);
-
+/*
     private void OnDrawGizmos()
     {
         // link to enemy
@@ -208,10 +216,10 @@ public abstract class Tower : MonoBehaviour
         //    else { Gizmos.color = Color.gray;}   
         }
 
-    }
+    }*/
     void ShowRange()
     {
-        if (previousRange != range)
+        if (previousRange != range || previousPosition != transform.position)
         {
             Vector3 compass = range * Vector3.forward;
             for (int i = 0; i < 72; i++)
@@ -222,6 +230,7 @@ public abstract class Tower : MonoBehaviour
                 compass = Quaternion.AngleAxis(5, Vector3.up) * compass;//  —\|/—\|/ rotate the radius vector around planeNormal axis on 10 degrees.
             }
             previousRange = range;
+            previousPosition = transform.position;
         }
 
         if (isSelected)
@@ -247,5 +256,31 @@ public abstract class Tower : MonoBehaviour
         {
             towerMaterial.SetColor("Color_19495AAD", Color.black);
         }
+    }
+
+    public void SetSymbiosis(Tower partner)
+    {
+        symbiosisTower = partner;
+        partner.symbiosisTower = this;
+        towerMenuController.StartInstallingSymbiosis();
+    }
+
+    public void BreakSymbiosis()
+    {
+        if (symbiosisTower)
+        {
+            isSymbiosisInstalled = false;
+            symbiosisTower.isSymbiosisInstalled = false;
+
+            symbiosisTower.towerMenuController.ResetSymbiosisCircleBar().ResetSymbiosisTimers();
+            towerMenuController.ResetSymbiosisCircleBar().ResetSymbiosisTimers();
+
+            TowerManager.symbiosisTowers.Remove(this);
+            TowerManager.symbiosisTowers.Remove(symbiosisTower);
+
+            symbiosisTower.symbiosisTower = null;
+            symbiosisTower = null;
+        }
+        
     }
 }

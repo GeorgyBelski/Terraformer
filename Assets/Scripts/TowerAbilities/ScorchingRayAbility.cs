@@ -103,12 +103,14 @@ public class ScorchingRayAbility : TowerAbility
     {
         EnemyManagerPro.enemies.ForEach(enemy =>
         {
-            Vector3 distanceToEnemy = enemy.transform.position - aim;
-            if (distanceToEnemy.magnitude <= effectRadius)
-            {
-                enemy.effectsController.AddBurning(((LaserTower)tower).damageBurning);
-                targets.Add(enemy);
-            }
+            if (enemy)
+                { Vector3 distanceToEnemy = enemy.transform.position - aim;
+                if (distanceToEnemy.magnitude <= effectRadius)
+                {
+                    enemy.effectsController.AddBurning(((LaserTower)tower).damageBurning);
+                    targets.Add(enemy);
+                }
+            }    
         });
         ApplyDamageToTargets(targets, damage);
     }
