@@ -59,7 +59,7 @@ public class EnemyManagerPro : MonoBehaviour
 
     public static bool checking(Enemy enem)
     {
-        if (enemies.Exists(e => e.Equals(enem)))
+        if (enem!= null && enemies.Exists(e => e.Equals(enem)))
         {
             return true;
         }
