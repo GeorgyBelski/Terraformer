@@ -37,7 +37,7 @@ public class TowerMenuController : MonoBehaviour
 
     void Start()
     {
-        material = tower.gameObject.GetComponent<MeshRenderer>().material;
+      //  material = GetComponent<MeshRenderer>().material;
         previousSelectedTargetingButton = NearestButton;
         ClickButton(NearestButton);
         symbiosisCircleBar.fillAmount = 0;
