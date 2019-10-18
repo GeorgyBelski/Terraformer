@@ -93,7 +93,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_DD897F7A: {r: 1.3830544, g: 2.6466532, b: 2.7924528, a: 1}
+    - Color_CADFE401: {r: 0.3218227, g: 0.47199646, b: 0.6037736, a: 1}
+    - Color_DD897F7A: {r: 1.3889165, g: 2.792453, b: 2.6044798, a: 1}
     - Vector2_DF677674: {r: 0, g: 0.4, b: 0, a: 0}
     - Vector2_FE921CD6: {r: 0, g: 0.2, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

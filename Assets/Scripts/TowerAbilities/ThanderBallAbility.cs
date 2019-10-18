@@ -129,11 +129,14 @@ public class ThanderBallAbility : TowerAbility
 */
         EnemyManagerPro.enemies.ForEach(enemy =>
         {
-            Vector3 distanceToEnemy = enemy.transform.position - center;
-            if (distanceToEnemy.magnitude <= radius)
+            if (enemy)
             {
-                enemy.effectsController.AddStun(2);
-                thanderBallTargets.Add(enemy);
+                Vector3 distanceToEnemy = enemy.transform.position - center;
+                if (distanceToEnemy.magnitude <= radius)
+                {
+                    enemy.effectsController.AddStun(2);
+                    thanderBallTargets.Add(enemy);
+                }
             }
         });
 

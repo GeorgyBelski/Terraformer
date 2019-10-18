@@ -13,19 +13,25 @@ public class TowerManager : MonoBehaviour
     public static List<LaserTower> availableLaserTowers = new List<LaserTower>();
 
     public static float selectedTowerRange = 1.5f;
+    public static Dictionary<Transform, Tower> transformTowerMap = new Dictionary<Transform, Tower>();
+    public static HashSet<Tower> symbiosisTowers = new HashSet<Tower>();
 
     int towerEnemyLayerMask = (1 << 13 | 1 << 12);
     int towerLayer = 13;
     public static Tower selectedTower;
-
+    public static Tower highlightedTower;
+    public static Tower towerLookingForSymbiosisPartner;
 
     private void Start()
     {
 
     }
-
-    void LateUpdate() {
-        //   TowerCount = towers.Count;
+    private void FixedUpdate()
+    {
+        LookingForSymbiosis();
+    }
+    void LateUpdate()
+    {
         SelectTower();
     }
 
@@ -44,6 +50,7 @@ public class TowerManager : MonoBehaviour
 
     public static void RemoveTower(Tower tower) {
         towers.Remove(tower);
+        transformTowerMap.Remove(tower.transform);
         if (tower.type == TowerType.Electro)
         {
             availableElectroTowers.Remove((ElectroTower)tower);
@@ -96,8 +103,10 @@ public class TowerManager : MonoBehaviour
                 {
                     if (selectedTower){selectedTower.isSelected = false; }
 
-                    selectedTower = hit.transform.gameObject.GetComponent<Tower>();
-                    selectedTower.isSelected = true;
+                    //   selectedTower = hit.transform.gameObject.GetComponent<Tower>();
+                    transformTowerMap.TryGetValue(hit.transform, out selectedTower);
+                    if (selectedTower)
+                    { selectedTower.isSelected = true; }
                 }
                 
             }
@@ -107,5 +116,49 @@ public class TowerManager : MonoBehaviour
         {
             if (selectedTower) { selectedTower.isSelected = false; }
         }
+    }
+
+    public void LookingForSymbiosis()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            towerLookingForSymbiosisPartner = null;
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+            highlightedTower = null;
+        }
+        if (!towerLookingForSymbiosisPartner)
+        {
+            return;
+        }
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 100f, towerEnemyLayerMask))
+        {
+            if (hit.transform.gameObject.layer == towerLayer)
+            {
+                if (highlightedTower) { highlightedTower.isHighlighted = false; }
+
+                //   selectedTower = hit.transform.gameObject.GetComponent<Tower>();
+                transformTowerMap.TryGetValue(hit.transform, out highlightedTower);
+                if (highlightedTower && highlightedTower!= towerLookingForSymbiosisPartner && !symbiosisTowers.Contains(highlightedTower))
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        highlightedTower.isHighlighted = false;
+                        towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
+                        symbiosisTowers.Add(highlightedTower);
+                        symbiosisTowers.Add(towerLookingForSymbiosisPartner);
+                        towerLookingForSymbiosisPartner = null;
+                    }
+                    else
+                    {
+                        highlightedTower.isHighlighted = true;
+                    }
+                }
+            }
+
+        }
+        
     }
 }
