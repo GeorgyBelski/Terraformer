@@ -43,7 +43,6 @@ public abstract class Damageable : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            RemoveFromList();
             ApplyDeath();
         }
     }

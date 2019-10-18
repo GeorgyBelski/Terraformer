@@ -200,7 +200,7 @@ public abstract class Tower : MonoBehaviour
         cannon.LookAt(targetPosition);
     }
     public abstract void TowerAttack(Enemy target);
-
+/*
     private void OnDrawGizmos()
     {
         // link to enemy
@@ -216,7 +216,7 @@ public abstract class Tower : MonoBehaviour
         //    else { Gizmos.color = Color.gray;}   
         }
 
-    }
+    }*/
     void ShowRange()
     {
         if (previousRange != range || previousPosition != transform.position)
@@ -274,6 +274,9 @@ public abstract class Tower : MonoBehaviour
 
             symbiosisTower.towerMenuController.ResetSymbiosisCircleBar().ResetSymbiosisTimers();
             towerMenuController.ResetSymbiosisCircleBar().ResetSymbiosisTimers();
+
+            TowerManager.symbiosisTowers.Remove(this);
+            TowerManager.symbiosisTowers.Remove(symbiosisTower);
 
             symbiosisTower.symbiosisTower = null;
             symbiosisTower = null;

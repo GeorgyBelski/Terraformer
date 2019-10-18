@@ -29,13 +29,9 @@ public class TowerHealth : Damageable
     public override void ApplyDeath()
     {
         thisTower.BreakSymbiosis();
-        //RemoveFromList();
+        RemoveFromList();
         //Destroy(thisTowet.gameObject);
 
-        Material mt = thisTower.gameObject.GetComponent<Renderer>().material;//.SetColor(Color.gray);
-        //thisTowet.GetComponent<Material>
-        mt.color = Color.gray;
-        thisTower.gizmoMaterial.color = Color.gray;
         thisTower.cooldownAttack = float.PositiveInfinity;
         thisTower.timerAttack = float.PositiveInfinity;
        

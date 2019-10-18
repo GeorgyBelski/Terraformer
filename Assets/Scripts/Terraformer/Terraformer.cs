@@ -7,6 +7,7 @@ public class Terraformer : Tower
     new void Start()
     {
         TowerManager.terraformer = this;
+        TowerManager.AddTower(this);
     }
 
     void Update()

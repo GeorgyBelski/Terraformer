@@ -68,8 +68,8 @@ public class Enemy : Damageable
     public void DestroyUnit()
     {
         Destroy(this.gameObject);
-        if (spurtFXController)
-        { spurtFXController.Destroy(); }
+      //  if (spurtFXController)
+      //  { spurtFXController.Destroy(); }
     }
 
     /*

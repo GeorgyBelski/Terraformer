@@ -14,6 +14,7 @@ public class TowerManager : MonoBehaviour
 
     public static float selectedTowerRange = 1.5f;
     public static Dictionary<Transform, Tower> transformTowerMap = new Dictionary<Transform, Tower>();
+    public static HashSet<Tower> symbiosisTowers = new HashSet<Tower>();
 
     int towerEnemyLayerMask = (1 << 13 | 1 << 12);
     int towerLayer = 13;
@@ -140,12 +141,14 @@ public class TowerManager : MonoBehaviour
 
                 //   selectedTower = hit.transform.gameObject.GetComponent<Tower>();
                 transformTowerMap.TryGetValue(hit.transform, out highlightedTower);
-                if (highlightedTower && highlightedTower!= towerLookingForSymbiosisPartner)
+                if (highlightedTower && highlightedTower!= towerLookingForSymbiosisPartner && !symbiosisTowers.Contains(highlightedTower))
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
                         highlightedTower.isHighlighted = false;
                         towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
+                        symbiosisTowers.Add(highlightedTower);
+                        symbiosisTowers.Add(towerLookingForSymbiosisPartner);
                         towerLookingForSymbiosisPartner = null;
                     }
                     else
