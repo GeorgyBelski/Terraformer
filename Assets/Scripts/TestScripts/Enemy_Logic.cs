@@ -118,14 +118,23 @@ public abstract class Enemy_Logic : MonoBehaviour
 
     protected void stateGoToDestanation(TowerType destTowerType) 
     {
-        
-        Vector3 fromTargetTowerToEnemy;
-        targetTower = TowerManager.GetNearestTower(this.transform, destTowerType);
-        fromTargetTowerToEnemy = transform.position - targetTower.transform.position;
-        destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
+        if(destTowerType == TowerType.Terraformerw)
+        {
+            targetTower = TowerManager.terraformer;
+            destTower = targetTower.transform.position;
+        }
+        else
+        {
+            Vector3 fromTargetTowerToEnemy;
+            targetTower = TowerManager.GetNearestTower(this.transform, destTowerType);
+            //Debug.Log(targetTower.transform.position);
+            fromTargetTowerToEnemy = transform.position - targetTower.transform.position;
+            destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
+           
+        }
         emk.SetDest((Vector3)destTower);
         isGoingToDest = true;
-        print(destTower);
+        //print(destTower);
 
     }
 
