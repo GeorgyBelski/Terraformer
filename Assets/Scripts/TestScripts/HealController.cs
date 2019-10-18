@@ -135,7 +135,7 @@ public class HealController : MonoBehaviour
             {
                 if (EnemyManagerPro.enemiesMap[EnemyType.Solder][i].GetHealthRatio() < 1)
                 {
-                    if (Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Solder][i].gameObject.transform.position, transform.position) < healingDist) { 
+                    if (EnemyManagerPro.enemiesMap[EnemyType.Solder][i] && Vector3.Distance(EnemyManagerPro.enemiesMap[EnemyType.Solder][i].gameObject.transform.position, transform.position) < healingDist) { 
                         if (min == -1)
                         {
                             target = EnemyManagerPro.enemiesMap[EnemyType.Solder][i];
