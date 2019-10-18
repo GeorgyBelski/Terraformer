@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManagerPro : MonoBehaviour
 {
     public static int enemyLayerMask;
+    public static int enemyLayer = 12;
     // public List<Enemy> startEnemies = new List<Enemy>();
     //public static List<Enemy> enemiesDamage = new List<Enemy>();
     //public static List<Enemy> enemiesHealers = new List<Enemy>();
