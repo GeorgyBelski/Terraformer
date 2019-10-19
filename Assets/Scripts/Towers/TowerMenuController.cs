@@ -48,13 +48,17 @@ public class TowerMenuController : MonoBehaviour
         ShowTowerMenu();
         BreakingSymbiosis();
         InstallingSymbiosis();
+        if(RepairButton.isActive && tower.isSelected)
+        {
+            tower.towerHealth.Repair();
+        }
     }
 
     
 
     void ShowTowerMenu()
     {
-        if ((tower.isSelected && !TowerMenu.IsActive()) ||(!tower.isSelected && TowerMenu.IsActive()))
+        if (((tower.isSelected && !TowerMenu.IsActive()) ||(!tower.isSelected && TowerMenu.IsActive())) && !RepairButton.isActive)
         {
             TowerMenu.gameObject.SetActive(tower.isSelected);
         }

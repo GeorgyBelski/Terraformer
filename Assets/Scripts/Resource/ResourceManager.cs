@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -10,14 +11,15 @@ public class ResourceManager : MonoBehaviour
     public float resourceMax = 10000;
 
     [Header("HUD")]
-    public Text resourceCounter;
+    //public TextMeshPro
+    public TextMeshProUGUI resourceCounter;
     public Image resourcefiller;
     public Image incomefiller;
 
     public static float resourceST;
     public static float resourceMaxST;
 
-    public static Text resourceCounterST;
+    public static TextMeshProUGUI resourceCounterST;
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 

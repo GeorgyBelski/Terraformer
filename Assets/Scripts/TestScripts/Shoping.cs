@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using TMPro;
 
 public class Shoping : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class Shoping : MonoBehaviour
     public GameObject lazerTower;
     public float lazerTowerPrice;
 
-    public Text uiElectroTowerPrice;
-    public Text uiLazerTowerPrice;
+    public TextMeshProUGUI uiElectroTowerPrice;
+    public TextMeshProUGUI uiLazerTowerPrice;
 
     [Header("Buttons")]
     public List<Button> buttons;

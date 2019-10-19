@@ -5,10 +5,11 @@ using UnityEngine;
 public class TowerHealth : Damageable
 {
     public Tower thisTower;
-    private bool isRepair;
+    public bool isRepair;
     private float maxRepairHealth = 0;
 
-
+    private float prevHealthRatio;
+        
     void Start()
     {
         isRepair = false;
@@ -18,6 +19,11 @@ public class TowerHealth : Damageable
     {
         if (isRepair && healthRatio < maxRepairHealth)
         {
+            if(healthRatio < prevHealthRatio)
+            {
+                maxRepairHealth -= prevHealthRatio - healthRatio;
+                prevHealthRatio = healthRatio;
+            }
             //print(Time.deltaTime);
             base.health += (int)((maxHealth/10) * Time.deltaTime);
             
@@ -51,13 +57,14 @@ public class TowerHealth : Damageable
 
     public void Repair()
     {
-        //print(healthRatio);
-        if (healthRatio < 1) { 
+        
+        if (healthRatio < 1 && !isRepair) { 
             float resource = ResourceManager.resourceST;
             float repaircost = ResourceManager.RepairCost;
-
             float costNeeded = (1 - healthRatio) * 100 * repaircost;
-            //print(costNeeded);
+
+            prevHealthRatio = healthRatio;
+
             if(resource > costNeeded)
             {
                 maxRepairHealth = 1;
@@ -70,8 +77,8 @@ public class TowerHealth : Damageable
                 ResourceManager.removeResource(resource);
                 //print(maxRepairHealth);
             }
+            
 
-        
 
             isRepair = true;
         }
