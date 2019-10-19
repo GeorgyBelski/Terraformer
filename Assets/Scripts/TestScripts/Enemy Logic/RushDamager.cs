@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpawnerDamager : Enemy_Logic
+public class RushDamager : Enemy_Logic
 {
     public int damageOnAttack;
     public GameObject powerCristall;
