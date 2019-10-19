@@ -13,6 +13,7 @@ public class Enemy : Damageable
     public EnemyEffectsController effectsController;
     public EnemyType type;
     public Animator animator;
+    public SpurtFXController spurtFXController;
     /*
    [Range(10, 1000)]
    public int maxHealth = 100;
@@ -58,15 +59,20 @@ public class Enemy : Damageable
         {
             animator.SetBool("DeathTrigger", true);
             effectsController.navAgent.speed = 0;
+            effectsController.navAgent.angularSpeed = 0;
         }
         else {
-            Destroy(this.gameObject);
+
+            DestroyUnit();
         }
             
     }
-    public void DestroyUnit()
+    public void DestroyUnit() //C
     {
+        this.RemoveFromList();
         Destroy(this.gameObject);
+        if (spurtFXController)
+        { spurtFXController.Destroy(); }
     }
 
     /*

@@ -11,6 +11,7 @@ public class SpawnerDamager : Enemy_Logic
 
     public float jumpDistance;
     public float chargingTime;
+    public SpurtFXController SpurtFXController;
 
     private float realChargingTime;
     private bool isChargingReady = false;
@@ -21,7 +22,8 @@ public class SpawnerDamager : Enemy_Logic
 
     public override void Attack()
     {
-        targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
+        if (targetTower)
+        { targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero); }
     }
 
     // Start is called before the first frame update
@@ -68,6 +70,7 @@ public class SpawnerDamager : Enemy_Logic
 
     void jump(Vector3 jumpPos)
     {
+        SpurtFXController.ShowSpurtWave(dest);
         transform.position = dest;
         isChargingReady = false;
         realChargingTime = 0;
