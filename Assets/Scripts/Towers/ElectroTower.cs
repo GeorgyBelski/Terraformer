@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 
 public class ElectroTower : Tower
 {
@@ -24,6 +24,9 @@ public class ElectroTower : Tower
     float timerChargeLifeTime;
     float chargeLerpPosition;
     Vector3 fromChargeToTarget;
+    int randomizer;
+    [Range(1,100)]
+    public int probabilityOfStan = 10;
 
     [Header("ThandetBallAbility")]
     public ThanderBallAbility thanderBallAbility;
@@ -47,28 +50,22 @@ public class ElectroTower : Tower
     {
         base.Start();
         type = TowerType.Electro;
-        
+        SetLightningCharge();
+    }
 
-        //   thandetBallAim = null;
-        //   hitThanderBallColliders = new Collider[10];
-        //    thanderBallTargets = new List<Enemy>();
+    void SetLightningCharge()
+    {
+        currentLightningCharge = Instantiate(lightningChargePrefab, gunpoint.position, gunpoint.rotation).transform;
+        lightningChargeParticleSys = currentLightningCharge.GetComponent<ParticleSystem>();
+        chargeTrailMaterial = currentLightningCharge.GetComponent<ParticleSystemRenderer>().trailMaterial;
+        chargeTrailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
+        lightningChargeSize = currentLightningCharge.localScale.x;
     }
     public override void TowerAttack(Enemy target)
     {
         if (target)
         {
-            if (!currentLightningCharge)
-            {
-                //  DestroyCharge();
-                currentLightningCharge = Instantiate(lightningChargePrefab, gunpoint.position, gunpoint.rotation).transform;
-                lightningChargeParticleSys = currentLightningCharge.GetComponent<ParticleSystem>();
-               chargeTrailMaterial = currentLightningCharge.GetComponent<ParticleSystemRenderer>().trailMaterial;
-                chargeTrailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
-                lightningChargeSize = currentLightningCharge.localScale.x;
-            }
-            else {
-                currentLightningCharge.position = gunpoint.position;
-            }
+            currentLightningCharge.position = gunpoint.position;
             enableCharge = true;
             timerChargeLifeTime = chargeLifeTime;
             EnableChargeParticlesEmission(true);
@@ -100,9 +97,9 @@ public class ElectroTower : Tower
                 {
                     currentLightningCharge.position = target.GetPosition();
                     currentLightningCharge.localScale *= 1.7f;
-                    //   DestroyCharge();
                     enableCharge = false;
                     EnableChargeParticlesEmission(false);
+                    AddEffects();
                     target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
                     chargeLerpPosition = 0;
                 }
@@ -126,7 +123,7 @@ public class ElectroTower : Tower
         var emission = lightningChargeParticleSys.emission;
         emission.enabled = isEmission;
     }
-    void DestroyCharge()
+    public void DestroyCharge()
     {
         if (currentLightningCharge)
         {
@@ -134,6 +131,15 @@ public class ElectroTower : Tower
             currentLightningCharge = null;
             chargeLerpPosition = 0;
         }
+    }
+
+    void AddEffects()
+    {
+        // original Lightning Charge Effect
+        randomizer = Random.Range(0, 100);
+        if (randomizer <= probabilityOfStan)
+        { target.effectsController.AddStun(1); }
+        //
     }
 
 // Ability 1  - ThanderBall
