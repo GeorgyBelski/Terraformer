@@ -42,6 +42,7 @@ public abstract class Tower : MonoBehaviour
     public Tower symbiosisTower;
     public TowerMenuController towerMenuController;
     public bool isSymbiosisInstalled =false;
+    public TowerType? symbiosisTowerType = null;
 
     int targetIndex = -1;
     LineRenderer rangeline;
@@ -278,9 +279,16 @@ public abstract class Tower : MonoBehaviour
             TowerManager.symbiosisTowers.Remove(this);
             TowerManager.symbiosisTowers.Remove(symbiosisTower);
 
+            DisableSymbiosisUpgrade();
+            symbiosisTower.DisableSymbiosisUpgrade();
+
             symbiosisTower.symbiosisTower = null;
             symbiosisTower = null;
+
         }
         
     }
+
+    public abstract void ActivateSymbiosisUpgrade();
+    public abstract void DisableSymbiosisUpgrade();
 }

@@ -45,7 +45,7 @@ public class LaserTower : Tower
             lr.endColor = endLaser;
 
             target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
-            target.effectsController.AddBurning(damageBurning);
+            target.effectsController.AddBurning(BurningEffect.standardLifetime, damageBurning);
         }
     }
 
@@ -69,6 +69,17 @@ public class LaserTower : Tower
         }
     }
 
+    public override void ActivateSymbiosisUpgrade()
+    {
+        
+    }
+
+    public override void DisableSymbiosisUpgrade()
+    {
+
+    }
+
+    // Ability 1  - ScorchingRay
     public void CastScorchingRay(Vector3 aimPosition)
     {
         scorchingRayAbility.Cast(aimPosition);
@@ -79,4 +90,6 @@ public class LaserTower : Tower
         IsCastingAbility = false;
         TowerManager.availableLaserTowers.Add(this);
     }
+
+    
 }

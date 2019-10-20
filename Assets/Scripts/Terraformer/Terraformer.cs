@@ -29,4 +29,14 @@ public class Terraformer : Tower
     {
 
     }
+
+    public override void ActivateSymbiosisUpgrade()
+    {
+        
+    }
+
+    public override void DisableSymbiosisUpgrade()
+    {
+        
+    }
 }

@@ -113,12 +113,12 @@ public class EnemyEffectsController : MonoBehaviour
         }
     }
 
-    public void AddBurning(int damage) {
+    public void AddBurning(float time, int damage) {
         if (!enableBurning) {
             return;
         }
         BurningEffect burningEffect = (BurningEffect)AddEffect(Effect.Type.Burning);
-        burningEffect.Set(2, 2, damage);
+        burningEffect.Set(time, damage);
         EnableFlame();
 
     }
