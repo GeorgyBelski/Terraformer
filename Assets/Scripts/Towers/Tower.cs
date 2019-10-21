@@ -183,7 +183,7 @@ public abstract class Tower : MonoBehaviour
         else { return newTarget; }
     }
 
-    void LookAtTarger() {
+    protected void LookAtTarger() {
      //   if (cannon) { 
             if (target)
             {

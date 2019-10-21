@@ -34,8 +34,6 @@ public class ElectroTower : Tower
     public ThanderBallAbility thanderBallAbility;
 
 
-
-
     private new void Start()
     {
         base.Start();
