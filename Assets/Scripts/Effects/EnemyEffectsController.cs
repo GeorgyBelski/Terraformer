@@ -17,7 +17,7 @@ public class EnemyEffectsController : MonoBehaviour
     public GameObject flame;
     public GameObject vertigoPrefab;
     public GameObject vertigo;
-    private float tempNavAgentSpeed;
+    float originalNavAgentSpeed;
 
     ParticleSystem flameParticleSystem;
 
@@ -27,7 +27,8 @@ public class EnemyEffectsController : MonoBehaviour
 
     void Start()
     {
-        
+        if (enableStun && navAgent)
+        { originalNavAgentSpeed = navAgent.speed; }
     }
 
     void Update()
@@ -85,7 +86,7 @@ public class EnemyEffectsController : MonoBehaviour
           //  tpCharacter.m_AnimSpeedMultiplier = 1f;
           //  tpCharacter.m_StationaryTurnSpeed = 180f;
             tpCharacter.m_Stun = false;
-            navAgent.speed = tempNavAgentSpeed;
+            navAgent.speed = originalNavAgentSpeed;
         }
     }
     private Effect AddEffect(Effect.Type type) {
@@ -134,7 +135,6 @@ public class EnemyEffectsController : MonoBehaviour
         //  tpCharacter.m_AnimSpeedMultiplier = 0f;
        // tpCharacter.m_MoveSpeedMultiplier = 0f;
         tpCharacter.m_Stun = true;
-        tempNavAgentSpeed = navAgent.speed;
         navAgent.speed = 0;
     }
 
