@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LaserTower : Tower
 {
@@ -15,7 +16,11 @@ public class LaserTower : Tower
     float timerDuration;
     LineRenderer lr;
     Material lrMaterial;
-    Color startLaser, endLaser;
+    [ColorUsageAttribute(true, true)]
+    public Color ordinaryLaserColor1, ordinaryLaserColor2, electroSymbColor1, electroSymbColor2;
+    [ColorUsageAttribute(true, true)]
+    [HideInInspector]
+    public Color currentColor1, currentColor2;
 
     [Header("ThandetBallAbility")]
     public ScorchingRayAbility scorchingRayAbility;
@@ -31,9 +36,8 @@ public class LaserTower : Tower
         {
             lr = gunpoint.gameObject.AddComponent<LineRenderer>();
         }
-
-        startLaser = lr.startColor;
-        endLaser = lr.endColor;
+        currentColor1 = ordinaryLaserColor1;
+        currentColor2 = ordinaryLaserColor2;
     }
     public override void TowerAttack(Enemy target)
     {
@@ -41,11 +45,24 @@ public class LaserTower : Tower
             timerDuration = beamDuration;
             lr.SetPosition(0, gunpoint.position);
             lr.SetPosition(1, target.GetPosition());
-            lr.startColor = startLaser;
-            lr.endColor = endLaser;
+            lr.material.SetColor("_EnergyColor01", currentColor1);
+            lr.material.SetColor("_EnergyColor02", currentColor2);
 
             target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
-            target.effectsController.AddBurning(damageBurning);
+            AddEffects();
+        }
+    }
+
+    private void AddEffects()
+    {
+        target.effectsController.AddBurning(BurningEffect.standardLifetime, damageBurning);
+        if (symbiosisTowerType == TowerType.Electro)
+        {
+            randomizer = Random.Range(0, 100);
+            if(randomizer <= ((ElectroTower)symbiosisTower).probabilityOfStan/2)
+            {
+                target.effectsController.AddStun(1);
+            }
         }
     }
 
@@ -59,8 +76,8 @@ public class LaserTower : Tower
 
           //  lr.startColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
             //     lr.endColor = new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration);
-            lrMaterial.SetColor("_BaseColor", new Color(lr.startColor.r, lr.startColor.g - 1 + ratioDuration, lr.startColor.b, ratioDuration));
-            lrMaterial.SetColor("_EmissionColor", new Color(1 + ratioDuration, 0, 0));
+            lrMaterial.SetColor("_EnergyColor01", new Color(currentColor1.r, currentColor1.g - 1 + ratioDuration, currentColor1.b, ratioDuration));
+            lrMaterial.SetColor("_EnergyColor02", new Color(currentColor2.r, currentColor2.g, currentColor2.b, ratioDuration));
             lr.widthMultiplier = ratioDuration;
         }
         else
@@ -69,6 +86,23 @@ public class LaserTower : Tower
         }
     }
 
+    public override void ActivateSymbiosisUpgrade()
+    {
+        symbiosisTowerType = Symbiosis.ActivateLaserSymbiosisUpgrade(this);
+    }
+
+    public override void DisableSymbiosisUpgrade()
+    {
+        SetOrdinaryLaserRay();
+        symbiosisTowerType = null;
+    }
+    void SetOrdinaryLaserRay()
+    {
+        currentColor1 = ordinaryLaserColor1;
+        currentColor2 = ordinaryLaserColor2;
+    }
+
+    // Ability 1  - ScorchingRay
     public void CastScorchingRay(Vector3 aimPosition)
     {
         scorchingRayAbility.Cast(aimPosition);
@@ -79,4 +113,6 @@ public class LaserTower : Tower
         IsCastingAbility = false;
         TowerManager.availableLaserTowers.Add(this);
     }
+
+    
 }
