@@ -49,6 +49,7 @@ public abstract class Tower : MonoBehaviour
     Vector3 previousPosition;
     Material towerMaterial;
     Color highlightedColor;
+    protected int randomizer;
 
     protected void Start()
     {

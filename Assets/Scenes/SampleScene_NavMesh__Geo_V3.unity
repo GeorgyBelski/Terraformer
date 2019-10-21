@@ -5212,16 +5212,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElectroTower
       objectReference: {fileID: 0}
-    - target: {fileID: 7532716056537121323, guid: 6c767a6979ec47546b20e60deea06abc,
-        type: 3}
-      propertyPath: probabilityOfStan
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7532716056537121323, guid: 6c767a6979ec47546b20e60deea06abc,
-        type: 3}
-      propertyPath: isHighlighted
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7532716056537121493, guid: 6c767a6979ec47546b20e60deea06abc,
         type: 3}
       propertyPath: m_LocalPosition.x

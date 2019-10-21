@@ -376,7 +376,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a68406ff8cf5b9a4bacb338d39ee7652, type: 2}
+  - {fileID: 2100000, guid: 11647272501d4b14aa737dff140f5b13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -676,6 +676,12 @@ MonoBehaviour:
   beamDuration: 0.3
   damageAttack: 50
   damageBurning: 6
+  ordinaryLaserColor1: {r: 5.992157, g: 0.7529412, b: 0.59607846, a: 0.8666667}
+  ordinaryLaserColor2: {r: 4, g: 2.644961, b: 0.6981132, a: 0.92941177}
+  electroSymbColor1: {r: 0.5960785, g: 5.992157, b: 5.9478927, a: 0.8666667}
+  electroSymbColor2: {r: 0.71204174, g: 0.8813625, b: 3.9999995, a: 0.92941177}
+  currentColor1: {r: 0, g: 0, b: 0, a: 0}
+  currentColor2: {r: 0, g: 0, b: 0, a: 0}
   scorchingRayAbility: {fileID: 2474435889650568810}
 --- !u!114 &6998274765810947965
 MonoBehaviour:
@@ -743,6 +749,7 @@ MonoBehaviour:
   SymbiosisButton: {fileID: 0}
   symbiosisCircleBar: {fileID: 7686870110740383762}
   setSymbiosisTime: 2
+  timerSetSymbiosisTime: 0
   breakSymbiosisHoldingTime: 0.6
   timerBreakSymbiosisHoldingTime: 0
   isHoldingClick: 0

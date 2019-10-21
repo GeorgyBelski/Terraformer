@@ -26,7 +26,7 @@ public class ElectroTower : Tower
     float timerChargeLifeTime;
     float chargeLerpPosition;
     Vector3 fromChargeToTarget;
-    int randomizer;
+
     [Range(1,100)]
     public int probabilityOfStan = 10;
 
@@ -142,7 +142,7 @@ public class ElectroTower : Tower
     }
     public override void DisableSymbiosisUpgrade()
     {
-        Debug.Log("DisableSymbiosisUpgrade");
+        //Debug.Log("DisableSymbiosisUpgrade");
         SetOrdinaryLightningCharge();
         symbiosisTowerType = null;
     }

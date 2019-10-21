@@ -28,4 +28,23 @@ public class Symbiosis
         return symbiosisTowerType;
     }
 
+    public static TowerType? ActivateLaserSymbiosisUpgrade(LaserTower tower)
+    {
+        if (!tower.isSymbiosisInstalled)
+        { return null; }
+        TowerType symbiosisTowerType = tower.symbiosisTower.type;
+        if (symbiosisTowerType == TowerType.Electro)
+        {
+            tower.currentColor1 = tower.electroSymbColor1;
+            tower.currentColor2 = tower.electroSymbColor2;
+        }
+        else if (symbiosisTowerType == TowerType.Laser)
+        {
+
+        }
+
+        tower.isSymbiosisInstalled = false;
+        return symbiosisTowerType;
+    }
+
 }
