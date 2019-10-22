@@ -84,7 +84,7 @@ public class PlazmaTower : Tower
         sinTheta = cosTheta * tanTheta;
     }
 
-    public override void LookAtTarger()
+    protected override void LookAtTarger()
     {
         //print("+");
         if (target)
@@ -106,5 +106,15 @@ public class PlazmaTower : Tower
             findeTrajectory();
         }
         //throw new System.NotImplementedException();
+    }
+
+    public override void ActivateSymbiosisUpgrade()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void DisableSymbiosisUpgrade()
+    {
+        throw new System.NotImplementedException();
     }
 }
