@@ -6,15 +6,16 @@ public class BurningEffect : Effect
 {
     public int damage; // in half a second
     public float timerDamage = 0.3f;
+    public static float standardLifetime = 2f;
 
     public BurningEffect() {
         this.type = Effect.Type.Burning;
     }
 
-    public void Set(float lifetime, float timerLifetime, int damage) {
+    public void Set(float lifetime, int damage) {
         
         this.lifetime = lifetime;
-        this.timerLifetime = timerLifetime;
+        this.timerLifetime = lifetime;
         this.damage = damage;
     }
 

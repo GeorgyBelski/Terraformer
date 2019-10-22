@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 3348572517771893590}
   - component: {fileID: 3348572517771893584}
   - component: {fileID: 3348572517771893591}
+  - component: {fileID: 6957332154284653914}
   m_Layer: 13
   m_Name: TowerMenu
   m_TagString: Untagged
@@ -152,6 +153,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!65 &6957332154284653914
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3348572517771893589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 500, y: 372, z: 1}
+  m_Center: {x: 0, y: 194.5, z: 0}
 --- !u!1 &3714572449213715466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1066,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerMenuController: {fileID: 0}
-  onPointerDown: 0
+  thisSymiosisButton: {fileID: 0}
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &8696404076799371673
 GameObject:
   m_ObjectHideFlags: 0

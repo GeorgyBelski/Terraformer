@@ -52,6 +52,11 @@ public class TowerHealth : Damageable
 
         thisTower.cooldownAttack = float.PositiveInfinity;
         thisTower.timerAttack = float.PositiveInfinity;
+
+        if (thisTower.type == TowerType.Electro)
+        {
+            ((ElectroTower)thisTower).DestroyCharge();
+        }
        
     }
 
