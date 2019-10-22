@@ -15,11 +15,27 @@ public class PlazmaBullet : MonoBehaviour
     private Enemy target;
 
     private float time = 0;
+    private float startPos;
+    private Vector3 launchPoint;
+    private Vector3 velocity;
+    //private float time = 0;
+
+
+    void Start()
+    {
+        startPos = transform.position.y;
+    }
 
     void Update()
     {
-        //transform.position += new Vector3(Vector3.forward.x, transform.position.y - (time * speed - (9.81f * (time * time))/2), Vector3.forward.z) * speed * Time.deltaTime;
-        transform.position += transform.forward * speed * Time.deltaTime;
+        time += Time.deltaTime;
+        Vector3 p = launchPoint + velocity * time;
+        p.y -= 0.5f * 9.81f * time * time;
+        transform.localPosition = p;
+        //time += Time.deltaTime;
+        //if()
+        //transform.position += new Vector3(transform.forward.x, startPos - (time * speed - (9.81f * (time * time))/2) - startPos, transform.forward.z) * speed * Time.deltaTime;
+        //transform.position += transform.forward * speed * Time.deltaTime;
         if (transform.position.y <= 0.4)
         {
 
@@ -30,13 +46,15 @@ public class PlazmaBullet : MonoBehaviour
     
     }
 
-    public void setSettings(int mainDamage, float speed, int blowUpDamage, float blowUpSize, Enemy target)
+    public void setSettings(int mainDamage, float speed, int blowUpDamage, float blowUpSize, Enemy target, Vector3 launchPoint, Vector3 velocity)
     {
         this.mainDamage = mainDamage;
         this.speed = speed;
         this.blowUpDamage = blowUpDamage;
         this.blowUpSize = blowUpSize;
         this.target = target;
+        this.launchPoint = launchPoint;
+        this.velocity = velocity;
     }
 
     private void OnTriggerEnter(Collider other)
