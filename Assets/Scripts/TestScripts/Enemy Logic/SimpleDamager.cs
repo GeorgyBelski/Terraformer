@@ -21,7 +21,8 @@ public class SimpleDamager : Enemy_Logic
 
     public override void Attack()
     {
-        targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
+        if (targetTower)
+        { targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero); }
     }
 
 }

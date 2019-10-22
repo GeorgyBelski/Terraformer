@@ -24,6 +24,7 @@ public abstract class Tower : MonoBehaviour
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
+    protected float ordinaryCooldownAttack;
     public float timerAttack = 0f;
     /*
     public float cooldownAbility1 = 10f;
@@ -56,6 +57,7 @@ public abstract class Tower : MonoBehaviour
         TowerManager.AddTower(this);
         TowerManager.transformTowerMap.Add(this.transform, this);
         rangeline = gameObject.GetComponent<LineRenderer>();
+        ordinaryCooldownAttack = cooldownAttack;
         if (!rangeline) { 
             rangeline = gameObject.AddComponent<LineRenderer>();
         }
