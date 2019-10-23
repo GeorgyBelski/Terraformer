@@ -6,12 +6,12 @@ public class SymbiosisVisualLink : MonoBehaviour
 {
     public LineRenderer link;
     public Transform point0, point1;
-
+    [Range(2,100)]
     public int positionsNumber = 6;
     public float waveHeight = 3;
     float currentWaveHeight;
+    [Range(0.5f, 100)]
     public float switchPeriod = Mathf.PI*2;
-    bool isSwithched;
     float timerSwitchPeriod;
     public float speed = 1;
     Vector3 end0, end1, previousEnd0, previousEnd1;
@@ -26,7 +26,6 @@ public class SymbiosisVisualLink : MonoBehaviour
     {
         SetLinePositions();
         timerSwitchPeriod = switchPeriod;
-        isSwithched = false;
     }
     void Update()
     {
@@ -42,7 +41,7 @@ public class SymbiosisVisualLink : MonoBehaviour
         Vector3 lineDirection = fromEnd0toEnd1.normalized;
         waveDirection = new Vector3(-lineDirection.z, 0, lineDirection.x);
         stillPositions = new Vector3[positionsNumber];
-        amplitudeMultipliers = new float[positionsNumber];
+        amplitudeMultipliers = new float[positionsNumber]; // suppress amplitude by position: 0 near the ends;
 
         link.positionCount = positionsNumber;
         
@@ -59,12 +58,16 @@ public class SymbiosisVisualLink : MonoBehaviour
     }
     void Wave()
     {
-        timeOffset = Mathf.Cos(Time.time / switchPeriod);
+        if (switchPeriod == 0)
+        { return; }
 
+        timeOffset = Mathf.Sin(Time.time / switchPeriod);
+        float periodicalAmplitudeChanger = Mathf.Cos(Time.time / switchPeriod);
+        float periodicalSuppressorOfAmplitude = Mathf.Min(1, periodicalAmplitudeChanger);
         for (int i = 0; i < positionsNumber; i++)
         {
-            float finalMultiplier = waveHeight * amplitudeMultipliers[i] * Mathf.Min(timeOffset, 1);
-            link.SetPosition(i, stillPositions[i] + waveDirection * Mathf.Sin(radiansBySegment * i + Mathf.Sin(Time.time / switchPeriod) * speed) * finalMultiplier);
+            float finalMultiplier = waveHeight * amplitudeMultipliers[i] * periodicalSuppressorOfAmplitude;
+            link.SetPosition(i, stillPositions[i] + waveDirection * Mathf.Sin(radiansBySegment * i + timeOffset * speed) * finalMultiplier);
         }
     }
 
