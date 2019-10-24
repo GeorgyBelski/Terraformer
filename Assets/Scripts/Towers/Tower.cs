@@ -266,13 +266,13 @@ public abstract class Tower : MonoBehaviour
 
     public void BreakSymbiosis()
     {
-        if (currentVisualLink)
-        { currentVisualLink.gameObject.SetActive(false); }
+        if (currentVisualLink && currentVisualLink.gameObject.activeSelf)
+        { currentVisualLink.BreakVisualLink(); }
 
         if (symbiosisTower)
         {
-            if (symbiosisTower.currentVisualLink)
-            { symbiosisTower.currentVisualLink.gameObject.SetActive(false); }
+            if (symbiosisTower.currentVisualLink  && symbiosisTower.currentVisualLink.gameObject.activeSelf)
+            { symbiosisTower.currentVisualLink.BreakVisualLink(); }
 
             isSymbiosisInstalled = false;
             symbiosisTower.isSymbiosisInstalled = false;
