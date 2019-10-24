@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SymbiosisVisualLink : MonoBehaviour
 {
-    public LineRenderer link;
+    public LineRenderer lineRenderer;
     public Transform point0, point1;
     [Range(2,100)]
     public int positionsNumber = 6;
@@ -21,11 +21,19 @@ public class SymbiosisVisualLink : MonoBehaviour
     Vector3[] stillPositions;
     float[] amplitudeMultipliers;
     float timeOffset;
+    float timeRandomizer;
+    Gradient gradient;
+    GradientAlphaKey[] gradientAlphaKeys;
+    GradientColorKey[] gradientColorKeys;
 
     void Start()
     {
         SetLinePositions();
         timerSwitchPeriod = switchPeriod;
+        timeRandomizer = Random.Range(0f, 20f);
+        
+        
+        
     }
     void Update()
     {
@@ -33,6 +41,45 @@ public class SymbiosisVisualLink : MonoBehaviour
         { SetLinePositions(); }
         Wave();
     }
+
+    public void SetEndPoints(Transform p0, Transform p1)
+    {
+        point0 = p0;
+        point1 = p1;
+    }
+
+    public void SetEndColors(Color c0, Color c1)
+    {
+        lineRenderer.startColor = c0;
+        lineRenderer.endColor = c1;
+
+        gradient = lineRenderer.colorGradient;
+        gradientColorKeys = gradient.colorKeys;
+        gradientAlphaKeys = gradient.alphaKeys;
+        gradientColorKeys[0].time = 0.5f;
+        gradientAlphaKeys[1].alpha = 0f;
+        gradient.mode = GradientMode.Fixed;
+    }
+
+    public void SetGradientProgress(float ratio)
+    {
+        if (ratio < 1)
+        {
+            gradientAlphaKeys[0].time = ratio / 2;
+            gradientAlphaKeys[1].time = 1 - ratio / 2;
+        }
+        else
+        {
+            gradient.mode = GradientMode.Blend;
+
+            gradientColorKeys[0].time = 0f; 
+            gradientAlphaKeys[1].alpha = 1f;
+        }
+
+        gradient.SetKeys(gradientColorKeys, gradientAlphaKeys);
+        lineRenderer.colorGradient = gradient;
+    }
+
     void SetLinePositions()
     {
         end0 = point0.transform.position;
@@ -43,14 +90,14 @@ public class SymbiosisVisualLink : MonoBehaviour
         stillPositions = new Vector3[positionsNumber];
         amplitudeMultipliers = new float[positionsNumber]; // suppress amplitude by position: 0 near the ends;
 
-        link.positionCount = positionsNumber;
+        lineRenderer.positionCount = positionsNumber;
         
         segment = fromEnd0toEnd1 / (positionsNumber - 1);
         radiansBySegment = 2 * Mathf.PI * segment.magnitude / fromEnd0toEnd1.magnitude;
         for (int i = 0; i < positionsNumber; i++)
         {
             stillPositions[i] = end0 + segment * i;
-            link.SetPosition(i, stillPositions[i]);
+            lineRenderer.SetPosition(i, stillPositions[i]);
             amplitudeMultipliers[i] =  Mathf.Sin(radiansBySegment/2 * i);
         }
         previousEnd0 = end0;
@@ -61,13 +108,14 @@ public class SymbiosisVisualLink : MonoBehaviour
         if (switchPeriod == 0)
         { return; }
 
-        timeOffset = Mathf.Sin(Time.time / switchPeriod);
-        float periodicalAmplitudeChanger = Mathf.Cos(Time.time / switchPeriod);
+        float timeArgument = (Time.time + timeRandomizer) / switchPeriod;
+        timeOffset = Mathf.Sin(timeArgument);
+        float periodicalAmplitudeChanger = Mathf.Cos(timeArgument);
         float periodicalSuppressorOfAmplitude = Mathf.Min(1, periodicalAmplitudeChanger);
         for (int i = 0; i < positionsNumber; i++)
         {
             float finalMultiplier = waveHeight * amplitudeMultipliers[i] * periodicalSuppressorOfAmplitude;
-            link.SetPosition(i, stillPositions[i] + waveDirection * Mathf.Sin(radiansBySegment * i + timeOffset * speed) * finalMultiplier);
+            lineRenderer.SetPosition(i, stillPositions[i] + waveDirection * Mathf.Sin(radiansBySegment * i + timeOffset * speed) * finalMultiplier);
         }
     }
 

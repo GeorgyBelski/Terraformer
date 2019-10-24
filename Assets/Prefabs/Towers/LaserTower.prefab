@@ -670,6 +670,8 @@ MonoBehaviour:
   gunpoint: {fileID: 6015777777595496274}
   towerHealth: {fileID: 6998274765810947965}
   target: {fileID: 0}
+  visualLinkPrefab: {fileID: 8683470728788414260, guid: 03c45ea41f9012b449fcfb8d6797a4c9,
+    type: 3}
   symbiosisTower: {fileID: 0}
   towerMenuController: {fileID: 7590772555364440343}
   isSymbiosisInstalled: 0

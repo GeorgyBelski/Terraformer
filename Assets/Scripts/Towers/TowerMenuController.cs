@@ -87,7 +87,12 @@ public class TowerMenuController : MonoBehaviour
         if (isInstallingSymbiosis)
         {
             timerSetSymbiosisTime += Time.deltaTime;
-            symbiosisCircleBar.fillAmount = timerSetSymbiosisTime / setSymbiosisTime;
+            float ratio = timerSetSymbiosisTime / setSymbiosisTime;
+            symbiosisCircleBar.fillAmount = ratio;
+            if (tower.currentVisualLink && tower.currentVisualLink.isActiveAndEnabled)
+            {
+                tower.currentVisualLink.SetGradientProgress(ratio);
+            }
             if (timerSetSymbiosisTime >= setSymbiosisTime)
             {
                 ConfirmSymbiosis();
