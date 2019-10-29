@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class ResourceManager : MonoBehaviour
 {
     [Header("Resourses")]
-    public float resource;
-    public float resourceMax = 10000;
+    public float StartResource = 500;
+    public float StartMaxresource = 10000;
 
     [Header("HUD")]
-    public Text resourceCounter;
+    public Text resourceCounter, resourceCost;
     public Image resourcefiller;
     public Image incomefiller;
 
-    public static float resourceST;
-    public static float resourceMaxST;
+    public static float resource;
+    public static float resourceMax;
 
     public static Text resourceCounterST;
     public static Image resourcefillerST;
@@ -31,40 +31,40 @@ public class ResourceManager : MonoBehaviour
     //    }
     void Start()
     {
-        resourceST = resource;
-        resourceMaxST = resourceMax;
+        resource = StartResource;
+        resourceMax = StartMaxresource;
 
         resourceCounterST = resourceCounter;
         resourcefillerST = resourcefiller;
         incomeFilerST = incomefiller;
 
         fillResourceFiller();
-        resourceCounter.text = resource.ToString();
+        resourceCounter.text = StartResource.ToString();
         incomefiller.fillAmount = 0;
     }
 
     public static void addResource(float count)
     {
-        resourceST += count;
-        if (resourceST > resourceMaxST)
-            resourceST = resourceMaxST;
+        resource += count;
+        if (resource > resourceMax)
+            resource = resourceMax;
         fillResourceFiller();
     }
 
     public static void removeResource(float count)
     {
-        if (resourceST - count < 0)
+        if (resource - count < 0)
             return;
 
-        resourceST -= count;
+        resource -= count;
         fillResourceFiller();
     }
 
     private static void fillResourceFiller()
     {
         //print("+");
-        resourcefillerST.fillAmount = resourceST / resourceMaxST;
-        resourceCounterST.text = resourceST.ToString();
+        resourcefillerST.fillAmount = resource / resourceMax;
+        resourceCounterST.text = resource.ToString();
     }
 
     private static void fillIncomeFiller()

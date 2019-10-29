@@ -58,7 +58,7 @@ public class TowerHealth : Damageable
     {
         //print(healthRatio);
         if (healthRatio < 1) { 
-            float resource = ResourceManager.resourceST;
+            float resource = ResourceManager.resource;
             float repaircost = ResourceManager.RepairCost;
 
             float costNeeded = (1 - healthRatio) * 100 * repaircost;
