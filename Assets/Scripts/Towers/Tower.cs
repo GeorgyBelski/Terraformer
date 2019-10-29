@@ -24,6 +24,7 @@ public abstract class Tower : MonoBehaviour
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
+    protected float ordinaryCooldownAttack;
     public float timerAttack = 0f;
     /*
     public float cooldownAbility1 = 10f;
@@ -36,7 +37,11 @@ public abstract class Tower : MonoBehaviour
     public Transform cannon;
     public Transform gunpoint;
     public TowerHealth towerHealth;
+    [HideInInspector]
     public Enemy target;
+    public SymbiosisVisualLink visualLinkPrefab;
+    [HideInInspector]
+    public SymbiosisVisualLink currentVisualLink;
 
     [Header("Symbiosis")]
     public Tower symbiosisTower;
@@ -56,6 +61,7 @@ public abstract class Tower : MonoBehaviour
         TowerManager.AddTower(this);
         TowerManager.transformTowerMap.Add(this.transform, this);
         rangeline = gameObject.GetComponent<LineRenderer>();
+        ordinaryCooldownAttack = cooldownAttack;
         if (!rangeline) { 
             rangeline = gameObject.AddComponent<LineRenderer>();
         }
@@ -202,23 +208,7 @@ public abstract class Tower : MonoBehaviour
         cannon.LookAt(targetPosition);
     }
     public abstract void TowerAttack(Enemy target);
-/*
-    private void OnDrawGizmos()
-    {
-        // link to enemy
-        for (int i = 0; i < EnemyManagerPro.enemies.Count; i++)
-        {
-            if (i == targetIndex)
-            {
-                Gizmos.color = new Color(1, 0.4f, 0.3f);
-             //   if (EnemyManagerPro.enemies[i]) {
-                Gizmos.DrawLine(EnemyManagerPro.enemies[i].GetPosition(), this.transform.position);
-            //    }
-            }
-        //    else { Gizmos.color = Color.gray;}   
-        }
 
-    }*/
     void ShowRange()
     {
         if (previousRange != range || previousPosition != transform.position)
@@ -262,6 +252,13 @@ public abstract class Tower : MonoBehaviour
 
     public void SetSymbiosis(Tower partner)
     {
+        if (!currentVisualLink)
+        {
+            currentVisualLink = Instantiate(visualLinkPrefab);
+        }
+        currentVisualLink.gameObject.SetActive(true);
+        currentVisualLink.SetEndPoints(cannon, partner.cannon);
+        currentVisualLink.SetEndColors(partner.rangeColor, this.rangeColor);
         symbiosisTower = partner;
         partner.symbiosisTower = this;
         towerMenuController.StartInstallingSymbiosis();
@@ -269,8 +266,14 @@ public abstract class Tower : MonoBehaviour
 
     public void BreakSymbiosis()
     {
+        if (currentVisualLink && currentVisualLink.gameObject.activeSelf)
+        { currentVisualLink.BreakVisualLink(); }
+
         if (symbiosisTower)
         {
+            if (symbiosisTower.currentVisualLink  && symbiosisTower.currentVisualLink.gameObject.activeSelf)
+            { symbiosisTower.currentVisualLink.BreakVisualLink(); }
+
             isSymbiosisInstalled = false;
             symbiosisTower.isSymbiosisInstalled = false;
 
