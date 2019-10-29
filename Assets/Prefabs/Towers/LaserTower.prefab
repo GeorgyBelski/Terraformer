@@ -670,6 +670,8 @@ MonoBehaviour:
   gunpoint: {fileID: 6015777777595496274}
   towerHealth: {fileID: 6998274765810947965}
   target: {fileID: 0}
+  visualLinkPrefab: {fileID: 8683470728788414260, guid: 03c45ea41f9012b449fcfb8d6797a4c9,
+    type: 3}
   symbiosisTower: {fileID: 0}
   towerMenuController: {fileID: 7590772555364440343}
   isSymbiosisInstalled: 0
@@ -678,6 +680,7 @@ MonoBehaviour:
   damageBurning: 6
   ordinaryLaserColor1: {r: 5.992157, g: 0.7529412, b: 0.59607846, a: 0.8666667}
   ordinaryLaserColor2: {r: 4, g: 2.644961, b: 0.6981132, a: 0.92941177}
+  laserSymbColor: {r: 12.337362, g: 1.6876584, b: 2.8394542, a: 1}
   electroSymbColor1: {r: 0.5960785, g: 5.992157, b: 5.9478927, a: 0.8666667}
   electroSymbColor2: {r: 0.71204174, g: 0.8813625, b: 3.9999995, a: 0.92941177}
   currentColor1: {r: 0, g: 0, b: 0, a: 0}
@@ -746,7 +749,6 @@ MonoBehaviour:
   VurnerableButton: {fileID: 9035417527670959842}
   HardyButton: {fileID: 8395635425398089281}
   previousSelectedTargetingButton: {fileID: 0}
-  SymbiosisButton: {fileID: 0}
   symbiosisCircleBar: {fileID: 7686870110740383762}
   setSymbiosisTime: 2
   timerSetSymbiosisTime: 0

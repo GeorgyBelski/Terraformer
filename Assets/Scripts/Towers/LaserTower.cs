@@ -17,7 +17,7 @@ public class LaserTower : Tower
     LineRenderer lr;
     Material lrMaterial;
     [ColorUsageAttribute(true, true)]
-    public Color ordinaryLaserColor1, ordinaryLaserColor2, electroSymbColor1, electroSymbColor2;
+    public Color ordinaryLaserColor1, ordinaryLaserColor2, laserSymbColor, electroSymbColor1, electroSymbColor2;
     [ColorUsageAttribute(true, true)]
     [HideInInspector]
     public Color currentColor1, currentColor2;
@@ -100,6 +100,8 @@ public class LaserTower : Tower
     {
         currentColor1 = ordinaryLaserColor1;
         currentColor2 = ordinaryLaserColor2;
+        if (cooldownAttack != ordinaryCooldownAttack)
+        { cooldownAttack = ordinaryCooldownAttack; }
     }
 
     // Ability 1  - ScorchingRay

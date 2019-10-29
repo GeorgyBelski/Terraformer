@@ -14,13 +14,22 @@ public class ElectroTower : Tower
     public float lightningLerpSpeed = 2f;
     public int damageAttack = 50;
     public GameObject lightningChargePrefab;
+    [HideInInspector]
     public ParticleSystem lightningChargeParticleSys;
+    int blinkingCounter;
+    [HideInInspector]
     public Transform currentLightningCharge;
     float lightningChargeSize;
     bool enableCharge;
+    [HideInInspector]
     public ParticleSystemRenderer particleSystemRenderer;
-    public Material ordinaryTrailMaterial, laserSymbiosisMaterial, plasmaSymbiosisMaterial; 
-
+    [HideInInspector]
+    public Material autoAttackMaterial;
+    [ColorUsageAttribute(true, true)]
+    public Color ordinaryElectroColor1, ordinaryElectroColor2, electroSymbColor, laserSymbColor1, laserSymbColor2, plasmaSymbColor1, plasmaSymbColor2;
+    [ColorUsageAttribute(true, true)]
+    [HideInInspector]
+    public Color currentColor1, currentColor2;
 
     float chargeLifeTime = 0.5f;
     float timerChargeLifeTime;
@@ -32,7 +41,6 @@ public class ElectroTower : Tower
 
     [Header("ThandetBallAbility")]
     public ThanderBallAbility thanderBallAbility;
-
 
     private new void Start()
     {
@@ -46,18 +54,24 @@ public class ElectroTower : Tower
         lightningChargeParticleSys = currentLightningCharge.GetComponent<ParticleSystem>();
         particleSystemRenderer = currentLightningCharge.GetComponent<ParticleSystemRenderer>();
         lightningChargeSize = currentLightningCharge.localScale.x;
-        lightningChargeParticleSys = currentLightningCharge.GetComponent<ParticleSystem>();    
+        lightningChargeParticleSys = currentLightningCharge.GetComponent<ParticleSystem>();
+        autoAttackMaterial = Instantiate(particleSystemRenderer.trailMaterial);
+        particleSystemRenderer.trailMaterial = autoAttackMaterial;
+        //  ordinaryElectroColor1 = autoAttackMaterial.GetColor("_EnergyColor01");
+        //  ordinaryElectroColor2 = autoAttackMaterial.GetColor("_EnergyColor02");
+        autoAttackMaterial.SetColor("_EnergyColor01", ordinaryElectroColor1);
+        autoAttackMaterial.SetColor("_EnergyColor02", ordinaryElectroColor2);
     }
 
     public override void TowerAttack(Enemy target)
-    {
+    {    
         if (target)
         {
             currentLightningCharge.position = gunpoint.position;
             enableCharge = true;
             timerChargeLifeTime = chargeLifeTime;
             EnableChargeParticlesEmission(true);
-            currentLightningCharge.localScale = new Vector3(lightningChargeSize, lightningChargeSize, lightningChargeSize);
+            currentLightningCharge.localScale = Vector3.one * lightningChargeSize;
 
         }
     }
@@ -86,19 +100,34 @@ public class ElectroTower : Tower
                 if (distanceFromChargeToTarget < 0.1)
                 {
                     currentLightningCharge.position = target.GetPosition();
-                    currentLightningCharge.localScale *= 1.7f;
                     enableCharge = false;
                     EnableChargeParticlesEmission(false);
                     AddEffects();
                     target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
                     chargeLerpPosition = 0;
+                    blinkingCounter = 3;
                 }
             }
 
             timerChargeLifeTime -= Time.deltaTime;
-            if (timerChargeLifeTime < 0.1 && currentLightningCharge.localScale.x > 0.1f)
+            if (timerChargeLifeTime > 0.1)
             {
-                currentLightningCharge.localScale /= 6;
+                if(chargeLerpPosition == 0 && blinkingCounter > 0)
+                {
+                    if(blinkingCounter == 3)
+                    {
+                        currentLightningCharge.localScale = Vector3.one * lightningChargeSize * 2;
+                    }
+                    else if (currentLightningCharge.localScale.x > lightningChargeSize)
+                    { currentLightningCharge.localScale = Vector3.one * lightningChargeSize; }
+                    else
+                    { currentLightningCharge.localScale = Vector3.one * lightningChargeSize * 1.6f; }
+                    blinkingCounter--;
+                }
+            }
+            else
+            {
+                currentLightningCharge.localScale /= 2;
             }
                 if (timerChargeLifeTime <= 0)
             {
@@ -146,10 +175,14 @@ public class ElectroTower : Tower
     }
     public void SetOrdinaryLightningCharge()
     {
-        particleSystemRenderer.trailMaterial = ordinaryTrailMaterial;
+        //   particleSystemRenderer.trailMaterial = ordinaryTrailMaterial;
+        autoAttackMaterial.SetColor("_EnergyColor01", ordinaryElectroColor1);
+        autoAttackMaterial.SetColor("_EnergyColor02", ordinaryElectroColor2);
         var trails = lightningChargeParticleSys.trails;
         trails.ribbonCount = 2;
         lightningLerpSpeed = 2;
+        if (cooldownAttack != ordinaryCooldownAttack)
+        { cooldownAttack = ordinaryCooldownAttack; }
     }
 
     // Ability 1  - ThanderBall

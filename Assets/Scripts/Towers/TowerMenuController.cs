@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public enum TargetingType { Nearest, MostVurnerable, MostHardy };
-public enum SimbiosisState {None, Breaked };
+//public enum SimbiosisState {None, Breaked };
 public class TowerMenuController : MonoBehaviour
 {
     
@@ -25,7 +25,6 @@ public class TowerMenuController : MonoBehaviour
     public Button previousSelectedTargetingButton;
 
     [Header("Symbiosis Buttons")]
-    public Button SymbiosisButton;
     public Image symbiosisCircleBar;
     public float setSymbiosisTime = 0.8f;
     public float timerSetSymbiosisTime = 0f; // Increasing
@@ -88,7 +87,12 @@ public class TowerMenuController : MonoBehaviour
         if (isInstallingSymbiosis)
         {
             timerSetSymbiosisTime += Time.deltaTime;
-            symbiosisCircleBar.fillAmount = timerSetSymbiosisTime / setSymbiosisTime;
+            float ratio = timerSetSymbiosisTime / setSymbiosisTime;
+            symbiosisCircleBar.fillAmount = ratio;
+            if (tower.currentVisualLink && tower.currentVisualLink.isActiveAndEnabled)
+            {
+                tower.currentVisualLink.SetGradientProgress(ratio);
+            }
             if (timerSetSymbiosisTime >= setSymbiosisTime)
             {
                 ConfirmSymbiosis();
@@ -99,6 +103,7 @@ public class TowerMenuController : MonoBehaviour
     }
     public void ConfirmSymbiosis()
     {
+       // Debug.Log("ConfirmSymbiosis");
         symbiosisCircleBar.fillAmount = 1;
         timerBreakSymbiosisHoldingTime = breakSymbiosisHoldingTime;
         if (tower && tower.symbiosisTower)
@@ -106,8 +111,8 @@ public class TowerMenuController : MonoBehaviour
             tower.isSymbiosisInstalled = true;
             tower.ActivateSymbiosisUpgrade();
 
-            tower.symbiosisTower.isSymbiosisInstalled = true;
-            tower.symbiosisTower.ActivateSymbiosisUpgrade();
+          //  tower.symbiosisTower.isSymbiosisInstalled = true;
+          //  tower.symbiosisTower.ActivateSymbiosisUpgrade();
 
         }
         else
