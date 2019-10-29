@@ -417,8 +417,8 @@ MonoBehaviour:
   lazerTower: {fileID: 6015777778884135378, guid: 0337bdfcdac9efd43baee395d73fe29e,
     type: 3}
   lazerTowerPrice: 120
-  uiElectroTowerPrice: {fileID: 7264254517224199427}
-  uiLazerTowerPrice: {fileID: 7074244636597440230}
+  uiElectroTowerPrice: {fileID: 0}
+  uiLazerTowerPrice: {fileID: 0}
   buttons:
   - {fileID: 605910771}
   - {fileID: 980679421}

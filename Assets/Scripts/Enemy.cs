@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public enum EnemyType { Solder, Healer};
+public enum EnemyType { Solder, Healer, Tank, Jumper};
 
 public class Enemy : Damageable
 {
