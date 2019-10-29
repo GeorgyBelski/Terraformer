@@ -17,6 +17,7 @@ public class TowerManager : MonoBehaviour
     public static HashSet<Tower> symbiosisTowers = new HashSet<Tower>();
 
     int towerEnemyLayerMask = (1 << 13 | 1 << 12);
+    int towerLayerMask = 1 << 13;
     int towerLayer = 13;
     public static Tower selectedTower;
     public static Tower highlightedTower;
@@ -133,31 +134,34 @@ public class TowerManager : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 100f, towerEnemyLayerMask))
+        if (Physics.Raycast(ray, out hit, 100f, towerLayerMask))
         {
-            if (hit.transform.gameObject.layer == towerLayer)
-            {
-                if (highlightedTower) { highlightedTower.isHighlighted = false; }
 
-                //   selectedTower = hit.transform.gameObject.GetComponent<Tower>();
-                transformTowerMap.TryGetValue(hit.transform, out highlightedTower);
-                if (highlightedTower && highlightedTower!= towerLookingForSymbiosisPartner && !symbiosisTowers.Contains(highlightedTower))
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+
+            //   selectedTower = hit.transform.gameObject.GetComponent<Tower>();
+            transformTowerMap.TryGetValue(hit.transform, out highlightedTower);
+            if (highlightedTower && highlightedTower != towerLookingForSymbiosisPartner && !symbiosisTowers.Contains(highlightedTower))
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        highlightedTower.isHighlighted = false;
-                        towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
-                        symbiosisTowers.Add(highlightedTower);
-                        symbiosisTowers.Add(towerLookingForSymbiosisPartner);
-                        towerLookingForSymbiosisPartner = null;
-                    }
-                    else
-                    {
-                        highlightedTower.isHighlighted = true;
-                    }
+                    highlightedTower.isHighlighted = false;
+                    towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
+                    symbiosisTowers.Add(highlightedTower);
+                    symbiosisTowers.Add(towerLookingForSymbiosisPartner);
+                    towerLookingForSymbiosisPartner = null;
+                }
+                else
+                {
+                    highlightedTower.isHighlighted = true;
                 }
             }
 
+        }
+        else
+        {
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+            highlightedTower = null;
         }
         
     }

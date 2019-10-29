@@ -9,6 +9,8 @@ public class CreepHexagonGenerator : MonoBehaviour
 {
     public static int creepLayer = 14;
 
+    public int hexagonsCount = 0;
+
     [Range(1,49)]
     public int radius = 3;
     public int coefficient = 1;
@@ -83,7 +85,7 @@ public class CreepHexagonGenerator : MonoBehaviour
             coordinatHexaX = x;
             coordinatHexaZ = z;
             coefficient = parentCreep.coefficient;
-
+            parentCreep.hexagonsCount++;
             if (hexagonPrefab == null)
             {
                 hexagonGObject = new GameObject("hexagon_" + x + "," + z);
@@ -198,7 +200,8 @@ public class CreepHexagonGenerator : MonoBehaviour
             {
                 damagedHexagons.Remove(this);
             }
-           // hexagonGObject.SetActive(false);
+            parentCreep.hexagonsCount--;
+            // hexagonGObject.SetActive(false);
         }
 
         public void DamageHexagon()
@@ -211,6 +214,7 @@ public class CreepHexagonGenerator : MonoBehaviour
             coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = HexCoordinatStatus.Damaged;
             hexagonGObject.transform.localScale = Vector3.one * 0.4f;
             // hexagon.Delete();
+            parentCreep.hexagonsCount--;
         }
 
         public void ResetPosition()
@@ -228,7 +232,14 @@ public class CreepHexagonGenerator : MonoBehaviour
         ScaleExternalCircle();
         RepairHexagons();
     }
-
+    public void Expand()
+    {
+        isExpanding = true;
+    }
+    public void Repair()
+    {
+        isRepairing = true;
+    }
     public void CreateHexagon(int x, int z)
     {
         if (GetHexagon(x, z) != null)
@@ -299,7 +310,7 @@ public class CreepHexagonGenerator : MonoBehaviour
                 if (hexagonScale > 1)
                 {
                     hexagonScale = 1;
-                    
+                   // hexagonsCount++;
                 }
 
                 hexgon.hexagonGObject.transform.localScale = hexagonScale * Vector3.one;
@@ -368,7 +379,7 @@ public class CreepHexagonGenerator : MonoBehaviour
             }
             externalCircle.Add(hexagon);
         });
-        
+        hexagonsCount += damagedHexagons.Count;
         damagedHexagons.Clear();
       //  isRepairing = false;
     }
