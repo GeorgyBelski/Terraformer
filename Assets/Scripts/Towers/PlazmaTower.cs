@@ -35,15 +35,6 @@ public class PlazmaTower : Tower
     {
         s2 = plazmaBuletSpeed * plazmaBuletSpeed;
         dir = new Vector2();
-
-
-        //Debug.DrawLine(new Vector3(10, 1, 0), new Vector3 (-30, 1, 0), Color.green, 100, true);
-
-        
-        //print(s2 + " " + tanTheta + " " + Mathf.Sqrt(r) + " " + (g * x) + " " + y);
-
-
-        //timerAttack = cooldownAttack;
         base.Start();
         type = TowerType.Plazma;
     }
@@ -52,14 +43,17 @@ public class PlazmaTower : Tower
         if (target)
         {
             /////////Debug for Drawing Trajectory
+            float realSpeed = plazmaBuletSpeed;
             Vector3 prev = gunpoint.transform.position, next;
             for (int i = 1; i <= 20; i++)
             {
+                
                 float t = i / 10f;
-                float dx = plazmaBuletSpeed * cosTheta * t;
-                float dy = plazmaBuletSpeed * sinTheta * t - 0.5f * g * t * t;
+                //realSpeed -= (0.5f * 0.002f * realSpeed * realSpeed);
+                float dx = realSpeed * cosTheta * t;
+                float dy = realSpeed * sinTheta * t - 0.5f * g * t * t;
                 next = gunpoint.transform.position + new Vector3(dir.x * dx, dy, dir.y * dx);
-                Debug.DrawLine(prev, next, Color.blue, 100, true);
+                Debug.DrawLine(prev, next, Color.blue, 5, true);
                 prev = next;
                 // print(prev + "+" + next);
             }
@@ -67,14 +61,45 @@ public class PlazmaTower : Tower
 
             //LookAtTarger();
             bullet = Instantiate(plazmaBullet, gunpoint.position, gunpoint.rotation).GetComponent<PlazmaBullet>();
-            bullet.setSettings(directShotAttack, plazmaBuletSpeed, blastShotAttack, damageRadius, target, gunpoint.transform.position, new Vector3(plazmaBuletSpeed * cosTheta * dir.x, plazmaBuletSpeed * sinTheta, plazmaBuletSpeed * cosTheta * dir.y));
+            bullet.setSettings(directShotAttack, plazmaBuletSpeed, blastShotAttack, damageRadius, target, gunpoint.transform.position, new Vector3(plazmaBuletSpeed * cosTheta * dir.x, plazmaBuletSpeed * sinTheta, plazmaBuletSpeed *cosTheta * dir.y));
         }
     }
 
+    //private Vector3 prevPos;
+    //private float prevTime = 0;
+
     private void findeTrajectory()
     {
-        dir.x = target.transform.position.x - gunpoint.transform.position.x;
-        dir.y = target.transform.position.z - gunpoint.transform.position.z;
+       
+        //Rigidbody targetRigidbody;
+        Vector3 endPosition = target.transform.position;
+        /*
+        if (prevPos == null)
+            prevPos = endPosition;
+
+        if (prevTime == 0)
+            prevTime = Time.deltaTime;
+
+        print((prevPos / Time.deltaTime - endPosition / Time.deltaTime).magnitude);
+        prevPos = endPosition;
+        prevTime = Time.deltaTime;
+        */
+        switch(target.type)   
+        {
+            case EnemyType.Tank:
+                //EnemyMouseController emk = target.GetComponent<EnemyMouseController>();
+                //print(targetRigidbody.velocity.magnitude);
+                //print(Vector3.Distance(transform.position, target.transform.position) / base.range);
+                endPosition += target.transform.forward * 2 * plazmaBuletSpeed / g * 0.5f * 2.5f * Vector3.Distance(transform.position, target.transform.position) / base.range;
+                
+            break;
+            case EnemyType.Solder:
+                endPosition += target.transform.forward * 6f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);// * plazmaBuletSpeed / g * 2.5f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);
+            break;
+            //endPosition += target.transform.forward * emk.agent.speed;//((Vector3.Distance(transform.position, target.transform.position)) / base.range) * 6 * emk.agent.speed;
+        }
+        dir.x = endPosition.x - gunpoint.transform.position.x;
+        dir.y = endPosition.z - gunpoint.transform.position.z;
         shootPosX = dir.magnitude;
         shootPosY = -gunpoint.transform.position.y;
         dir /= shootPosX;
@@ -89,6 +114,7 @@ public class PlazmaTower : Tower
         //print("+");
         if (target)
         {
+            
             cannon.localRotation = Quaternion.LookRotation(new Vector3(dir.x, tanTheta, dir.y));
             //cannon.LookAt(target.GetPosition());
         }

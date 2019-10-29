@@ -31,6 +31,7 @@ public class PlazmaBullet : MonoBehaviour
         time += Time.deltaTime;
         Vector3 p = launchPoint + velocity * time;
         p.y -= 0.5f * 9.81f * time * time;
+        //p.x = px - p.x / 100; 
         transform.localPosition = p;
         //time += Time.deltaTime;
         //if()
