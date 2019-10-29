@@ -13,6 +13,7 @@ public class SpriteController : MonoBehaviour
         fromPlayerToBar = this.transform.position - actor.transform.position;
     }
 
+
     void LateUpdate()
     {
         this.transform.position = actor.transform.position + fromPlayerToBar;

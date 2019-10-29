@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TowerType { Electro, Laser, Terraformerw };
+public enum TowerType { Electro, Laser, Terraformerw, Plazma };
 
 public abstract class Tower : MonoBehaviour
 {
