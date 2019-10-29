@@ -17,8 +17,8 @@ public class Shoping : MonoBehaviour
     public GameObject lazerTower;
     public float lazerTowerPrice;
 
-    public TextMeshProUGUI uiElectroTowerPrice;
-    public TextMeshProUGUI uiLazerTowerPrice;
+    public Text uiElectroTowerPrice;
+    public Text uiLazerTowerPrice;
 
     [Header("Buttons")]
     public List<Button> buttons;
