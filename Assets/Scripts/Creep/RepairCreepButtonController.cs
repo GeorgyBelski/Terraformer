@@ -4,18 +4,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
+public class RepairCreepButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
     public Button thisButton;
     public bool isPointeOnTheButton = false, isPointerExit = true;
     public bool lockShowCost = false;
 
-
     void Start()
     {
 
     }
-
     void Update()
     {
         EnableButton();
@@ -28,7 +26,6 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
         isPointerExit = false;
         lockShowCost = false;
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         ResourceManager.resourceCost.text = "";
@@ -39,18 +36,19 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         ResourceManager.resourceCost.text = "";
     }
+
     void ShowCost()
     {
-        if (isPointeOnTheButton && !lockShowCost && thisButton.interactable)
+        if (!lockShowCost && isPointeOnTheButton)
         {
-            CreepHexagonGenerator.DisplayExpensionCost();
+            CreepHexagonGenerator.DisplayRepairingCost();
             lockShowCost = true;
         }
+        
     }
-
     void EnableButton()
     {
-        if (CreepHexagonGenerator.creepHexagonGenerator.isExpanding || CreepHexagonGenerator.damagedHexagons.Count >0)
+        if (CreepHexagonGenerator.creepHexagonGenerator.isRepairing || CreepHexagonGenerator.damagedHexagons.Count == 0)
         {
             if (thisButton.interactable)
             {
@@ -58,7 +56,6 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
                 isPointeOnTheButton = false;
                 lockShowCost = false;
             }
-            
         }
         else if(!thisButton.interactable)
         {
@@ -66,10 +63,7 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
             if (!isPointerExit)
             {
                 isPointeOnTheButton = true;
-                
             }
         }
     }
-
-    
 }

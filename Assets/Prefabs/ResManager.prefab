@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3396125244038868016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.41, y: 1.27, z: -22.4}
-  m_LocalScale: {x: 0.7235, y: 0.96059096, z: 0.7235}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,7 +92,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartResource: 500
-  resourceMax: 10000
+  StartMaxresource: 10000
   resourceCounter: {fileID: 0}
+  resourceCostReference: {fileID: 0}
+  resourceIncome: {fileID: 0}
   resourcefiller: {fileID: 0}
   incomefiller: {fileID: 0}
+  incomePeriod: 2

@@ -73,13 +73,13 @@ public class TowerHealth : Damageable
             if(resource > costNeeded)
             {
                 maxRepairHealth = 1;
-                ResourceManager.removeResource(costNeeded);
+                ResourceManager.RemoveResource(costNeeded);
             }
 
             else
             {
                 maxRepairHealth = healthRatio + resource / 100 / repaircost;
-                ResourceManager.removeResource(resource);
+                ResourceManager.RemoveResource(resource);
                 //print(maxRepairHealth);
             }
             

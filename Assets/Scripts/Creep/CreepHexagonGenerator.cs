@@ -7,12 +7,17 @@ public enum HexCoordinatStatus {Void, Attend, Damaged };
 
 public class CreepHexagonGenerator : MonoBehaviour
 {
+    public static CreepHexagonGenerator creepHexagonGenerator;
     public static int creepLayer = 14;
 
     public int hexagonsCount = 0;
+    int previosHexagonCount;
 
     [Range(1,49)]
     public int radius = 3;
+    public static int expansionCost, repairingCost;
+    public int buildCost = 1, repairHexagonCost = 1, incomFromHexagon = 1, income; 
+
     public int coefficient = 1;
     int previousRadius;
     int previousCoefficient;
@@ -47,12 +52,13 @@ public class CreepHexagonGenerator : MonoBehaviour
     
     void Start()
     {
-
+        creepHexagonGenerator = this;
         Vector3 rightUpVertexDirection = Quaternion.AngleAxis(60, Vector3.up) * Vector3.forward;
         hexaZ = (rightUpVertexDirection + Vector3.forward) * coefficient;
         hexaX = new Vector3(rightUpVertexDirection.x, 0, 0) * 2 * coefficient;
         Circles = new List<Hexagon>[matrixCoordinateCenter];
         timerRiseTime = new float[radius+1];
+        UpdateExpansionCost();
         damagedHexagons = new List<Hexagon>();
      /*
         offset = new float[radius+1];
@@ -86,6 +92,7 @@ public class CreepHexagonGenerator : MonoBehaviour
             coordinatHexaZ = z;
             coefficient = parentCreep.coefficient;
             parentCreep.hexagonsCount++;
+            parentCreep.CalculateIncome();
             if (hexagonPrefab == null)
             {
                 hexagonGObject = new GameObject("hexagon_" + x + "," + z);
@@ -201,6 +208,7 @@ public class CreepHexagonGenerator : MonoBehaviour
                 damagedHexagons.Remove(this);
             }
             parentCreep.hexagonsCount--;
+            parentCreep.CalculateIncome();
             // hexagonGObject.SetActive(false);
         }
 
@@ -215,6 +223,8 @@ public class CreepHexagonGenerator : MonoBehaviour
             hexagonGObject.transform.localScale = Vector3.one * 0.4f;
             // hexagon.Delete();
             parentCreep.hexagonsCount--;
+            parentCreep.UpdateRepairingCost();
+            parentCreep.CalculateIncome();
         }
 
         public void ResetPosition()
@@ -232,13 +242,37 @@ public class CreepHexagonGenerator : MonoBehaviour
         ScaleExternalCircle();
         RepairHexagons();
     }
+    public static void DisplayExpensionCost()
+    {
+        ResourceManager.resourceCost.text = "-" + expansionCost;
+    }
+    public static void DisplayRepairingCost()
+    {
+        if (repairingCost > 0)
+        { ResourceManager.resourceCost.text = "-" + repairingCost; }
+    }
+    void UpdateExpansionCost()
+    {
+        expansionCost = 6 * buildCost * (radius + 1);
+    }
+    void UpdateRepairingCost()
+    {
+        repairingCost = repairHexagonCost * damagedHexagons.Count;
+    }
     public void Expand()
     {
-        isExpanding = true;
+        if (ResourceManager.RemoveResource(expansionCost))
+        { isExpanding = true;}
     }
     public void Repair()
     {
-        isRepairing = true;
+        if (ResourceManager.RemoveResource(repairingCost))
+        { isRepairing = true;}
+    }
+    public int CalculateIncome()
+    {
+        income = hexagonsCount * incomFromHexagon;
+        return income;
     }
     public void CreateHexagon(int x, int z)
     {
@@ -275,6 +309,7 @@ public class CreepHexagonGenerator : MonoBehaviour
             if (radius < previousRadius) {
              //   externalCircle.Clear();
                 ReduceSurface();
+                UpdateExpansionCost();
                 return;
             }
 
@@ -381,6 +416,8 @@ public class CreepHexagonGenerator : MonoBehaviour
         });
         hexagonsCount += damagedHexagons.Count;
         damagedHexagons.Clear();
+        UpdateRepairingCost();
+        CalculateIncome();
       //  isRepairing = false;
     }
 
@@ -446,7 +483,8 @@ public class CreepHexagonGenerator : MonoBehaviour
                 isExpanding = false;
                 isExpandingFinished = true;
                 isLockExpancion = false;
-                circleRadius = 1;        
+                circleRadius = 1;
+                UpdateExpansionCost();
             }
             else
             {

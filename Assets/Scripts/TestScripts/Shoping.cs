@@ -130,7 +130,7 @@ public class Shoping : MonoBehaviour
                
                 if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower && ResourceManager.resource >= currPrice)
                 {
-                    ResourceManager.removeResource(currPrice);
+                    ResourceManager.RemoveResource(currPrice);
                     placeTower();
                     isPlacing = false;
                     selectB(bSelected);

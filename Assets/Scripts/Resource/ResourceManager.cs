@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class ResourceManager : MonoBehaviour
     public float StartMaxresource = 10000;
 
     [Header("HUD")]
-    public Text resourceCounter, resourceCost;
+    public Text resourceCounter;
+    public Text resourceCostReference;
+    public Text resourceIncome;
+    int previousIncome;
     public Image resourcefiller;
     public Image incomefiller;
 
@@ -19,11 +23,15 @@ public class ResourceManager : MonoBehaviour
     public static float resourceMax;
 
     public static Text resourceCounterST;
+    public static Text resourceCost;
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 
     public static float RepairCost = 1f;
-    
+
+    [Header("INcome")]
+    public float incomePeriod = 1;
+    float timerIncomePeriod;
 
     //private static float income;
     //        {
@@ -36,6 +44,7 @@ public class ResourceManager : MonoBehaviour
         resourceMax = StartMaxresource;
 
         resourceCounterST = resourceCounter;
+        resourceCost = resourceCostReference;
         resourcefillerST = resourcefiller;
         incomeFilerST = incomefiller;
 
@@ -44,21 +53,46 @@ public class ResourceManager : MonoBehaviour
         incomefiller.fillAmount = 0;
     }
 
-    public static void addResource(float count)
+    void Update()
+    {
+        Income();
+        ShowIncome();
+    }
+
+    private void Income()
+    {
+        timerIncomePeriod -= Time.deltaTime;
+        if (timerIncomePeriod <= 0)
+        {
+            AddResource(CreepHexagonGenerator.creepHexagonGenerator.income);
+            timerIncomePeriod = incomePeriod;
+        }
+    }
+    void ShowIncome()
+    {
+        if (previousIncome != CreepHexagonGenerator.creepHexagonGenerator.income)
+        {
+            previousIncome = CreepHexagonGenerator.creepHexagonGenerator.income;
+            resourceIncome.text = previousIncome.ToString();
+        }
+    }
+
+    public static void AddResource(float count)
     {
         resource += count;
         if (resource > resourceMax)
-            resource = resourceMax;
+        { resource = resourceMax;}  
         fillResourceFiller();
     }
 
-    public static void removeResource(float count)
+    public static bool RemoveResource(float count)
     {
         if (resource - count < 0)
-            return;
+        { return false; }
 
         resource -= count;
         fillResourceFiller();
+        return true;
     }
 
     private static void fillResourceFiller()

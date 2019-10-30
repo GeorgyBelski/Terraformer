@@ -25,7 +25,7 @@ public class LaserTower : Tower
     [Header("ThandetBallAbility")]
     public ScorchingRayAbility scorchingRayAbility;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
         type = TowerType.Laser;
