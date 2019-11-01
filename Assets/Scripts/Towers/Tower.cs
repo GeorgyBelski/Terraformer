@@ -11,21 +11,28 @@ public abstract class Tower : MonoBehaviour
     public TowerType type;
 
     [Header("Main Attributes")]
+    public bool enableAutoattacs = true;
     public int range = 8;
     int previousRange;
     public Color rangeColor;
     public Material gizmoMaterial;
     public Material rangeLineMaterial;
-    public bool isHighlighted;
-    public bool isSelected;
+    [HideInInspector]
+    public bool isHighlighted, isSelected;
     bool castingAbility;
     public bool IsCastingAbility { get => castingAbility; set => castingAbility = value; }
+    
+
     public TargetingType targetingType = TargetingType.Nearest;
+    public static int basicSupply = 1;
+    public int supply; // cost of autoAttacs per second;
+    public int autoAttacCost = 1;
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
     protected float ordinaryCooldownAttack;
     public float timerAttack = 0f;
+
     /*
     public float cooldownAbility1 = 10f;
     protected float timerAbility1 = 0f;
@@ -74,6 +81,7 @@ public abstract class Tower : MonoBehaviour
 
         towerMaterial = GetComponent<MeshRenderer>().material;
         highlightedColor = new Color(1, 1, .5f);
+        ResourceManager.isTowersSupplyChanged = true;
     }
 
     void Update()
@@ -83,11 +91,14 @@ public abstract class Tower : MonoBehaviour
             LookAtTarger();
             Shooting();
         }
-
-        TowerUpdate();
-        ReduceTimers();
-        HighlightTower();
-        ShowRange();
+        if (enableAutoattacs)
+        {
+            TowerUpdate();
+            ReduceTimers();
+            HighlightTower();
+            ShowRange();
+        }
+        
     }
     internal abstract void TowerUpdate();
 
@@ -289,10 +300,12 @@ public abstract class Tower : MonoBehaviour
             symbiosisTower.symbiosisTower = null;
             symbiosisTower = null;
 
+            ResourceManager.isTowersSupplyChanged = true;
         }
         
     }
 
     public abstract void ActivateSymbiosisUpgrade();
     public abstract void DisableSymbiosisUpgrade();
+
 }

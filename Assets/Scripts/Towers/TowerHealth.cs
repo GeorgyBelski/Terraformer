@@ -42,6 +42,7 @@ public class TowerHealth : Damageable
     public override void RemoveFromList()
     {
         TowerManager.RemoveTower(thisTower);
+        ResourceManager.isTowersSupplyChanged = true;
     }
 
     public override void ApplyDeath()
@@ -51,7 +52,8 @@ public class TowerHealth : Damageable
         //Destroy(thisTowet.gameObject);
 
         thisTower.cooldownAttack = float.PositiveInfinity;
-        thisTower.timerAttack = float.PositiveInfinity;
+        //    thisTower.timerAttack = float.PositiveInfinity;
+        thisTower.enableAutoattacs = false;
 
         if (thisTower.type == TowerType.Electro)
         {

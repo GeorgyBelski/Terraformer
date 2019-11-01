@@ -25,7 +25,7 @@ public class TowerManager : MonoBehaviour
 
     private void Start()
     {
-
+        
     }
     private void FixedUpdate()
     {

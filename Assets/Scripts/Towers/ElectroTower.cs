@@ -65,7 +65,7 @@ public class ElectroTower : Tower
 
     public override void TowerAttack(Enemy target)
     {    
-        if (target)
+        if (target && currentLightningCharge)
         {
             currentLightningCharge.position = gunpoint.position;
             enableCharge = true;

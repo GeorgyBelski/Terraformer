@@ -10,12 +10,16 @@ public class ResourceManager : MonoBehaviour
     [Header("Resourses")]
     public float StartResource = 500;
     public float StartMaxresource = 10000;
+    int proceeds;
+    bool signOfPreviosProceeds = true;
+    public int towersSupply;
+    public static bool isTowersSupplyChanged = true;
 
     [Header("HUD")]
     public Text resourceCounter;
     public Text resourceCostReference;
-    public Text resourceIncome;
-    int previousIncome;
+    public Text resourceProceeds, sigh;
+    int previousProceeds;
     public Image resourcefiller;
     public Image incomefiller;
 
@@ -29,9 +33,20 @@ public class ResourceManager : MonoBehaviour
 
     public static float RepairCost = 1f;
 
-    [Header("INcome")]
-    public float incomePeriod = 1;
-    float timerIncomePeriod;
+    [Header("Income")]
+    public int startIncomeFromHexagon = 1;
+    public static int incomeFromHexagon = 1, income;
+    public float startBillingPeriod = 2f;
+    public static float billingPeriod = 2f;
+
+    public Color incomeColor, lossColor;
+
+    float timerBillingPeriod;
+    [Header("Costs")]
+    public int basicTowerSupply = 2;
+    public int simbiosisTowerSupply = 1;
+    
+
 
     //private static float income;
     //        {
@@ -51,34 +66,71 @@ public class ResourceManager : MonoBehaviour
         fillResourceFiller();
         resourceCounter.text = StartResource.ToString();
         incomefiller.fillAmount = 0;
+
+        incomeFromHexagon = startIncomeFromHexagon;
+        billingPeriod = startBillingPeriod;
+
+        incomeColor = resourceProceeds.color;
     }
 
     void Update()
     {
-        Income();
-        ShowIncome();
+        CulculateTowersSupply();
+        CalculateProceeds();
+        ShowProceeds();
+        ApplyProceeds();
     }
-
-    private void Income()
+    void CulculateTowersSupply()
     {
-        timerIncomePeriod -= Time.deltaTime;
-        if (timerIncomePeriod <= 0)
+        if (!isTowersSupplyChanged)
+        { return; }
+
+        //   towersSupply = 0;
+        //   TowerManager.towers.ForEach(tower => towersSupply += tower.supply);
+        towersSupply = TowerManager.towers.Count * basicTowerSupply + TowerManager.symbiosisTowers.Count * simbiosisTowerSupply;
+        isTowersSupplyChanged = false;
+    }
+    private void ApplyProceeds()
+    {
+        timerBillingPeriod -= Time.deltaTime;
+        if (timerBillingPeriod <= 0)
         {
-            AddResource(CreepHexagonGenerator.creepHexagonGenerator.income);
-            timerIncomePeriod = incomePeriod;
+            AddResource(proceeds);
+            timerBillingPeriod = billingPeriod;
         }
     }
-    void ShowIncome()
+    void CalculateProceeds()
     {
-        if (previousIncome != CreepHexagonGenerator.creepHexagonGenerator.income)
+        proceeds = ResourceManager.income - towersSupply;
+        if (proceeds <= 0 && signOfPreviosProceeds)
         {
-            previousIncome = CreepHexagonGenerator.creepHexagonGenerator.income;
-            resourceIncome.text = previousIncome.ToString();
+            resourceProceeds.color = lossColor;
+            sigh.enabled = false;
+            signOfPreviosProceeds = false;
+        }
+        else if(proceeds > 0 && !signOfPreviosProceeds)
+        {
+            resourceProceeds.color = incomeColor;
+            sigh.enabled = true; ;
+            signOfPreviosProceeds = true;
+        }
+    }
+    void ShowProceeds()
+    {
+        if (previousProceeds != proceeds)
+        {
+            previousProceeds = proceeds;
+            resourceProceeds.text = previousProceeds.ToString();
         }
     }
 
     public static void AddResource(float count)
     {
+        if (count < 0)
+        {
+            RemoveResource(-count);
+            return;
+        }
         resource += count;
         if (resource > resourceMax)
         { resource = resourceMax;}  

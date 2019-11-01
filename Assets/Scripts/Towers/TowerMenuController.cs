@@ -115,8 +115,9 @@ public class TowerMenuController : MonoBehaviour
             tower.isSymbiosisInstalled = true;
             tower.ActivateSymbiosisUpgrade();
 
-          //  tower.symbiosisTower.isSymbiosisInstalled = true;
-          //  tower.symbiosisTower.ActivateSymbiosisUpgrade();
+            ResourceManager.isTowersSupplyChanged = true;
+            //  tower.symbiosisTower.isSymbiosisInstalled = true;
+            //  tower.symbiosisTower.ActivateSymbiosisUpgrade();
 
         }
         else

@@ -108,8 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexagonsCount: 0
   radius: 1
-  buildCost: 40
-  repairHexagonCost: 30
+  buildCost: 30
+  repairHexagonCost: 25
   incomFromHexagon: 1
   income: 0
   coefficient: 2

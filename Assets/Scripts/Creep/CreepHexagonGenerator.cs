@@ -10,13 +10,13 @@ public class CreepHexagonGenerator : MonoBehaviour
     public static CreepHexagonGenerator creepHexagonGenerator;
     public static int creepLayer = 14;
 
-    public int hexagonsCount = 0;
+    public static int hexagonsCount = 0;
     int previosHexagonCount;
 
     [Range(1,49)]
     public int radius = 3;
     public static int expansionCost, repairingCost;
-    public int buildCost = 1, repairHexagonCost = 1, incomFromHexagon = 1, income; 
+    public int buildCost = 1, repairHexagonCost = 1; 
 
     public int coefficient = 1;
     int previousRadius;
@@ -91,8 +91,8 @@ public class CreepHexagonGenerator : MonoBehaviour
             coordinatHexaX = x;
             coordinatHexaZ = z;
             coefficient = parentCreep.coefficient;
-            parentCreep.hexagonsCount++;
-            parentCreep.CalculateIncome();
+            hexagonsCount++;
+            parentCreep.CalculateCreepIncome();
             if (hexagonPrefab == null)
             {
                 hexagonGObject = new GameObject("hexagon_" + x + "," + z);
@@ -207,8 +207,8 @@ public class CreepHexagonGenerator : MonoBehaviour
             {
                 damagedHexagons.Remove(this);
             }
-            parentCreep.hexagonsCount--;
-            parentCreep.CalculateIncome();
+            hexagonsCount--;
+            parentCreep.CalculateCreepIncome();
             // hexagonGObject.SetActive(false);
         }
 
@@ -222,9 +222,9 @@ public class CreepHexagonGenerator : MonoBehaviour
             coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = HexCoordinatStatus.Damaged;
             hexagonGObject.transform.localScale = Vector3.one * 0.4f;
             // hexagon.Delete();
-            parentCreep.hexagonsCount--;
+            hexagonsCount--;
             parentCreep.UpdateRepairingCost();
-            parentCreep.CalculateIncome();
+            parentCreep.CalculateCreepIncome();
         }
 
         public void ResetPosition()
@@ -269,10 +269,9 @@ public class CreepHexagonGenerator : MonoBehaviour
         if (ResourceManager.RemoveResource(repairingCost))
         { isRepairing = true;}
     }
-    public int CalculateIncome()
+    public void CalculateCreepIncome()
     {
-        income = hexagonsCount * incomFromHexagon;
-        return income;
+        ResourceManager.income = hexagonsCount * ResourceManager.incomeFromHexagon;
     }
     public void CreateHexagon(int x, int z)
     {
@@ -417,7 +416,7 @@ public class CreepHexagonGenerator : MonoBehaviour
         hexagonsCount += damagedHexagons.Count;
         damagedHexagons.Clear();
         UpdateRepairingCost();
-        CalculateIncome();
+        CalculateCreepIncome();
       //  isRepairing = false;
     }
 

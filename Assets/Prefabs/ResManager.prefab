@@ -91,11 +91,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc00b98b61eec6438d24ab9979db8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartResource: 500
+  StartResource: 550
   StartMaxresource: 10000
+  towersSupply: 0
   resourceCounter: {fileID: 0}
   resourceCostReference: {fileID: 0}
-  resourceIncome: {fileID: 0}
+  resourceProceeds: {fileID: 0}
+  sigh: {fileID: 0}
   resourcefiller: {fileID: 0}
   incomefiller: {fileID: 0}
-  incomePeriod: 2
+  startIncomeFromHexagon: 1
+  startBillingPeriod: 2
+  incomeColor: {r: 0.7294118, g: 1, b: 0.89411765, a: 1}
+  lossColor: {r: 1, g: 0.5235849, b: 0.5235849, a: 1}
+  basicTowerSupply: 2
+  simbiosisTowerSupply: 1
