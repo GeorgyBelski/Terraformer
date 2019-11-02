@@ -21,23 +21,23 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_3D6217E2:
-        m_Texture: {fileID: 2800000, guid: 9c4ece2aaf37e334f8b509083b09f6c4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1d812fbe5bcc98046be67cf3a4b501ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_4CAFEF17:
-        m_Texture: {fileID: 2800000, guid: fdcef55d9aeec384b83350b39435757a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 79c3638d7315ca84aa86b9de01355e26, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_9AFFCAC8:
-        m_Texture: {fileID: 2800000, guid: e0b203cc1bfce5049bf0f07c783dd5d5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6dd3a88ff19ab8f40ab4ded1bb146c07, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_A9B432BE:
-        m_Texture: {fileID: 2800000, guid: f2ca3f00d90aaab458df01fe6d9d1b13, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2a7639c7867d8b6458c96a86f31fa285, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_B5D47446:
-        m_Texture: {fileID: 2800000, guid: c8d1d708e1384324ab87ccf87f4f123b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 56f35cd47eb9da6499c628e0f839b62b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_6A6F0598_Texture_1:
@@ -50,17 +50,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_2EDF9278: 0
+    - Boolean_85A21493: 1
+    - Boolean_D779A97B: 1
     - Vector1_1FD0BB21: 0.49
-    - Vector1_9734A4A4: 3.07
+    - Vector1_9734A4A4: 1
     - Vector1_AC08B298: 0.5
     - _Boolean_Highlight: 1
+    - _Float_Highlight: 0
+    - _Float_Symbiosis: 0
+    - _Float_Upgrade: 0
+    - _Float_isSymbiosis: 0
+    - _Float_isUpgrade: 0
     m_Colors:
     - Color_19495AAD: {r: 1, g: 1, b: 0.4481132, a: 1}
     - Color_4711D7AC: {r: 4, g: 0.8167539, b: 0.4397905, a: 0}
     - Color_7CD30C50: {r: 0.5518868, g: 1, b: 0.9955211, a: 0}
     - Color_BC50206F: {r: 2.692615, g: 0.9622641, b: 4, a: 0}
-    - Color_E9157EBD: {r: 1, g: 0.6117647, b: 0.5254902, a: 1}
+    - Color_E9157EBD: {r: 1, g: 0.79545456, b: 0.75, a: 1}
     - _Color_Highlight: {r: 0.9639488, g: 1, b: 0.495283, a: 1}
-    - _Color_StEmition: {r: 1.424084, g: 3.183246, b: 4, a: 0}
+    - _Color_StEmition: {r: 3.9800448, g: 1.3895732, b: 0.8072733, a: 0}
     - _Color_SymbEmition: {r: 4, g: 0.8167539, b: 0.4397905, a: 0}
     - _Color_UpEmition: {r: 2.692615, g: 0.9622641, b: 4, a: 0}
