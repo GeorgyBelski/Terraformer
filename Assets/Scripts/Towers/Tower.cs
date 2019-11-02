@@ -59,7 +59,8 @@ public abstract class Tower : MonoBehaviour
     int targetIndex = -1;
     LineRenderer rangeline;
     Vector3 previousPosition;
-    Material towerMaterial;
+    [HideInInspector]
+    public Material towerMaterial;
     Color highlightedColor;
     protected int randomizer;
 
@@ -251,13 +252,13 @@ public abstract class Tower : MonoBehaviour
 
     void HighlightTower()
     {
-        if (isHighlighted && towerMaterial.GetColor("Color_19495AAD") != highlightedColor)
+        if (isHighlighted && towerMaterial.GetFloat("_Float_Highlight") != 1)
         {
-            towerMaterial.SetColor("Color_19495AAD", highlightedColor);
+            towerMaterial.SetFloat("_Float_Highlight", 1f);
         }
-        else if(!isHighlighted && towerMaterial.GetColor("Color_19495AAD") != Color.black)
+        else if (!isHighlighted && towerMaterial.GetFloat("_Float_Highlight") != 0)
         {
-            towerMaterial.SetColor("Color_19495AAD", Color.black);
+            towerMaterial.SetFloat("_Float_Highlight", 0);
         }
     }
 
@@ -297,10 +298,17 @@ public abstract class Tower : MonoBehaviour
             DisableSymbiosisUpgrade();
             symbiosisTower.DisableSymbiosisUpgrade();
 
+            towerMaterial.SetFloat("_Float_Symbiosis", 0);
+            symbiosisTower.towerMaterial.SetFloat("_Float_Symbiosis", 0);
+
+
             symbiosisTower.symbiosisTower = null;
             symbiosisTower = null;
 
             ResourceManager.isTowersSupplyChanged = true;
+            towerMaterial.SetFloat("_Float_Highlight", 0);
+
+            
         }
         
     }
