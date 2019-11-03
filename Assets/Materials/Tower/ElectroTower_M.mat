@@ -70,4 +70,4 @@ Material:
     - _Color_Highlight: {r: 0.96192724, g: 1, b: 0.4669811, a: 1}
     - _Color_StEmition: {r: 1.424084, g: 3.183246, b: 4, a: 0}
     - _Color_SymbEmition: {r: 8.161612, g: 1.175395, b: 0.6836951, a: 0}
-    - _Color_UpEmition: {r: 4.5638695, g: 4.9787664, b: 5.4282384, a: 0}
+    - _Color_UpEmition: {r: 14.093178, g: 14.093178, b: 14.093178, a: 0}
