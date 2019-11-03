@@ -12,14 +12,14 @@ public class ResourceManager : MonoBehaviour
 
     [Header("HUD")]
     //public TextMeshPro
-    public TextMeshProUGUI resourceCounter;
+    public Text resourceCounter;
     public Image resourcefiller;
     public Image incomefiller;
 
     public static float resourceST;
     public static float resourceMaxST;
 
-    public static TextMeshProUGUI resourceCounterST;
+    public static Text resourceCounterST;
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 

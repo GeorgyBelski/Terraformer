@@ -162,7 +162,11 @@ public abstract class AbilityButtonController : MonoBehaviour
                 {
                     casterTower = (LaserTower)nearestTower;
                 }
-                
+                else if (castTowerType == TowerType.Plazma)
+                {
+                    casterTower = (PlazmaTower)nearestTower;
+                }
+
                 if (casterTower && casterTower != previousHighlightedTower)
                 {
                     casterTower.isHighlighted = true;
