@@ -66,8 +66,8 @@ Material:
     - Color_4711D7AC: {r: 4, g: 0.8167539, b: 0.4397905, a: 0}
     - Color_7CD30C50: {r: 0.5518868, g: 1, b: 0.9955211, a: 0}
     - Color_BC50206F: {r: 2.692615, g: 0.9622641, b: 4, a: 0}
-    - Color_E9157EBD: {r: 1, g: 0.79545456, b: 0.75, a: 1}
+    - Color_E9157EBD: {r: 1, g: 0.8784312, b: 0.8632076, a: 1}
     - _Color_Highlight: {r: 0.9639488, g: 1, b: 0.495283, a: 1}
-    - _Color_StEmition: {r: 3.9800448, g: 1.3895732, b: 0.8072733, a: 0}
+    - _Color_StEmition: {r: 7.0941677, g: 1.4005663, b: 0.30116737, a: 0}
     - _Color_SymbEmition: {r: 4, g: 0.8167539, b: 0.4397905, a: 0}
-    - _Color_UpEmition: {r: 16, g: 16, b: 16, a: 0}
+    - _Color_UpEmition: {r: 21.361254, g: 1.712931, b: 1.712931, a: 0}

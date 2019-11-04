@@ -153,7 +153,9 @@ public class CreepHexagonGenerator : MonoBehaviour
 
                 UpdateHexagonMesh();
                 hexagonGObject.layer = creepLayer;
-                hexagonGObject.AddComponent<MeshCollider>();
+                MeshCollider meshCollider = hexagonGObject.AddComponent<MeshCollider>();
+                meshCollider.convex = true;
+                meshCollider.isTrigger = true;
             }
             else
             {

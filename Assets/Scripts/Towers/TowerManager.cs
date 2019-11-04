@@ -23,6 +23,8 @@ public class TowerManager : MonoBehaviour
     public static Tower highlightedTower;
     public static Tower towerLookingForSymbiosisPartner;
 
+    public int symbiosisCostMultiplayer = 8;
+
     private void Start()
     {
         
@@ -123,6 +125,7 @@ public class TowerManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            ResourceManager.DisplayCost(false);
             towerLookingForSymbiosisPartner = null;
             if (highlightedTower) { highlightedTower.isHighlighted = false; }
             highlightedTower = null;
@@ -143,8 +146,12 @@ public class TowerManager : MonoBehaviour
             transformTowerMap.TryGetValue(hit.transform, out highlightedTower);
             if (highlightedTower && highlightedTower != towerLookingForSymbiosisPartner && !symbiosisTowers.Contains(highlightedTower))
             {
+                Symbiosis.cost = (int)(symbiosisCostMultiplayer * (towerLookingForSymbiosisPartner.transform.position - highlightedTower.transform.position).magnitude);
+                ResourceManager.DisplayCost(true, Symbiosis.cost);
                 if (Input.GetMouseButtonDown(0))
                 {
+                    ResourceManager.DisplayCost(false);
+                    ResourceManager.RemoveResource(Symbiosis.cost);
                     highlightedTower.isHighlighted = false;
                     towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
                     symbiosisTowers.Add(highlightedTower);
@@ -160,9 +167,11 @@ public class TowerManager : MonoBehaviour
         }
         else
         {
+            ResourceManager.DisplayCost(false);
             if (highlightedTower) { highlightedTower.isHighlighted = false; }
             highlightedTower = null;
         }
         
     }
+
 }

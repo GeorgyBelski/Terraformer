@@ -16,9 +16,9 @@ public class ResourceManager : MonoBehaviour
     public static bool isTowersSupplyChanged = true;
 
     [Header("HUD")]
-    public Text resourceCounter;
-    public Text resourceCostReference;
-    public Text resourceProceeds, sigh;
+    public TextMeshProUGUI resourceCounter;
+    public TextMeshProUGUI resourceCostReference;
+    public TextMeshProUGUI resourceProceeds, sigh;
     int previousProceeds;
     public Image resourcefiller;
     public Image incomefiller;
@@ -26,8 +26,8 @@ public class ResourceManager : MonoBehaviour
     public static float resource;
     public static float resourceMax;
 
-    public static Text resourceCounterST;
-    public static Text resourceCost;
+    public static TextMeshProUGUI resourceCounterST;
+    public static TextMeshProUGUI resourceCost;
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 
@@ -70,7 +70,7 @@ public class ResourceManager : MonoBehaviour
         incomeFromHexagon = startIncomeFromHexagon;
         billingPeriod = startBillingPeriod;
 
-        incomeColor = resourceProceeds.color;
+        incomeColor = resourceProceeds.faceColor;
     }
 
     void Update()
@@ -104,13 +104,13 @@ public class ResourceManager : MonoBehaviour
         proceeds = ResourceManager.income - towersSupply;
         if (proceeds <= 0 && signOfPreviosProceeds)
         {
-            resourceProceeds.color = lossColor;
+            resourceProceeds.faceColor = lossColor;
             sigh.enabled = false;
             signOfPreviosProceeds = false;
         }
         else if(proceeds > 0 && !signOfPreviosProceeds)
         {
-            resourceProceeds.color = incomeColor;
+            resourceProceeds.faceColor = incomeColor;
             sigh.enabled = true; ;
             signOfPreviosProceeds = true;
         }
@@ -158,11 +158,18 @@ public class ResourceManager : MonoBehaviour
     {
 
     }
-    
+
     /*
     public void countIncome()
     {
 
     }
     */
+    public static void DisplayCost( bool enable, int cost = 0)
+    {
+        if (enable)
+        { resourceCost.text = "-" + cost; }
+        else
+        { resourceCost.text = ""; }
+    }
 }

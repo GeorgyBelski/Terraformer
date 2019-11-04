@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Symbiosis
 {
-
+    public static int cost;
+    public static void DisplaySymbiosisCost(bool enable)
+    {
+        if (enable)
+        { ResourceManager.resourceCost.text = "-" + cost; }
+        else { ResourceManager.resourceCost.text = ""; }
+    }
     public static TowerType? ActivateElectroSymbiosisUpgrade(ElectroTower tower)
     {
         if (!tower.isSymbiosisInstalled)
@@ -26,7 +32,7 @@ public class Symbiosis
             //   tower.particleSystemRenderer.trailMaterial = tower.laserSymbiosisMaterial;          
             tower.autoAttackMaterial.SetColor("_EnergyColor01", tower.laserSymbColor1);
             tower.autoAttackMaterial.SetColor("_EnergyColor02", tower.laserSymbColor2);
-            tower.towerMaterial.SetColor("_Color_SymbEmition", tower.laserSymbColor1);
+            tower.towerMaterial.SetColor("_Color_SymbEmition", tower.laserSymbColor2);
             var trails = tower.lightningChargeParticleSys.trails;
             trails.ribbonCount = 1;
             tower.lightningLerpSpeed = 3;
@@ -48,7 +54,7 @@ public class Symbiosis
         {
             tower.currentColor1 = tower.electroSymbColor1;
             tower.currentColor2 = tower.electroSymbColor2;
-            tower.towerMaterial.SetColor("_Color_SymbEmition", tower.electroSymbColor1);
+            tower.towerMaterial.SetColor("_Color_SymbEmition", tower.electroSymbColor2);
         }
         else if (symbiosisTowerType == TowerType.Laser)
         {
