@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlazmaBullet : MonoBehaviour
+public class ClusterShard : MonoBehaviour
 {
-    public GameObject plazmaBlowUp;
+    public GameObject clasterBlowUp;
+    public GameObject calsterPuddle;
     private int blowUpDamage;
     private float blowUpSize;
+
+    private float puddleSize;
+    private float puddleTime;
 
     public int mainDamage;
     public float speed;
 
     private PlazmaBlowUp blow;
-    private Enemy target;
+    private ClusterPuddle puddle;
+    //private Enemy target;
 
     private float time = 0;
     private float startPos;
@@ -40,46 +45,35 @@ public class PlazmaBullet : MonoBehaviour
         if (transform.position.y <= 0.4)
         {
 
-            blow = Instantiate(plazmaBlowUp, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<PlazmaBlowUp>();
+            blow = Instantiate(clasterBlowUp, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<PlazmaBlowUp>();
             blow.setSetings(blowUpDamage, blowUpSize);
+            puddle = Instantiate(calsterPuddle, new Vector3(transform.position.x, 0, transform.position.z), new Quaternion(0, 0, 0, 0)).GetComponent<ClusterPuddle>();
+            puddle.setSetings(puddleTime, puddleSize);
             Destroy(gameObject);
         }
-    
+
     }
 
-    public void setSettings(int mainDamage, float speed, int blowUpDamage, float blowUpSize, Enemy target, Vector3 launchPoint, Vector3 velocity)
+    public void setSettings(int mainDamage, float speed, int blowUpDamage, float blowUpSize, float puddleSize, float puddleTime, Vector3 launchPoint, Vector3 velocity)
     {
         this.mainDamage = mainDamage;
         this.speed = speed;
         this.blowUpDamage = blowUpDamage;
         this.blowUpSize = blowUpSize;
-        this.target = target;
+        this.puddleSize = puddleSize;
+        this.puddleTime = puddleTime;
         this.launchPoint = launchPoint;
         this.velocity = velocity;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-       
 
-        if (other.gameObject.layer == 12 && target)
+
+        if (other.gameObject.layer == 12)
         {
-            target.ApplyDamage(mainDamage, transform.position, Vector3.zero);
+            other.GetComponent<Enemy>().ApplyDamage(mainDamage, transform.position, Vector3.zero);
             //Debug.Log("entered");
         }
     }
-
-    /*void OnCollisionEnter(Collision collision)
-    {
-        // print("+");
-        if (collision.gameObject.layer == 9)
-        {
-            
-            Instantiate(plazmaBlowUp, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
-        
-    }
-    */
- }
-
+}

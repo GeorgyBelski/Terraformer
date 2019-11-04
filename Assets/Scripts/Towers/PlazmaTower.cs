@@ -17,6 +17,8 @@ public class PlazmaTower : Tower
     //private float reloading;
     public GameObject plazmaBullet;
 
+    public PlazmaClusterBombAbility clusterBombAbility;
+
     private PlazmaBullet bullet;
 
     private Vector2 dir;
@@ -137,7 +139,7 @@ public class PlazmaTower : Tower
 
     public void CastClusterBomb(Vector3 aimPosition)
     {
-
+        clusterBombAbility.Cast(aimPosition);
     }
 
     public override void ActivateSymbiosisUpgrade()
