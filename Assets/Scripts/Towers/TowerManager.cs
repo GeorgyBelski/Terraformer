@@ -150,13 +150,20 @@ public class TowerManager : MonoBehaviour
                 ResourceManager.DisplayCost(true, Symbiosis.cost);
                 if (Input.GetMouseButtonDown(0))
                 {
-                    ResourceManager.DisplayCost(false);
-                    ResourceManager.RemoveResource(Symbiosis.cost);
-                    highlightedTower.isHighlighted = false;
-                    towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
-                    symbiosisTowers.Add(highlightedTower);
-                    symbiosisTowers.Add(towerLookingForSymbiosisPartner);
-                    towerLookingForSymbiosisPartner = null;
+                    if (ResourceManager.RemoveResource(Symbiosis.cost))
+                    {
+                        ResourceManager.DisplayCost(false);
+                        highlightedTower.isHighlighted = false;
+                        towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
+                        symbiosisTowers.Add(highlightedTower);
+                        symbiosisTowers.Add(towerLookingForSymbiosisPartner);
+                        towerLookingForSymbiosisPartner = null;
+                    }
+                    else
+                    {
+                        ResourceManager.CostIsTooHighSignal();
+                    }
+
                 }
                 else
                 {

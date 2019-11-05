@@ -28,6 +28,7 @@ public class ResourceManager : MonoBehaviour
 
     public static TextMeshProUGUI resourceCounterST;
     public static TextMeshProUGUI resourceCost;
+    public static Animator resourceCostAnimator;
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 
@@ -60,6 +61,7 @@ public class ResourceManager : MonoBehaviour
 
         resourceCounterST = resourceCounter;
         resourceCost = resourceCostReference;
+        resourceCostAnimator = resourceCost.GetComponent<Animator>();
         resourcefillerST = resourcefiller;
         incomeFilerST = incomefiller;
 
@@ -171,5 +173,14 @@ public class ResourceManager : MonoBehaviour
         { resourceCost.text = "-" + cost; }
         else
         { resourceCost.text = ""; }
+    }
+
+    public static void CostIsTooHighSignal()
+    {
+        resourceCostAnimator.SetBool("tooHigh", true);
+    }
+    public static void ExitCostIsTooHighSignal()
+    {
+        resourceCostAnimator.SetBool("tooHigh", false);
     }
 }

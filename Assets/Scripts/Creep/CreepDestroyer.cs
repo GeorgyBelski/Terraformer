@@ -5,7 +5,6 @@ using UnityEngine;
 public class CreepDestroyer : MonoBehaviour
 {
     public bool destroyHexagon = false;
-    int creepLayerMask = 1 << CreepHexagonGenerator.creepLayer; //
     void Start()
     {
         
@@ -21,7 +20,7 @@ public class CreepDestroyer : MonoBehaviour
         if (!destroyHexagon) { return; }
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2f, creepLayerMask))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2f, CreepHexagonGenerator.creepLayerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
             GameObject hexagonGameObject = hit.collider.gameObject;

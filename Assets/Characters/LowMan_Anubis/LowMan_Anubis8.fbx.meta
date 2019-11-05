@@ -1,395 +1,26 @@
 fileFormatVersion: 2
-guid: 6f4dccda69a59e04db8fd5c5e1cc79ca
+guid: 2c9f9572e2ba994468d596a1acb2722d
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      1: 100000
-    second: default1
-  - first:
-      1: 100002
-    second: Helmet0
-  - first:
-      1: 100004
-    second: LowMan
-  - first:
-      1: 100006
-    second: //RootNode
-  - first:
-      1: 100008
-    second: mixamorig:Head
-  - first:
-      1: 100010
-    second: mixamorig:HeadTop_End
-  - first:
-      1: 100012
-    second: mixamorig:Hips
-  - first:
-      1: 100014
-    second: mixamorig:LeftArm
-  - first:
-      1: 100016
-    second: mixamorig:LeftFoot
-  - first:
-      1: 100018
-    second: mixamorig:LeftForeArm
-  - first:
-      1: 100020
-    second: mixamorig:LeftHand
-  - first:
-      1: 100022
-    second: mixamorig:LeftHandIndex1
-  - first:
-      1: 100024
-    second: mixamorig:LeftHandIndex2
-  - first:
-      1: 100026
-    second: mixamorig:LeftHandIndex3
-  - first:
-      1: 100028
-    second: mixamorig:LeftHandIndex4
-  - first:
-      1: 100030
-    second: mixamorig:LeftHandMiddle1
-  - first:
-      1: 100032
-    second: mixamorig:LeftHandMiddle2
-  - first:
-      1: 100034
-    second: mixamorig:LeftHandMiddle3
-  - first:
-      1: 100036
-    second: mixamorig:LeftHandMiddle4
-  - first:
-      1: 100038
-    second: mixamorig:LeftHandThumb1
-  - first:
-      1: 100040
-    second: mixamorig:LeftHandThumb2
-  - first:
-      1: 100042
-    second: mixamorig:LeftHandThumb3
-  - first:
-      1: 100044
-    second: mixamorig:LeftHandThumb4
-  - first:
-      1: 100046
-    second: mixamorig:LeftLeg
-  - first:
-      1: 100048
-    second: mixamorig:LeftShoulder
-  - first:
-      1: 100050
-    second: mixamorig:LeftToe_End
-  - first:
-      1: 100052
-    second: mixamorig:LeftToeBase
-  - first:
-      1: 100054
-    second: mixamorig:LeftUpLeg
-  - first:
-      1: 100056
-    second: mixamorig:Neck
-  - first:
-      1: 100058
-    second: mixamorig:RightArm
-  - first:
-      1: 100060
-    second: mixamorig:RightFoot
-  - first:
-      1: 100062
-    second: mixamorig:RightForeArm
-  - first:
-      1: 100064
-    second: mixamorig:RightHand
-  - first:
-      1: 100066
-    second: mixamorig:RightHandIndex1
-  - first:
-      1: 100068
-    second: mixamorig:RightHandIndex2
-  - first:
-      1: 100070
-    second: mixamorig:RightHandIndex3
-  - first:
-      1: 100072
-    second: mixamorig:RightHandIndex4
-  - first:
-      1: 100074
-    second: mixamorig:RightHandMiddle1
-  - first:
-      1: 100076
-    second: mixamorig:RightHandMiddle2
-  - first:
-      1: 100078
-    second: mixamorig:RightHandMiddle3
-  - first:
-      1: 100080
-    second: mixamorig:RightHandMiddle4
-  - first:
-      1: 100082
-    second: mixamorig:RightHandThumb1
-  - first:
-      1: 100084
-    second: mixamorig:RightHandThumb2
-  - first:
-      1: 100086
-    second: mixamorig:RightHandThumb3
-  - first:
-      1: 100088
-    second: mixamorig:RightHandThumb4
-  - first:
-      1: 100090
-    second: mixamorig:RightLeg
-  - first:
-      1: 100092
-    second: mixamorig:RightShoulder
-  - first:
-      1: 100094
-    second: mixamorig:RightToe_End
-  - first:
-      1: 100096
-    second: mixamorig:RightToeBase
-  - first:
-      1: 100098
-    second: mixamorig:RightUpLeg
-  - first:
-      1: 100100
-    second: mixamorig:Spine
-  - first:
-      1: 100102
-    second: mixamorig:Spine1
-  - first:
-      1: 100104
-    second: mixamorig:Spine2
-  - first:
-      1: 100106
-    second: SholderStrap0
-  - first:
-      4: 400000
-    second: default1
-  - first:
-      4: 400002
-    second: Helmet0
-  - first:
-      4: 400004
-    second: LowMan
-  - first:
-      4: 400006
-    second: //RootNode
-  - first:
-      4: 400008
-    second: mixamorig:Head
-  - first:
-      4: 400010
-    second: mixamorig:HeadTop_End
-  - first:
-      4: 400012
-    second: mixamorig:Hips
-  - first:
-      4: 400014
-    second: mixamorig:LeftArm
-  - first:
-      4: 400016
-    second: mixamorig:LeftFoot
-  - first:
-      4: 400018
-    second: mixamorig:LeftForeArm
-  - first:
-      4: 400020
-    second: mixamorig:LeftHand
-  - first:
-      4: 400022
-    second: mixamorig:LeftHandIndex1
-  - first:
-      4: 400024
-    second: mixamorig:LeftHandIndex2
-  - first:
-      4: 400026
-    second: mixamorig:LeftHandIndex3
-  - first:
-      4: 400028
-    second: mixamorig:LeftHandIndex4
-  - first:
-      4: 400030
-    second: mixamorig:LeftHandMiddle1
-  - first:
-      4: 400032
-    second: mixamorig:LeftHandMiddle2
-  - first:
-      4: 400034
-    second: mixamorig:LeftHandMiddle3
-  - first:
-      4: 400036
-    second: mixamorig:LeftHandMiddle4
-  - first:
-      4: 400038
-    second: mixamorig:LeftHandThumb1
-  - first:
-      4: 400040
-    second: mixamorig:LeftHandThumb2
-  - first:
-      4: 400042
-    second: mixamorig:LeftHandThumb3
-  - first:
-      4: 400044
-    second: mixamorig:LeftHandThumb4
-  - first:
-      4: 400046
-    second: mixamorig:LeftLeg
-  - first:
-      4: 400048
-    second: mixamorig:LeftShoulder
-  - first:
-      4: 400050
-    second: mixamorig:LeftToe_End
-  - first:
-      4: 400052
-    second: mixamorig:LeftToeBase
-  - first:
-      4: 400054
-    second: mixamorig:LeftUpLeg
-  - first:
-      4: 400056
-    second: mixamorig:Neck
-  - first:
-      4: 400058
-    second: mixamorig:RightArm
-  - first:
-      4: 400060
-    second: mixamorig:RightFoot
-  - first:
-      4: 400062
-    second: mixamorig:RightForeArm
-  - first:
-      4: 400064
-    second: mixamorig:RightHand
-  - first:
-      4: 400066
-    second: mixamorig:RightHandIndex1
-  - first:
-      4: 400068
-    second: mixamorig:RightHandIndex2
-  - first:
-      4: 400070
-    second: mixamorig:RightHandIndex3
-  - first:
-      4: 400072
-    second: mixamorig:RightHandIndex4
-  - first:
-      4: 400074
-    second: mixamorig:RightHandMiddle1
-  - first:
-      4: 400076
-    second: mixamorig:RightHandMiddle2
-  - first:
-      4: 400078
-    second: mixamorig:RightHandMiddle3
-  - first:
-      4: 400080
-    second: mixamorig:RightHandMiddle4
-  - first:
-      4: 400082
-    second: mixamorig:RightHandThumb1
-  - first:
-      4: 400084
-    second: mixamorig:RightHandThumb2
-  - first:
-      4: 400086
-    second: mixamorig:RightHandThumb3
-  - first:
-      4: 400088
-    second: mixamorig:RightHandThumb4
-  - first:
-      4: 400090
-    second: mixamorig:RightLeg
-  - first:
-      4: 400092
-    second: mixamorig:RightShoulder
-  - first:
-      4: 400094
-    second: mixamorig:RightToe_End
-  - first:
-      4: 400096
-    second: mixamorig:RightToeBase
-  - first:
-      4: 400098
-    second: mixamorig:RightUpLeg
-  - first:
-      4: 400100
-    second: mixamorig:Spine
-  - first:
-      4: 400102
-    second: mixamorig:Spine1
-  - first:
-      4: 400104
-    second: mixamorig:Spine2
-  - first:
-      4: 400106
-    second: SholderStrap0
-  - first:
-      21: 2100000
-    second: lambert_LowMan
-  - first:
-      21: 2100002
-    second: lambert_SholderStrap
-  - first:
-      23: 2300000
-    second: default1
-  - first:
-      23: 2300002
-    second: Helmet0
-  - first:
-      33: 3300000
-    second: default1
-  - first:
-      33: 3300002
-    second: Helmet0
-  - first:
-      43: 4300000
-    second: default1
-  - first:
-      43: 4300002
-    second: LowMan
-  - first:
-      43: 4300004
-    second: SholderStrap0
-  - first:
-      43: 4300006
-    second: Helmet0
-  - first:
-      74: 7400000
+      74: 1827226128182048838
     second: Take 001
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: LowMan
-  - first:
-      137: 13700002
-    second: SholderStrap0
-  - first:
-      41386430: 2186277476908879412
-    second: ImportLogs
-  - first:
-      1773428102: 7973541674914708964
-    second: Helmet0
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert_LowMan
-    second: {fileID: 2100000, guid: 00cb820b80c1c414b881e148c9cd133e, type: 2}
+      name: blinn1
+    second: {fileID: 2100000, guid: c8b10fe5db0043a4ab529a4ce0c4f56f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert_SholderStrap
-    second: {fileID: 2100000, guid: df83b97db131e234686d6ca3f8dccdaf, type: 2}
+    second: {fileID: 2100000, guid: 5439b2d832d9e0b42afe35b50dc483c0, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
-    materialSearch: 1
+    materialSearch: 0
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -416,7 +47,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
-      internalID: 7400000
+      internalID: 1827226128182048838
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -805,33 +436,28 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: LowMan_Anubis7(Clone)
+    - name: LowMan_Anubis8(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: default1
-      parentName: LowMan_Anubis7(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: LowMan
-      parentName: LowMan_Anubis7(Clone)
+      parentName: LowMan_Anubis8(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: SholderStrap0
-      parentName: LowMan_Anubis7(Clone)
+      parentName: LowMan_Anubis8(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Helmet0
-      parentName: LowMan_Anubis7(Clone)
-      position: {x: -5.4210107e-22, y: 1.5208523, z: -1.4432899e-17}
+      parentName: LowMan_Anubis8(Clone)
+      position: {x: -5.4210107e-22, y: 1.5208523, z: -6.328271e-17}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
-      parentName: LowMan_Anubis7(Clone)
+      parentName: LowMan_Anubis8(Clone)
       position: {x: -0.0000010685346, y: 0.8667587, z: 0.01038635}
       rotation: {x: 0.000000041537536, y: -0.00000025909762, z: 0.000009099255, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -943,7 +569,7 @@ ModelImporter:
     - name: mixamorig:RightHandThumb1
       parentName: mixamorig:RightHand
       position: {x: -0.023854962, y: 0.03000774, z: 0.007911121}
-      rotation: {x: 0.18051302, y: 0.07949175, z: 0.037647463, w: 0.97963196}
+      rotation: {x: 0.027693603, y: 0.014990078, z: 0.12862945, w: 0.9911927}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightHandThumb2
       parentName: mixamorig:RightHandThumb1
@@ -1023,7 +649,7 @@ ModelImporter:
     - name: mixamorig:LeftHandThumb1
       parentName: mixamorig:LeftHand
       position: {x: 0.024915192, y: 0.029638145, z: 0.009181932}
-      rotation: {x: 0.16901064, y: -0.07727448, z: -0.07092612, w: 0.9800171}
+      rotation: {x: 0.010808033, y: -0.016410286, z: -0.15649456, w: 0.9874834}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftHandThumb2
       parentName: mixamorig:LeftHandThumb1

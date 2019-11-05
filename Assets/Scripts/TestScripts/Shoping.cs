@@ -25,7 +25,7 @@ public class Shoping : MonoBehaviour
 
     float camRayLength = 60f;
     //public ResourceManager resManager;
-    public int floorMask;
+  //  public int floorMask;
 
 
     private bool selectedElectroBool = false;
@@ -46,7 +46,7 @@ public class Shoping : MonoBehaviour
     {
         uiElectroTowerPrice.text = electroTowerPrice.ToString();
         uiLazerTowerPrice.text = lazerTowerPrice.ToString();
-        floorMask = LayerMask.GetMask("Ground");
+    //    floorMask = LayerMask.GetMask("Ground");
         //defaultColor = 
         selectedTowerColor = Color.green;
         //agent.updateRotation = false;
@@ -118,10 +118,11 @@ public class Shoping : MonoBehaviour
         {
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit floorHit;
-            if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+            if (Physics.Raycast(camRay, out floorHit, camRayLength, CreepHexagonGenerator.creepLayerMask))
             {
 
-                realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y, System.Convert.ToInt32(floorHit.point.z));
+                //   realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y, System.Convert.ToInt32(floorHit.point.z));
+                realTimeTowerPlace.transform.position = floorHit.transform.position;
                 if (realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower || ResourceManager.resource < currPrice)
                 {
                     mt.SetColor("_BaseColor", transparentRed);
@@ -130,13 +131,17 @@ public class Shoping : MonoBehaviour
                 {
                     mt.SetColor("_BaseColor", transparentGreen);
                 }
-               
+
                 if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower && ResourceManager.resource >= currPrice)
                 {
                     ResourceManager.RemoveResource(currPrice);
                     placeTower();
                     isPlacing = false;
                     selectB(bSelected);
+                }
+                else if (ResourceManager.resource < currPrice)
+                {
+                    ResourceManager.CostIsTooHighSignal();
                 }
             }
         }

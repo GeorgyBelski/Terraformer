@@ -63,21 +63,29 @@ public abstract class AbilityButtonController : MonoBehaviour
             Aiming();
             if (Input.GetMouseButtonDown(0))
             {
-                ResourceManager.DisplayCost(false);
+                
                 if (casterTower)
                 {
-                    ResourceManager.RemoveResource(cost);
-                    currentState = State.Recharging;
-                    buttonImage.color = buttonTintRecharging;
-                    timerCoolDown = coolDown;
-                //    timerCast = castTime;
-                //    TowerManager.ClearHighlighting();
-                    casterTower.isHighlighted = false;
-                    previousHighlightedTower = null;
-                    ///   casterTower.CastThanderBall(aimArea.position);
-                    TowerCastAreaAbility(casterTower);
-                    outLineImage.enabled = false;
-                    aimingAbility = null;
+                    if (ResourceManager.RemoveResource(cost))
+                    {
+                        ResourceManager.DisplayCost(false);
+                        currentState = State.Recharging;
+                        buttonImage.color = buttonTintRecharging;
+                        timerCoolDown = coolDown;
+                        //    timerCast = castTime;
+                        //    TowerManager.ClearHighlighting();
+                        casterTower.isHighlighted = false;
+                        previousHighlightedTower = null;
+                        ///   casterTower.CastThanderBall(aimArea.position);
+                        TowerCastAreaAbility(casterTower);
+                        outLineImage.enabled = false;
+                        aimingAbility = null;
+                    }
+                    else
+                    {
+                        ResourceManager.CostIsTooHighSignal();
+                        Cancel();
+                    }
                 }
                 else
                 {
@@ -89,6 +97,7 @@ public abstract class AbilityButtonController : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1))
             {
+                ResourceManager.DisplayCost(false);
                 Cancel();
             }
 
@@ -98,8 +107,7 @@ public abstract class AbilityButtonController : MonoBehaviour
                                                                  /// casterTower.CastThanderBall(aimArea.position);  // example for ElectroTower
                                                                  /// </summary>
 
-    public void Cancel() {
-        ResourceManager.DisplayCost(false);
+    public void Cancel() {       
         currentState = State.Ready;
         RemoveAimArea();
         outLineImage.enabled = false;

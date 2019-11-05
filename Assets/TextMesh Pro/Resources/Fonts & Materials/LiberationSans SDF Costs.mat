@@ -52,7 +52,7 @@ Material:
     - _ColorMask: 15
     - _Diffuse: 0
     - _FaceDilate: 0.52
-    - _FaceUVSpeedX: 0.05
+    - _FaceUVSpeedX: 0.09
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.007
     - _GlowOffset: -0.4
@@ -94,7 +94,7 @@ Material:
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceColor: {r: 0.7843137, g: 0, b: 1, a: 1}
+    - _FaceColor: {r: 0.85489815, g: 0.3254717, b: 1, a: 1}
     - _GlowColor: {r: 0.5896226, g: 0.70849603, b: 1, a: 1}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}

@@ -7,12 +7,15 @@ public class TowerHealth : Damageable
     public Tower thisTower;
     public bool isRepair;
     private float maxRepairHealth = 0;
+    public Color damagePoinysColor = Color.red;
 
     private float prevHealthRatio;
         
     void Start()
     {
         isRepair = false;
+        for (int i = 0; i < damagePoints.Length; i++)
+        { damagePoints[i].color = damagePoinysColor; }
     }
 
     void Update()

@@ -9,6 +9,7 @@ public class CreepHexagonGenerator : MonoBehaviour
 {
     public static CreepHexagonGenerator creepHexagonGenerator;
     public static int creepLayer = 14;
+    public static int creepLayerMask = 1 << creepLayer;
 
     public static int hexagonsCount = 0;
     int previosHexagonCount;
@@ -264,12 +265,16 @@ public class CreepHexagonGenerator : MonoBehaviour
     public void Expand()
     {
         if (ResourceManager.RemoveResource(expansionCost))
-        { isExpanding = true;}
+        { isExpanding = true; }
+        else
+        { ResourceManager.CostIsTooHighSignal(); }
     }
     public void Repair()
     {
         if (ResourceManager.RemoveResource(repairingCost))
         { isRepairing = true;}
+        else
+        { ResourceManager.CostIsTooHighSignal(); }
     }
     public void CalculateCreepIncome()
     {

@@ -31,13 +31,15 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ResourceManager.resourceCost.text = "";
+        if (!ResourceManager.resourceCostAnimator.GetBool("tooHigh"))
+        { ResourceManager.DisplayCost(false); }
         isPointeOnTheButton = false;
         isPointerExit = true;
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        ResourceManager.resourceCost.text = "";
+        if (CreepHexagonGenerator.expansionCost <= ResourceManager.resource)
+        { ResourceManager.DisplayCost(false); }
     }
     void ShowCost()
     {
