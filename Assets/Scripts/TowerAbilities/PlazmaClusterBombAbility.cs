@@ -91,7 +91,7 @@ public class PlazmaClusterBombAbility : TowerAbility
         shootPosY = -gunpoint.transform.position.y;
         dir /= shootPosX;
         float r = s2 * s2 - g * (g * shootPosX * shootPosX + 2f * shootPosY * s2);
-        tanTheta = (s2 + Mathf.Sqrt(r)) / (g * shootPosX);
+        tanTheta = (s2 - Mathf.Sqrt(r)) / (g * shootPosX);
         cosTheta = Mathf.Cos(Mathf.Atan(tanTheta));
         sinTheta = cosTheta * tanTheta;
 
