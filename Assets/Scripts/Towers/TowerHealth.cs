@@ -78,7 +78,7 @@ public class TowerHealth : Damageable
             if(resource > costNeeded)
             {
                 maxRepairHealth = 1;
-                Debug.Log(costNeeded);
+            //    Debug.Log(costNeeded);
                 ResourceManager.RemoveResource(costNeeded);
             }
 
