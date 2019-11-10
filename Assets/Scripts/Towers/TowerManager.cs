@@ -11,6 +11,7 @@ public class TowerManager : MonoBehaviour
 
     public static List<ElectroTower> availableElectroTowers = new List<ElectroTower>();
     public static List<LaserTower> availableLaserTowers = new List<LaserTower>();
+    public static List<PlazmaTower> availablePlazmaTowers = new List<PlazmaTower>();
 
     public static float selectedTowerRange = 1.5f;
     public static Dictionary<Transform, Tower> transformTowerMap = new Dictionary<Transform, Tower>();
@@ -48,6 +49,10 @@ public class TowerManager : MonoBehaviour
         else if (tower is LaserTower)
         {
             availableLaserTowers.Add((LaserTower)tower);
+        }
+        else if (tower is PlazmaTower)
+        {
+            availablePlazmaTowers.Add((PlazmaTower)tower);
         }
     }
 
