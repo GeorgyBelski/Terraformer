@@ -4,17 +4,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
     public Button thisButton;
-    public CreepHexagonGenerator creepHexagonGenerator;
     public bool isPointeOnTheButton = false, isPointerExit = true;
     public bool lockShowCost = false;
 
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -32,34 +31,38 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!ResourceManager.resourceCostAnimator.GetBool("tooHigh"))
+        { ResourceManager.DisplayCost(false); }
         isPointeOnTheButton = false;
         isPointerExit = true;
     }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (CreepHexagonGenerator.expansionCost <= ResourceManager.resource)
+        { ResourceManager.DisplayCost(false); }
+    }
     void ShowCost()
     {
-        if (creepHexagonGenerator && isPointeOnTheButton && !lockShowCost)
+        if (isPointeOnTheButton && !lockShowCost && thisButton.interactable)
         {
-            Debug.Log("cost: " + 6 * (creepHexagonGenerator.radius + 1));
+            CreepHexagonGenerator.DisplayExpensionCost();
             lockShowCost = true;
-        }
-        else if (!isPointeOnTheButton)
-        {
-
         }
     }
 
     void EnableButton()
     {
-        if(!creepHexagonGenerator)
-        { return; }
-
-        if (creepHexagonGenerator.isExpanding || CreepHexagonGenerator.damagedHexagons.Count >0)
+        if (CreepHexagonGenerator.creepHexagonGenerator.isExpanding || CreepHexagonGenerator.damagedHexagons.Count >0)
         {
-            thisButton.interactable = false;
-            isPointeOnTheButton = false;
-            lockShowCost = false;
+            if (thisButton.interactable)
+            {
+                thisButton.interactable = false;
+                isPointeOnTheButton = false;
+                lockShowCost = false;
+            }
+            
         }
-        else
+        else if(!thisButton.interactable)
         {
             thisButton.interactable = true;
             if (!isPointerExit)

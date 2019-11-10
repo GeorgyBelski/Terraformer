@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TowerType { Electro, Laser, Terraformerw };
+public enum TowerType { Electro, Laser, Terraformerw, Plazma };
 
 public abstract class Tower : MonoBehaviour
 {
@@ -11,21 +11,28 @@ public abstract class Tower : MonoBehaviour
     public TowerType type;
 
     [Header("Main Attributes")]
+    public bool enableAutoattacs = true;
     public int range = 8;
     int previousRange;
     public Color rangeColor;
     public Material gizmoMaterial;
     public Material rangeLineMaterial;
-    public bool isHighlighted;
-    public bool isSelected;
+    [HideInInspector]
+    public bool isHighlighted, isSelected;
     bool castingAbility;
     public bool IsCastingAbility { get => castingAbility; set => castingAbility = value; }
+    
+
     public TargetingType targetingType = TargetingType.Nearest;
+    public static int basicSupply = 1;
+    public int supply; // cost of autoAttacs per second;
+    public int autoAttacCost = 1;
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;
     protected float ordinaryCooldownAttack;
     public float timerAttack = 0f;
+
     /*
     public float cooldownAbility1 = 10f;
     protected float timerAbility1 = 0f;
@@ -52,7 +59,8 @@ public abstract class Tower : MonoBehaviour
     int targetIndex = -1;
     LineRenderer rangeline;
     Vector3 previousPosition;
-    Material towerMaterial;
+    [HideInInspector]
+    public Material towerMaterial;
     Color highlightedColor;
     protected int randomizer;
 
@@ -74,6 +82,7 @@ public abstract class Tower : MonoBehaviour
 
         towerMaterial = GetComponent<MeshRenderer>().material;
         highlightedColor = new Color(1, 1, .5f);
+        ResourceManager.isTowersSupplyChanged = true;
     }
 
     void Update()
@@ -83,11 +92,14 @@ public abstract class Tower : MonoBehaviour
             LookAtTarger();
             Shooting();
         }
-
-        TowerUpdate();
-        ReduceTimers();
-        HighlightTower();
-        ShowRange();
+        if (enableAutoattacs)
+        {
+            TowerUpdate();
+            ReduceTimers();
+            HighlightTower();
+            ShowRange();
+        }
+        
     }
     internal abstract void TowerUpdate();
 
@@ -198,7 +210,7 @@ public abstract class Tower : MonoBehaviour
     //    }
     }
     void Shooting() {
-        if (timerAttack <= 0) {
+        if (timerAttack <= 0 && target) {
             TowerAttack(target);
             timerAttack = cooldownAttack;
         }
@@ -240,13 +252,13 @@ public abstract class Tower : MonoBehaviour
 
     void HighlightTower()
     {
-        if (isHighlighted && towerMaterial.GetColor("Color_19495AAD") != highlightedColor)
+        if (isHighlighted && towerMaterial.GetFloat("_Float_Highlight") != 1)
         {
-            towerMaterial.SetColor("Color_19495AAD", highlightedColor);
+            towerMaterial.SetFloat("_Float_Highlight", 1f);
         }
-        else if(!isHighlighted && towerMaterial.GetColor("Color_19495AAD") != Color.black)
+        else if (!isHighlighted && towerMaterial.GetFloat("_Float_Highlight") != 0)
         {
-            towerMaterial.SetColor("Color_19495AAD", Color.black);
+            towerMaterial.SetFloat("_Float_Highlight", 0);
         }
     }
 
@@ -286,13 +298,22 @@ public abstract class Tower : MonoBehaviour
             DisableSymbiosisUpgrade();
             symbiosisTower.DisableSymbiosisUpgrade();
 
+            towerMaterial.SetFloat("_Float_Symbiosis", 0);
+            symbiosisTower.towerMaterial.SetFloat("_Float_Symbiosis", 0);
+
+
             symbiosisTower.symbiosisTower = null;
             symbiosisTower = null;
 
+            ResourceManager.isTowersSupplyChanged = true;
+            towerMaterial.SetFloat("_Float_Highlight", 0);
+
+            
         }
         
     }
 
     public abstract void ActivateSymbiosisUpgrade();
     public abstract void DisableSymbiosisUpgrade();
+
 }

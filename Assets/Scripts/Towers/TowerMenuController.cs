@@ -47,13 +47,17 @@ public class TowerMenuController : MonoBehaviour
         ShowTowerMenu();
         BreakingSymbiosis();
         InstallingSymbiosis();
+        if(RepairButton.isActive && tower.isSelected)
+        {
+            tower.towerHealth.Repair();
+        }
     }
 
     
 
     void ShowTowerMenu()
     {
-        if ((tower.isSelected && !TowerMenu.IsActive()) ||(!tower.isSelected && TowerMenu.IsActive()))
+        if (((tower.isSelected && !TowerMenu.IsActive()) ||(!tower.isSelected && TowerMenu.IsActive())) && !RepairButton.isActive)
         {
             TowerMenu.gameObject.SetActive(tower.isSelected);
         }
@@ -111,8 +115,9 @@ public class TowerMenuController : MonoBehaviour
             tower.isSymbiosisInstalled = true;
             tower.ActivateSymbiosisUpgrade();
 
-          //  tower.symbiosisTower.isSymbiosisInstalled = true;
-          //  tower.symbiosisTower.ActivateSymbiosisUpgrade();
+            ResourceManager.isTowersSupplyChanged = true;
+            //  tower.symbiosisTower.isSymbiosisInstalled = true;
+            //  tower.symbiosisTower.ActivateSymbiosisUpgrade();
 
         }
         else
