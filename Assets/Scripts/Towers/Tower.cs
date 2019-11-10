@@ -210,7 +210,7 @@ public abstract class Tower : MonoBehaviour
     //    }
     }
     void Shooting() {
-        if (timerAttack <= 0) {
+        if (timerAttack <= 0 && target) {
             TowerAttack(target);
             timerAttack = cooldownAttack;
         }

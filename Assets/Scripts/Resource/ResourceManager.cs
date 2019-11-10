@@ -61,7 +61,8 @@ public class ResourceManager : MonoBehaviour
 
         resourceCounterST = resourceCounter;
         resourceCost = resourceCostReference;
-        resourceCostAnimator = resourceCost.GetComponent<Animator>();
+        if (resourceCost)
+        { resourceCostAnimator = resourceCost.GetComponent<Animator>(); }
         resourcefillerST = resourcefiller;
         incomeFilerST = incomefiller;
 
