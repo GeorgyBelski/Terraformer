@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 4185582797753693951}
   - component: {fileID: 4185582797753693950}
   - component: {fileID: 4185582797753693949}
-  - component: {fileID: 4185582797753693948}
+  - component: {fileID: 5070000462709867432}
   - component: {fileID: 5315704249322942705}
   - component: {fileID: 4961004010957731150}
   - component: {fileID: 4635216721409019256}
@@ -402,8 +402,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4185582797753693947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.6, y: 2.0000002, z: 0.23}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -9.6, y: 0, z: 0.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5953679779698151395}
   - {fileID: 7796311517893457597}
@@ -418,7 +418,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4185582797753693947}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 3186528505494243756, guid: b7662a41c716bbc48a36eab23a725712, type: 3}
 --- !u!23 &4185582797753693949
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -457,8 +457,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &4185582797753693948
-CapsuleCollider:
+--- !u!64 &5070000462709867432
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -467,10 +467,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 3186528505494243756, guid: b7662a41c716bbc48a36eab23a725712, type: 3}
 --- !u!114 &5315704249322942705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,22 +484,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  enableAutoattacs: 1
   range: 14
-  rangeColor: {r: 0, g: 0, b: 0, a: 0}
+  rangeColor: {r: 0.6179246, g: 1, b: 0.6802195, a: 1}
   gizmoMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   rangeLineMaterial: {fileID: 2100000, guid: a6b798d74865a9e4e855fa60ca076075, type: 2}
   isHighlighted: 0
   isSelected: 0
   targetingType: 0
+  supply: 0
+  autoAttacCost: 1
   cooldownAttack: 1
   timerAttack: 0
   cannon: {fileID: 4507894551800307058}
   gunpoint: {fileID: 8530123040127368789}
   towerHealth: {fileID: 4961004010957731150}
   target: {fileID: 0}
+  visualLinkPrefab: {fileID: 0}
+  currentVisualLink: {fileID: 0}
   symbiosisTower: {fileID: 0}
   towerMenuController: {fileID: 4635216721409019256}
   isSymbiosisInstalled: 0
+  towerMaterial: {fileID: 0}
   plazmaBuletSpeed: 12
   directShotAttack: 150
   blastShotAttack: 100
@@ -534,6 +540,7 @@ MonoBehaviour:
   healthRatio: 0
   thisTower: {fileID: 5315704249322942705}
   isRepair: 0
+  damagePoinysColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &4635216721409019256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,7 +559,6 @@ MonoBehaviour:
   VurnerableButton: {fileID: 5268047010300813016}
   HardyButton: {fileID: 4682852361279526523}
   previousSelectedTargetingButton: {fileID: 0}
-  SymbiosisButton: {fileID: 0}
   symbiosisCircleBar: {fileID: 6832702964018985000}
   setSymbiosisTime: 2
   timerSetSymbiosisTime: 0
@@ -642,8 +648,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4909214296052474110}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.446, z: -0.00000009685755}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
+  m_LocalPosition: {x: 0, y: 4.13, z: -0.00000009685755}
+  m_LocalScale: {x: 0.54123, y: 0.54123, z: 0.90205}
   m_Children:
   - {fileID: 3671649629614699715}
   - {fileID: 8530123040127368789}
