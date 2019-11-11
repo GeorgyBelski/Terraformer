@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlazmaClusterBombAbilityButton : AbilityButtonController
+public class PlasmaClusterBombAbilityButton : AbilityButtonController
 {
     public override void TowerCastAreaAbility(Tower casterTower)
     {
-        ((PlazmaTower)casterTower).CastClusterBomb(aimArea.position);
+        ((PlasmaTower)casterTower).CastClusterBomb(aimArea.position);
     }
 }

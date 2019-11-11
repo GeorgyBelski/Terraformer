@@ -1330,13 +1330,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3236513020866106309}
   - component: {fileID: 3236513020866106310}
-  - component: {fileID: 3236513020560041561}
-  - component: {fileID: 3865004739852368829}
-  - component: {fileID: 3236513020560041562}
   - component: {fileID: 3236513020560041565}
+  - component: {fileID: 3236513020560041562}
   - component: {fileID: 1142897424575519165}
-  - component: {fileID: 6355382112742705237}
-  - component: {fileID: 6294444358056743056}
   m_Layer: 13
   m_Name: Terraformer
   m_TagString: Untagged
@@ -1374,65 +1370,6 @@ CapsuleCollider:
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3236513020560041561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3236513020866106311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
---- !u!114 &3865004739852368829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3236513020866106311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
---- !u!114 &3236513020560041562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3236513020866106311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ec283e3859fd7e49adcf5a71f90387f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3000
-  health: 3000
-  healthBar: {fileID: 374236586}
-  damagePoints:
-  - {fileID: 927901776}
-  - {fileID: 2079786717}
-  - {fileID: 481090553}
-  damagePointAnimators:
-  - {fileID: 927901773}
-  - {fileID: 2079786714}
-  - {fileID: 481090550}
-  damagePointIndex: 0
-  healthRatio: 0
-  thisTower: {fileID: 3236513020560041565}
-  isRepair: 0
 --- !u!114 &3236513020560041565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1467,23 +1404,8 @@ MonoBehaviour:
   symbiosisTower: {fileID: 0}
   towerMenuController: {fileID: 0}
   isSymbiosisInstalled: 0
---- !u!114 &1142897424575519165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3236513020866106311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
---- !u!114 &6355382112742705237
+  towerMaterial: {fileID: 0}
+--- !u!114 &3236513020560041562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1495,8 +1417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec283e3859fd7e49adcf5a71f90387f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2000
-  health: 2000
+  maxHealth: 3000
+  health: 3000
   healthBar: {fileID: 374236586}
   damagePoints:
   - {fileID: 927901776}
@@ -1508,9 +1430,10 @@ MonoBehaviour:
   - {fileID: 481090550}
   damagePointIndex: 0
   healthRatio: 0
-  thisTower: {fileID: 0}
+  thisTower: {fileID: 3236513020560041565}
   isRepair: 0
---- !u!114 &6294444358056743056
+  damagePoinysColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &1142897424575519165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

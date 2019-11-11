@@ -402,7 +402,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4185582797753693947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.6, y: 0, z: 0.23}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5953679779698151395}
@@ -436,7 +436,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e609830be1fbb354db16233a0b57cf82, type: 2}
+  - {fileID: 2100000, guid: 8e8ff643c7bb7944db94e840cccfe2c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
   type: 3
   enableAutoattacs: 1
   range: 14
-  rangeColor: {r: 0.6179246, g: 1, b: 0.6802195, a: 1}
+  rangeColor: {r: 0.6047526, g: 0.8490566, b: 0.69819236, a: 1}
   gizmoMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   rangeLineMaterial: {fileID: 2100000, guid: a6b798d74865a9e4e855fa60ca076075, type: 2}
   isHighlighted: 0
@@ -500,7 +500,8 @@ MonoBehaviour:
   gunpoint: {fileID: 8530123040127368789}
   towerHealth: {fileID: 4961004010957731150}
   target: {fileID: 0}
-  visualLinkPrefab: {fileID: 0}
+  visualLinkPrefab: {fileID: 8683470728788414260, guid: 03c45ea41f9012b449fcfb8d6797a4c9,
+    type: 3}
   currentVisualLink: {fileID: 0}
   symbiosisTower: {fileID: 0}
   towerMenuController: {fileID: 4635216721409019256}
@@ -538,7 +539,7 @@ MonoBehaviour:
   - {fileID: 5953679780579067581}
   damagePointIndex: 0
   healthRatio: 0
-  thisTower: {fileID: 5315704249322942705}
+  thisTower: {fileID: 0}
   isRepair: 0
   damagePoinysColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &4635216721409019256
@@ -586,9 +587,9 @@ MonoBehaviour:
   blastShotAttack: 100
   damageRadius: 2.5
   puddleRadius: 7
-  puddleTime: 10
+  puddleTime: 2.5
   bomb: {fileID: 9140362940864386350, guid: c5ba0e5c17de9ca48b4278258a5c7241, type: 3}
-  bombCount: 14
+  bombCount: 10
 --- !u!208 &4909029387598569047
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -598,12 +599,12 @@ NavMeshObstacle:
   m_GameObject: {fileID: 4185582797753693947}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_Shape: 1
+  m_Extents: {x: 1.2, y: 1.7580001, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.7450001, z: 0}
   m_TimeToStationary: 0.5
 --- !u!54 &4632297607463911867
 Rigidbody:
@@ -648,7 +649,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4909214296052474110}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.13, z: -0.00000009685755}
+  m_LocalPosition: {x: 0, y: 4.29, z: -0.00000009685755}
   m_LocalScale: {x: 0.54123, y: 0.54123, z: 0.90205}
   m_Children:
   - {fileID: 3671649629614699715}
@@ -744,7 +745,7 @@ RectTransform:
   m_GameObject: {fileID: 5953679779698151394}
   m_LocalRotation: {x: -0, y: 0.39704907, z: -0, w: 0.9177974}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0025, y: 0.0025, z: 0}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0}
   m_Children:
   - {fileID: 5953679779735270791}
   - {fileID: 5953679780609343248}
@@ -756,7 +757,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 46.788002, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.82}
+  m_AnchoredPosition: {x: 0, y: 5.04}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5953679779698151399

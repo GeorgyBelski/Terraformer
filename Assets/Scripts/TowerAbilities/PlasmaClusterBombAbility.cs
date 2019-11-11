@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlazmaClusterBombAbility : TowerAbility
+public class PlasmaClusterBombAbility : TowerAbility
 {
     //Timeless//Timeless//Timeless//Timeless//Timeless//Timeless//Timeless//Timeless//
     public float plazmaBuletSpeed = 50f;
@@ -76,7 +76,7 @@ public class PlazmaClusterBombAbility : TowerAbility
     {
 
         base.Cast(aimPosition);
-        TowerManager.availablePlazmaTowers.Remove((PlazmaTower)tower);
+        TowerManager.availablePlasmaTowers.Remove((PlasmaTower)tower);
         aim = aimPosition;
 
         speed = Vector3.Distance(aimPosition, gunpoint.position)/1.2f;

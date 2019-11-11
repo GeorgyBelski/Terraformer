@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
+    public int availablePlazmaTowersCount;
+
     public static List<Tower> towers = new List<Tower>();
 
     public static Tower terraformer { get; set; }
@@ -11,7 +13,7 @@ public class TowerManager : MonoBehaviour
 
     public static List<ElectroTower> availableElectroTowers = new List<ElectroTower>();
     public static List<LaserTower> availableLaserTowers = new List<LaserTower>();
-    public static List<PlazmaTower> availablePlazmaTowers = new List<PlazmaTower>();
+    public static List<PlasmaTower> availablePlasmaTowers = new List<PlasmaTower>();
 
     public static float selectedTowerRange = 1.5f;
     public static Dictionary<Transform, Tower> transformTowerMap = new Dictionary<Transform, Tower>();
@@ -37,6 +39,7 @@ public class TowerManager : MonoBehaviour
     void LateUpdate()
     {
         SelectTower();
+        availablePlazmaTowersCount = availablePlasmaTowers.Count;
     }
 
     public static void AddTower(Tower tower)
@@ -50,9 +53,9 @@ public class TowerManager : MonoBehaviour
         {
             availableLaserTowers.Add((LaserTower)tower);
         }
-        else if (tower is PlazmaTower)
+        else if (tower is PlasmaTower)
         {
-            availablePlazmaTowers.Add((PlazmaTower)tower);
+            availablePlasmaTowers.Add((PlasmaTower)tower);
         }
     }
 

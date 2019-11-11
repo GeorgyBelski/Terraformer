@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlazmaTower : Tower
+public class PlasmaTower : Tower
 {
     [Header("PlazmaTower")]
 
@@ -17,7 +17,7 @@ public class PlazmaTower : Tower
     //private float reloading;
     public GameObject plazmaBullet;
 
-    public PlazmaClusterBombAbility clusterBombAbility;
+    public PlasmaClusterBombAbility clusterBombAbility;
 
     private PlazmaBullet bullet;
 
@@ -38,7 +38,7 @@ public class PlazmaTower : Tower
         s2 = plazmaBuletSpeed * plazmaBuletSpeed;
         dir = new Vector2();
         base.Start();
-        type = TowerType.Plazma;
+        type = TowerType.Plasma;
         //print(TowerManager.availablePlazmaTowers);
     }
     public override void TowerAttack(Enemy target)
@@ -140,6 +140,7 @@ public class PlazmaTower : Tower
     public void CastClusterBomb(Vector3 aimPosition)
     {
         clusterBombAbility.Cast(aimPosition);
+        TowerManager.availablePlasmaTowers.Add(this);
     }
 
     public override void ActivateSymbiosisUpgrade()
