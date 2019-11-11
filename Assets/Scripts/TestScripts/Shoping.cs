@@ -17,15 +17,15 @@ public class Shoping : MonoBehaviour
     public GameObject lazerTower;
     public float lazerTowerPrice;
 
-    public Text uiElectroTowerPrice;
-    public Text uiLazerTowerPrice;
+    public TextMeshProUGUI uiElectroTowerPrice;
+    public TextMeshProUGUI uiLazerTowerPrice;
 
     [Header("Buttons")]
     public List<Button> buttons;
 
     float camRayLength = 60f;
     //public ResourceManager resManager;
-    public int floorMask;
+  //  public int floorMask;
 
 
     private bool selectedElectroBool = false;
@@ -38,6 +38,7 @@ public class Shoping : MonoBehaviour
     private ColorBlock defaultColor;
     private Button bSelected;
     private Material mt;
+    Color transparentRed, transparentGreen;
 
     //public NavMeshAgent agent;
 
@@ -45,10 +46,12 @@ public class Shoping : MonoBehaviour
     {
         uiElectroTowerPrice.text = electroTowerPrice.ToString();
         uiLazerTowerPrice.text = lazerTowerPrice.ToString();
-        floorMask = LayerMask.GetMask("Ground");
+    //    floorMask = LayerMask.GetMask("Ground");
         //defaultColor = 
         selectedTowerColor = Color.green;
         //agent.updateRotation = false;
+        transparentRed = new Color(1, 0, 0, 0.5f);
+        transparentGreen = new Color(0, 1, 0, 0.5f);
     }
     public void SelectElectroTower(Button b)
     {
@@ -115,25 +118,30 @@ public class Shoping : MonoBehaviour
         {
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit floorHit;
-            if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+            if (Physics.Raycast(camRay, out floorHit, camRayLength, CreepHexagonGenerator.creepLayerMask))
             {
 
-                realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y + realTimeTowerPlace.transform.localScale.y - 0.3f, System.Convert.ToInt32(floorHit.point.z));
-                if (realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower || ResourceManager.resourceST < currPrice)
+                //   realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y, System.Convert.ToInt32(floorHit.point.z));
+                realTimeTowerPlace.transform.position = floorHit.transform.position;
+                if (realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower || ResourceManager.resource < currPrice)
                 {
-                    mt.color = new Color(1, 0, 0, 0.5f);
+                    mt.SetColor("_BaseColor", transparentRed);
                 }
                 else
                 {
-                    mt.color = new Color(0, 1, 0, 0.5f);
+                    mt.SetColor("_BaseColor", transparentGreen);
                 }
-               
-                if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower && ResourceManager.resourceST >= currPrice)
+
+                if (Input.GetMouseButtonDown(0) && !realTimeTowerPlace.GetComponent<TowerPlacing>().isOnTower && ResourceManager.resource >= currPrice)
                 {
-                    ResourceManager.removeResource(currPrice);
+                    ResourceManager.RemoveResource(currPrice);
                     placeTower();
                     isPlacing = false;
                     selectB(bSelected);
+                }
+                else if (ResourceManager.resource < currPrice)
+                {
+                    ResourceManager.CostIsTooHighSignal();
                 }
             }
         }

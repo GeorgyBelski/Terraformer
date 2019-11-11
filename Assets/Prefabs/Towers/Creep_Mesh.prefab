@@ -106,9 +106,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf925250396a73144b0d8f6d105396c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hexagonsCount: 0
   radius: 1
+  buildCost: 30
+  repairHexagonCost: 25
+  incomFromHexagon: 1
+  income: 0
   coefficient: 2
   isExpanding: 0
+  isRepairing: 0
   riseTime: 0.24
   risingHeight: 0.23
   scaleExternalCircleTime: 0.3

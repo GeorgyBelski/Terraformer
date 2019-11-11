@@ -12,9 +12,11 @@ public abstract class AbilityButtonController : MonoBehaviour
  //   public float castTime = 2.0f;
  //   public float timerCast;
     public float coolDown = 5.0f;
+    public int cost = 10;
     public float timerCoolDown;
-    public Color buttomTintReady;
-    public Color buttomTintRecharging;
+    public Color buttonTintReady;
+    public Color buttonTintRecharging;
+    [HideInInspector]
     public GameObject parent;
     public static AbilityButtonController aimingAbility;
 
@@ -41,7 +43,7 @@ public abstract class AbilityButtonController : MonoBehaviour
         parent = transform.parent.gameObject;
         outLineImage = parent.GetComponent<Image>();
         outLineImage.enabled = false;
-        buttonImage.color = buttomTintReady;
+        buttonImage.color = buttonTintReady;
         buttonImage.fillAmount = 1f;
         aimArea = null;
     }
@@ -61,20 +63,29 @@ public abstract class AbilityButtonController : MonoBehaviour
             Aiming();
             if (Input.GetMouseButtonDown(0))
             {
+                
                 if (casterTower)
                 {
-                  //  print("casterTower: " + casterTower);
-                    currentState = State.Recharging;
-                    buttonImage.color = buttomTintRecharging;
-                    timerCoolDown = coolDown;
-                //    timerCast = castTime;
-                //    TowerManager.ClearHighlighting();
-                    casterTower.isHighlighted = false;
-                    previousHighlightedTower = null;
-                    ///   casterTower.CastThanderBall(aimArea.position);
-                    TowerCastAreaAbility(casterTower);
-                    outLineImage.enabled = false;
-                    aimingAbility = null;
+                    if (ResourceManager.RemoveResource(cost))
+                    {
+                        ResourceManager.DisplayCost(false);
+                        currentState = State.Recharging;
+                        buttonImage.color = buttonTintRecharging;
+                        timerCoolDown = coolDown;
+                        //    timerCast = castTime;
+                        //    TowerManager.ClearHighlighting();
+                        casterTower.isHighlighted = false;
+                        previousHighlightedTower = null;
+                        ///   casterTower.CastThanderBall(aimArea.position);
+                        TowerCastAreaAbility(casterTower);
+                        outLineImage.enabled = false;
+                        aimingAbility = null;
+                    }
+                    else
+                    {
+                        ResourceManager.CostIsTooHighSignal();
+                        Cancel();
+                    }
                 }
                 else
                 {
@@ -86,6 +97,7 @@ public abstract class AbilityButtonController : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1))
             {
+                ResourceManager.DisplayCost(false);
                 Cancel();
             }
 
@@ -95,7 +107,7 @@ public abstract class AbilityButtonController : MonoBehaviour
                                                                  /// casterTower.CastThanderBall(aimArea.position);  // example for ElectroTower
                                                                  /// </summary>
 
-    public void Cancel() {
+    public void Cancel() {       
         currentState = State.Ready;
         RemoveAimArea();
         outLineImage.enabled = false;
@@ -143,6 +155,7 @@ public abstract class AbilityButtonController : MonoBehaviour
     {
         if (aimArea)
         {
+            ResourceManager.DisplayCost(true, cost);
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(camRay, out RaycastHit floorHit, camRayLength, groundMask))
             {
@@ -162,7 +175,11 @@ public abstract class AbilityButtonController : MonoBehaviour
                 {
                     casterTower = (LaserTower)nearestTower;
                 }
-                
+                else if (castTowerType == TowerType.Plasma)
+                {
+                    casterTower = (PlasmaTower)nearestTower;
+                }
+
                 if (casterTower && casterTower != previousHighlightedTower)
                 {
                     casterTower.isHighlighted = true;
@@ -184,7 +201,7 @@ public abstract class AbilityButtonController : MonoBehaviour
             if (currentState == State.Recharging)
             {
                 currentState = State.Ready;
-                buttonImage.color = buttomTintReady;
+                buttonImage.color = buttonTintReady;
             }
         }
         else
@@ -228,6 +245,10 @@ public abstract class AbilityButtonController : MonoBehaviour
         else if (castTowerType == TowerType.Laser)
         {
             availableTowersCount = TowerManager.availableLaserTowers.Count;
+        }
+        else //if(castTowerType == TowerType.Plazma)
+        {
+            availableTowersCount = TowerManager.availablePlasmaTowers.Count;
         }
 
         if (availableTowersCount == 0)

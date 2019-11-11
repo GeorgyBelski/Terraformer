@@ -7,12 +7,15 @@ public class TowerHealth : Damageable
     public Tower thisTower;
     public bool isRepair;
     private float maxRepairHealth = 0;
+    public Color damagePointsColor = Color.red;
 
     private float prevHealthRatio;
         
     void Start()
     {
         isRepair = false;
+        for (int i = 0; i < damagePoints.Length; i++)
+        { damagePoints[i].color = damagePointsColor; }
     }
 
     void Update()
@@ -42,6 +45,7 @@ public class TowerHealth : Damageable
     public override void RemoveFromList()
     {
         TowerManager.RemoveTower(thisTower);
+        ResourceManager.isTowersSupplyChanged = true;
     }
 
     public override void ApplyDeath()
@@ -51,20 +55,26 @@ public class TowerHealth : Damageable
         //Destroy(thisTowet.gameObject);
 
         thisTower.cooldownAttack = float.PositiveInfinity;
-        thisTower.timerAttack = float.PositiveInfinity;
+        //    thisTower.timerAttack = float.PositiveInfinity;
+        thisTower.enableAutoattacs = false;
 
         if (thisTower.type == TowerType.Electro)
         {
             ((ElectroTower)thisTower).DestroyCharge();
+        }
+        else if(thisTower.type == TowerType.Terraformer)
+        {
+            Debug.Log("Defeat!");
+            return;
         }
        
     }
 
     public void Repair()
     {
-        
+        //print(healthRatio);
         if (healthRatio < 1 && !isRepair) { 
-            float resource = ResourceManager.resourceST;
+            float resource = ResourceManager.resource;
             float repaircost = ResourceManager.RepairCost;
             float costNeeded = (1 - healthRatio) * 100 * repaircost;
 
@@ -73,13 +83,14 @@ public class TowerHealth : Damageable
             if(resource > costNeeded)
             {
                 maxRepairHealth = 1;
-                ResourceManager.removeResource(costNeeded);
+            //    Debug.Log(costNeeded);
+                ResourceManager.RemoveResource(costNeeded);
             }
 
             else
             {
                 maxRepairHealth = healthRatio + resource / 100 / repaircost;
-                ResourceManager.removeResource(resource);
+                ResourceManager.RemoveResource(resource);
                 //print(maxRepairHealth);
             }
             

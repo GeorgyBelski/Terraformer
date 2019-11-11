@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlazmaBlowUp : MonoBehaviour
+public class PlasmaBlowUp : MonoBehaviour
 {
     //Material mt;
     public float damage;

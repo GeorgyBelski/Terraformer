@@ -42,7 +42,7 @@ public class Tank : Enemy_Logic
                 isStand = false;
                 isAttack = false;
                 if (TowerManager.terraformer)
-                    stateGoToDestanation(TowerType.Terraformerw);
+                    stateGoToDestanation(TowerType.Terraformer);
                 else
                     isStand = true;
             }
@@ -58,7 +58,7 @@ public class Tank : Enemy_Logic
             isStand = false;
             isAttack = false;
             if (TowerManager.terraformer)
-                stateGoToDestanation(TowerType.Terraformerw);
+                stateGoToDestanation(TowerType.Terraformer);
             else
                 isStand = true;
             //isGoingToDist = true;

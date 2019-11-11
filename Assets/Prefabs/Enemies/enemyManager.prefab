@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5929000346387127078}
   - component: {fileID: 5929000346387127079}
   - component: {fileID: 5929000346387127000}
-  - component: {fileID: 5929000346387127001}
+  - component: {fileID: 1015835152}
   m_Layer: 0
   m_Name: enemyManager
   m_TagString: Untagged
@@ -58,6 +58,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -78,7 +79,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5929000346387127003}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5929000346387127001
+--- !u!114 &1015835152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,9 +88,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5929000346387127003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 140d27eaa9d25064a82b5ef9fc0988a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dde25d668ecb2e4db037d0ad499a8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEnemies:
-  - {fileID: 0}
-  - {fileID: 0}

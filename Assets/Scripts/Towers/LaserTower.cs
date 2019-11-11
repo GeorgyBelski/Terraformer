@@ -25,7 +25,7 @@ public class LaserTower : Tower
     [Header("ThandetBallAbility")]
     public ScorchingRayAbility scorchingRayAbility;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
         type = TowerType.Laser;
@@ -59,9 +59,9 @@ public class LaserTower : Tower
         if (symbiosisTowerType == TowerType.Electro)
         {
             randomizer = Random.Range(0, 100);
-            if(randomizer <= ((ElectroTower)symbiosisTower).probabilityOfStan/2)
+            if(randomizer <= ((ElectroTower)symbiosisTower).probabilityOfStan)
             {
-                target.effectsController.AddStun(1);
+                target.effectsController.AddStun(((ElectroTower)symbiosisTower).stunDuration/2);
             }
         }
     }

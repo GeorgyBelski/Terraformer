@@ -9,6 +9,7 @@ public class ThanderBallAbility : TowerAbility
 
     public float speed = 20f;
     public float effectRadius = 2.19f;
+    public float abilityStunDuration = 3f;
 
     GameObject thandetBall;
     Material thandetBallTrailMaterial;
@@ -134,7 +135,7 @@ public class ThanderBallAbility : TowerAbility
                 Vector3 distanceToEnemy = enemy.transform.position - center;
                 if (distanceToEnemy.magnitude <= radius)
                 {
-                    enemy.effectsController.AddStun(2);
+                    enemy.effectsController.AddStun(abilityStunDuration);
                     thanderBallTargets.Add(enemy);
                 }
             }

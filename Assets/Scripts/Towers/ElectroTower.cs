@@ -38,6 +38,7 @@ public class ElectroTower : Tower
 
     [Range(1,100)]
     public int probabilityOfStan = 10;
+    public float stunDuration = 2f;
 
     [Header("ThandetBallAbility")]
     public ThanderBallAbility thanderBallAbility;
@@ -65,7 +66,7 @@ public class ElectroTower : Tower
 
     public override void TowerAttack(Enemy target)
     {    
-        if (target)
+        if (target && currentLightningCharge)
         {
             currentLightningCharge.position = gunpoint.position;
             enableCharge = true;
@@ -157,7 +158,7 @@ public class ElectroTower : Tower
         // original Lightning Charge Effect
         randomizer = Random.Range(0, 100);
         if (randomizer <= probabilityOfStan)
-        { target.effectsController.AddStun(1); }
+        { target.effectsController.AddStun(stunDuration); }
         // symbiosis with LaserTower
         if (symbiosisTowerType == TowerType.Laser)
         { target.effectsController.AddBurning(BurningEffect.standardLifetime/2, 6); }

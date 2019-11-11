@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
+    public int availablePlazmaTowersCount;
+
     public static List<Tower> towers = new List<Tower>();
 
     public static Tower terraformer { get; set; }
@@ -11,20 +13,24 @@ public class TowerManager : MonoBehaviour
 
     public static List<ElectroTower> availableElectroTowers = new List<ElectroTower>();
     public static List<LaserTower> availableLaserTowers = new List<LaserTower>();
+    public static List<PlasmaTower> availablePlasmaTowers = new List<PlasmaTower>();
 
     public static float selectedTowerRange = 1.5f;
     public static Dictionary<Transform, Tower> transformTowerMap = new Dictionary<Transform, Tower>();
     public static HashSet<Tower> symbiosisTowers = new HashSet<Tower>();
 
     int towerEnemyLayerMask = (1 << 13 | 1 << 12);
+    int towerLayerMask = 1 << 13;
     int towerLayer = 13;
     public static Tower selectedTower;
     public static Tower highlightedTower;
     public static Tower towerLookingForSymbiosisPartner;
 
+    public int symbiosisCostMultiplayer = 8;
+
     private void Start()
     {
-
+        
     }
     private void FixedUpdate()
     {
@@ -33,6 +39,7 @@ public class TowerManager : MonoBehaviour
     void LateUpdate()
     {
         SelectTower();
+        availablePlazmaTowersCount = availablePlasmaTowers.Count;
     }
 
     public static void AddTower(Tower tower)
@@ -46,6 +53,10 @@ public class TowerManager : MonoBehaviour
         {
             availableLaserTowers.Add((LaserTower)tower);
         }
+        else if (tower is PlasmaTower)
+        {
+            availablePlasmaTowers.Add((PlasmaTower)tower);
+        }
     }
 
     public static void RemoveTower(Tower tower) {
@@ -58,6 +69,10 @@ public class TowerManager : MonoBehaviour
         else if (tower.type == TowerType.Laser)
         {
             availableLaserTowers.Remove((LaserTower)tower);
+        }
+        else if(tower.type == TowerType.Plasma)
+        {
+            availablePlasmaTowers.Remove((PlasmaTower)tower);
         }
     }
 
@@ -122,6 +137,7 @@ public class TowerManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            ResourceManager.DisplayCost(false);
             towerLookingForSymbiosisPartner = null;
             if (highlightedTower) { highlightedTower.isHighlighted = false; }
             highlightedTower = null;
@@ -133,18 +149,22 @@ public class TowerManager : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 100f, towerEnemyLayerMask))
+        if (Physics.Raycast(ray, out hit, 100f, towerLayerMask))
         {
-            if (hit.transform.gameObject.layer == towerLayer)
-            {
-                if (highlightedTower) { highlightedTower.isHighlighted = false; }
 
-                //   selectedTower = hit.transform.gameObject.GetComponent<Tower>();
-                transformTowerMap.TryGetValue(hit.transform, out highlightedTower);
-                if (highlightedTower && highlightedTower!= towerLookingForSymbiosisPartner && !symbiosisTowers.Contains(highlightedTower))
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+
+            //   selectedTower = hit.transform.gameObject.GetComponent<Tower>();
+            transformTowerMap.TryGetValue(hit.transform, out highlightedTower);
+            if (highlightedTower && highlightedTower != towerLookingForSymbiosisPartner && !symbiosisTowers.Contains(highlightedTower))
+            {
+                Symbiosis.cost = (int)(symbiosisCostMultiplayer * (towerLookingForSymbiosisPartner.transform.position - highlightedTower.transform.position).magnitude);
+                ResourceManager.DisplayCost(true, Symbiosis.cost);
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (Input.GetMouseButtonDown(0))
+                    if (ResourceManager.RemoveResource(Symbiosis.cost))
                     {
+                        ResourceManager.DisplayCost(false);
                         highlightedTower.isHighlighted = false;
                         towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
                         symbiosisTowers.Add(highlightedTower);
@@ -153,12 +173,24 @@ public class TowerManager : MonoBehaviour
                     }
                     else
                     {
-                        highlightedTower.isHighlighted = true;
+                        ResourceManager.CostIsTooHighSignal();
                     }
+
+                }
+                else
+                {
+                    highlightedTower.isHighlighted = true;
                 }
             }
 
         }
+        else
+        {
+            ResourceManager.DisplayCost(false);
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+            highlightedTower = null;
+        }
         
     }
+
 }
