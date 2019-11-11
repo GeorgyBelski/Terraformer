@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 4909029387598569047}
   - component: {fileID: 4632297607463911867}
   m_Layer: 13
-  m_Name: PlazmaTower
+  m_Name: PlasmaTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,7 +539,7 @@ MonoBehaviour:
   - {fileID: 5953679780579067581}
   damagePointIndex: 0
   healthRatio: 0
-  thisTower: {fileID: 0}
+  thisTower: {fileID: 5315704249322942705}
   isRepair: 0
   damagePoinysColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &4635216721409019256

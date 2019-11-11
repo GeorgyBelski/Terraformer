@@ -39,7 +39,7 @@ public class Symbiosis
         }
 
 
-        tower.isSymbiosisInstalled = false;
+    //    tower.isSymbiosisInstalled = false;
         return symbiosisTowerType;
     }
 
@@ -63,7 +63,7 @@ public class Symbiosis
             tower.cooldownAttack /= 2;
         }
 
-        tower.isSymbiosisInstalled = false;
+    //    tower.isSymbiosisInstalled = false;
         return symbiosisTowerType;
     }
 

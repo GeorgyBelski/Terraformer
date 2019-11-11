@@ -70,6 +70,10 @@ public class TowerManager : MonoBehaviour
         {
             availableLaserTowers.Remove((LaserTower)tower);
         }
+        else if(tower.type == TowerType.Plasma)
+        {
+            availablePlasmaTowers.Remove((PlasmaTower)tower);
+        }
     }
 
     public static Tower GetNearestTower(Transform target, TowerType type) {

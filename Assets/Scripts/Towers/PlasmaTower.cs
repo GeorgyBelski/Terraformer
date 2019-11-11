@@ -19,7 +19,7 @@ public class PlasmaTower : Tower
 
     public PlasmaClusterBombAbility clusterBombAbility;
 
-    private PlazmaBullet bullet;
+    private PlasmaBullet bullet;
 
     private Vector2 dir;
 
@@ -63,7 +63,7 @@ public class PlasmaTower : Tower
             ///////////////////////////////
 
             //LookAtTarger();
-            bullet = Instantiate(plazmaBullet, gunpoint.position, gunpoint.rotation).GetComponent<PlazmaBullet>();
+            bullet = Instantiate(plazmaBullet, gunpoint.position, gunpoint.rotation).GetComponent<PlasmaBullet>();
             bullet.setSettings(directShotAttack, plazmaBuletSpeed, blastShotAttack, damageRadius, target, gunpoint.transform.position, new Vector3(plazmaBuletSpeed * cosTheta * dir.x, plazmaBuletSpeed * sinTheta, plazmaBuletSpeed *cosTheta * dir.y));
         }
     }

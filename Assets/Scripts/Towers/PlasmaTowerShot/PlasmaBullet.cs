@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlazmaBullet : MonoBehaviour
+public class PlasmaBullet : MonoBehaviour
 {
     public GameObject plazmaBlowUp;
     private int blowUpDamage;
@@ -11,7 +11,7 @@ public class PlazmaBullet : MonoBehaviour
     public int mainDamage;
     public float speed;
 
-    private PlazmaBlowUp blow;
+    private PlasmaBlowUp blow;
     private Enemy target;
 
     private float time = 0;
@@ -40,7 +40,7 @@ public class PlazmaBullet : MonoBehaviour
         if (transform.position.y <= 0.4)
         {
 
-            blow = Instantiate(plazmaBlowUp, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<PlazmaBlowUp>();
+            blow = Instantiate(plazmaBlowUp, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<PlasmaBlowUp>();
             blow.setSetings(blowUpDamage, blowUpSize);
             Destroy(gameObject);
         }

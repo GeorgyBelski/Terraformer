@@ -7,7 +7,7 @@ public class TowerHealth : Damageable
     public Tower thisTower;
     public bool isRepair;
     private float maxRepairHealth = 0;
-    public Color damagePoinysColor = Color.red;
+    public Color damagePointsColor = Color.red;
 
     private float prevHealthRatio;
         
@@ -15,7 +15,7 @@ public class TowerHealth : Damageable
     {
         isRepair = false;
         for (int i = 0; i < damagePoints.Length; i++)
-        { damagePoints[i].color = damagePoinysColor; }
+        { damagePoints[i].color = damagePointsColor; }
     }
 
     void Update()
@@ -61,6 +61,11 @@ public class TowerHealth : Damageable
         if (thisTower.type == TowerType.Electro)
         {
             ((ElectroTower)thisTower).DestroyCharge();
+        }
+        else if(thisTower.type == TowerType.Terraformer)
+        {
+            Debug.Log("Defeat!");
+            return;
         }
        
     }

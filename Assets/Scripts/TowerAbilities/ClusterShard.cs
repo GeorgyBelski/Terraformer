@@ -15,7 +15,7 @@ public class ClusterShard : MonoBehaviour
     public int mainDamage;
     public float speed;
 
-    private PlazmaBlowUp blow;
+    private PlasmaBlowUp blow;
     private ClusterPuddle puddle;
     //private Enemy target;
 
@@ -45,7 +45,7 @@ public class ClusterShard : MonoBehaviour
         if (transform.position.y <= 0.4)
         {
 
-            blow = Instantiate(clasterBlowUp, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<PlazmaBlowUp>();
+            blow = Instantiate(clasterBlowUp, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<PlasmaBlowUp>();
             blow.setSetings(blowUpDamage, blowUpSize);
             puddle = Instantiate(calsterPuddle, new Vector3(transform.position.x, -0.03f, transform.position.z), new Quaternion(0, 0, 0, 0)).GetComponent<ClusterPuddle>();
             puddle.setSetings(puddleTime, puddleSize);
