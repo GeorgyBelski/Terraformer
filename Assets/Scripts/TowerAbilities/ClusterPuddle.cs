@@ -25,19 +25,21 @@ public class ClusterPuddle : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer == EnemyManagerPro.enemyLayer && EnemyManagerPro.checking(other.gameObject.GetComponent<Enemy>()))
         {
             
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            defaultspeed = enemy.character.m_MoveSpeedMultiplier;
-            
-            enemy.character.m_MoveSpeedMultiplier /= 2;
+            EnemyEffectsController enemy = other.gameObject.GetComponent<EnemyEffectsController>();
+            //defaultspeed = enemy.character.m_MoveSpeedMultiplier;
+            enemy.AddSlowdown(2, 2);
+
+
+            //enemy.character.m_MoveSpeedMultiplier /= 2;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+/*    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == EnemyManagerPro.enemyLayer && EnemyManagerPro.checking(other.gameObject.GetComponent<Enemy>()))
         {
@@ -45,8 +47,9 @@ public class ClusterPuddle : MonoBehaviour
             enemy.character.m_MoveSpeedMultiplier = defaultspeed;
         }
     }
+*/
 
-            public void setSetings(float existeTime, float radius)
+    public void setSetings(float existeTime, float radius)
     {
         this.existeTime = existeTime;
         this.radius = radius;
