@@ -18,7 +18,7 @@ public class ElectroTower : Tower
     public ParticleSystem lightningChargeParticleSys;
     int blinkingCounter;
     [HideInInspector]
-    public Transform currentLightningCharge;
+    public Transform lightningCharge;
     float lightningChargeSize;
     bool enableCharge;
     [HideInInspector]
@@ -39,6 +39,10 @@ public class ElectroTower : Tower
     [Range(1,100)]
     public int probabilityOfStan = 10;
     public float stunDuration = 2f;
+    public GameObject areaDamagePrefab;
+    GameObject areaDamager;
+    public int symbiosisAreaDamage = 30;
+    ElectroAreaDamageController areaDamageController;
 
     [Header("ThandetBallAbility")]
     public ThanderBallAbility thanderBallAbility;
@@ -47,15 +51,18 @@ public class ElectroTower : Tower
     {
         base.Start();
         type = TowerType.Electro;
-        currentLightningCharge = Instantiate(lightningChargePrefab, gunpoint.position, gunpoint.rotation).transform;
+        lightningCharge = Instantiate(lightningChargePrefab, gunpoint.position, gunpoint.rotation).transform;
         SaveOrdinaryLightningChargeSattings();
+        areaDamager = Instantiate(areaDamagePrefab);
+        areaDamageController = areaDamager.GetComponent<ElectroAreaDamageController>();
+        areaDamageController.thisTower = this;
     }
     void SaveOrdinaryLightningChargeSattings()
     {
-        lightningChargeParticleSys = currentLightningCharge.GetComponent<ParticleSystem>();
-        particleSystemRenderer = currentLightningCharge.GetComponent<ParticleSystemRenderer>();
-        lightningChargeSize = currentLightningCharge.localScale.x;
-        lightningChargeParticleSys = currentLightningCharge.GetComponent<ParticleSystem>();
+        lightningChargeParticleSys = lightningCharge.GetComponent<ParticleSystem>();
+        particleSystemRenderer = lightningCharge.GetComponent<ParticleSystemRenderer>();
+        lightningChargeSize = lightningCharge.localScale.x;
+        lightningChargeParticleSys = lightningCharge.GetComponent<ParticleSystem>();
         autoAttackMaterial = Instantiate(particleSystemRenderer.trailMaterial);
         particleSystemRenderer.trailMaterial = autoAttackMaterial;
         //  ordinaryElectroColor1 = autoAttackMaterial.GetColor("_EnergyColor01");
@@ -66,13 +73,13 @@ public class ElectroTower : Tower
 
     public override void TowerAttack(Enemy target)
     {    
-        if (target && currentLightningCharge)
+        if (target && lightningCharge)
         {
-            currentLightningCharge.position = gunpoint.position;
+            lightningCharge.position = gunpoint.position;
             enableCharge = true;
             timerChargeLifeTime = chargeLifeTime;
             EnableChargeParticlesEmission(true);
-            currentLightningCharge.localScale = Vector3.one * lightningChargeSize;
+            lightningCharge.localScale = Vector3.one * lightningChargeSize;
 
         }
     }
@@ -88,54 +95,52 @@ public class ElectroTower : Tower
  // AutoAttack - Charge   
 
     void ChargeControl() {
-        if (currentLightningCharge)
+        if (target && enableCharge)
         {
-            if (target && enableCharge)
-            {
-                fromChargeToTarget = target.GetPosition() - currentLightningCharge.position;
-                float distanceFromChargeToTarget = fromChargeToTarget.magnitude;
-                currentLightningCharge.position = Vector3.Lerp(gunpoint.position, target.GetPosition(), chargeLerpPosition);
-                chargeLerpPosition += lightningLerpSpeed * Time.deltaTime * (range / distanceFromChargeToTarget);
+            fromChargeToTarget = target.GetPosition() - lightningCharge.position;
+            float distanceFromChargeToTarget = fromChargeToTarget.magnitude;
+            lightningCharge.position = Vector3.Lerp(gunpoint.position, target.GetPosition(), chargeLerpPosition);
+            chargeLerpPosition += lightningLerpSpeed * Time.deltaTime * (range / distanceFromChargeToTarget);
 
 
-                if (distanceFromChargeToTarget < 0.1)
-                {
-                    currentLightningCharge.position = target.GetPosition();
-                    enableCharge = false;
-                    EnableChargeParticlesEmission(false);
-                    AddEffects();
-                    target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
-                    chargeLerpPosition = 0;
-                    blinkingCounter = 3;
-                }
-            }
-
-            timerChargeLifeTime -= Time.deltaTime;
-            if (timerChargeLifeTime > 0.1)
+            if (distanceFromChargeToTarget < 0.1)
             {
-                if(chargeLerpPosition == 0 && blinkingCounter > 0)
-                {
-                    if(blinkingCounter == 3)
-                    {
-                        currentLightningCharge.localScale = Vector3.one * lightningChargeSize * 2;
-                    }
-                    else if (currentLightningCharge.localScale.x > lightningChargeSize)
-                    { currentLightningCharge.localScale = Vector3.one * lightningChargeSize; }
-                    else
-                    { currentLightningCharge.localScale = Vector3.one * lightningChargeSize * 1.6f; }
-                    blinkingCounter--;
-                }
-            }
-            else
-            {
-                currentLightningCharge.localScale /= 2;
-            }
-                if (timerChargeLifeTime <= 0)
-            {
-                //   DestroyCharge();
+                lightningCharge.position = target.GetPosition();
+                enableCharge = false;
                 EnableChargeParticlesEmission(false);
-                timerChargeLifeTime = 0;
+                AddEffects(); //<- Symbiosi Area Damage 
+                target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
+                chargeLerpPosition = 0;
+                blinkingCounter = 3;
             }
+        }
+
+        timerChargeLifeTime -= Time.deltaTime;
+        if (timerChargeLifeTime > 0.1)
+        {
+            if(chargeLerpPosition == 0 && blinkingCounter > 0)
+            {
+                if(blinkingCounter == 3)
+                {
+                    lightningCharge.localScale = Vector3.one * lightningChargeSize * 2;
+                }
+                else if (lightningCharge.localScale.x > lightningChargeSize)
+                { lightningCharge.localScale = Vector3.one * lightningChargeSize; }
+                else
+                { lightningCharge.localScale = Vector3.one * lightningChargeSize * 1.6f; }
+                blinkingCounter--;
+            }
+        }
+        else
+        {
+            lightningCharge.localScale /= 2;
+        }
+            if (timerChargeLifeTime <= 0)
+        {
+            //   DestroyCharge();
+            EnableChargeParticlesEmission(false);
+            chargeLerpPosition = 0;
+            timerChargeLifeTime = 0;
         }
     }
     void EnableChargeParticlesEmission(bool isEmission)
@@ -145,10 +150,10 @@ public class ElectroTower : Tower
     }
     public void DestroyCharge()
     {
-        if (currentLightningCharge)
+        if (lightningCharge)
         {
-            Destroy(currentLightningCharge.gameObject);
-            currentLightningCharge = null;
+            Destroy(lightningCharge.gameObject);
+            lightningCharge = null;
             chargeLerpPosition = 0;
         }
     }
@@ -157,16 +162,28 @@ public class ElectroTower : Tower
     {
         // original Lightning Charge Effect
         randomizer = Random.Range(0, 100);
-        if (randomizer <= probabilityOfStan)
+        bool isStun = randomizer <= probabilityOfStan;
+        if (isStun)
         { target.effectsController.AddStun(stunDuration); }
         // symbiosis with LaserTower
         if (symbiosisTowerType == TowerType.Laser)
-        { target.effectsController.AddBurning(BurningEffect.standardLifetime/2, 6); }
+        { target.effectsController.AddBurning(BurningEffect.standardLifetime / 2, 6); }
+        else if(symbiosisTowerType == TowerType.Plasma)
+        { ApplyAreaDamage(symbiosisAreaDamage, isStun, stunDuration); }
     }
-
+    void ApplyAreaDamage(int damage, bool isStun, float stunDuration = 0) 
+    {   
+        if (isStun)
+        {  
+            areaDamageController.stunDuration = stunDuration; 
+        }
+        areaDamageController.damage = damage;
+        areaDamager.transform.position = lightningCharge.position;
+        areaDamager.SetActive(true);
+    }
     public override void ActivateSymbiosisUpgrade()
     {
-        symbiosisTowerType = Symbiosis.ActivateElectroSymbiosisUpgrade(this);
+        symbiosisTowerType = Symbiosis.ActivateSymbiosisUpgrade(this);
     }
     public override void DisableSymbiosisUpgrade()
     {
