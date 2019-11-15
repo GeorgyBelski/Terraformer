@@ -630,7 +630,6 @@ GameObject:
   - component: {fileID: 7532716056537121493}
   - component: {fileID: 7532716056537121492}
   - component: {fileID: 7532716056537121495}
-  - component: {fileID: 7532716056537121494}
   - component: {fileID: 8123968881667366141}
   - component: {fileID: 7532716056537121323}
   - component: {fileID: 1605180230303121764}
@@ -707,20 +706,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &7532716056537121494
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7532716056537121489}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!64 &8123968881667366141
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -757,7 +742,6 @@ MonoBehaviour:
   isSelected: 0
   targetingType: 0
   supply: 0
-  autoAttacCost: 1
   cooldownAttack: 1
   timerAttack: 0
   cannon: {fileID: 7532716056096678989}
@@ -776,7 +760,7 @@ MonoBehaviour:
   lightningChargePrefab: {fileID: 5848706040537432421, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
     type: 3}
   lightningChargeParticleSys: {fileID: 0}
-  currentLightningCharge: {fileID: 0}
+  lightningCharge: {fileID: 0}
   particleSystemRenderer: {fileID: 0}
   autoAttackMaterial: {fileID: 0}
   ordinaryElectroColor1: {r: 1.7098039, g: 4, b: 3.8588235, a: 1}
@@ -784,11 +768,15 @@ MonoBehaviour:
   electroSymbColor: {r: 0.7895681, g: 1.074193, b: 6.695539, a: 1}
   laserSymbColor1: {r: 5.992157, g: 0.7529412, b: 0.59607846, a: 1}
   laserSymbColor2: {r: 3.9296644, g: 1.3204995, b: 1.1677777, a: 1}
-  plasmaSymbColor1: {r: 0, g: 0, b: 0, a: 0}
-  plasmaSymbColor2: {r: 0, g: 0, b: 0, a: 0}
+  plasmaSymbColor1: {r: 0.593157, g: 7.3970156, b: 2.6236272, a: 1}
+  plasmaSymbColor2: {r: 0.5176471, g: 2, b: 0.44705883, a: 1}
   currentColor1: {r: 0, g: 0, b: 0, a: 0}
   currentColor2: {r: 0, g: 0, b: 0, a: 0}
   probabilityOfStan: 10
+  stunDuration: 2
+  areaDamagePrefab: {fileID: 8783333094378843143, guid: aa6faf0cd005d57488574d2a4b4b9ae5,
+    type: 3}
+  symbiosisAreaDamage: 30
   thanderBallAbility: {fileID: 5870178027991076530}
 --- !u!114 &1605180230303121764
 MonoBehaviour:
@@ -817,7 +805,7 @@ MonoBehaviour:
   healthRatio: 0
   thisTower: {fileID: 7532716056537121323}
   isRepair: 0
-  damagePoinysColor: {r: 1, g: 0.21318905, b: 0.1462264, a: 1}
+  damagePointsColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &5870178027991076530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,6 +825,7 @@ MonoBehaviour:
     type: 3}
   speed: 80
   effectRadius: 2.19
+  abilityStunDuration: 3
 --- !u!114 &1354494127388490066
 MonoBehaviour:
   m_ObjectHideFlags: 0

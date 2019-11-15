@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 8310427317106048715}
   - component: {fileID: 6568533687768976809}
   - component: {fileID: 3866234832303368385}
-  - component: {fileID: 2191082912157260141}
   - component: {fileID: 3198725551179431901}
   - component: {fileID: 1397796324701862286}
   - component: {fileID: 1179185393371987871}
   m_Layer: 0
-  m_Name: PlazmaShot
+  m_Name: PlasmaShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7057038046003624443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2603096, y: 2.4367764, z: -14.030598}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2191082912157260141
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7057038046003624443}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.21
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &3198725551179431901
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -142,7 +128,6 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f37d1decfe8902949907227d92c2b477, type: 2}
   - {fileID: 2100000, guid: 439be46cd8a762e4ab7d73799bf404b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

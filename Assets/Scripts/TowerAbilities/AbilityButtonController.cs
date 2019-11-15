@@ -151,7 +151,7 @@ public abstract class AbilityButtonController : MonoBehaviour
         }
     }
 
-    void Aiming()
+    public virtual void Aiming()
     {
         if (aimArea)
         {

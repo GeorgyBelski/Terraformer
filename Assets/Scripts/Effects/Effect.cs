@@ -19,6 +19,10 @@ public abstract class Effect
         {
             return new StunEffect();
         }
+        else if(type == Type.Slowdown)
+        {
+            return new SlowDownEffect();
+        }
         return null;
     }
 

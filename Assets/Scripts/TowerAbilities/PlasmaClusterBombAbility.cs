@@ -80,7 +80,7 @@ public class PlasmaClusterBombAbility : TowerAbility
         aim = aimPosition;
 
         speed = Vector3.Distance(aimPosition, gunpoint.position)/1.2f;
-        print(speed);
+        // print(speed);
         s2 = speed * speed;
 
         //tower.//RotateCannon((Vector3)aim);
