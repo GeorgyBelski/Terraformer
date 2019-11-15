@@ -507,9 +507,10 @@ MonoBehaviour:
   isSymbiosisInstalled: 0
   towerMaterial: {fileID: 0}
   plazmaBuletSpeed: 12
-  directShotAttack: 150
-  blastShotAttack: 100
+  directShotAttack: 50
+  blastShotAttack: 40
   damageRadius: 4
+  isPreemptive: 1
   plazmaBullet: {fileID: 7057038046003624443, guid: 629af26e030e69f4895c5654324a72e5,
     type: 3}
   clusterBombAbility: {fileID: 277963137008030843}
@@ -599,7 +600,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1.2, y: 1.7580001, z: 1.2}
+  m_Extents: {x: 1, y: 1.7580001, z: 1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

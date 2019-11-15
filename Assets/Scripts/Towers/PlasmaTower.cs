@@ -11,7 +11,7 @@ public class PlasmaTower : Tower
     public int directShotAttack = 150;
     public int blastShotAttack = 100;
     public float damageRadius = 1.5f;
-
+    public bool isPreemptive = false;
     //public float attackSpeed;
 
     //private float reloading;
@@ -87,19 +87,22 @@ public class PlasmaTower : Tower
         prevPos = endPosition;
         prevTime = Time.deltaTime;
         */
-        switch(target.type)   
-        {
-            case EnemyType.Tank:
-                //EnemyMouseController emk = target.GetComponent<EnemyMouseController>();
-                //print(targetRigidbody.velocity.magnitude);
-                //print(Vector3.Distance(transform.position, target.transform.position) / base.range);
-                endPosition += target.transform.forward * 2 * plazmaBuletSpeed / g * 0.5f * 2.5f * Vector3.Distance(transform.position, target.transform.position) / base.range;
+        if (isPreemptive) 
+        { 
+            switch(target.type)   
+            {
+                case EnemyType.Tank:
+                    //EnemyMouseController emk = target.GetComponent<EnemyMouseController>();
+                    //print(targetRigidbody.velocity.magnitude);
+                    //print(Vector3.Distance(transform.position, target.transform.position) / base.range);
+                    endPosition += target.character.m_ForwardAmount * target.transform.forward * 2 * plazmaBuletSpeed / g * 0.5f * 2.5f * Vector3.Distance(transform.position, target.transform.position) / base.range;
                 
-            break;
-            case EnemyType.Solder:
-                endPosition += target.transform.forward * 6f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);// * plazmaBuletSpeed / g * 2.5f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);
-            break;
-            //endPosition += target.transform.forward * emk.agent.speed;//((Vector3.Distance(transform.position, target.transform.position)) / base.range) * 6 * emk.agent.speed;
+                break;
+                case EnemyType.Solder:
+                    endPosition += target.character.m_ForwardAmount * target.transform.forward * 6f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);// * plazmaBuletSpeed / g * 2.5f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);
+                break;
+                //endPosition += target.transform.forward * emk.agent.speed;//((Vector3.Distance(transform.position, target.transform.position)) / base.range) * 6 * emk.agent.speed;
+            }
         }
         dir.x = endPosition.x - gunpoint.transform.position.x;
         dir.y = endPosition.z - gunpoint.transform.position.z;
@@ -126,6 +129,7 @@ public class PlasmaTower : Tower
     public override void EndCasting()
     {
         IsCastingAbility = false;
+        TowerManager.availablePlasmaTowers.Add(this);
     }
 
     internal override void TowerUpdate()
@@ -140,7 +144,7 @@ public class PlasmaTower : Tower
     public void CastClusterBomb(Vector3 aimPosition)
     {
         clusterBombAbility.Cast(aimPosition);
-        TowerManager.availablePlasmaTowers.Add(this);
+        
     }
 
     public override void ActivateSymbiosisUpgrade()
