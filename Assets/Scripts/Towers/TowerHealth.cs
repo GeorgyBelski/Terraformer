@@ -64,7 +64,7 @@ public class TowerHealth : Damageable
         }
         else if(thisTower.type == TowerType.Terraformer)
         {
-            Debug.Log("Defeat!");
+            //Debug.Log("Defeat!");
             return;
         }
        
