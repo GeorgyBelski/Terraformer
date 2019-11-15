@@ -118,7 +118,7 @@ public abstract class Enemy_Logic : MonoBehaviour
 
     protected void stateGoToDestanation(TowerType destTowerType) 
     {
-        if(destTowerType == TowerType.Terraformerw)
+        if(destTowerType == TowerType.Terraformer)
         {
             targetTower = TowerManager.terraformer;
             destTower = targetTower.transform.position;

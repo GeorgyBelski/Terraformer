@@ -175,7 +175,11 @@ public abstract class AbilityButtonController : MonoBehaviour
                 {
                     casterTower = (LaserTower)nearestTower;
                 }
-                
+                else if (castTowerType == TowerType.Plasma)
+                {
+                    casterTower = (PlasmaTower)nearestTower;
+                }
+
                 if (casterTower && casterTower != previousHighlightedTower)
                 {
                     casterTower.isHighlighted = true;
@@ -241,6 +245,10 @@ public abstract class AbilityButtonController : MonoBehaviour
         else if (castTowerType == TowerType.Laser)
         {
             availableTowersCount = TowerManager.availableLaserTowers.Count;
+        }
+        else //if(castTowerType == TowerType.Plazma)
+        {
+            availableTowersCount = TowerManager.availablePlasmaTowers.Count;
         }
 
         if (availableTowersCount == 0)

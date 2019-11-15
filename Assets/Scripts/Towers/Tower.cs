@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TowerType { Electro, Laser, Terraformerw, Plazma };
+public enum TowerType { Electro, Laser, Terraformer, Plasma };
 
 public abstract class Tower : MonoBehaviour
 {
@@ -26,7 +26,6 @@ public abstract class Tower : MonoBehaviour
     public TargetingType targetingType = TargetingType.Nearest;
     public static int basicSupply = 1;
     public int supply; // cost of autoAttacs per second;
-    public int autoAttacCost = 1;
 
     [Header("Cooldowns")]
     public float cooldownAttack = 1f;

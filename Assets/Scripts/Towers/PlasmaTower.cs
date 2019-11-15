@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlazmaTower : Tower
+public class PlasmaTower : Tower
 {
     [Header("PlazmaTower")]
 
@@ -17,7 +17,9 @@ public class PlazmaTower : Tower
     //private float reloading;
     public GameObject plazmaBullet;
 
-    private PlazmaBullet bullet;
+    public PlasmaClusterBombAbility clusterBombAbility;
+
+    private PlasmaBullet bullet;
 
     private Vector2 dir;
 
@@ -36,7 +38,8 @@ public class PlazmaTower : Tower
         s2 = plazmaBuletSpeed * plazmaBuletSpeed;
         dir = new Vector2();
         base.Start();
-        type = TowerType.Plazma;
+        type = TowerType.Plasma;
+        //print(TowerManager.availablePlazmaTowers);
     }
     public override void TowerAttack(Enemy target)
     {
@@ -60,7 +63,7 @@ public class PlazmaTower : Tower
             ///////////////////////////////
 
             //LookAtTarger();
-            bullet = Instantiate(plazmaBullet, gunpoint.position, gunpoint.rotation).GetComponent<PlazmaBullet>();
+            bullet = Instantiate(plazmaBullet, gunpoint.position, gunpoint.rotation).GetComponent<PlasmaBullet>();
             bullet.setSettings(directShotAttack, plazmaBuletSpeed, blastShotAttack, damageRadius, target, gunpoint.transform.position, new Vector3(plazmaBuletSpeed * cosTheta * dir.x, plazmaBuletSpeed * sinTheta, plazmaBuletSpeed *cosTheta * dir.y));
         }
     }
@@ -131,16 +134,22 @@ public class PlazmaTower : Tower
         {
             findeTrajectory();
         }
-        //throw new System.NotImplementedException();
+
+    }
+
+    public void CastClusterBomb(Vector3 aimPosition)
+    {
+        clusterBombAbility.Cast(aimPosition);
+        TowerManager.availablePlasmaTowers.Add(this);
     }
 
     public override void ActivateSymbiosisUpgrade()
     {
-        throw new System.NotImplementedException();
+        symbiosisTowerType = Symbiosis.ActivateSymbiosisUpgrade(this);
     }
 
     public override void DisableSymbiosisUpgrade()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

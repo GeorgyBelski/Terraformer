@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ElectroTower_M
+  m_Name: PlasmaTower_M
   m_Shader: {fileID: -6465566751694194690, guid: f6f4b38feed057e46a538ecba16e2bc7,
     type: 3}
   m_ShaderKeywords: 
@@ -66,8 +66,8 @@ Material:
     - Color_4711D7AC: {r: 4, g: 0.8167539, b: 0.4397905, a: 0}
     - Color_7CD30C50: {r: 0.5518868, g: 1, b: 0.9955211, a: 0}
     - Color_BC50206F: {r: 2.692615, g: 0.9622641, b: 4, a: 0}
-    - Color_E9157EBD: {r: 0.75, g: 0.9905063, b: 1, a: 1}
+    - Color_E9157EBD: {r: 0.7490196, g: 1, b: 0.76633936, a: 1}
     - _Color_Highlight: {r: 0.96192724, g: 1, b: 0.4669811, a: 1}
-    - _Color_StEmition: {r: 1.424084, g: 3.183246, b: 4, a: 0}
+    - _Color_StEmition: {r: 1.445026, g: 3.9999995, b: 1.4786799, a: 0}
     - _Color_SymbEmition: {r: 8.161612, g: 1.175395, b: 0.6836951, a: 0}
     - _Color_UpEmition: {r: 14.093178, g: 14.093178, b: 14.093178, a: 0}
