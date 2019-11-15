@@ -17,12 +17,17 @@ public class LaserTower : Tower
     LineRenderer lr;
     Material lrMaterial;
     [ColorUsageAttribute(true, true)]
-    public Color ordinaryLaserColor1, ordinaryLaserColor2, laserSymbColor, electroSymbColor1, electroSymbColor2;
+    public Color ordinaryLaserColor1, ordinaryLaserColor2, laserSymbColor, electroSymbColor1, electroSymbColor2, plasmaSymbColor1, plasmaSymbColor2;
     [ColorUsageAttribute(true, true)]
     [HideInInspector]
     public Color currentColor1, currentColor2;
 
-    [Header("ThandetBallAbility")]
+    public GameObject areaDamagePrefab;
+    GameObject areaDamager;
+    public int symbiosisAreaDamage = 30;
+    LaserAreaDamageController areaDamageController;
+
+    [Header("ScorchingRayAbility")]
     public ScorchingRayAbility scorchingRayAbility;
 
     private new void Start()
@@ -38,6 +43,11 @@ public class LaserTower : Tower
         }
         currentColor1 = ordinaryLaserColor1;
         currentColor2 = ordinaryLaserColor2;
+
+        areaDamager = Instantiate(areaDamagePrefab);
+        areaDamageController = areaDamager.GetComponent<LaserAreaDamageController>();
+        areaDamageController.thisTower = this;
+        
     }
     public override void TowerAttack(Enemy target)
     {
@@ -59,13 +69,24 @@ public class LaserTower : Tower
         if (symbiosisTowerType == TowerType.Electro)
         {
             randomizer = Random.Range(0, 100);
-            if(randomizer <= ((ElectroTower)symbiosisTower).probabilityOfStan)
+            if (randomizer <= ((ElectroTower)symbiosisTower).probabilityOfStan)
             {
-                target.effectsController.AddStun(((ElectroTower)symbiosisTower).stunDuration/2);
+                target.effectsController.AddStun(((ElectroTower)symbiosisTower).stunDuration / 2);
             }
         }
+        else if (symbiosisTowerType == TowerType.Plasma)
+        {
+            ApplyAreaDamage();
+        }
     }
-
+    void ApplyAreaDamage() 
+    {
+        areaDamageController.BurningDuration = BurningEffect.standardLifetime;
+        areaDamageController.damageBurning = damageBurning;
+        areaDamageController.damageHit = symbiosisAreaDamage;
+        areaDamager.transform.position = target.GetPosition();
+        areaDamager.SetActive(true);
+    }
     internal override void TowerUpdate()
     {
         if (timerDuration > 0)

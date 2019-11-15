@@ -77,7 +77,14 @@ public class Symbiosis
             tower.towerMaterial.SetColor("_Color_SymbEmition", tower.laserSymbColor);
             tower.cooldownAttack /= 2;
         }
-    //    tower.isSymbiosisInstalled = false;
+        else if (symbiosisTowerType == TowerType.Plasma)
+        {
+            tower.currentColor1 = tower.plasmaSymbColor1;
+            tower.currentColor2 = tower.plasmaSymbColor2;
+            tower.towerMaterial.SetColor("_Color_SymbEmition", tower.plasmaSymbColor2);
+
+        }
+        //    tower.isSymbiosisInstalled = false;
     }
 
     internal static void ActivatePlasmaSymbiosisUpgrade(PlasmaTower plasmaTower)

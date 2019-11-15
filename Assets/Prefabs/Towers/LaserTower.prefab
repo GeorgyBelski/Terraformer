@@ -666,7 +666,6 @@ MonoBehaviour:
   isSelected: 0
   targetingType: 0
   supply: 0
-  autoAttacCost: 1
   cooldownAttack: 1
   timerAttack: 0
   cannon: {fileID: 6015777778795571989}
@@ -688,8 +687,13 @@ MonoBehaviour:
   laserSymbColor: {r: 12.337362, g: 1.6876584, b: 2.8394542, a: 1}
   electroSymbColor1: {r: 0.5960785, g: 5.992157, b: 5.9478927, a: 0.8666667}
   electroSymbColor2: {r: 0.71204174, g: 0.8813625, b: 3.9999995, a: 0.92941177}
+  plasmaSymbColor1: {r: 0.593157, g: 7.3970156, b: 2.6236272, a: 1}
+  plasmaSymbColor2: {r: 0.5176471, g: 2, b: 0.44705883, a: 1}
   currentColor1: {r: 0, g: 0, b: 0, a: 0}
   currentColor2: {r: 0, g: 0, b: 0, a: 0}
+  areaDamagePrefab: {fileID: 7127411712342797653, guid: c3a7bae3f7f3f0a4db507baa4b875c8e,
+    type: 3}
+  symbiosisAreaDamage: 30
   scorchingRayAbility: {fileID: 2474435889650568810}
 --- !u!114 &6998274765810947965
 MonoBehaviour:
@@ -718,7 +722,7 @@ MonoBehaviour:
   healthRatio: 0
   thisTower: {fileID: 6015777778884135385}
   isRepair: 0
-  damagePoinysColor: {r: 0.8018868, g: 0.06167551, b: 0, a: 1}
+  damagePointsColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &2474435889650568810
 MonoBehaviour:
   m_ObjectHideFlags: 0

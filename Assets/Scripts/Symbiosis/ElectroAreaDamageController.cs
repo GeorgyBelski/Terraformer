@@ -7,15 +7,6 @@ public class ElectroAreaDamageController : MonoBehaviour
     public int damage;
     public float stunDuration = 0;
     public Tower thisTower;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     private void Disable()
     {
