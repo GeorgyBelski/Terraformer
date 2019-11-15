@@ -505,7 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healpower: 50
   radius: 20
-  liveTime: 20
+  liveTime: 1000
   healRate: 2
   StartPoint: {fileID: 2407488622040583472}
   cast: {fileID: 7285463587927345781, guid: 28bb175c084f33c45b266bb51e5e7109, type: 3}
@@ -553,6 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBurning: 1
   enableStun: 0
+  enableSlowdown: 0
   thisEnemy: {fileID: 1772361876839422169}
   tpCharacter: {fileID: 0}
   navAgent: {fileID: 0}
@@ -934,21 +935,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7701119216240502193, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5615429418157641000, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}
