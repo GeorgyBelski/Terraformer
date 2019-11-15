@@ -505,7 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healpower: 50
   radius: 20
-  liveTime: 1000
+  liveTime: 20
   healRate: 2
   StartPoint: {fileID: 2407488622040583472}
   cast: {fileID: 7285463587927345781, guid: 28bb175c084f33c45b266bb51e5e7109, type: 3}
