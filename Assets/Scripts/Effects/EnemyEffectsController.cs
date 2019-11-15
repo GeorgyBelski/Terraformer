@@ -9,7 +9,8 @@ public class EnemyEffectsController : MonoBehaviour
 {
     public bool enableBurning = true;
     public bool enableStun = true;
-    
+    public bool enableSlowdown = true;
+
     public Enemy thisEnemy;
     public ThirdPersonCharacter tpCharacter;
     public NavMeshAgent navAgent;
@@ -18,6 +19,7 @@ public class EnemyEffectsController : MonoBehaviour
     public GameObject vertigoPrefab;
     public GameObject vertigo;
     float originalNavAgentSpeed;
+    //private float basicSpeed;
 
     ParticleSystem flameParticleSystem;
 
@@ -71,6 +73,10 @@ public class EnemyEffectsController : MonoBehaviour
         {
 
         }
+        else if (effect.type == Effect.Type.Stan)
+        {
+
+        }
     }
 
     private void StopEffect(Effect effect)
@@ -86,6 +92,11 @@ public class EnemyEffectsController : MonoBehaviour
           //  tpCharacter.m_AnimSpeedMultiplier = 1f;
           //  tpCharacter.m_StationaryTurnSpeed = 180f;
             tpCharacter.m_Stun = false;
+            navAgent.speed = originalNavAgentSpeed;
+        }
+        else if (effect.type == Effect.Type.Slowdown)
+        {
+            enableSlowdown = true;
             navAgent.speed = originalNavAgentSpeed;
         }
     }
@@ -112,6 +123,19 @@ public class EnemyEffectsController : MonoBehaviour
             effects.Add(type, effect);
             return effect;
         }
+    }
+
+    public void AddSlowdown(float duration, float multiplayer)
+    {
+        
+        if (!enableSlowdown)
+            return;
+        SlowDownEffect slowdown = (SlowDownEffect)AddEffect(Effect.Type.Slowdown);
+        slowdown.Set(duration, multiplayer);
+        print(navAgent.speed);
+        navAgent.speed /= multiplayer;
+        print(navAgent.speed);
+        enableSlowdown = false;
     }
 
     public void AddBurning(float time, int damage) {
