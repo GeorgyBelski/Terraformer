@@ -17,7 +17,7 @@ public abstract class Tower : MonoBehaviour
     public Color rangeColor;
     public Material gizmoMaterial;
     public Material rangeLineMaterial;
-    [HideInInspector]
+  //  [HideInInspector]
     public bool isHighlighted, isSelected;
     bool castingAbility;
     public bool IsCastingAbility { get => castingAbility; set => castingAbility = value; }

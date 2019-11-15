@@ -739,7 +739,7 @@ MonoBehaviour:
   gizmoMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   rangeLineMaterial: {fileID: 2100000, guid: a6b798d74865a9e4e855fa60ca076075, type: 2}
   isHighlighted: 0
-  isSelected: 1
+  isSelected: 0
   targetingType: 0
   supply: 0
   cooldownAttack: 1
@@ -776,6 +776,7 @@ MonoBehaviour:
   stunDuration: 2
   areaDamagePrefab: {fileID: 8783333094378843143, guid: aa6faf0cd005d57488574d2a4b4b9ae5,
     type: 3}
+  symbiosisAreaDamage: 30
   thanderBallAbility: {fileID: 5870178027991076530}
 --- !u!114 &1605180230303121764
 MonoBehaviour:
