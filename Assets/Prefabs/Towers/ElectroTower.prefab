@@ -772,7 +772,7 @@ MonoBehaviour:
   plasmaSymbColor2: {r: 0.5176471, g: 2, b: 0.44705883, a: 1}
   currentColor1: {r: 0, g: 0, b: 0, a: 0}
   currentColor2: {r: 0, g: 0, b: 0, a: 0}
-  probabilityOfStan: 10
+  probabilityOfStan: 20
   stunDuration: 2
   areaDamagePrefab: {fileID: 8783333094378843143, guid: aa6faf0cd005d57488574d2a4b4b9ae5,
     type: 3}

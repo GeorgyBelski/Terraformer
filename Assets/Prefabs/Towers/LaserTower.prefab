@@ -681,7 +681,7 @@ MonoBehaviour:
   towerMaterial: {fileID: 0}
   beamDuration: 0.3
   damageAttack: 50
-  damageBurning: 6
+  damageBurning: 10
   ordinaryLaserColor1: {r: 5.992157, g: 0.7529412, b: 0.59607846, a: 0.8666667}
   ordinaryLaserColor2: {r: 4, g: 2.644961, b: 0.6981132, a: 0.92941177}
   laserSymbColor: {r: 12.337362, g: 1.6876584, b: 2.8394542, a: 1}
