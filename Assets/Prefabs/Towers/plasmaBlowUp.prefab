@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5318376179407707426}
   - component: {fileID: 5318376179407707425}
   - component: {fileID: 5318376179407707424}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: plasmaBlowUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}

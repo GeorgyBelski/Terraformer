@@ -89,6 +89,17 @@ public class Symbiosis
 
     internal static void ActivatePlasmaSymbiosisUpgrade(PlasmaTower plasmaTower)
     {
-        
+        if (symbiosisTowerType == TowerType.Electro)
+        {
+            plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.electroSymbColor2);
+        } 
+        else if (symbiosisTowerType == TowerType.Laser)
+        {
+            plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.laserSymbTrailColor);
+        }
+        else if (symbiosisTowerType == TowerType.Plasma)
+        {
+            plasmaTower.cooldownAttack /= 2;
+        }
     }
 }

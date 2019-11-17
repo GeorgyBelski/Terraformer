@@ -15,9 +15,12 @@ public class PlasmaTower : Tower
     //public float attackSpeed;
 
     //private float reloading;
-    public GameObject plazmaBullet;
+    public GameObject plazmaBulletPrefab;
 
     public PlasmaClusterBombAbility clusterBombAbility;
+
+    [ColorUsageAttribute(true, true)]
+    public Color ordinaryPlasmaBulletColor, ordinaryPlasmaTrailColor, plasmaSymbTrailColor , electroSymbTrailColor, electroSymbColor2, laserSymbTrailColor, laserSymbColor2;
 
     private PlasmaBullet bullet;
 
@@ -39,6 +42,8 @@ public class PlasmaTower : Tower
         dir = new Vector2();
         base.Start();
         type = TowerType.Plasma;
+        ordinaryPlasmaBulletColor = plazmaBulletPrefab.GetComponent<MeshRenderer>().sharedMaterial.GetColor("_EmissionColor");
+        ordinaryPlasmaTrailColor = plazmaBulletPrefab.GetComponent<TrailRenderer>().sharedMaterial.GetColor("_EmissionColor");
         //print(TowerManager.availablePlazmaTowers);
     }
     public override void TowerAttack(Enemy target)
@@ -63,8 +68,10 @@ public class PlasmaTower : Tower
             ///////////////////////////////
 
             //LookAtTarger();
-            bullet = Instantiate(plazmaBullet, gunpoint.position, gunpoint.rotation).GetComponent<PlasmaBullet>();
+            bullet = Instantiate(plazmaBulletPrefab, gunpoint.position, gunpoint.rotation).GetComponent<PlasmaBullet>();
+            bullet.thisTower = this;
             bullet.setSettings(directShotAttack, plazmaBuletSpeed, blastShotAttack, damageRadius, target, gunpoint.transform.position, new Vector3(plazmaBuletSpeed * cosTheta * dir.x, plazmaBuletSpeed * sinTheta, plazmaBuletSpeed *cosTheta * dir.y));
+            
         }
     }
 
@@ -154,6 +161,12 @@ public class PlasmaTower : Tower
 
     public override void DisableSymbiosisUpgrade()
     {
-        
+        SetOrdinaryPlasmaShots();
+        symbiosisTowerType = null;
+    }
+    void SetOrdinaryPlasmaShots() 
+    {
+        if (cooldownAttack != ordinaryCooldownAttack)
+        { cooldownAttack = ordinaryCooldownAttack; }
     }
 }

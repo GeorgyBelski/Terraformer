@@ -509,7 +509,7 @@ PrefabInstance:
     - target: {fileID: 2623192909609195394, guid: da5415a432dac38419376531d70065e1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2623192909609195394, guid: da5415a432dac38419376531d70065e1,
         type: 3}
@@ -809,14 +809,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 371407608, guid: da5415a432dac38419376531d70065e1, type: 3}
-      propertyPath: maxHealth
-      value: 1500
-      objectReference: {fileID: 0}
-    - target: {fileID: 371407608, guid: da5415a432dac38419376531d70065e1, type: 3}
-      propertyPath: health
-      value: 1500
-      objectReference: {fileID: 0}
     - target: {fileID: 1210009157638167411, guid: da5415a432dac38419376531d70065e1,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -856,6 +848,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].y
       value: -92.062965
+      objectReference: {fileID: 0}
+    - target: {fileID: 371407608, guid: da5415a432dac38419376531d70065e1, type: 3}
+      propertyPath: maxHealth
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 371407608, guid: da5415a432dac38419376531d70065e1, type: 3}
+      propertyPath: health
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 8804390195762881590, guid: da5415a432dac38419376531d70065e1,
         type: 3}
@@ -1315,7 +1315,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1445157231
 PrefabInstance:
@@ -1428,7 +1428,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1452106952
 MeshCollider:
@@ -1502,7 +1502,7 @@ Transform:
   m_LocalScale: {x: 39.124977, y: 39.124977, z: 39.124977}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1738012762 stripped
 MonoBehaviour:
@@ -1590,7 +1590,7 @@ PrefabInstance:
     - target: {fileID: 559022949615289610, guid: 7abdc609b64c85640ba1f38b4999b17c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 559022949615289610, guid: 7abdc609b64c85640ba1f38b4999b17c,
         type: 3}
