@@ -47,7 +47,9 @@ public class LaserTower : Tower
         areaDamager = Instantiate(areaDamagePrefab);
         areaDamageController = areaDamager.GetComponent<LaserAreaDamageController>();
         areaDamageController.thisTower = this;
-        
+        areaDamager.SetActive(false);
+
+
     }
     public override void TowerAttack(Enemy target)
     {

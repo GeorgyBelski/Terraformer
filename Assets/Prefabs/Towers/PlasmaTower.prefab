@@ -519,7 +519,8 @@ MonoBehaviour:
   plasmaSymbTrailColor: {r: 0.98857003, g: 2.5693965, b: 0.32723448, a: 1}
   electroSymbTrailColor: {r: 0, g: 1.9245284, b: 1.6256067, a: 1}
   electroSymbColor2: {r: 0, g: 0.7293466, b: 1.9245284, a: 1}
-  laserSymbTrailColor: {r: 4.2387795, g: 0, b: 0.16768342, a: 1}
+  laserSymbTrailColor: {r: 8.8623705, g: 0.20901814, b: 0.29209998, a: 1}
+  laserSymbColor2: {r: 4.460966, g: 0.21020247, b: 0.41198054, a: 0.92941177}
 --- !u!114 &4961004010957731150
 MonoBehaviour:
   m_ObjectHideFlags: 0

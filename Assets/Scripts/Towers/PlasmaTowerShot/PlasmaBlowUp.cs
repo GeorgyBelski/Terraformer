@@ -63,11 +63,11 @@ public class PlasmaBlowUp : MonoBehaviour
         
         if (thisTower.symbiosisTowerType == TowerType.Laser)
         {
-            material.SetColor("_EmissionColor", thisTower.laserSymbTrailColor);
+            material.SetColor("_EmissionColor", thisTower.laserSymbColor2);
         }
         else if (thisTower.symbiosisTowerType == TowerType.Electro)
         {
-            material.SetColor("_EmissionColor", thisTower.electroSymbTrailColor);
+            material.SetColor("_EmissionColor", thisTower.electroSymbColor2);
         }
         else if (thisTower.symbiosisTowerType == TowerType.Plasma)
         {
