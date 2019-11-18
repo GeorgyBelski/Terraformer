@@ -56,6 +56,7 @@ public class ElectroTower : Tower
         areaDamager = Instantiate(areaDamagePrefab);
         areaDamageController = areaDamager.GetComponent<ElectroAreaDamageController>();
         areaDamageController.thisTower = this;
+        areaDamager.SetActive(false);
     }
     void SaveOrdinaryLightningChargeSattings()
     {

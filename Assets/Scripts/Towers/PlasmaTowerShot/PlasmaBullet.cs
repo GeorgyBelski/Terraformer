@@ -11,6 +11,8 @@ public class PlasmaBullet : MonoBehaviour
     public int mainDamage;
     public float speed;
 
+    public PlasmaTower thisTower;
+
     private PlasmaBlowUp blow;
     private Enemy target;
 
@@ -18,15 +20,24 @@ public class PlasmaBullet : MonoBehaviour
     private float startPos;
     private Vector3 launchPoint;
     private Vector3 velocity;
+    public Material trailmaterial;
+    public TrailRenderer trailRenderer;
     //private float time = 0;
 
 
     void Start()
     {
         startPos = transform.position.y;
+        trailRenderer = GetComponent<TrailRenderer>();
+
+        
+        blow = Instantiate(plazmaBlowUp, transform.position, plazmaBlowUp.transform.rotation).GetComponent<PlasmaBlowUp>();
+        blow.thisTower = thisTower;
+        
+        blow.gameObject.SetActive(false);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         time += Time.deltaTime;
         Vector3 p = launchPoint + velocity * time;
@@ -37,13 +48,6 @@ public class PlasmaBullet : MonoBehaviour
         //if()
         //transform.position += new Vector3(transform.forward.x, startPos - (time * speed - (9.81f * (time * time))/2) - startPos, transform.forward.z) * speed * Time.deltaTime;
         //transform.position += transform.forward * speed * Time.deltaTime;
-        if (transform.position.y <= 0.4)
-        {
-
-            blow = Instantiate(plazmaBlowUp, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<PlasmaBlowUp>();
-            blow.setSetings(blowUpDamage, blowUpSize);
-            Destroy(gameObject);
-        }
     
     }
 
@@ -56,30 +60,33 @@ public class PlasmaBullet : MonoBehaviour
         this.target = target;
         this.launchPoint = launchPoint;
         this.velocity = velocity;
-    }
 
+        if (thisTower.symbiosisTowerType == TowerType.Laser)
+        {
+            trailRenderer.materials[0].SetColor("_EmissionColor", thisTower.laserSymbTrailColor);
+        }
+        else if (thisTower.symbiosisTowerType == TowerType.Electro)
+        {
+            trailRenderer.materials[0].SetColor("_EmissionColor", thisTower.electroSymbTrailColor);
+        }
+        else if (thisTower.symbiosisTowerType == TowerType.Plasma)
+        {
+            trailRenderer.materials[0].SetColor("_EmissionColor", thisTower.plasmaSymbTrailColor);
+        }
+    }
+    void BlowUp() 
+    {
+        blow.gameObject.SetActive(true);
+        blow.SetSettings(blowUpDamage, blowUpSize);
+        blow.transform.position = this.transform.position;
+        Destroy(gameObject);
+    }
     private void OnTriggerEnter(Collider other)
     {
-       
-
-        if (other.gameObject.layer == 12 && target)
+        if (other.gameObject.layer == Globals.groundMask)
         {
-            target.ApplyDamage(mainDamage, transform.position, Vector3.zero);
-            //Debug.Log("entered");
+            BlowUp();
         }
     }
-
-    /*void OnCollisionEnter(Collision collision)
-    {
-        // print("+");
-        if (collision.gameObject.layer == 9)
-        {
-            
-            Instantiate(plazmaBlowUp, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
-        
-    }
-    */
  }
 

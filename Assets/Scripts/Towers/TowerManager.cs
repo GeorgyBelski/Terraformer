@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TowerManager : MonoBehaviour
 {
     public int availablePlazmaTowersCount;
@@ -28,10 +29,6 @@ public class TowerManager : MonoBehaviour
 
     public int symbiosisCostMultiplayer = 8;
 
-    private void Start()
-    {
-        
-    }
     private void FixedUpdate()
     {
         LookingForSymbiosis();
@@ -141,15 +138,16 @@ public class TowerManager : MonoBehaviour
             towerLookingForSymbiosisPartner = null;
             if (highlightedTower) { highlightedTower.isHighlighted = false; }
             highlightedTower = null;
+            return;
         }
         if (!towerLookingForSymbiosisPartner)
         {
             return;
         }
-        RaycastHit hit;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 100f, towerLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, towerLayerMask))
         {
 
             if (highlightedTower) { highlightedTower.isHighlighted = false; }
@@ -190,7 +188,7 @@ public class TowerManager : MonoBehaviour
             if (highlightedTower) { highlightedTower.isHighlighted = false; }
             highlightedTower = null;
         }
-        
+
     }
 
 }

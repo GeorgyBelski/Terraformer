@@ -77,11 +77,30 @@ public class Symbiosis
             tower.towerMaterial.SetColor("_Color_SymbEmition", tower.laserSymbColor);
             tower.cooldownAttack /= 2;
         }
-    //    tower.isSymbiosisInstalled = false;
+        else if (symbiosisTowerType == TowerType.Plasma)
+        {
+            tower.currentColor1 = tower.plasmaSymbColor1;
+            tower.currentColor2 = tower.plasmaSymbColor2;
+            tower.towerMaterial.SetColor("_Color_SymbEmition", tower.plasmaSymbColor2);
+
+        }
+        //    tower.isSymbiosisInstalled = false;
     }
 
     internal static void ActivatePlasmaSymbiosisUpgrade(PlasmaTower plasmaTower)
     {
-        
+        if (symbiosisTowerType == TowerType.Electro)
+        {
+            plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.electroSymbColor2);
+        } 
+        else if (symbiosisTowerType == TowerType.Laser)
+        {
+            plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.laserSymbColor2);
+        }
+        else if (symbiosisTowerType == TowerType.Plasma)
+        {
+            plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.ordinaryPlasmaBulletColor);
+            plasmaTower.cooldownAttack /= 2;
+        }
     }
 }
