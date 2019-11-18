@@ -10,8 +10,8 @@ public class ScorchingRayAbility : TowerAbility
 
     public float speed = 20f;
     public float effectRadius = 2.19f;
-
-    GameObject scorchingRay;
+    [HideInInspector]
+    public GameObject scorchingRay;
     Material trailMaterial;
     Animator animator;
     Vector3? aim;

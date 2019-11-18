@@ -61,13 +61,23 @@ public class TowerHealth : Damageable
         if (thisTower.type == TowerType.Electro)
         {
             ((ElectroTower)thisTower).DestroyCharge();
+            Destroy(((ElectroTower)thisTower).thanderBallAbility.thandetBall.gameObject);
         }
-        else if(thisTower.type == TowerType.Terraformer)
+        else if (thisTower.type == TowerType.Laser)
         {
-            Debug.Log("Defeat!");
+            ((LaserTower)thisTower).lr.enabled = false;
+            Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject);
+        }
+        else if (thisTower.type == TowerType.Terraformer)
+        {
+            ((Terraformer)thisTower).menu.SetActive(true);
+            ((Terraformer)thisTower).defeat.gameObject.SetActive(true);
             return;
         }
-       
+
+        Destroy(thisTower.gameObject);
+
+
     }
 
     public void Repair()

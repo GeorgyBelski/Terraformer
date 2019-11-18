@@ -10,8 +10,8 @@ public class ThanderBallAbility : TowerAbility
     public float speed = 20f;
     public float effectRadius = 2.19f;
     public float abilityStunDuration = 3f;
-
-    GameObject thandetBall;
+    [HideInInspector]
+    public GameObject thandetBall;
     Material thandetBallTrailMaterial;
     Animator thandetBallAnimator;
     SphereCollider thandetBallCollider;
