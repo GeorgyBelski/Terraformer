@@ -268,7 +268,7 @@ public abstract class Tower : MonoBehaviour
             currentVisualLink = Instantiate(visualLinkPrefab);
         }
         currentVisualLink.gameObject.SetActive(true);
-        currentVisualLink.SetEndPoints(cannon, partner.cannon);
+        currentVisualLink.SetEndPoints(cannon.position, partner.cannon.position);
         currentVisualLink.SetEndColors(partner.rangeColor, this.rangeColor);
         symbiosisTower = partner;
         partner.symbiosisTower = this;

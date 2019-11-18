@@ -46,7 +46,7 @@ public class ClusterShard : MonoBehaviour
         {
 
             blow = Instantiate(clasterBlowUp, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<PlasmaBlowUp>();
-            blow.setSetings(blowUpDamage, blowUpSize);
+            blow.SetSettings(blowUpDamage, blowUpSize);
             puddle = Instantiate(calsterPuddle, new Vector3(transform.position.x, -0.03f, transform.position.z), new Quaternion(0, 0, 0, 0)).GetComponent<ClusterPuddle>();
             puddle.setSetings(puddleTime, puddleSize);
             Destroy(gameObject);

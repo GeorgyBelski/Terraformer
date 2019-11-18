@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1116969067293731951}
   - component: {fileID: 6585456302863099396}
   - component: {fileID: 6995834468401018001}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: electroAreaDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,3 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d8e12214a031c45a8f1822720a2dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  stunDuration: 0
+  thisTower: {fileID: 0}
