@@ -134,7 +134,7 @@ public class PlasmaTower : Tower
         {
             findeTrajectory();
         }
-        //throw new System.NotImplementedException();
+
     }
 
     public void CastClusterBomb(Vector3 aimPosition)
@@ -145,11 +145,11 @@ public class PlasmaTower : Tower
 
     public override void ActivateSymbiosisUpgrade()
     {
-        throw new System.NotImplementedException();
+        symbiosisTowerType = Symbiosis.ActivateSymbiosisUpgrade(this);
     }
 
     public override void DisableSymbiosisUpgrade()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

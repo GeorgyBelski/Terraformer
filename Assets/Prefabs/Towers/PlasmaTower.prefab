@@ -485,15 +485,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   enableAutoattacs: 1
-  range: 12
-  rangeColor: {r: 0.6047526, g: 0.8490566, b: 0.69819236, a: 1}
+  range: 14
+  rangeColor: {r: 0.4963955, g: 0.9150943, b: 0.6558998, a: 1}
   gizmoMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   rangeLineMaterial: {fileID: 2100000, guid: a6b798d74865a9e4e855fa60ca076075, type: 2}
   isHighlighted: 0
   isSelected: 0
   targetingType: 0
   supply: 0
-  autoAttacCost: 1
   cooldownAttack: 1
   timerAttack: 0
   cannon: {fileID: 4507894551800307058}
@@ -1595,6 +1594,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5953679779698151395}
     m_Modifications:
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1700,7 +1714,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 1329226291428954005, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7701119216240502193, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5615429418157641000, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_Name
       value: DamagePointsParent

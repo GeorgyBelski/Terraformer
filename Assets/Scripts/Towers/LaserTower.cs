@@ -113,7 +113,7 @@ public class LaserTower : Tower
 
     public override void ActivateSymbiosisUpgrade()
     {
-        symbiosisTowerType = Symbiosis.ActivateLaserSymbiosisUpgrade(this);
+        symbiosisTowerType = Symbiosis.ActivateSymbiosisUpgrade(this);
     }
 
     public override void DisableSymbiosisUpgrade()

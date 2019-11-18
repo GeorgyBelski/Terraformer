@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: LiberationSans SDF ResourceCounter
   m_Shader: {fileID: 4800000, guid: dd89cf5b9246416f84610a006f916af7, type: 3}
-  m_ShaderKeywords: BEVEL_ON OUTLINE_ON
+  m_ShaderKeywords: OUTLINE_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: c311f6cf0daa9434da95da831083eef5, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Cube:
@@ -94,7 +94,7 @@ Material:
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceColor: {r: 1, g: 0.948544, b: 0.740566, a: 1}
+    - _FaceColor: {r: 1, g: 0.9656232, b: 0.8254717, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0.9918699, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
     - _OutlineColor: {r: 0.3497491, g: 0, b: 1, a: 1}
