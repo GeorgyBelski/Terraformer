@@ -95,21 +95,24 @@ public class PlasmaTower : Tower
         prevTime = Time.deltaTime;
         */
         if (isPreemptive) 
-        { 
+        {
+            Vector3 targetPositionShift = Vector3.zero;
             switch(target.type)   
             {
                 case EnemyType.Tank:
                     //EnemyMouseController emk = target.GetComponent<EnemyMouseController>();
                     //print(targetRigidbody.velocity.magnitude);
                     //print(Vector3.Distance(transform.position, target.transform.position) / base.range);
-                    endPosition += target.character.m_ForwardAmount * target.transform.forward * 2 * plazmaBuletSpeed / g * 0.5f * 2.5f * Vector3.Distance(transform.position, target.transform.position) / base.range;
+                    targetPositionShift = target.character.m_ForwardAmount * target.transform.forward * 2 * plazmaBuletSpeed / g * 0.5f * 2.5f * Vector3.Distance(transform.position, target.transform.position) / base.range;
                 
                 break;
                 case EnemyType.Solder:
-                    endPosition += target.character.m_ForwardAmount * target.transform.forward * 6f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);// * plazmaBuletSpeed / g * 2.5f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);
+                    targetPositionShift = target.character.m_ForwardAmount * target.transform.forward * 6f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);// * plazmaBuletSpeed / g * 2.5f * (Vector3.Distance(transform.position, target.transform.position) / base.range - 0.2f);
                 break;
                 //endPosition += target.transform.forward * emk.agent.speed;//((Vector3.Distance(transform.position, target.transform.position)) / base.range) * 6 * emk.agent.speed;
             }
+            if ((endPosition + targetPositionShift).magnitude <= range)
+            { endPosition += targetPositionShift; }
         }
         dir.x = endPosition.x - gunpoint.transform.position.x;
         dir.y = endPosition.z - gunpoint.transform.position.z;

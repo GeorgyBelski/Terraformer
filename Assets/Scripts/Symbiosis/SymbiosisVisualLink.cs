@@ -5,7 +5,7 @@ using UnityEngine;
 public class SymbiosisVisualLink : MonoBehaviour
 {
     public LineRenderer lineRenderer;
-    public Transform point0, point1;
+    public Vector3 point0, point1;
     [Range(2,100)]
     public int positionsNumber = 6;
     public float waveHeight = 3;
@@ -43,13 +43,13 @@ public class SymbiosisVisualLink : MonoBehaviour
     }
     void Update()
     {
-        if (previousEnd0 != point0.transform.position || previousEnd1 != point1.transform.position)
+        if (previousEnd0 != point0 || previousEnd1 != point1)
         { SetLinePositions(); }
         Wave();
         BreakingProcess();
     }
 
-    public void SetEndPoints(Transform p0, Transform p1)
+    public void SetEndPoints(Vector3 p0, Vector3 p1)
     {
         point0 = p0;
         point1 = p1;
@@ -101,8 +101,8 @@ public class SymbiosisVisualLink : MonoBehaviour
 
     void SetLinePositions()
     {
-        end0 = point0.transform.position;
-        end1 = point1.transform.position;
+        end0 = point0;
+        end1 = point1;
         fromEnd0toEnd1 = end1 - end0;
         Vector3 lineDirection = fromEnd0toEnd1.normalized;
         waveDirection = new Vector3(-lineDirection.z, 0, lineDirection.x);

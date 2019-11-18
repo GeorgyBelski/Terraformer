@@ -55,6 +55,7 @@ public class Enemy : Damageable
 
     public override void ApplyDeath()
     {
+        this.RemoveFromList();
         if (animator)
         {
             animator.SetBool("DeathTrigger", true);
@@ -69,7 +70,7 @@ public class Enemy : Damageable
     }
     public void DestroyUnit() //C
     {
-        this.RemoveFromList();
+        //this.RemoveFromList();
         Destroy(this.gameObject);
         if (spurtFXController)
         { spurtFXController.Destroy(); }

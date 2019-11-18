@@ -14,7 +14,8 @@ public class LaserTower : Tower
     public int damageAttack = 50;
     public int damageBurning = 5;
     float timerDuration;
-    LineRenderer lr;
+    [HideInInspector]
+    public LineRenderer lr;
     Material lrMaterial;
     [ColorUsageAttribute(true, true)]
     public Color ordinaryLaserColor1, ordinaryLaserColor2, laserSymbColor, electroSymbColor1, electroSymbColor2, plasmaSymbColor1, plasmaSymbColor2;
