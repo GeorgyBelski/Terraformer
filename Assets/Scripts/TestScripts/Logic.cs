@@ -4,7 +4,42 @@ using UnityEngine;
 
 public class Logic : MonoBehaviour
 {
-    public static float basicTowerCount = 150f;
+
+    public GameObject portal;
+    public PortalSettings thisPortalSettings;
+    public float difficulties = 1;
+
+    public bool betweenWavesActivity = false;
+
+    public float winPoints = 2000f;
+
+    private float timer = 30f;
+    private float realTimer;
+
+    private float randPos;
+
+    void Start()
+    {
+        realTimer = timer;
+        if(realTimer <= 0)
+        {
+            portal.transform.position = countVector();
+        }
+    }
+
+    void Update()
+    {
+
+    }
+
+    private Vector3 countVector()
+    {
+        randPos = Random.Range(0f, 360f);
+        return new Vector3(23 * Mathf.Sin(randPos), 1, 23 * Mathf.Cos(randPos));
+    }
+
+    
+    /*public static float basicTowerCount = 150f;
     public static float basicEnemyCount = 100f;
     public float basicSpawnPortalCooldown = 15f;
     //public List<Sqad> sqads;
@@ -48,7 +83,7 @@ public class Logic : MonoBehaviour
             spawnPortalCooldown = basicSpawnPortalCooldown;
             Instantiate(portal, new Vector3(23 * Mathf.Sin(randPos), 0.5f, 23 * Mathf.Cos(randPos)), this.transform.rotation, null);
         }
-    */
+    
     }
 
     public static float countTotalCount()
@@ -76,4 +111,5 @@ public class Logic : MonoBehaviour
                 break;
         }
     }
+    */
 }
