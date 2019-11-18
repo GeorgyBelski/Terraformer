@@ -919,8 +919,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3000
-  health: 3000
+  maxHealth: 1500
+  health: 1500
   healthBar: {fileID: 6345749245046345774}
   damagePoints:
   - {fileID: 6345749245826574310}
@@ -965,6 +965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBurning: 1
   enableStun: 1
+  enableSlowdown: 1
   thisEnemy: {fileID: 6345749244992806796}
   tpCharacter: {fileID: 3325181776808568390}
   navAgent: {fileID: 8813343440432242341}
@@ -994,6 +995,7 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.2
+  m_ForwardAmount: 0
   m_Stun: 0
 --- !u!114 &4993789895433094854
 MonoBehaviour:
@@ -1021,10 +1023,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8968871776893842166}
     m_Modifications:
-    - target: {fileID: 100006, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
-      propertyPath: m_Name
-      value: LowMan_Anubis7
-      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1069,6 +1067,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
+      propertyPath: m_Name
+      value: LowMan_Anubis7
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.00000009362675
@@ -1100,16 +1102,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6345749246055777368}
     m_Modifications:
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1215,17 +1207,27 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7701119216240502193, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 5615429418157641000, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 5615429418157641000, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_RootOrder
       value: 5
