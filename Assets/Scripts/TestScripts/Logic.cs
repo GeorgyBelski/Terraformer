@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Logic : MonoBehaviour
@@ -28,7 +29,7 @@ public class Logic : MonoBehaviour
 
     public float timer = 30f;
     private float realTimer;
-
+    public TextMeshProUGUI timerText;
     private float totalCount;
     private List<GameObject> list;
 
@@ -43,6 +44,7 @@ public class Logic : MonoBehaviour
     void Update()
     {
         realTimer -= Time.deltaTime;
+        timerText.text = realTimer.ToString("0.0");
         if (realTimer <= 0)
         {
             //print("+");

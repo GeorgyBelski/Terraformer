@@ -28,7 +28,7 @@ public class EnemyMouseController : MonoBehaviour
             }
         } 
         */
-        if (agent.remainingDistance > agent.stoppingDistance)
+        if (agent.enabled && agent.remainingDistance > agent.stoppingDistance)
         {
             character.Move(agent.desiredVelocity, false, false);
         }
@@ -54,7 +54,8 @@ public class EnemyMouseController : MonoBehaviour
 
     public void SetDest(Vector3 posicion)
     {
-        agent.SetDestination(posicion);
+        if (agent.enabled)
+        { agent.SetDestination(posicion); }
     }
 
     public Vector3 GetDest()

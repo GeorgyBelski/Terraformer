@@ -95,7 +95,11 @@ public class RushDamager : Enemy_Logic
             if (isGiveUp && !isHealingJump)
             {
                 isHealingJump = true;
-                transform.LookAt(emk.GetDest());
+                if (emk.GetDest().x < float.PositiveInfinity)
+                {
+                    transform.LookAt(emk.GetDest());
+                  //  Debug.Log("emk.GetDest(): " + emk.GetDest());
+                }
                 //print(transform.eulerAngles.x + "; " + transform.eulerAngles.z);
                 dest = new Vector3(transform.position.x + Mathf.Sin(Sqad.DegreeToRadian(transform.eulerAngles.y)) * jumpDistance, transform.position.y, transform.position.z + Mathf.Cos(Sqad.DegreeToRadian(transform.eulerAngles.y)) * jumpDistance);
                 jump(dest);

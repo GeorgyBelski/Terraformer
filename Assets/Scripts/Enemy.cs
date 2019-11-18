@@ -59,8 +59,9 @@ public class Enemy : Damageable
         if (animator)
         {
             animator.SetBool("DeathTrigger", true);
-            effectsController.navAgent.speed = 0;
-            effectsController.navAgent.angularSpeed = 0;
+          //  effectsController.navAgent.speed = 0;
+            effectsController.navAgent.enabled = false;
+         //   effectsController.navAgent.angularSpeed = 0;
         }
         else {
 
