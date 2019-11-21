@@ -44,6 +44,7 @@ public class PlasmaClusterBombAbility : TowerAbility
         base.Start();
         rateOfShooting = castTime / bombCount;
         aim = null;
+        shootingCount = bombCount;
     }
 
     // Update is called once per frame

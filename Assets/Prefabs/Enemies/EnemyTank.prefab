@@ -829,7 +829,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8968871776893842170}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Speed: 0.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -884,7 +884,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 1.81
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -1023,6 +1023,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8968871776893842166}
     m_Modifications:
+    - target: {fileID: 100006, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
+      propertyPath: m_Name
+      value: LowMan_Anubis7
+      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1067,10 +1071,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
-      propertyPath: m_Name
-      value: LowMan_Anubis7
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.00000009362675
@@ -1085,7 +1085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00279061
+      value: 0.002790769
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f4dccda69a59e04db8fd5c5e1cc79ca, type: 3}
@@ -1102,6 +1102,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6345749246055777368}
     m_Modifications:
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1207,27 +1217,17 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 7701119216240502193, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 5615429418157641000, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 5615429418157641000, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_RootOrder
       value: 5

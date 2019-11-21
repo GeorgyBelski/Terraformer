@@ -19,7 +19,7 @@ public class CreepHexagonGenerator : MonoBehaviour
     public static int expansionCost, repairingCost;
     public int buildCost = 1, repairHexagonCost = 1; 
 
-    public int coefficient = 1;
+    public float coefficient = 1;
     int previousRadius;
     int previousCoefficient;
     const int matrixDemension = 101;
@@ -83,7 +83,7 @@ public class CreepHexagonGenerator : MonoBehaviour
         Vector3[] vertices;
         int[] triangles;
 
-        int coefficient;
+        float coefficient;
 
         public Hexagon(CreepHexagonGenerator parent, int x, int z)
         {

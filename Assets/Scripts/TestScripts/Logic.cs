@@ -48,10 +48,10 @@ public class Logic : MonoBehaviour
         if (realTimer <= 0)
         {
             //print("+");
-            portal.active = true;
             portal.transform.position = countVector();
+            portal.active = true;
 
-            thisPortalSettings.setSetings(conutWave());
+            thisPortalSettings.setSettings(conutWave());
             realTimer = timer;
         }
     }
