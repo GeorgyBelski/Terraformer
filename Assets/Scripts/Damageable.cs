@@ -25,10 +25,7 @@ public abstract class Damageable : MonoBehaviour
 
     void Start()
     {
-        for(int i=0; i< damagePoints.Length; i++) 
-        {
-            damagePointAnimators[i] = damagePoints[i].GetComponent<Animator>();
-        }
+        
     }
 
     void Update()
