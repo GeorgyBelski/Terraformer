@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlasmaBullet : MonoBehaviour
 {
-    public GameObject plazmaBlowUp;
+  //  public GameObject plazmaBlowUp;
     private int blowUpDamage;
     private float blowUpSize;
 
@@ -13,7 +13,7 @@ public class PlasmaBullet : MonoBehaviour
 
     public PlasmaTower thisTower;
 
-    private PlasmaBlowUp blow;
+    public PlasmaBlowUp blow;
     private Enemy target;
 
     private float time = 0;
@@ -22,6 +22,8 @@ public class PlasmaBullet : MonoBehaviour
     private Vector3 velocity;
     public Material trailmaterial;
     public TrailRenderer trailRenderer;
+    [ColorUsageAttribute(true, true)]
+    public Color OrdinaryTrailColor;
     //private float time = 0;
 
 
@@ -30,11 +32,12 @@ public class PlasmaBullet : MonoBehaviour
         startPos = transform.position.y;
         trailRenderer = GetComponent<TrailRenderer>();
 
-        
+        /*
         blow = Instantiate(plazmaBlowUp, transform.position, plazmaBlowUp.transform.rotation).GetComponent<PlasmaBlowUp>();
         blow.thisTower = thisTower;
         
         blow.gameObject.SetActive(false);
+        */
     }
 
     void FixedUpdate()
@@ -50,8 +53,11 @@ public class PlasmaBullet : MonoBehaviour
         //transform.position += transform.forward * speed * Time.deltaTime;
     
     }
-
-    public void setSettings(int mainDamage, float speed, int blowUpDamage, float blowUpSize, Enemy target, Vector3 launchPoint, Vector3 velocity)
+    private void LateUpdate()
+    {
+        if (!thisTower) { Destroy(this.gameObject); }
+    }
+    public void setSettings(int mainDamage, float speed, int blowUpDamage, float blowUpSize, Enemy target, Vector3 launchPoint, Vector3 velocity, PlasmaBlowUp blow)
     {
         this.mainDamage = mainDamage;
         this.speed = speed;
@@ -59,28 +65,41 @@ public class PlasmaBullet : MonoBehaviour
         this.blowUpSize = blowUpSize;
         this.target = target;
         this.launchPoint = launchPoint;
+        this.transform.localPosition = launchPoint;
         this.velocity = velocity;
-
+        this.blow = blow;
+        this.time = 0;
+        this.gameObject.SetActive(true);
+    }
+    public void SetSimbiosisColor() 
+    {
         if (thisTower.symbiosisTowerType == TowerType.Laser)
         {
-            trailRenderer.materials[0].SetColor("_EmissionColor", thisTower.laserSymbTrailColor);
+            SetTrailColor(thisTower.laserSymbTrailColor);
         }
         else if (thisTower.symbiosisTowerType == TowerType.Electro)
         {
-            trailRenderer.materials[0].SetColor("_EmissionColor", thisTower.electroSymbTrailColor);
+            SetTrailColor(thisTower.electroSymbTrailColor);
         }
         else if (thisTower.symbiosisTowerType == TowerType.Plasma)
         {
-            trailRenderer.materials[0].SetColor("_EmissionColor", thisTower.plasmaSymbTrailColor);
+            SetTrailColor(thisTower.plasmaSymbTrailColor);
         }
+    }
+    public void SetTrailColor(Color color)
+    {
+        trailRenderer.materials[0].SetColor("_EmissionColor", color);
     }
     void BlowUp() 
     {
         blow.gameObject.SetActive(true);
         blow.SetSettings(blowUpDamage, blowUpSize);
         blow.transform.position = this.transform.position;
-        Destroy(gameObject);
+        //  Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == Globals.groundMask)

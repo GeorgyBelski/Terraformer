@@ -8,6 +8,7 @@ public class PlasmaBlowUp : MonoBehaviour
     public float damage;
     public float centerDamage = 50f;
     public float radius;
+    float startRadius;
     public PlasmaTower thisTower;
     public Material material;
     public Vector3 position;
@@ -15,7 +16,7 @@ public class PlasmaBlowUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        randomizer = Random.Range(0, 100);
+        startRadius = this.transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -26,9 +27,16 @@ public class PlasmaBlowUp : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 10, transform.localScale.y + Time.deltaTime *0.8f, transform.localScale.z + Time.deltaTime * 10);
         if (transform.localScale.x >= radius)
         {
-            Destroy(gameObject);
+            //  Destroy(gameObject);
+            this.gameObject.SetActive(false);
+            
         }
+        
         //mt.color = new Color(mt.color.r, mt.color.g, mt.color.b, mt.color.a - 0.25f / radius);
+    }
+    private void LateUpdate()
+    {
+        if (!thisTower) { Destroy(this.gameObject); }
     }
     /*
     private void OnDrawGizmos()
@@ -65,6 +73,7 @@ public class PlasmaBlowUp : MonoBehaviour
             else if (thisTower.symbiosisTowerType == TowerType.Electro)
             {
                 ElectroTower elTower = (ElectroTower)thisTower.symbiosisTower;
+                randomizer = Random.Range(0, 100);
                 if (randomizer <= elTower.probabilityOfStan)
                 {
                     enemy.effectsController.AddStun(elTower.stunDuration / 2);
@@ -78,21 +87,28 @@ public class PlasmaBlowUp : MonoBehaviour
     {
         this.damage = damage;
         this.radius = radius;
+        this.transform.localScale = Vector3.one * startRadius;
         if (!thisTower) 
         { return; }
         material = GetComponent<MeshRenderer>().materials[0];
-        
+     /*   
         if (thisTower.symbiosisTowerType == TowerType.Laser)
         {
-            material.SetColor("_EmissionColor", thisTower.laserSymbColor2);
+            SetColor(thisTower.laserSymbColor2);
         }
         else if (thisTower.symbiosisTowerType == TowerType.Electro)
         {
-            material.SetColor("_EmissionColor", thisTower.electroSymbColor2);
+            SetColor(thisTower.electroSymbColor2);
         }
         else if (thisTower.symbiosisTowerType == TowerType.Plasma)
         {
-            material.SetColor("_EmissionColor", thisTower.plasmaSymbTrailColor);
+            SetColor(thisTower.plasmaSymbTrailColor);
         }
+        */
+    }
+
+    public void SetColor(Color color) 
+    {
+        material.SetColor("_EmissionColor", color);
     }
 }

@@ -16,14 +16,25 @@ public class PlasmaTower : Tower
 
     //private float reloading;
     public GameObject plazmaBulletPrefab;
+    public GameObject plazmaBlowUpPrefab;
+    public PlasmaBlowUp blow;
 
     public PlasmaClusterBombAbility clusterBombAbility;
 
     [ColorUsageAttribute(true, true)]
-    public Color ordinaryPlasmaBulletColor, ordinaryPlasmaTrailColor, plasmaSymbTrailColor , electroSymbTrailColor, electroSymbColor2, laserSymbTrailColor, laserSymbColor2;
+    public Color ordinaryPlasmaBulletColor, ordinaryPlasmaTrail_BlowUpColor, plasmaSymbTrailColor , electroSymbTrailColor, electroSymbColor2, laserSymbTrailColor, laserSymbColor2;
 
-    private PlasmaBullet bullet;
+    public PlasmaBullet[] bullets = new PlasmaBullet[3];
+    private int currentBulletIndex = 0;
+    public int CurrentBulletIndex { 
+        get {
+            int index = currentBulletIndex;
+            if (currentBulletIndex + 1 < bullets.Length)
+            {currentBulletIndex++;}
+            else {currentBulletIndex = 0;}   
+            return index; 
 
+        } set => currentBulletIndex = value; }
     private Vector2 dir;
 
     private float shootPosX;
@@ -36,15 +47,26 @@ public class PlasmaTower : Tower
     private float cosTheta;
     private float sinTheta;
 
+    
+
     void Start()
     {
         s2 = plazmaBuletSpeed * plazmaBuletSpeed;
         dir = new Vector2();
         base.Start();
         type = TowerType.Plasma;
-        ordinaryPlasmaBulletColor = plazmaBulletPrefab.GetComponent<MeshRenderer>().sharedMaterial.GetColor("_EmissionColor");
-        ordinaryPlasmaTrailColor = plazmaBulletPrefab.GetComponent<TrailRenderer>().sharedMaterial.GetColor("_EmissionColor");
         //print(TowerManager.availablePlazmaTowers);
+        for (int i = 0; i < bullets.Length; i++) 
+        {
+            bullets[i] = Instantiate(plazmaBulletPrefab, gunpoint.position, gunpoint.rotation).GetComponent<PlasmaBullet>();
+            bullets[i].thisTower = this;
+            bullets[i].gameObject.SetActive(false);
+        }
+
+        blow = Instantiate(plazmaBlowUpPrefab).GetComponent<PlasmaBlowUp>();
+        blow.thisTower = this;
+
+        blow.gameObject.SetActive(false);
     }
     public override void TowerAttack(Enemy target)
     {
@@ -68,10 +90,7 @@ public class PlasmaTower : Tower
             ///////////////////////////////
 
             //LookAtTarger();
-            bullet = Instantiate(plazmaBulletPrefab, gunpoint.position, gunpoint.rotation).GetComponent<PlasmaBullet>();
-            bullet.thisTower = this;
-            bullet.setSettings(directShotAttack, plazmaBuletSpeed, blastShotAttack, damageRadius, target, gunpoint.transform.position, new Vector3(plazmaBuletSpeed * cosTheta * dir.x, plazmaBuletSpeed * sinTheta, plazmaBuletSpeed *cosTheta * dir.y));
-            
+            bullets[CurrentBulletIndex].setSettings(directShotAttack, plazmaBuletSpeed, blastShotAttack, damageRadius, target, gunpoint.transform.position, new Vector3(plazmaBuletSpeed * cosTheta * dir.x, plazmaBuletSpeed * sinTheta, plazmaBuletSpeed *cosTheta * dir.y), blow);
         }
     }
 
@@ -171,5 +190,10 @@ public class PlasmaTower : Tower
     {
         if (cooldownAttack != ordinaryCooldownAttack)
         { cooldownAttack = ordinaryCooldownAttack; }
+        foreach (var bullet in bullets) 
+        {
+            bullet.SetTrailColor(ordinaryPlasmaTrail_BlowUpColor);
+        }
+        blow.SetColor(ordinaryPlasmaTrail_BlowUpColor);
     }
 }

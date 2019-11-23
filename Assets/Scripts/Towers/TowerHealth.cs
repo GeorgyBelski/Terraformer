@@ -68,6 +68,21 @@ public class TowerHealth : Damageable
             ((LaserTower)thisTower).lr.enabled = false;
             Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject);
         }
+        else if (thisTower.type == TowerType.Plasma) 
+        {
+            foreach (var bullet in ((PlasmaTower)thisTower).bullets) 
+            { 
+                if (bullet.gameObject.activeSelf) 
+                { bullet.thisTower = null; } 
+                else 
+                { Destroy(bullet.gameObject); } 
+            }
+            PlasmaBlowUp blow = ((PlasmaTower)thisTower).blow;
+            if (blow.gameObject.activeSelf)
+            { blow.thisTower = null; }
+            else
+            { Destroy(((PlasmaTower)thisTower).blow.gameObject); }
+        }
         else if (thisTower.type == TowerType.Terraformer)
         {
             ((Terraformer)thisTower).menu.SetActive(true);

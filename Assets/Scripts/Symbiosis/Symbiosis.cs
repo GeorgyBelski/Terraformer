@@ -92,15 +92,26 @@ public class Symbiosis
         if (symbiosisTowerType == TowerType.Electro)
         {
             plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.electroSymbColor2);
+            SetBulletsAndBlowUpColors(plasmaTower, plasmaTower.electroSymbTrailColor);
         } 
         else if (symbiosisTowerType == TowerType.Laser)
         {
             plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.laserSymbColor2);
+            SetBulletsAndBlowUpColors(plasmaTower, plasmaTower.laserSymbTrailColor);
         }
         else if (symbiosisTowerType == TowerType.Plasma)
         {
             plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.ordinaryPlasmaBulletColor);
             plasmaTower.cooldownAttack /= 2;
+            SetBulletsAndBlowUpColors(plasmaTower, plasmaTower.plasmaSymbTrailColor);
         }
+    }
+    static void SetBulletsAndBlowUpColors(PlasmaTower plasmaTower,  Color color) 
+    {
+        foreach (var bullet in plasmaTower.bullets)
+        {
+            bullet.SetTrailColor(color);
+        }
+        plasmaTower.blow.SetColor(color);
     }
 }
