@@ -32,13 +32,6 @@ public abstract class Tower : MonoBehaviour
     protected float ordinaryCooldownAttack;
     public float timerAttack = 0f;
 
-    /*
-    public float cooldownAbility1 = 10f;
-    protected float timerAbility1 = 0f;
-
-    public float cooldownAbility2 = 15f;
-    protected float timerAbility2 = 0f;
-    */
     [Header("References")]
     public Transform cannon;
     public Transform gunpoint;
@@ -247,7 +240,7 @@ public abstract class Tower : MonoBehaviour
 
     }
 
-    public abstract void EndCasting();
+    public virtual void EndCasting() { timerAttack = cooldownAttack; }
 
     void HighlightTower()
     {

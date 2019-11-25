@@ -55,7 +55,7 @@ public class PlasmaBullet : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (!thisTower) { Destroy(this.gameObject); }
+        if (!thisTower && !this.gameObject.activeSelf) { DestroyBullet(); }
     }
     public void setSettings(int mainDamage, float speed, int blowUpDamage, float blowUpSize, Enemy target, Vector3 launchPoint, Vector3 velocity, PlasmaBlowUp blow)
     {
@@ -92,14 +92,23 @@ public class PlasmaBullet : MonoBehaviour
     }
     void BlowUp() 
     {
-        blow.gameObject.SetActive(true);
-        blow.SetSettings(blowUpDamage, blowUpSize);
-        blow.transform.position = this.transform.position;
+        if (blow) 
+        { 
+            blow.gameObject.SetActive(true);
+            blow.SetSettings(blowUpDamage, blowUpSize);
+            blow.transform.position = this.transform.position;
+        }
         //  Destroy(gameObject);
-        this.gameObject.SetActive(false);
+        if (thisTower)
+        { this.gameObject.SetActive(false); }
+        else
+        { DestroyBullet(); }
     }
 
-
+    public void DestroyBullet() 
+    {
+        Destroy(gameObject);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == Globals.groundMask)

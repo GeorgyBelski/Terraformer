@@ -157,6 +157,7 @@ public class PlasmaTower : Tower
 
     public override void EndCasting()
     {
+        base.EndCasting();
         IsCastingAbility = false;
         TowerManager.availablePlasmaTowers.Add(this);
     }
@@ -168,6 +169,25 @@ public class PlasmaTower : Tower
             findeTrajectory();
         }
 
+    }
+
+    public void DestroyBullets() 
+    {
+        int activeBullets = 0;
+        foreach (PlasmaBullet bullet in bullets)
+        {
+            if (bullet.gameObject.activeSelf)
+            {
+                activeBullets++;
+                bullet.thisTower = null;
+            }
+            else 
+            {
+                bullet.DestroyBullet();
+            }
+            if (activeBullets == 0) 
+            { Destroy(blow.gameObject); }
+        }
     }
 
     public void CastClusterBomb(Vector3 aimPosition)

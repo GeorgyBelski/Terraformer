@@ -161,6 +161,7 @@ public class LaserTower : Tower
 
     public override void EndCasting()
     {
+        base.EndCasting();
         IsCastingAbility = false;
         TowerManager.availableLaserTowers.Add(this);
     }
