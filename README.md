@@ -8,7 +8,7 @@ https://drive.google.com/open?id=1PeWubtOO2MmXaxy6MeJPklLKZfvKuwca
 
 **Electro Tower:**
 AutoAttacks, Ability, Symbiosis between two Electro Towers  
-![Electro Tower](https://drive.google.com/open?id=1kWdrMgUWk5tL0Fur9Y2PzlOr1x2KOUNa)
+![Electro Tower]()
 https://drive.google.com/open?id=1IN6AwZRMMjlF-Z7vuDvzhVb5Pts975ne
 
 
