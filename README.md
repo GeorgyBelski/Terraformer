@@ -12,5 +12,5 @@ https://drive.google.com/open?id=1IN6AwZRMMjlF-Z7vuDvzhVb5Pts975ne
 
 
 **Plasma Tower:**
-AutoAttacks, Ability  
-https://drive.google.com/open?id=1YtccAErvbl4sscydDzwXfqKArH7CCFFq
+AutoAttacks, Ability, Symbiosis between two Plasma Towers
+https://drive.google.com/open?id=1fFMRWM3yrVNaWhLHJONY0wHqO6fViWJg
