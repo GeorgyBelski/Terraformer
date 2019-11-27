@@ -24,7 +24,7 @@ public class PlasmaTower : Tower
     [ColorUsageAttribute(true, true)]
     public Color ordinaryPlasmaBulletColor, ordinaryPlasmaTrail_BlowUpColor, plasmaSymbTrailColor , electroSymbTrailColor, electroSymbColor2, laserSymbTrailColor, laserSymbColor2;
 
-    public PlasmaBullet[] bullets = new PlasmaBullet[3];
+    public PlasmaBullet[] bullets = new PlasmaBullet[4];
     private int currentBulletIndex = 0;
     public int CurrentBulletIndex { 
         get {
