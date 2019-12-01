@@ -490,10 +490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef92dc545a3a02f4180e93bd7845de9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healpower: 50
-  radius: 20
+  healpower: 75
+  radius: 7
   liveTime: 20
-  healRate: 2
+  healRate: 3
   StartPoint: {fileID: 2407488622040583472}
   cast: {fileID: 7285463587927345781, guid: 28bb175c084f33c45b266bb51e5e7109, type: 3}
 --- !u!114 &1772361876839422169

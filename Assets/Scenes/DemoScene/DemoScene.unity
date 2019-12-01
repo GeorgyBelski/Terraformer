@@ -1138,6 +1138,36 @@ PrefabInstance:
       propertyPath: thisPortalSettings
       value: 
       objectReference: {fileID: 485153875}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: enemyDamagerCount
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: enemyRusherCount
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: enemyTankCount
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: enemyHealCount
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: difficulties
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 928544962118843758, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70bfa4e3df0bb554c919837948630b18, type: 3}
 --- !u!114 &1738012762 stripped
