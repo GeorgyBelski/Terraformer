@@ -132,11 +132,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		//	m_Animator.SetBool("Crouch", m_Crouching);
             m_Animator.SetBool("Stun", m_Stun);
         //    m_Animator.SetBool("OnGround", m_IsGrounded);
-			if (!m_IsGrounded)
+		/*	if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
 			}
-
+        */
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
 			// (This code is reliant on the specific run cycle offset in our animations,
 			// and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
