@@ -39,10 +39,10 @@ public class EnemyMouseController : MonoBehaviour
 
     }
 
-    public void SetDest(Vector3 posicion)
+    public void SetDest(Vector3 position)
     {
         if (agent.enabled)
-        { agent.SetDestination(posicion); }
+        { agent.SetDestination(position); }
     }
 
     public Vector3 GetDest()

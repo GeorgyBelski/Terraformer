@@ -18,14 +18,14 @@ public class LaserBlowUpCast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.gameObject.active) { 
+        if (this.gameObject.activeSelf) { 
             transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 5, transform.localScale.y, transform.localScale.z + Time.deltaTime * 5);
             if (transform.localScale.x >= radius)
             {
                 if (isReal)
                 {
                     transform.localScale = new Vector3(0, transform.localScale.y, 0);
-                    gameObject.active = false;
+                    gameObject.SetActive(false);
                 }
                 else
                 {

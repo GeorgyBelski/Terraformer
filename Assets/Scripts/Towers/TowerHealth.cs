@@ -85,6 +85,7 @@ public class TowerHealth : Damageable
         }
 
         Destroy(thisTower.gameObject);
+        thisTower.hexagon.SetStatus(HexCoordinatStatus.Attend);
 
 
     }

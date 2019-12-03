@@ -5,6 +5,6 @@ using UnityEngine;
 public class Globals
 {
 
-    public static int groundMask = 9;
-
+    public static int groundLayer = 9;
+    public static int groundLayerMask = 1 << 9;
 }

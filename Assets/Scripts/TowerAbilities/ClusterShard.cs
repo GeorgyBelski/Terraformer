@@ -100,7 +100,7 @@ public class ClusterShard : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == Globals.groundMask)
+        if (other.gameObject.layer == Globals.groundLayer)
         {
 
             isGrounded = true;
