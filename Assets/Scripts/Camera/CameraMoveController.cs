@@ -17,6 +17,7 @@ public class CameraMoveController : MonoBehaviour
     public Vector3 direction;
     public float FarthestZoom;
     public float NearestZoom;
+    public float scrollFactor = 2f;
     [Header("Reference")]
     public Transform cameraFocusPoint;
  //   float distanceToFocusPoint;
@@ -55,11 +56,11 @@ public class CameraMoveController : MonoBehaviour
         var scroll = Input.mouseScrollDelta.y;
         if (scroll > 0 && transform.localPosition.magnitude > NearestZoom)
         {
-            this.transform.position += this.transform.rotation * Vector3.forward;
+            this.transform.position += this.transform.rotation * Vector3.forward * scrollFactor;
         }
         else if (scroll < 0 && transform.localPosition.magnitude < FarthestZoom)
         {
-            this.transform.position -= this.transform.rotation * Vector3.forward;
+            this.transform.position -= this.transform.rotation * Vector3.forward * scrollFactor;
         }
     }
 

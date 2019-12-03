@@ -513,14 +513,21 @@ MonoBehaviour:
   isPreemptive: 1
   plazmaBulletPrefab: {fileID: 7057038046003624443, guid: 629af26e030e69f4895c5654324a72e5,
     type: 3}
+  plazmaBlowUpPrefab: {fileID: 5318376179407707431, guid: 19b7a3ee2c1d0884a9e831b1ae730039,
+    type: 3}
+  blow: {fileID: 0}
   clusterBombAbility: {fileID: 277963137008030843}
-  ordinaryPlasmaBulletColor: {r: 0, g: 0, b: 0, a: 0}
-  ordinaryPlasmaTrailColor: {r: 0, g: 0, b: 0, a: 0}
+  ordinaryPlasmaBulletColor: {r: 0.18037727, g: 1.9245284, b: 0, a: 1}
+  ordinaryPlasmaTrail_BlowUpColor: {r: 1.3298428, g: 0.6806075, b: 0, a: 1}
   plasmaSymbTrailColor: {r: 0.98857003, g: 2.5693965, b: 0.32723448, a: 1}
   electroSymbTrailColor: {r: 0, g: 1.9245284, b: 1.6256067, a: 1}
   electroSymbColor2: {r: 0, g: 0.7293466, b: 1.9245284, a: 1}
   laserSymbTrailColor: {r: 8.8623705, g: 0.20901814, b: 0.29209998, a: 1}
   laserSymbColor2: {r: 4.460966, g: 0.21020247, b: 0.41198054, a: 0.92941177}
+  bullets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &4961004010957731150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1712,12 +1719,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_Layer
       value: 0

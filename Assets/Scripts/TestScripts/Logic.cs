@@ -1,10 +1,118 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Logic : MonoBehaviour
 {
-    public static float basicTowerCount = 150f;
+
+
+    public GameObject enemyDamager;
+    public GameObject enemyTank;
+    public GameObject enemyRusher;
+    public GameObject enemyHeal;
+
+    public float enemyDamagerCount = 30;
+    public float enemyTankCount = 70;
+    public float enemyRusherCount = 30;
+    public float enemyHealCount = 30;
+
+    public float towerCount = 100;
+
+    public GameObject portal;
+    public PortalSettings thisPortalSettings;
+    public float difficulties = 1;
+
+    public bool betweenWavesActivity = false;
+
+    public float winPoints = 2000f;
+
+    public float timer = 30f;
+    private float realTimer;
+    public TextMeshProUGUI timerText;
+    private float totalCount;
+    private List<GameObject> list;
+
+    private float randPos;
+
+    void Start()
+    {
+        portal.active = false;
+        realTimer = timer / 2;
+    }
+
+    void Update()
+    {
+        realTimer -= Time.deltaTime;
+        timerText.text = realTimer.ToString("0.0");
+        if (realTimer <= 0)
+        {
+            //print("+");
+            portal.transform.position = countVector();
+            portal.active = true;
+
+            thisPortalSettings.setSettings(conutWave());
+            realTimer = timer;
+        }
+    }
+
+    private Vector3 countVector()
+    {
+        randPos = Random.Range(0f, 360f);
+        return new Vector3(23 * Mathf.Sin(randPos), 1, 23 * Mathf.Cos(randPos));
+    }
+
+    private List<GameObject> conutWave()
+    {
+        list = new List<GameObject>();
+        totalCount = TowerManager.towers.Count * difficulties * towerCount;
+
+        if (totalCount > 200 && !EnemyManagerPro.enemiesMap.ContainsKey(EnemyType.Healer))
+        {
+            list.Add(enemyHeal);
+            totalCount -= enemyHealCount;
+        }
+            
+
+        int tanksCount = (int)totalCount / 300;
+
+        listAdding(tanksCount, enemyTank);
+        totalCount -= tanksCount * enemyTankCount;
+
+        int simpleDamagerCount = (int)(totalCount * 0.6f);
+        totalCount -= simpleDamagerCount;
+
+        int rushCount = (int)(totalCount / enemyRusherCount);
+        totalCount = 0;
+
+        simpleDamagerCount = simpleDamagerCount / (int)enemyDamagerCount;
+
+        listAdding(simpleDamagerCount, enemyDamager);
+        listAdding(rushCount, enemyRusher);
+
+        return list;
+    }
+
+    public void listAdding(int count, GameObject enemy)
+    {
+        for(int i = 0; i < count; i++)
+        {
+            list.Add(enemy);
+        }
+    }
+
+}
+  
+        
+
+        //return new List<Enemy>;
+    
+
+
+
+
+    
+    /*public static float basicTowerCount = 150f;
     public static float basicEnemyCount = 100f;
     public float basicSpawnPortalCooldown = 15f;
     //public List<Sqad> sqads;
@@ -48,7 +156,7 @@ public class Logic : MonoBehaviour
             spawnPortalCooldown = basicSpawnPortalCooldown;
             Instantiate(portal, new Vector3(23 * Mathf.Sin(randPos), 0.5f, 23 * Mathf.Cos(randPos)), this.transform.rotation, null);
         }
-    */
+    
     }
 
     public static float countTotalCount()
@@ -76,4 +184,5 @@ public class Logic : MonoBehaviour
                 break;
         }
     }
-}
+    */
+

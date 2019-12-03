@@ -51,6 +51,7 @@ public class TowerHealth : Damageable
     public override void ApplyDeath()
     {
         thisTower.BreakSymbiosis();
+        if (thisTower.currentVisualLink) { Destroy(thisTower.currentVisualLink.gameObject); }
         RemoveFromList();
         //Destroy(thisTowet.gameObject);
 
@@ -67,6 +68,14 @@ public class TowerHealth : Damageable
         {
             ((LaserTower)thisTower).lr.enabled = false;
             Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject);
+        }
+        else if (thisTower.type == TowerType.Plasma) 
+        {
+            ((PlasmaTower)thisTower).DestroyBullets();
+            ((PlasmaTower)thisTower).clusterBombAbility.DestroyBullets();
+            PlasmaBlowUp blow = ((PlasmaTower)thisTower).blow;
+            if (blow.gameObject.activeSelf)
+            { blow.thisTower = null; }
         }
         else if (thisTower.type == TowerType.Terraformer)
         {

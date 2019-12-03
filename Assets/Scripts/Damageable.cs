@@ -25,7 +25,7 @@ public abstract class Damageable : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     void Update()

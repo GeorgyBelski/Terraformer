@@ -14,7 +14,7 @@ public class Porta : MonoBehaviour
 
     
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         //Instantiate(spawnEffect, this.transform.position, this.transform.rotation);
         //GameObject tower = GameObject.Find("Tower");
@@ -61,4 +61,5 @@ public class Porta : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    */
 }

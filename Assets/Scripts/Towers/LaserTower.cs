@@ -31,8 +31,23 @@ public class LaserTower : Tower
     [Header("ScorchingRayAbility")]
     public ScorchingRayAbility scorchingRayAbility;
 
+    [Space]
+    [Header("UpgradeAbilityCast")]
+    private bool isUpgraided;
+    public LaserBlowUpCast cast;
+    public float castSize = 5f;
+    public float castDamage = 50f;
+    public float castBlowUpSize = 2f;
+    public float castBlowUpDamage = 25f;
+
+    public float castCooldown = 20f;
+    private float realCastTime;
+    
+
     private new void Start()
     {
+        cast.gameObject.active = false;
+        realCastTime = castCooldown;
         base.Start();
         type = TowerType.Laser;
 
@@ -92,6 +107,16 @@ public class LaserTower : Tower
     }
     internal override void TowerUpdate()
     {
+        if (isUpgraided)
+        {
+            realCastTime -= Time.deltaTime;
+
+            if(realCastTime <= 0)
+            {
+                cast.gameObject.active = true;
+                realCastTime = castCooldown;
+            }
+        }
         if (timerDuration > 0)
         {
             float ratioDuration = timerDuration / beamDuration;
@@ -136,9 +161,18 @@ public class LaserTower : Tower
 
     public override void EndCasting()
     {
+        base.EndCasting();
         IsCastingAbility = false;
         TowerManager.availableLaserTowers.Add(this);
     }
 
+    public void upgrade()
+    {
+        
+        isUpgraided = true;
+        cast.Set(castSize, castDamage, castBlowUpSize, castBlowUpDamage, damageBurning);
+
+
+    }
     
 }

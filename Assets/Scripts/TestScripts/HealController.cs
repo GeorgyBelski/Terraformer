@@ -89,7 +89,7 @@ public class HealController : MonoBehaviour
 
         realHealingTime -= Time.deltaTime;
         state_heal();
-        if(emk.agent.remainingDistance <= emk.agent.stoppingDistance)
+        if(emk.agent.enabled && emk.agent.remainingDistance <= emk.agent.stoppingDistance)
         {
             realMovementRate -= Time.deltaTime;
         }

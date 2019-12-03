@@ -13,7 +13,7 @@ public class EnemyManagerPro : MonoBehaviour
     //public static List<HealBase> healBases = new List<HealBase>();
 
     public static Dictionary<EnemyType, List<Enemy>> enemiesMap= new Dictionary<EnemyType, List<Enemy>>();
-
+    public int enemyCount;
     private void Start()
     {
         enemyLayerMask = LayerMask.GetMask("Enemy");
@@ -28,7 +28,10 @@ public class EnemyManagerPro : MonoBehaviour
         //enemiesHealers.Add(startEnemies[0]);
         //enemiesHealers.Add(startEnemies[2]);
     }
-
+    private void Update()
+    {
+        enemyCount = enemies.Count;
+    }
     //public static void 
 
     public static void AddEnemy(Enemy enemy)

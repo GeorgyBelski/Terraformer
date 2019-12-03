@@ -246,7 +246,7 @@ public abstract class AbilityButtonController : MonoBehaviour
         {
             availableTowersCount = TowerManager.availableLaserTowers.Count;
         }
-        else //if(castTowerType == TowerType.Plazma)
+        else if(castTowerType == TowerType.Plasma)
         {
             availableTowersCount = TowerManager.availablePlasmaTowers.Count;
         }
