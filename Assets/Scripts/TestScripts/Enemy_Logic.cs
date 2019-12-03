@@ -41,7 +41,6 @@ public abstract class Enemy_Logic : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-       
         brawe = Random.Range(0.1f, 0.7f);
         realcheckTime = checkTime;
         tempNavAgentSpeed = emk.agent.speed;

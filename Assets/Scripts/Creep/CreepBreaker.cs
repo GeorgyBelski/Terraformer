@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreepDestroyer : MonoBehaviour
+public class CreepBreaker : MonoBehaviour
 {
-    public bool destroyHexagon = false;
+    public bool breakHexagon = false;
     void Start()
     {
         
@@ -12,12 +12,12 @@ public class CreepDestroyer : MonoBehaviour
 
     void Update()
     {
-        RunDestroyRay();
+        LaunchDestroyRay();
     }
 
-    void RunDestroyRay()
+    void LaunchDestroyRay()
     {
-        if (!destroyHexagon) { return; }
+        if (!breakHexagon) { return; }
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2f, CreepHexagonGenerator.creepLayerMask))
@@ -35,6 +35,6 @@ public class CreepDestroyer : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 2, Color.white);
         }
 
-        destroyHexagon = false;
+        breakHexagon = false;
     }
 }

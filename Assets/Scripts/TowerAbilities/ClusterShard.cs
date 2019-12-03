@@ -78,7 +78,7 @@ public class ClusterShard : MonoBehaviour
     {
         if (blow && blow.gameObject.activeSelf)
         { blow.thisTower = null; }
-        else 
+        else if(blow)
         { Destroy(blow.gameObject); }
         Destroy(gameObject);
     }
