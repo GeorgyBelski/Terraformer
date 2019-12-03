@@ -78,7 +78,7 @@ public abstract class Tower : MonoBehaviour
         towerMaterial = GetComponent<MeshRenderer>().material;
         highlightedColor = new Color(1, 1, .5f);
         ResourceManager.isTowersSupplyChanged = true;
-        hexagon = GetHexagon();
+        
     }
 
     void Update()
@@ -95,7 +95,7 @@ public abstract class Tower : MonoBehaviour
             HighlightTower();
             ShowRange();
         }
-        
+        if (hexagon == null) { hexagon = GetHexagon();}
     }
     internal abstract void TowerUpdate();
 
