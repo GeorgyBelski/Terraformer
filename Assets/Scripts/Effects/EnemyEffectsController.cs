@@ -18,7 +18,7 @@ public class EnemyEffectsController : MonoBehaviour
     public GameObject flame;
     public GameObject vertigoPrefab;
     public GameObject vertigo;
-    float originalNavAgentSpeed;
+    public float originalNavAgentSpeed;
     //private float basicSpeed;
 
     ParticleSystem flameParticleSystem;
@@ -71,9 +71,9 @@ public class EnemyEffectsController : MonoBehaviour
         }
         else if (effect.type == Effect.Type.Stan)
         {
-
+            navAgent.speed = 0;
         }
-        else if (effect.type == Effect.Type.Stan)
+        else if (effect.type == Effect.Type.Slowdown)
         {
 
         }
@@ -133,7 +133,7 @@ public class EnemyEffectsController : MonoBehaviour
         SlowDownEffect slowdown = (SlowDownEffect)AddEffect(Effect.Type.Slowdown);
         slowdown.Set(duration, multiplayer);
         // print(navAgent.speed);
-        navAgent.speed /= multiplayer;
+        navAgent.speed = Mathf.Min(originalNavAgentSpeed * multiplayer, navAgent.speed);
         // print(navAgent.speed);
         enableSlowdown = false;
     }

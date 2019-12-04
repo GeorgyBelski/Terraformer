@@ -95,7 +95,7 @@ public class PortalSettings : MonoBehaviour
                 0,
                 this.transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(i * (360 / enemyList.Count - 1))) * 1 * enemyList.Count / 5)), leader.transform.rotation);
         }
-        gameObject.active = false;
+        gameObject.SetActive(false);
     }
 
     public void setSettings(List<GameObject> list)

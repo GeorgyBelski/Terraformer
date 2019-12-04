@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public enum HexCoordinatStatus {Void, Attend, Damaged };
+public enum HexCoordinatStatus {Void, Attend, Occupied,  Damaged };
 
 public class CreepHexagonGenerator : MonoBehaviour
 {
@@ -61,6 +61,8 @@ public class CreepHexagonGenerator : MonoBehaviour
         timerRiseTime = new float[radius+1];
         UpdateExpansionCost();
         damagedHexagons = new List<Hexagon>();
+        CreateHexagon(0, 0);
+        GetHexagon(0, 0).SetStatus(HexCoordinatStatus.Occupied);
      /*
         offset = new float[radius+1];
         
@@ -76,6 +78,7 @@ public class CreepHexagonGenerator : MonoBehaviour
     {
         public int coordinatHexaX, coordinatHexaZ;
         public Vector3 originalPosition;
+        public bool isTarget;
         CreepHexagonGenerator parentCreep;
         public GameObject hexagonGObject;
 
@@ -217,12 +220,10 @@ public class CreepHexagonGenerator : MonoBehaviour
 
         public void DamageHexagon()
         {
-
-            int x = this.coordinatHexaX, z = this.coordinatHexaZ;
-            if (parentCreep.GetCoordinateStatus(x, z) == HexCoordinatStatus.Damaged)
+            if (GetStatus() == HexCoordinatStatus.Damaged)
             { return; }
             damagedHexagons.Add(this);
-            coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = HexCoordinatStatus.Damaged;
+            SetStatus(HexCoordinatStatus.Damaged);
             hexagonGObject.transform.localScale = Vector3.one * 0.4f;
             // hexagon.Delete();
             hexagonsCount--;
@@ -234,6 +235,15 @@ public class CreepHexagonGenerator : MonoBehaviour
         {
             if (hexagonGObject)
             { hexagonGObject.transform.position = originalPosition; }
+        }
+        public void SetStatus(HexCoordinatStatus status)
+        {
+            int x = this.coordinatHexaX, z = this.coordinatHexaZ;
+            coordinates[x + matrixCoordinateCenter, z + matrixCoordinateCenter] = status;
+        }
+        public HexCoordinatStatus GetStatus() 
+        {
+            return parentCreep.GetCoordinateStatus(coordinatHexaX, coordinatHexaZ);
         }
     }
 

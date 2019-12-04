@@ -78,7 +78,7 @@ public class ClusterShard : MonoBehaviour
     {
         if (blow && blow.gameObject.activeSelf)
         { blow.thisTower = null; }
-        else 
+        else if(blow)
         { Destroy(blow.gameObject); }
         Destroy(gameObject);
     }
@@ -100,7 +100,7 @@ public class ClusterShard : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == Globals.groundMask)
+        if (other.gameObject.layer == Globals.groundLayer)
         {
 
             isGrounded = true;

@@ -8,8 +8,8 @@ public class EnemyMouseController : MonoBehaviour
     public NavMeshAgent agent;
     public ThirdPersonCharacter character;
 
-    Ray ray;
-    RaycastHit hit;
+  //  Ray ray;
+  //  RaycastHit hit;
 
     void Start()
     {
@@ -37,25 +37,12 @@ public class EnemyMouseController : MonoBehaviour
             character.Move(Vector3.zero, false, false);
         }
 
-        //if (agent.destination)
-        //{
-
-        //}
-        /*
-        if (agent.remainingDistance > agent.stoppingDistance)
-        {
-            character.Move(agent.desiredVelocity, false, false);
-        }
-        else {
-            character.Move(Vector3.zero, false, false);
-        }
-        */
     }
 
-    public void SetDest(Vector3 posicion)
+    public void SetDest(Vector3 position)
     {
         if (agent.enabled)
-        { agent.SetDestination(posicion); }
+        { agent.SetDestination(position); }
     }
 
     public Vector3 GetDest()

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
+using static CreepHexagonGenerator;
 
 public class Shoping : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class Shoping : MonoBehaviour
     private bool isPlacing = false;
     private GameObject realTimeTowerPlace;
     TowerPlacing towerPlacing;
+    bool isAbleToBuild;
+    int creep_GroundMask = CreepHexagonGenerator.creepLayerMask | Globals.groundLayerMask;
+    Hexagon hexagon;
     private GameObject selectedTower;
     private float currPrice;
 
@@ -148,12 +152,27 @@ public class Shoping : MonoBehaviour
         if (isPlacing)
         {
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(camRay, out RaycastHit floorHit, camRayLength, CreepHexagonGenerator.creepLayerMask))
+            if (Physics.Raycast(camRay, out RaycastHit floorHit, camRayLength, creep_GroundMask))
             {
 
                 //   realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y, System.Convert.ToInt32(floorHit.point.z));
-                realTimeTowerPlace.transform.position = floorHit.transform.position;
-                if (towerPlacing.isOnTower || ResourceManager.resource < currPrice)
+                isAbleToBuild = false;
+                realTimeTowerPlace.transform.position = floorHit.point;
+                if (floorHit.collider.gameObject.layer == CreepHexagonGenerator.creepLayer)
+                {
+                    GameObject hexagonGameObject = floorHit.collider.gameObject;
+                    if (CreepHexagonGenerator.meshHexagonMap.TryGetValue(hexagonGameObject, out hexagon))
+                    {
+                        if (hexagon.GetStatus() == HexCoordinatStatus.Attend)
+                        {
+                            realTimeTowerPlace.transform.position = floorHit.transform.position;
+                            isAbleToBuild = true;
+                        }
+                    }
+
+                }
+
+                if (!isAbleToBuild || ResourceManager.resource < currPrice)
                 {
                     mt.SetColor("_BaseColor", transparentRed);
                 }
@@ -162,10 +181,11 @@ public class Shoping : MonoBehaviour
                     mt.SetColor("_BaseColor", transparentGreen);
                 }
 
-                if (Input.GetMouseButtonDown(0) && !towerPlacing.isOnTower && ResourceManager.resource >= currPrice)
+                if (Input.GetMouseButtonDown(0) && isAbleToBuild && ResourceManager.resource >= currPrice)
                 {
                     ResourceManager.RemoveResource(currPrice);
                     placeTower();
+                 //   hexagon.SetStatus(HexCoordinatStatus.Occupied);
                     Cancel();
                 }
                 else if (ResourceManager.resource < currPrice)

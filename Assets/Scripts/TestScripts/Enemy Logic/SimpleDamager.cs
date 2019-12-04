@@ -6,13 +6,12 @@ public class SimpleDamager : Enemy_Logic
 {
     public TypeOfEnemy type;
     public int damageOnAttack;
-    // Start is called before the first frame update
+
     void Start()
     {
         base.Start();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //print(1);

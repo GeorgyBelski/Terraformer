@@ -32,7 +32,7 @@ public class ClusterPuddle : MonoBehaviour
             
             EnemyEffectsController enemy = other.gameObject.GetComponent<EnemyEffectsController>();
             //defaultspeed = enemy.character.m_MoveSpeedMultiplier;
-            enemy.AddSlowdown(2, 2);
+            enemy.AddSlowdown(2, 0.5f);
 
 
             //enemy.character.m_MoveSpeedMultiplier /= 2;

@@ -85,7 +85,8 @@ public class PlasmaBlowUp : MonoBehaviour
 
     public void SetColor(Color color) 
     {
-        material.SetColor("_EmissionColor", color);
+        if (material)
+        { material.SetColor("_EmissionColor", color); }
     }
 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static CreepHexagonGenerator;
 
 public enum TowerType { Electro, Laser, Terraformer, Plasma };
 
@@ -48,6 +49,8 @@ public abstract class Tower : MonoBehaviour
     public bool isSymbiosisInstalled =false;
     public TowerType? symbiosisTowerType = null;
 
+    public Hexagon hexagon;
+
     int targetIndex = -1;
     LineRenderer rangeline;
     Vector3 previousPosition;
@@ -75,6 +78,7 @@ public abstract class Tower : MonoBehaviour
         towerMaterial = GetComponent<MeshRenderer>().material;
         highlightedColor = new Color(1, 1, .5f);
         ResourceManager.isTowersSupplyChanged = true;
+        
     }
 
     void Update()
@@ -91,7 +95,7 @@ public abstract class Tower : MonoBehaviour
             HighlightTower();
             ShowRange();
         }
-        
+        if (hexagon == null) { hexagon = GetHexagon();}
     }
     internal abstract void TowerUpdate();
 
@@ -117,7 +121,19 @@ public abstract class Tower : MonoBehaviour
             return ChooseMostHardy(GetEnemiesInRange());
         }
     }
-
+    Hexagon GetHexagon()
+    {
+        if (Physics.Raycast(transform.position + Vector3.up * 0.3f, Vector3.down, out RaycastHit hit, 2f, CreepHexagonGenerator.creepLayerMask))
+        {
+            GameObject hexagonGameObject = hit.collider.gameObject;
+            if (CreepHexagonGenerator.meshHexagonMap.TryGetValue(hexagonGameObject, out hexagon))
+            {
+                hexagon.SetStatus(HexCoordinatStatus.Occupied);
+                return hexagon;
+            }
+        }
+        return null;
+    }
     List<Enemy> GetEnemiesInRange()
     {
         List<Enemy> enemies = EnemyManagerPro.enemies;
