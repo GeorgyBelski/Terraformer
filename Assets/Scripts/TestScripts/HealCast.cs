@@ -37,7 +37,7 @@ public class HealCast : MonoBehaviour
         if (other.gameObject.layer == EnemyManagerPro.enemyLayer && EnemyManagerPro.checking(other.gameObject.GetComponent<Enemy>()))
         {
             if (other.gameObject.GetComponent<Enemy>().GetHealthRatio() < 1)
-                other.gameObject.GetComponent<Enemy>().ApplyDamage((int)-healPower, this.transform.position, Vector3.zero);
+                other.gameObject.GetComponent<Enemy>().ApplyHeal((int)healPower);
         }
     }
 }
