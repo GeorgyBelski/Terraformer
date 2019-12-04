@@ -378,7 +378,7 @@ Transform:
   m_GameObject: {fileID: 2623192909609195406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.93943954, y: 0.93943954, z: 0.9400971}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 1468490028}
   - {fileID: 8761545690061015604}
@@ -396,7 +396,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 1
+  m_Speed: 0.8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -469,8 +469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
-  health: 500
+  maxHealth: 800
+  health: 800
   healthBar: {fileID: 200029530}
   damagePoints:
   - {fileID: 8482193479453818421}
@@ -1147,7 +1147,7 @@ PrefabInstance:
     - target: {fileID: 3181554843715549789, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5232116
+      value: 1.5249188
       objectReference: {fileID: 0}
     - target: {fileID: 3181554843715549789, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}

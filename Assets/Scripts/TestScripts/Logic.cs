@@ -19,6 +19,10 @@ public class Logic : MonoBehaviour
 
     public float towerCount = 100;
 
+    public float startCount = 200;
+
+    private float wave = 0;
+
     public GameObject portal;
     public PortalSettings thisPortalSettings;
     public float difficulties = 1;
@@ -52,32 +56,38 @@ public class Logic : MonoBehaviour
             portal.active = true;
 
             thisPortalSettings.setSettings(conutWave());
-            realTimer = timer;
+            wave++;
+            realTimer = timer + wave / difficulties;
         }
     }
 
     private Vector3 countVector()
     {
-        randPos = Random.Range(0f, 360f);
-        return new Vector3(23 * Mathf.Sin(randPos), 1, 23 * Mathf.Cos(randPos));
+        randPos = Random.Range(0f, 60f);
+        return new Vector3(23 + wave * Mathf.Sin(randPos), 1, 23 + wave * Mathf.Cos(randPos));
     }
 
     private List<GameObject> conutWave()
     {
         list = new List<GameObject>();
-        totalCount = TowerManager.towers.Count * difficulties * towerCount;
+        totalCount = startCount + (startCount / 2 * difficulties * wave);//TowerManager.towers.Count * difficulties * towerCount;
 
-        if (totalCount > 200 && !EnemyManagerPro.enemiesMap.ContainsKey(EnemyType.Healer))
+        if (wave > 1 && wave % 2 == 0)
         {
             list.Add(enemyHeal);
             totalCount -= enemyHealCount;
         }
-            
 
-        int tanksCount = (int)totalCount / 300;
 
-        listAdding(tanksCount, enemyTank);
-        totalCount -= tanksCount * enemyTankCount;
+        int tanksCount = (int)totalCount / (int)(300 / difficulties);
+
+        if(wave > 4 && wave % 3 == 0)
+        {
+            listAdding(tanksCount, enemyTank);
+            totalCount -= tanksCount * enemyTankCount;
+        }
+
+
 
         int simpleDamagerCount = (int)(totalCount * 0.6f);
         totalCount -= simpleDamagerCount;
