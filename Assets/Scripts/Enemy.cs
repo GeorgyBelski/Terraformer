@@ -64,7 +64,7 @@ public class Enemy : Damageable
          //   effectsController.navAgent.angularSpeed = 0;
         }
         else {
-
+            Debug.LogError("DestroyUnit() without animation!");
             DestroyUnit();
         }
             

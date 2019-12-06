@@ -104,7 +104,7 @@ public abstract class Enemy_Logic : MonoBehaviour
             fromTargetTowerToEnemy = transform.position - targetTower.transform.position;
             destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
          //   destTower.position = targetTower.transform.position - fromTargetTowerToEnemy.normalized;
-            emk.SetDest((Vector3)destTower);
+            emk.SetDestination((Vector3)destTower);
             isGoingToDest = true;
             //isAttack = true;
             
@@ -131,7 +131,7 @@ public abstract class Enemy_Logic : MonoBehaviour
             destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
            
         }
-        emk.SetDest((Vector3)destTower);
+        emk.SetDestination((Vector3)destTower);
         isGoingToDest = true;
         //print(destTower);
 
@@ -162,7 +162,7 @@ public abstract class Enemy_Logic : MonoBehaviour
             //Debug.Log("going");
             fromHealerToEnemy = transform.position - (Vector3)destHel;
             destHel = (Vector3)destHel + fromHealerToEnemy.normalized;
-            emk.SetDest((Vector3)destHel);
+            emk.SetDestination((Vector3)destHel);
         }
         
     }

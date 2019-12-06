@@ -602,6 +602,7 @@ GameObject:
   - component: {fileID: 762130189}
   - component: {fileID: 762130188}
   - component: {fileID: 3370245572825294258}
+  - component: {fileID: 1213444040372777304}
   - component: {fileID: 762130184}
   - component: {fileID: 7932900423740752727}
   m_Layer: 12
@@ -768,7 +769,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762130183}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dcb0023d81be1849bccc1dc507dce82, type: 3}
   m_Name: 
@@ -783,6 +784,24 @@ MonoBehaviour:
   castHealBaseRate: 15
   duration: 0.5
   movementRate: 2
+--- !u!114 &1213444040372777304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762130183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f75255a2e884a408ee8c8675d7f0ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  emk: {fileID: 762130189}
+  animator: {fileID: 0}
+  allies: []
+  supportListMaxLength: 3
+  threatsListMaxLength: 3
 --- !u!114 &762130184
 MonoBehaviour:
   m_ObjectHideFlags: 0
