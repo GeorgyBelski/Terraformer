@@ -14,8 +14,8 @@ public class RushDamager : Enemy_Logic
     public SpurtFXController SpurtFXController;
 
     private float realChargingTime;
-    private bool isChargingReady = false;
-    private bool isHealingJump = false;
+    [SerializeField] private bool isChargingReady = false;
+    [SerializeField] private bool isHealingJump = false;
     private Material cristalMaterial;
 
     private Vector3 dest;

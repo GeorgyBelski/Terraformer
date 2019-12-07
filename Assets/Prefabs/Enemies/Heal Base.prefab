@@ -491,8 +491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healpower: 75
-  radius: 7
-  liveTime: 20
+  radius: 4
+  liveTime: 10
   healRate: 3
   StartPoint: {fileID: 2407488622040583472}
   cast: {fileID: 7285463587927345781, guid: 28bb175c084f33c45b266bb51e5e7109, type: 3}
@@ -525,9 +525,10 @@ MonoBehaviour:
   healthRatio: 0
   character: {fileID: 0}
   effectsController: {fileID: 697666250140818683}
-  type: 1
+  type: 4
   animator: {fileID: 0}
   spurtFXController: {fileID: 0}
+  chest: {fileID: 2407488622040583472}
 --- !u!114 &697666250140818683
 MonoBehaviour:
   m_ObjectHideFlags: 0

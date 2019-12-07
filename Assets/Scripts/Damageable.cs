@@ -24,7 +24,7 @@ public abstract class Damageable : MonoBehaviour
     public short damagePointIndex = 0;
     // Vector3 capsuleCenter;
 
-    public float healthRatio;
+    public float healthRatio = 1f;
 
     void Start()
     {

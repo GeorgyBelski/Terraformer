@@ -59,7 +59,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 264092040}
-  - {fileID: 8029352006667555970}
   m_Father: {fileID: 1336621653}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -603,10 +602,12 @@ GameObject:
   - component: {fileID: 762130188}
   - component: {fileID: 3370245572825294258}
   - component: {fileID: 1213444040372777304}
+  - component: {fileID: 3422993924782259130}
+  - component: {fileID: 4158117497877208495}
   - component: {fileID: 762130184}
   - component: {fileID: 7932900423740752727}
   m_Layer: 12
-  m_Name: Heal
+  m_Name: Healer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,6 +627,7 @@ Transform:
   - {fileID: 1440081791}
   - {fileID: 1612968202}
   - {fileID: 2071652815}
+  - {fileID: 8029352006667555970}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -638,13 +640,13 @@ NavMeshAgent:
   m_GameObject: {fileID: 762130183}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1
+  m_Radius: 0.25
+  m_Speed: 0.9
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0.7
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
@@ -679,7 +681,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!95 &762130185
 Animator:
@@ -712,8 +714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
-  health: 300
+  maxHealth: 4000
+  health: 4000
   healthBar: {fileID: 1609642471}
   healHealth: {fileID: 0}
   isHeal: 0
@@ -732,6 +734,7 @@ MonoBehaviour:
   type: 1
   animator: {fileID: 762130185}
   spurtFXController: {fileID: 0}
+  chest: {fileID: 874196122}
 --- !u!114 &762130189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,6 +749,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 762130190}
   character: {fileID: 762130184}
+  rotationTime: 0.3
+  timerRotation: 0
+  rotationSpeed: 5
 --- !u!114 &762130188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,11 +803,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  thisUnit: {fileID: 371407608}
   emk: {fileID: 762130189}
-  animator: {fileID: 0}
+  animator: {fileID: 762130185}
+  supportRange: 12
   allies: []
   supportListMaxLength: 3
+  defineDestinationsCooldown: 0.5
+  timerSafeDestination: 0
+  timerSupportDestination: 0
   threatsListMaxLength: 3
+  threatsNumber: 0
+  activeAbility: {fileID: 0}
+  safeDestination: {x: 0, y: 0, z: 0}
+  supportDestination: {x: 0, y: 0, z: 0}
+  lookAt: {x: 0, y: 0, z: 0}
+--- !u!114 &3422993924782259130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762130183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4828f8370e5c34c49b028cd1384ece6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisController: {fileID: 1213444040372777304}
+  state: 2
+  isAreaAbility: 0
+  range: 6
+  cooldawn: 5
+  timerCooldown: 3
+  castPoint: {fileID: 8029352006667555970}
+  lr: {fileID: 1017531535196420535}
+--- !u!114 &4158117497877208495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762130183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a752de758f526764580ecad34cd0450f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisController: {fileID: 1213444040372777304}
+  state: 2
+  isAreaAbility: 1
+  range: 3.4
+  cooldawn: 12
+  timerCooldown: 3
+  castPoint: {fileID: 8029352006667555970}
+  healBase: {fileID: 5691318349596143735, guid: d90044f2846ed9446b56dc1bb9c6251c,
+    type: 3}
 --- !u!114 &762130184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,9 +876,10 @@ MonoBehaviour:
   m_JumpPower: 6
   m_GravityMultiplier: 2
   m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 0.5
-  m_AnimSpeedMultiplier: 0.5
+  m_MoveSpeedMultiplier: 1
+  m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.2
+  m_TurnAmount: 0
   m_ForwardAmount: 0
   m_Stun: 0
 --- !u!114 &7932900423740752727
@@ -1755,8 +1813,9 @@ GameObject:
   - component: {fileID: 1642129423613037341}
   - component: {fileID: 2567467975438370970}
   - component: {fileID: 1017531535196420535}
+  - component: {fileID: 5476602256695816971}
   m_Layer: 12
-  m_Name: HealPoint
+  m_Name: CastPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1769,12 +1828,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181182241653195763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalRotation: {x: -0.49288526, y: 0.4741042, z: -0.5120737, w: 0.5196825}
+  m_LocalPosition: {x: -0.7799999, y: 1.3465569, z: 0.012674063}
+  m_LocalScale: {x: 0.16327024, y: 0.1632703, z: 0.16327035}
   m_Children: []
-  m_Father: {fileID: 65918465}
-  m_RootOrder: 1
+  m_Father: {fileID: 762130191}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7358199329792698085
 MeshFilter:
@@ -1940,6 +1999,32 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1773428102 &5476602256695816971
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181182241653195763}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: -0.78, y: 1.3465567, z: 0.012673378}
+  m_RotationAtRest: {x: -1.5317783, y: 86.29577, z: -90.59101}
+  m_TranslationOffsets:
+  - {x: 0.0008546114, y: -0.0004940033, z: 0.0076999664}
+  m_RotationOffsets:
+  - {x: -7.433452, y: -178.67813, z: 179.80287}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 0
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 0
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 2102703530}
+    weight: 1
 --- !u!1001 &444791220953531806
 PrefabInstance:
   m_ObjectHideFlags: 0
