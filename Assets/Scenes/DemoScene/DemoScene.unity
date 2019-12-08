@@ -160,8 +160,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.9823381, g: 1, b: 0.8392157, a: 1}
+  m_Intensity: 0.9
   m_Range: 13.18
   m_SpotAngle: 62.31911
   m_InnerSpotAngle: 21.80208
@@ -170,7 +170,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.37
     m_Bias: 0.67
     m_NormalBias: 0.59
     m_NearPlane: 0.1
@@ -218,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170076733}
   m_LocalRotation: {x: 0.32761076, y: 0.37214112, z: -0.2997902, w: 0.81505096}
-  m_LocalPosition: {x: 0.3, y: 4.85, z: -7.9}
+  m_LocalPosition: {x: -0.17, y: 14.66, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1032,6 +1032,36 @@ PrefabInstance:
       propertyPath: thisPortalSettings
       value: 
       objectReference: {fileID: 485153875}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: enemyDamagerCount
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: enemyRusherCount
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: enemyTankCount
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: enemyHealCount
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: difficulties
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 928544962118843758, guid: 70bfa4e3df0bb554c919837948630b18,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70bfa4e3df0bb554c919837948630b18, type: 3}
 --- !u!114 &1738012762 stripped
@@ -1592,6 +1622,34 @@ PrefabInstance:
     - target: {fileID: 1194056671, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}
       propertyPath: m_Name
       value: Text_Defeat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902143820328577125, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: coolDown
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902143820328577125, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: cost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952772300094902114, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: cost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952772300094902114, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: coolDown
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 468299217, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}
+      propertyPath: cost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 468299217, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}
+      propertyPath: coolDown
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}

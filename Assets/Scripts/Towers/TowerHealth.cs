@@ -1,41 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class TowerHealth : Damageable
 {
     public Tower thisTower;
-    public bool isRepair;
-    private float maxRepairHealth = 0;
+
     public Color damagePointsColor = Color.red;
 
     private float prevHealthRatio;
         
     void Start()
     {
-        isRepair = false;
+        isHeal = false;
         for (int i = 0; i < damagePoints.Length; i++)
         { damagePoints[i].color = damagePointsColor; }
     }
 
     void Update()
     {
-        if (isRepair && healthRatio < maxRepairHealth)
+        base.CalcHealthRatio();
+
+        if (isHeal && healthRatio < maxRepairHealth)
         {
-            if(healthRatio < prevHealthRatio)
-            {
-                maxRepairHealth -= prevHealthRatio - healthRatio;
-                prevHealthRatio = healthRatio;
-            }
-            //print(Time.deltaTime);
-            base.health += (int)((maxHealth/10) * Time.deltaTime);
+            //base.CalcHealthRatio();
+           // print(maxRepairHealth);
+            base.health += (int)((maxHealth/15) * Time.deltaTime);
             
             //base.CalcHealthRatio();
         }
         else
-            isRepair = false;
-
-        base.CalcHealthRatio();
+        {
+            if(healHealth)
+                healHealth.fillAmount = healthBar.fillAmount;
+            //ealHealth.fillAmount = healthBar.fillAmount;
+            isHeal = false;
+        }
+            
+        
+        
        /* if (health == 0 && TowerManager.towers.Contains(thisTower)){
             RemoveFromList();
         }*/
@@ -93,7 +97,7 @@ public class TowerHealth : Damageable
     public void Repair()
     {
         //print(healthRatio);
-        if (healthRatio < 1 && !isRepair) { 
+        if (healthRatio < 1 && !isHeal) { 
             float resource = ResourceManager.resource;
             float repaircost = ResourceManager.RepairCost;
             float costNeeded = (1 - healthRatio) * 100 * repaircost;
@@ -113,10 +117,12 @@ public class TowerHealth : Damageable
                 ResourceManager.RemoveResource(resource);
                 //print(maxRepairHealth);
             }
-            
+
+            healHealth.fillAmount = maxRepairHealth;
 
 
-            isRepair = true;
+
+            isHeal = true;
         }
     }
     /*

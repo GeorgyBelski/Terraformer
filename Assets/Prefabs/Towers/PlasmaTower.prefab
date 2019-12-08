@@ -493,7 +493,7 @@ MonoBehaviour:
   isSelected: 0
   targetingType: 0
   supply: 0
-  cooldownAttack: 1
+  cooldownAttack: 2
   timerAttack: 0
   cannon: {fileID: 4507894551800307058}
   gunpoint: {fileID: 8530123040127368789}

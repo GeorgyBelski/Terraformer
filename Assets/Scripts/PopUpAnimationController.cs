@@ -8,8 +8,13 @@ public class PopUpAnimationController : MonoBehaviour
     public RectTransform rect;
     Vector2 defaultPosition;
 
-    public void EndPopUpAnimation() {
+    public void EndDamagePopUpAnimation() {
         popUpTextAnimator.SetBool("isDamaged", false);
+        rect.anchoredPosition = defaultPosition;
+    }
+    public void EndHealPopUpAnimation()
+    {
+        popUpTextAnimator.SetBool("isHealed", false);
         rect.anchoredPosition = defaultPosition;
     }
     public void RandomHorizontalPos() {
