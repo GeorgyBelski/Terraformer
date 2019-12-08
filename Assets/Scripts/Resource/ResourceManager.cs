@@ -22,6 +22,8 @@ public class ResourceManager : MonoBehaviour
     int previousProceeds;
     public Image resourcefiller;
     public Image incomefiller;
+    public Image OverclockBar;
+    public TextMeshProUGUI victory;
 
     public static float resource;
     public static float resourceMax;
@@ -46,8 +48,11 @@ public class ResourceManager : MonoBehaviour
     [Header("Costs")]
     public int basicTowerSupply = 2;
     public int simbiosisTowerSupply = 1;
-    
 
+    public static void Restart() 
+    {
+        isTowersSupplyChanged = true;
+    }
 
     //private static float income;
     //        {
@@ -74,6 +79,8 @@ public class ResourceManager : MonoBehaviour
         billingPeriod = startBillingPeriod;
 
         incomeColor = resourceProceeds.faceColor;
+        OverclockBar.fillAmount = 0;
+        victory.gameObject.SetActive(false);
     }
 
     void Update()
@@ -82,6 +89,7 @@ public class ResourceManager : MonoBehaviour
         CalculateProceeds();
         ShowProceeds();
         ApplyProceeds();
+        OverclockTerraformer();
     }
     void CulculateTowersSupply()
     {
@@ -154,7 +162,7 @@ public class ResourceManager : MonoBehaviour
     {
         //print("+");
         resourcefillerST.fillAmount = resource / resourceMax;
-        resourceCounterST.text = resource.ToString();
+        resourceCounterST.text = resource.ToString("F0");
     }
 
     private static void fillIncomeFiller()
@@ -183,5 +191,35 @@ public class ResourceManager : MonoBehaviour
     public static void ExitCostIsTooHighSignal()
     {
         resourceCostAnimator.SetBool("tooHigh", false);
+    }
+
+    public void OverclockTerraformer()
+    {
+        if (resource == resourceMax)
+        {
+            OverclockBar.fillAmount += proceeds * Time.deltaTime / 200;
+        }
+        else if(OverclockBar.fillAmount > 0)
+        {
+            OverclockBar.fillAmount -= proceeds * Time.deltaTime / 200;
+        }
+        if (OverclockBar.fillAmount == 1) 
+        { ApplyVictory(); }
+    }
+    public void ApplyVictory()
+    {
+        //  victory.gameObject.SetActive(true);
+        MenuController.ShowVictory(true);
+        if (EnemyManagerPro.enemies.Count != 0)
+        {
+            var enemy = EnemyManagerPro.enemies.ToArray()[0];
+            enemy.ApplyDamage(enemy.maxHealth, Vector3.zero, Vector3.zero);
+        }
+        /*
+        foreach (var enemy in EnemyManagerPro.enemies) {
+            if (enemy)
+            { enemy.ApplyDamage(enemy.maxHealth, Vector3.zero, Vector3.zero); }
+        }
+        */
     }
 }

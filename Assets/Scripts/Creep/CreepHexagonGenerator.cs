@@ -50,10 +50,31 @@ public class CreepHexagonGenerator : MonoBehaviour
     List<Hexagon> hexagonSecondCircle = null;
     List<Hexagon> externalCircle = null;
     List<Hexagon>[] Circles = null;
-    
+    public static void Restart() 
+    {
+        hexagonsCount = 0;
+        
+        meshHexagonMap.Clear();
+        hexagons = new Hexagon[matrixDemension, matrixDemension];
+        coordinates = new HexCoordinatStatus[matrixDemension, matrixDemension];
+        damagedHexagons.Clear();
+
+        creepHexagonGenerator.radius = 0;
+        creepHexagonGenerator.previousRadius = 0;
+        creepHexagonGenerator.hexagonFirstCircle = null;
+        creepHexagonGenerator.hexagonSecondCircle = null;
+        creepHexagonGenerator.externalCircle = null;
+        creepHexagonGenerator.Circles = null;
+        creepHexagonGenerator.isExpanding = false;
+        creepHexagonGenerator.isExpandingFinished = true;
+        creepHexagonGenerator.isRepairing = false;
+        creepHexagonGenerator.isLockExpancion = false;
+        creepHexagonGenerator.isCircleSelected = false;
+    }
     void Start()
     {
         creepHexagonGenerator = this;
+        
         Vector3 rightUpVertexDirection = Quaternion.AngleAxis(60, Vector3.up) * Vector3.forward;
         hexaZ = (rightUpVertexDirection + Vector3.forward) * coefficient;
         hexaX = new Vector3(rightUpVertexDirection.x, 0, 0) * 2 * coefficient;
@@ -249,7 +270,6 @@ public class CreepHexagonGenerator : MonoBehaviour
 
     void Update()
     {
-
         ExpandCreep();
         UpdateCreep();
         ScaleExternalCircle();
@@ -272,17 +292,17 @@ public class CreepHexagonGenerator : MonoBehaviour
     {
         repairingCost = repairHexagonCost * damagedHexagons.Count;
     }
-    public void Expand()
+    public static void Expand()
     {
         if (ResourceManager.RemoveResource(expansionCost))
-        { isExpanding = true; }
+        { creepHexagonGenerator.isExpanding = true; }
         else
         { ResourceManager.CostIsTooHighSignal(); }
     }
-    public void Repair()
+    public static void Repair()
     {
         if (ResourceManager.RemoveResource(repairingCost))
-        { isRepairing = true;}
+        { creepHexagonGenerator.isRepairing = true;}
         else
         { ResourceManager.CostIsTooHighSignal(); }
     }
