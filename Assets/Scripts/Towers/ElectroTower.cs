@@ -212,6 +212,7 @@ public class ElectroTower : Tower
     }
 
     public override void EndCasting() {
+        base.EndCasting();
         IsCastingAbility = false;
         TowerManager.availableElectroTowers.Add(this);
     }

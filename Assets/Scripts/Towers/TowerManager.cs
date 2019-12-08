@@ -6,6 +6,7 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour
 {
     public int availablePlazmaTowersCount;
+    public int towersNumber;
 
     public static List<Tower> towers = new List<Tower>();
 
@@ -37,6 +38,7 @@ public class TowerManager : MonoBehaviour
     {
         SelectTower();
         availablePlazmaTowersCount = availablePlasmaTowers.Count;
+        towersNumber = towers.Count;
     }
 
     public static void AddTower(Tower tower)

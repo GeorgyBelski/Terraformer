@@ -490,10 +490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef92dc545a3a02f4180e93bd7845de9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healpower: 50
-  radius: 20
-  liveTime: 20
-  healRate: 2
+  healpower: 75
+  radius: 4
+  liveTime: 10
+  healRate: 3
   StartPoint: {fileID: 2407488622040583472}
   cast: {fileID: 7285463587927345781, guid: 28bb175c084f33c45b266bb51e5e7109, type: 3}
 --- !u!114 &1772361876839422169
@@ -508,9 +508,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 400
-  health: 400
+  maxHealth: 200
+  health: 200
   healthBar: {fileID: 8189187154717802135}
+  healHealth: {fileID: 0}
+  isHeal: 0
   damagePoints:
   - {fileID: 2977082139062385159}
   - {fileID: 8055449587544981165}
@@ -523,9 +525,10 @@ MonoBehaviour:
   healthRatio: 0
   character: {fileID: 0}
   effectsController: {fileID: 697666250140818683}
-  type: 1
+  type: 4
   animator: {fileID: 0}
   spurtFXController: {fileID: 0}
+  chest: {fileID: 2407488622040583472}
 --- !u!114 &697666250140818683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,6 +552,7 @@ MonoBehaviour:
   flame: {fileID: 0}
   vertigoPrefab: {fileID: 0}
   vertigo: {fileID: 0}
+  originalNavAgentSpeed: 0
 --- !u!208 &5602973137139057799
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -559,7 +563,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.1, y: 0.5, z: 0.1}
+  m_Extents: {x: 0.3, y: 0.5, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

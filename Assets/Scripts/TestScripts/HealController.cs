@@ -65,7 +65,7 @@ public class HealController : MonoBehaviour
         realCastHealBaseRate -= Time.deltaTime;
         if (line && target)
         {
-            target.ApplyDamage(-(int)healingPower / 20, target.GetPosition(), Vector3.zero); // Testing!!!
+            target.ApplyHeal((int)healingPower / 20); // Testing!!!
             lr.widthMultiplier = startwidth;
             realDuration -= Time.deltaTime;
             lr.SetPosition(0, healpoint.position);
@@ -89,7 +89,7 @@ public class HealController : MonoBehaviour
 
         realHealingTime -= Time.deltaTime;
         state_heal();
-        if(emk.agent.remainingDistance <= emk.agent.stoppingDistance)
+        if(emk.agent.enabled && emk.agent.remainingDistance <= emk.agent.stoppingDistance)
         {
             realMovementRate -= Time.deltaTime;
         }

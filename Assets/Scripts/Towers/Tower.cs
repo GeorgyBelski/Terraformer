@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static CreepHexagonGenerator;
 
 public enum TowerType { Electro, Laser, Terraformer, Plasma };
 
@@ -32,13 +33,6 @@ public abstract class Tower : MonoBehaviour
     protected float ordinaryCooldownAttack;
     public float timerAttack = 0f;
 
-    /*
-    public float cooldownAbility1 = 10f;
-    protected float timerAbility1 = 0f;
-
-    public float cooldownAbility2 = 15f;
-    protected float timerAbility2 = 0f;
-    */
     [Header("References")]
     public Transform cannon;
     public Transform gunpoint;
@@ -54,6 +48,8 @@ public abstract class Tower : MonoBehaviour
     public TowerMenuController towerMenuController;
     public bool isSymbiosisInstalled =false;
     public TowerType? symbiosisTowerType = null;
+
+    public Hexagon hexagon;
 
     int targetIndex = -1;
     LineRenderer rangeline;
@@ -82,6 +78,7 @@ public abstract class Tower : MonoBehaviour
         towerMaterial = GetComponent<MeshRenderer>().material;
         highlightedColor = new Color(1, 1, .5f);
         ResourceManager.isTowersSupplyChanged = true;
+        
     }
 
     void Update()
@@ -98,7 +95,7 @@ public abstract class Tower : MonoBehaviour
             HighlightTower();
             ShowRange();
         }
-        
+        if (hexagon == null) { hexagon = GetHexagon();}
     }
     internal abstract void TowerUpdate();
 
@@ -124,7 +121,19 @@ public abstract class Tower : MonoBehaviour
             return ChooseMostHardy(GetEnemiesInRange());
         }
     }
-
+    Hexagon GetHexagon()
+    {
+        if (Physics.Raycast(transform.position + Vector3.up * 0.3f, Vector3.down, out RaycastHit hit, 2f, CreepHexagonGenerator.creepLayerMask))
+        {
+            GameObject hexagonGameObject = hit.collider.gameObject;
+            if (CreepHexagonGenerator.meshHexagonMap.TryGetValue(hexagonGameObject, out hexagon))
+            {
+                hexagon.SetStatus(HexCoordinatStatus.Occupied);
+                return hexagon;
+            }
+        }
+        return null;
+    }
     List<Enemy> GetEnemiesInRange()
     {
         List<Enemy> enemies = EnemyManagerPro.enemies;
@@ -247,7 +256,7 @@ public abstract class Tower : MonoBehaviour
 
     }
 
-    public abstract void EndCasting();
+    public virtual void EndCasting() { timerAttack = cooldownAttack; }
 
     void HighlightTower()
     {

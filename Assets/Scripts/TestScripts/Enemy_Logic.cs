@@ -41,7 +41,6 @@ public abstract class Enemy_Logic : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-       
         brawe = Random.Range(0.1f, 0.7f);
         realcheckTime = checkTime;
         tempNavAgentSpeed = emk.agent.speed;
@@ -65,7 +64,7 @@ public abstract class Enemy_Logic : MonoBehaviour
 
         if (isGoingToDest)
         {
-            if (Vector3.Distance((Vector3)destTower, transform.position) < 5 && emk.agent.remainingDistance < emk.agent.stoppingDistance)
+            if (emk.agent.enabled && Vector3.Distance((Vector3)destTower, transform.position) < 5 && emk.agent.remainingDistance < emk.agent.stoppingDistance)
             {
                 isGoingToDest = false;
                 IsAttack = true;
@@ -105,7 +104,7 @@ public abstract class Enemy_Logic : MonoBehaviour
             fromTargetTowerToEnemy = transform.position - targetTower.transform.position;
             destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
          //   destTower.position = targetTower.transform.position - fromTargetTowerToEnemy.normalized;
-            emk.SetDest((Vector3)destTower);
+            emk.SetDestination((Vector3)destTower);
             isGoingToDest = true;
             //isAttack = true;
             
@@ -132,7 +131,7 @@ public abstract class Enemy_Logic : MonoBehaviour
             destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
            
         }
-        emk.SetDest((Vector3)destTower);
+        emk.SetDestination((Vector3)destTower);
         isGoingToDest = true;
         //print(destTower);
 
@@ -163,7 +162,7 @@ public abstract class Enemy_Logic : MonoBehaviour
             //Debug.Log("going");
             fromHealerToEnemy = transform.position - (Vector3)destHel;
             destHel = (Vector3)destHel + fromHealerToEnemy.normalized;
-            emk.SetDest((Vector3)destHel);
+            emk.SetDestination((Vector3)destHel);
         }
         
     }

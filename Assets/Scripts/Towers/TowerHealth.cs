@@ -1,41 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class TowerHealth : Damageable
 {
     public Tower thisTower;
-    public bool isRepair;
-    private float maxRepairHealth = 0;
+
     public Color damagePointsColor = Color.red;
 
     private float prevHealthRatio;
         
     void Start()
     {
-        isRepair = false;
+        isHeal = false;
         for (int i = 0; i < damagePoints.Length; i++)
         { damagePoints[i].color = damagePointsColor; }
     }
 
     void Update()
     {
-        if (isRepair && healthRatio < maxRepairHealth)
+        base.CalcHealthRatio();
+
+        if (isHeal && healthRatio < maxRepairHealth)
         {
-            if(healthRatio < prevHealthRatio)
-            {
-                maxRepairHealth -= prevHealthRatio - healthRatio;
-                prevHealthRatio = healthRatio;
-            }
-            //print(Time.deltaTime);
-            base.health += (int)((maxHealth/10) * Time.deltaTime);
+            //base.CalcHealthRatio();
+           // print(maxRepairHealth);
+            base.health += (int)((maxHealth/15) * Time.deltaTime);
             
             //base.CalcHealthRatio();
         }
         else
-            isRepair = false;
-
-        base.CalcHealthRatio();
+        {
+            if(healHealth)
+                healHealth.fillAmount = healthBar.fillAmount;
+            //ealHealth.fillAmount = healthBar.fillAmount;
+            isHeal = false;
+        }
+            
+        
+        
        /* if (health == 0 && TowerManager.towers.Contains(thisTower)){
             RemoveFromList();
         }*/
@@ -49,8 +53,9 @@ public class TowerHealth : Damageable
     }
 
     public override void ApplyDeath()
-    {
+    { 
         thisTower.BreakSymbiosis();
+        if (thisTower.currentVisualLink) { Destroy(thisTower.currentVisualLink.gameObject); }
         RemoveFromList();
         //Destroy(thisTowet.gameObject);
 
@@ -61,12 +66,22 @@ public class TowerHealth : Damageable
         if (thisTower.type == TowerType.Electro)
         {
             ((ElectroTower)thisTower).DestroyCharge();
-            Destroy(((ElectroTower)thisTower).thanderBallAbility.thandetBall.gameObject);
+            if (((ElectroTower)thisTower).thanderBallAbility.thandetBall)
+            { Destroy(((ElectroTower)thisTower).thanderBallAbility.thandetBall.gameObject); }
         }
         else if (thisTower.type == TowerType.Laser)
         {
             ((LaserTower)thisTower).lr.enabled = false;
-            Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject);
+            if (((LaserTower)thisTower).scorchingRayAbility.scorchingRay)
+            { Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject); }
+        }
+        else if (thisTower.type == TowerType.Plasma) 
+        {
+            ((PlasmaTower)thisTower).DestroyBullets();
+            ((PlasmaTower)thisTower).clusterBombAbility.DestroyBullets();
+            PlasmaBlowUp blow = ((PlasmaTower)thisTower).blow;
+            if (blow.gameObject.activeSelf)
+            { blow.thisTower = null; }
         }
         else if (thisTower.type == TowerType.Terraformer)
         {
@@ -74,16 +89,14 @@ public class TowerHealth : Damageable
             ((Terraformer)thisTower).defeat.gameObject.SetActive(true);
             return;
         }
-
-        Destroy(thisTower.gameObject);
-
-
+        thisTower.hexagon.SetStatus(HexCoordinatStatus.Attend);
+        Destroy(thisTower.gameObject); 
     }
 
     public void Repair()
     {
         //print(healthRatio);
-        if (healthRatio < 1 && !isRepair) { 
+        if (healthRatio < 1 && !isHeal) { 
             float resource = ResourceManager.resource;
             float repaircost = ResourceManager.RepairCost;
             float costNeeded = (1 - healthRatio) * 100 * repaircost;
@@ -103,10 +116,12 @@ public class TowerHealth : Damageable
                 ResourceManager.RemoveResource(resource);
                 //print(maxRepairHealth);
             }
-            
+
+            healHealth.fillAmount = maxRepairHealth;
 
 
-            isRepair = true;
+
+            isHeal = true;
         }
     }
     /*

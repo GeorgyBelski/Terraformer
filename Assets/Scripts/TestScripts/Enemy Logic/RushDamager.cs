@@ -14,8 +14,8 @@ public class RushDamager : Enemy_Logic
     public SpurtFXController SpurtFXController;
 
     private float realChargingTime;
-    private bool isChargingReady = false;
-    private bool isHealingJump = false;
+    [SerializeField] private bool isChargingReady = false;
+    [SerializeField] private bool isHealingJump = false;
     private Material cristalMaterial;
 
     private Vector3 dest;
@@ -95,7 +95,11 @@ public class RushDamager : Enemy_Logic
             if (isGiveUp && !isHealingJump)
             {
                 isHealingJump = true;
-                transform.LookAt(emk.GetDest());
+                if (emk.GetDest().x < float.PositiveInfinity)
+                {
+                    transform.LookAt(emk.GetDest());
+                  //  Debug.Log("emk.GetDest(): " + emk.GetDest());
+                }
                 //print(transform.eulerAngles.x + "; " + transform.eulerAngles.z);
                 dest = new Vector3(transform.position.x + Mathf.Sin(Sqad.DegreeToRadian(transform.eulerAngles.y)) * jumpDistance, transform.position.y, transform.position.z + Mathf.Cos(Sqad.DegreeToRadian(transform.eulerAngles.y)) * jumpDistance);
                 jump(dest);

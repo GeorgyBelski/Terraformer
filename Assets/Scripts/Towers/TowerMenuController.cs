@@ -42,8 +42,13 @@ public class TowerMenuController : MonoBehaviour
         symbiosisCircleBar.fillAmount = 0;
     }
 
+    void LateUpdate()
+    {
+        CalculateSize();
+    }
     void Update()
     {
+        
         ShowTowerMenu();
         BreakingSymbiosis();
         InstallingSymbiosis();
@@ -63,6 +68,12 @@ public class TowerMenuController : MonoBehaviour
         }
     }
 
+    void CalculateSize() 
+    {
+        float distanceToCamera = (Camera.main.transform.position - TowerMenu.transform.position).magnitude;
+        float scalefactor = Mathf.Min(2.5f, 1 + distanceToCamera / 40);
+        TowerMenu.transform.localScale = Vector3.one * scalefactor;
+    }
 
     public void ClickButton(Button clickedButton)
     {

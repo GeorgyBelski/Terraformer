@@ -16,16 +16,19 @@ public abstract class Damageable : MonoBehaviour
     [Space]
     [Header("References")]
     public Image healthBar;
+    public Image healHealth;
+    public bool isHeal;
+    protected float maxRepairHealth = 0;
     public Text[] damagePoints = new Text[3];
     public Animator[] damagePointAnimators = new Animator[3];
     public short damagePointIndex = 0;
     // Vector3 capsuleCenter;
 
-    public float healthRatio;
+    public float healthRatio = 1f;
 
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -38,12 +41,34 @@ public abstract class Damageable : MonoBehaviour
         if (health > 0)
         {
             health -= value;
+        /*    if (isHeal)
+            {
+                //print((float)value / maxHealth);
+                maxRepairHealth -= (float)value / maxHealth;
+                healHealth.fillAmount = maxRepairHealth;
+            }
+         */      
             PopUpDamagePoint(value);
         }
         if (health <= 0)
         {
             health = 0;
             ApplyDeath();
+        }
+    }
+
+    public void ApplyHeal(int value) 
+    {
+        if (health > 0) 
+        {
+            health += value;
+        }
+
+        PopUpHealPoint(value);
+
+        if (health > maxHealth) 
+        {
+            health = maxHealth;
         }
     }
     public abstract void RemoveFromList();
@@ -72,9 +97,21 @@ public abstract class Damageable : MonoBehaviour
 
     void PopUpDamagePoint(int value)
     {
-
+        PopUpPoint(value, false);
+    }
+    void PopUpHealPoint(int value)
+    {
+        PopUpPoint(value, true);
+    }
+    void PopUpPoint(int value, bool isHeal) 
+    {
         damagePoints[damagePointIndex].text = value.ToString();
-        damagePointAnimators[damagePointIndex].SetBool("isDamaged", true);
+
+        if (isHeal)
+        { damagePointAnimators[damagePointIndex].SetBool("isHealed", true); }
+        else
+        { damagePointAnimators[damagePointIndex].SetBool("isDamaged", true); }
+
         damagePointIndex++;
         if (damagePointIndex == damagePoints.Length)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public enum EnemyType { Solder, Healer, Tank, Jumper};
+public enum EnemyType { Solder, Healer, Tank, Jumper, Totem};
 
 public class Enemy : Damageable
 {
@@ -14,6 +14,7 @@ public class Enemy : Damageable
     public EnemyType type;
     public Animator animator;
     public SpurtFXController spurtFXController;
+    public Transform chest;
     /*
    [Range(10, 1000)]
    public int maxHealth = 100;
@@ -59,11 +60,11 @@ public class Enemy : Damageable
         if (animator)
         {
             animator.SetBool("DeathTrigger", true);
-            effectsController.navAgent.speed = 0;
-            effectsController.navAgent.angularSpeed = 0;
+          //  effectsController.navAgent.speed = 0;
+            effectsController.navAgent.enabled = false;
+         //   effectsController.navAgent.angularSpeed = 0;
         }
         else {
-
             DestroyUnit();
         }
             
@@ -118,4 +119,8 @@ public class Enemy : Damageable
                 }
             }
         */
+    new public Vector3 GetPosition() 
+    {
+        return chest.position;
+    }
 }

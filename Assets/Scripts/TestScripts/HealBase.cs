@@ -24,7 +24,7 @@ public class HealBase : MonoBehaviour
     {
      //   EnemyManagerPro.AddEnemy(this.GetComponent<Enemy>());
         HealCast.healPower = healpower;
-        HealCast.radius = radius;
+        HealCast.diameter = radius*2;
         realHealRate = healRate;
     }
 

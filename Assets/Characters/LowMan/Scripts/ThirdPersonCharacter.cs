@@ -18,10 +18,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
-		bool m_IsGrounded;
+		bool m_IsGrounded =true;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
-		float m_TurnAmount;
+		public float m_TurnAmount;
 		public float m_ForwardAmount;
 		Vector3 m_GroundNormal;
 		float m_CapsuleHeight;
@@ -29,7 +29,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
         public bool m_Stun;
-
+        Vector3 previousmove;
 
 
         void Start()
@@ -40,11 +40,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
-			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+			m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		}
 
-
+        public void Rotate(Vector3 lookPoint) 
+        {
+            m_TurnAmount = Mathf.Atan2(lookPoint.x, lookPoint.z);
+        }
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
 
@@ -53,9 +56,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// direction.
 			if (move.magnitude > 1f) move.Normalize();
 			move = transform.InverseTransformDirection(move);
-			CheckGroundStatus();
+		//	CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z);
+            
+          //  if (previousmove != move)
+          //  { 
+                m_TurnAmount = Mathf.Atan2(move.x, move.z); 
+           //     previousmove = move;
+          //  }
+
+
             if (!m_Crouching)
             {
                 m_ForwardAmount = move.z;
@@ -131,12 +141,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 		//	m_Animator.SetBool("Crouch", m_Crouching);
             m_Animator.SetBool("Stun", m_Stun);
-            m_Animator.SetBool("OnGround", m_IsGrounded);
-			if (!m_IsGrounded)
+        //    m_Animator.SetBool("OnGround", m_IsGrounded);
+		/*	if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
 			}
-
+        */
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
 			// (This code is reliant on the specific run cycle offset in our animations,
 			// and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
