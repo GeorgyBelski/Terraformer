@@ -38,17 +38,13 @@ public class CameraMoveController : MonoBehaviour
  //       distanceToFocusPoint = Vector3.Distance(transform.position, focusPointPosition);
     }
 
-    void Update()
+    void LateUpdate()
     {
+        CulculateGroundPositionsForMove();
         MoveByTouchingBorders();
         RotateByDrag();
         MoveByDrag();
         Zoom();
-    }
-
-    private void FixedUpdate()
-    {
-        CulculateGroundPositionsForMove();
     }
 
     void Zoom()
