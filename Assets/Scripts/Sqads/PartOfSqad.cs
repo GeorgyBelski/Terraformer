@@ -53,7 +53,7 @@ public class PartOfSquad : Enemy_Logic
     {
         EnemyMouseController em = leader.emk;
         Vector3 posTemp = em.transform.position - tempDestPosition; ;
-        emk.SetDest(posTemp);
+        emk.SetDestination(posTemp);
         emk.agent.speed = em.agent.speed * 1.5f;
     }
 

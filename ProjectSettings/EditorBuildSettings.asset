@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DemoScene/DemoScene.unity
     guid: c58d9d127d2704c4994f4b8239b79073
+  - enabled: 0
+    path: Assets/Scenes/SampleScene_Geo_Clear.unity
+    guid: d6d4a28c86a6d2a438db3eebad142a38
   m_configObjects: {}
