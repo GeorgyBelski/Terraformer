@@ -30,6 +30,10 @@ public class TowerManager : MonoBehaviour
 
     public int symbiosisCostMultiplayer = 8;
 
+    private void Start()
+    {
+
+    }
     private void FixedUpdate()
     {
         LookingForSymbiosis();
@@ -192,5 +196,17 @@ public class TowerManager : MonoBehaviour
         }
 
     }
+    public static void Restart()
+    {
+        towers.Clear();
+        availableElectroTowers.Clear();
+        availableLaserTowers.Clear();
+        availablePlasmaTowers.Clear();
+        transformTowerMap.Clear();
+        symbiosisTowers.Clear();
 
+        selectedTower =null;
+        highlightedTower = null;
+        towerLookingForSymbiosisPartner = null;
+    }
 }

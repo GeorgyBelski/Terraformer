@@ -6,14 +6,17 @@ public class EnemyManagerPro : MonoBehaviour
 {
     public static int enemyLayerMask;
     public static int enemyLayer = 12;
-    // public List<Enemy> startEnemies = new List<Enemy>();
-    //public static List<Enemy> enemiesDamage = new List<Enemy>();
-    //public static List<Enemy> enemiesHealers = new List<Enemy>();
+
     public static List<Enemy> enemies = new List<Enemy>();
-    //public static List<HealBase> healBases = new List<HealBase>();
 
     public static Dictionary<EnemyType, List<Enemy>> enemiesMap= new Dictionary<EnemyType, List<Enemy>>();
-    public int enemyCount;
+    public int enemyCount;// for debuging
+
+    public static void Restart()
+    {
+        enemies.Clear();
+        enemiesMap.Clear();
+    }
     private void Start()
     {
         enemyLayerMask = LayerMask.GetMask("Enemy");

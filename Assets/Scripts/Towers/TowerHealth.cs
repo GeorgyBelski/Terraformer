@@ -85,8 +85,10 @@ public class TowerHealth : Damageable
         }
         else if (thisTower.type == TowerType.Terraformer)
         {
-            ((Terraformer)thisTower).menu.SetActive(true);
-            ((Terraformer)thisTower).defeat.gameObject.SetActive(true);
+            // ((Terraformer)thisTower).menu.SetActive(true);
+            MenuController.ShowMenu(true);
+            MenuController.ShowDefeat(true);
+            //((Terraformer)thisTower).defeat.gameObject.SetActive(true);
             return;
         }
         thisTower.hexagon.SetStatus(HexCoordinatStatus.Attend);
