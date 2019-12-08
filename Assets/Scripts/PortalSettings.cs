@@ -23,17 +23,37 @@ public class PortalSettings : MonoBehaviour
     [ColorUsageAttribute(true, true)]
     public Color loadingLineColor;
     public float lineSpeed = 2f;
+
+    private float realLineSpeed;
+
     float previousLineSpeed;
     float originalSpeed;
     public Material loadingLineMaterial;
 
-    private bool spawn = false;
-    
+    private float startSizeInSecond;
+    private bool active = false;
+    private bool spwning = false;
+
+    public float spawnRate = 1f;
+    private float realSpawnRate = 1f;
+
+    private int enemieCountInList = 0;
+
+    private int columns;
+    private int columnCount;
+    private float columnsRange;
+    private float rotation;
+    private Sqad.Formation form;
+
+    private bool isSquad = false;
+    //private loadingLineMaterial;
+
 
     private void Awake()
     {
         startScale = transform.localScale.x;
         sizeInSecond = (finalSize - startScale) / loadingTime;
+        
         previousLoadingTime = loadingTime;
         loadingLine.positionCount = 72;
         loadingLineMaterial = loadingLine.materials[0];
@@ -58,19 +78,41 @@ public class PortalSettings : MonoBehaviour
         ChangeLineSpeed();
         if (this.enabled)
         {
+            //print(realLineSpeed);
+            //realLineSpeed = lineSpeed * transform.localScale.x / finalSize;
+            //loadingLineMaterial.SetFloat("_Speed", realLineSpeed);
             transform.localScale = new Vector3(transform.localScale.x + sizeInSecond * Time.deltaTime, transform.localScale.y + sizeInSecond * Time.deltaTime, transform.localScale.z + sizeInSecond * Time.deltaTime);
         
         //print(transform.localScale.x + " " + size);
-            if(transform.localScale.x >= finalSize && spawn)
+            if(transform.localScale.x >= finalSize && active)
             {
-                spawn = false;
+                //print(sizeInSecond);
+                sizeInSecond = 0;
+                active = false;
                 //gameObject.active = false;
-                spawnEnemyes();
-                transform.localScale = Vector3.zero;
-                transform.position = Vector3.zero;
-                this.enabled = false;
+                spwning = true;
+                enemieCountInList = 0;
+                //spawnEnemyes();
+                //transform.localScale = Vector3.zero;
+                //transform.position = Vector3.zero;
+                //this.enabled = false;
                 //gameObject. = false
 
+            }
+
+            if (spwning)
+            {
+                if (isSquad)
+                {
+                    spawnSquad();
+                }
+                else
+                {
+                    realSpawnRate -= Time.deltaTime;
+                    spawnEnemyes();
+                }
+                
+                
             }
         }
     }
@@ -84,26 +126,88 @@ public class PortalSettings : MonoBehaviour
     }
     public void spawnEnemyes()
     {
+        if(realSpawnRate <= 0)
+        {
+            //print("+");
+            Instantiate(enemyList[enemieCountInList], new Vector3(
+                this.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 1 * enemyList.Count/7),
+                0,
+                this.transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 1 * enemyList.Count / 5)), this.transform.rotation);
+            realSpawnRate = spawnRate;
+            enemieCountInList++;
+        }
+
+        if (enemyList.Count <= enemieCountInList)
+        {
+            spwning = false;
+            transform.localScale = Vector3.zero;
+            transform.position = Vector3.zero;
+            this.enabled = false;
+            gameObject.SetActive(false);
+            realSpawnRate = spawnRate;
+            sizeInSecond = startSizeInSecond;
+
+        }
+        
         //print(enemyList.Count);
         //engl = SquadFormationSquare.DegreeToRadian(engl);
-        leader = enemyList[0];
-        Instantiate(leader, transform.position, this.transform.rotation);
-        for (int i = 1; i < enemyList.Count - 1; i++)
-        {
-            Instantiate(enemyList[i], new Vector3(
-                this.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(i * (360 / enemyList.Count - 1))) * 1 * enemyList.Count/5),
-                0,
-                this.transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(i * (360 / enemyList.Count - 1))) * 1 * enemyList.Count / 5)), leader.transform.rotation);
-        }
-        gameObject.SetActive(false);
+        //leader = enemyList[0];
+        //Instantiate(leader, transform.position, this.transform.rotation);
+        //for (int i = 1; i < enemyList.Count - 1; i++)
+        //{
+
+        //}
+        
     }
 
-    public void setSettings(List<GameObject> list)
+    private void spawnSquad()
     {
+        switch(form) {
+            case Sqad.Formation.Square:
+                new SquadFormationSquare(enemyList[0], enemyList[1], columns, columnCount, columnsRange, 23, rotation);
+                break;
+            case Sqad.Formation.Circle:
+                new SquadFormationCircle(enemyList[0], enemyList[1], columns, columnCount, columnsRange, 23, rotation);
+                break;
+        }
+        spwning = false;
+        transform.localScale = Vector3.zero;
+        transform.position = Vector3.zero;
+        this.enabled = false;
+        gameObject.SetActive(false);
+        realSpawnRate = spawnRate;
+        sizeInSecond = startSizeInSecond;
+
+    }
+
+    public void setSettings(List<GameObject> list, float spawnRate)
+    {
+        this.spawnRate = spawnRate;
+        realSpawnRate = spawnRate;
+        startSizeInSecond = sizeInSecond;
         enemyList = list;
-        //size = list.Count;
-        //print(size);
-        spawn = true;
+
+        active = true;
+        this.enabled = true;
+        isSquad = false;
+        ReloadLine();
+    }
+
+    public void setSettings(List<GameObject> list, int columns, int columnCount, float columnsRange, float rotation, Sqad.Formation form)
+    {
+        realSpawnRate = spawnRate;
+        startSizeInSecond = sizeInSecond;
+        enemyList = list;
+
+        this.columns = columns;
+        this.columnCount = columnCount;
+        this.columnsRange = columnsRange;
+        this.form = form;
+        this.rotation = rotation;
+
+        isSquad = true;
+
+        active = true;
         this.enabled = true;
 
         ReloadLine();

@@ -8,7 +8,7 @@ public enum EnemyType { Solder, Healer, Tank, Jumper, Totem};
 
 public class Enemy : Damageable
 {
-    
+    public Material shaderMaterial;
     public ThirdPersonCharacter character;
     public EnemyEffectsController effectsController;
     public EnemyType type;
@@ -35,6 +35,10 @@ public class Enemy : Damageable
 */
     void Start()
     {
+        healthBar.material = Instantiate(shaderMaterial);
+        shaderMaterial = healthBar.material;
+        //shaderMaterial = healthBar.;
+        shaderMaterial.SetFloat("_Steps", maxHealth/200);
         // capsuleCenter = GetComponent<CapsuleCollider>().center;
         if (!EnemyManagerPro.enemies.Contains(this)) {
             //   EnemyManagerPro.enemies.Add(this);

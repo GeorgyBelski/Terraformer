@@ -41,13 +41,13 @@ public abstract class Damageable : MonoBehaviour
         if (health > 0)
         {
             health -= value;
-        /*    if (isHeal)
+            if (isHeal)
             {
                 //print((float)value / maxHealth);
                 maxRepairHealth -= (float)value / maxHealth;
                 healHealth.fillAmount = maxRepairHealth;
             }
-         */      
+              
             PopUpDamagePoint(value);
         }
         if (health <= 0)

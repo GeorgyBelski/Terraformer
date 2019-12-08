@@ -32,10 +32,12 @@ public class TowerHealth : Damageable
         }
         else
         {
+            //print("+");
+            isHeal = false;
             if(healHealth)
                 healHealth.fillAmount = healthBar.fillAmount;
             //ealHealth.fillAmount = healthBar.fillAmount;
-            isHeal = false;
+            
         }
             
         
