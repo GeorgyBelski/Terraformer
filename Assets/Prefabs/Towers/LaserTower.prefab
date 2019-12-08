@@ -582,7 +582,7 @@ Transform:
   m_Children:
   - {fileID: 6015777778795571989}
   - {fileID: 8280114582322313786}
-  - {fileID: 2065179494154560868}
+  - {fileID: 8358002563068960505}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -698,7 +698,7 @@ MonoBehaviour:
     type: 3}
   symbiosisAreaDamage: 30
   scorchingRayAbility: {fileID: 2474435889650568810}
-  cast: {fileID: 3717215885554449417}
+  cast: {fileID: 8358002563068959889}
   castSize: 5
   castDamage: 500
   castBlowUpSize: 3
@@ -719,6 +719,8 @@ MonoBehaviour:
   maxHealth: 2000
   health: 2000
   healthBar: {fileID: 5329926910552512237}
+  healHealth: {fileID: 0}
+  isHeal: 0
   damagePoints:
   - {fileID: 2974092476607063203}
   - {fileID: 8060341138537914377}
@@ -730,7 +732,6 @@ MonoBehaviour:
   damagePointIndex: 0
   healthRatio: 0
   thisTower: {fileID: 6015777778884135385}
-  isRepair: 0
   damagePointsColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &2474435889650568810
 MonoBehaviour:
@@ -910,11 +911,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280114582322313786}
     m_Modifications:
-    - target: {fileID: 3348572517771893589, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
-      propertyPath: m_Name
-      value: TowerMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 4331312378236362637, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1144,6 +1140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3348572517771893589, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_Name
+      value: TowerMenu
       objectReference: {fileID: 0}
     - target: {fileID: 3348572517771893590, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
@@ -1399,11 +1400,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6015777778884135390}
     m_Modifications:
-    - target: {fileID: 8429019210697089014, guid: 55d2cf7acb1628649844dc17d15a3844,
-        type: 3}
-      propertyPath: m_Name
-      value: LaserTowerCastBlowUp
-      objectReference: {fileID: 0}
     - target: {fileID: 8022435694985575031, guid: 55d2cf7acb1628649844dc17d15a3844,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1465,15 +1461,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8429019210697089014, guid: 55d2cf7acb1628649844dc17d15a3844,
         type: 3}
+    - target: {fileID: 8429019210697089014, guid: 55d2cf7acb1628649844dc17d15a3844,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserTowerCastBlowUp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55d2cf7acb1628649844dc17d15a3844, type: 3}
---- !u!4 &2065179494154560868 stripped
+--- !u!4 &8358002563068960505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8022435694985575031, guid: 55d2cf7acb1628649844dc17d15a3844,
     type: 3}
   m_PrefabInstance: {fileID: 8358002563068960531}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3717215885554449417 stripped
+--- !u!114 &8358002563068959889 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4641983247363793690, guid: 55d2cf7acb1628649844dc17d15a3844,
     type: 3}
@@ -1492,11 +1493,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280114582322313786}
     m_Modifications:
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
-      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1602,12 +1598,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_Layer
       value: 0
@@ -1616,6 +1612,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}

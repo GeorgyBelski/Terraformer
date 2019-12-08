@@ -53,7 +53,7 @@ public class TowerHealth : Damageable
     }
 
     public override void ApplyDeath()
-    {
+    { 
         thisTower.BreakSymbiosis();
         if (thisTower.currentVisualLink) { Destroy(thisTower.currentVisualLink.gameObject); }
         RemoveFromList();
@@ -66,12 +66,14 @@ public class TowerHealth : Damageable
         if (thisTower.type == TowerType.Electro)
         {
             ((ElectroTower)thisTower).DestroyCharge();
-            Destroy(((ElectroTower)thisTower).thanderBallAbility.thandetBall.gameObject);
+            if (((ElectroTower)thisTower).thanderBallAbility.thandetBall)
+            { Destroy(((ElectroTower)thisTower).thanderBallAbility.thandetBall.gameObject); }
         }
         else if (thisTower.type == TowerType.Laser)
         {
             ((LaserTower)thisTower).lr.enabled = false;
-            Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject);
+            if (((LaserTower)thisTower).scorchingRayAbility.scorchingRay)
+            { Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject); }
         }
         else if (thisTower.type == TowerType.Plasma) 
         {
@@ -87,11 +89,8 @@ public class TowerHealth : Damageable
             ((Terraformer)thisTower).defeat.gameObject.SetActive(true);
             return;
         }
-
-        Destroy(thisTower.gameObject);
         thisTower.hexagon.SetStatus(HexCoordinatStatus.Attend);
-
-
+        Destroy(thisTower.gameObject); 
     }
 
     public void Repair()
