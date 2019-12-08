@@ -197,11 +197,11 @@ public class ResourceManager : MonoBehaviour
     {
         if (resource == resourceMax)
         {
-            OverclockBar.fillAmount += proceeds * Time.deltaTime / 200;
+            OverclockBar.fillAmount += proceeds * Time.deltaTime / 1000;
         }
         else if(OverclockBar.fillAmount > 0)
         {
-            OverclockBar.fillAmount -= proceeds * Time.deltaTime / 200;
+            OverclockBar.fillAmount -= proceeds * Time.deltaTime / 1000;
         }
         if (OverclockBar.fillAmount == 1) 
         { ApplyVictory(); }
