@@ -458,7 +458,7 @@ BoxCollider:
   m_GameObject: {fileID: 5691318349596143735}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.84, z: 0.7}
   m_Center: {x: 0, y: 0.37, z: 0}
@@ -523,6 +523,7 @@ MonoBehaviour:
   - {fileID: 592312484424647470}
   damagePointIndex: 0
   healthRatio: 0
+  shaderMaterial: {fileID: 2100000, guid: 3de58dcecff9cec4f836b99b1ce729c0, type: 2}
   character: {fileID: 0}
   effectsController: {fileID: 697666250140818683}
   type: 4
@@ -560,7 +561,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5691318349596143735}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.3, y: 0.5, z: 0.3}

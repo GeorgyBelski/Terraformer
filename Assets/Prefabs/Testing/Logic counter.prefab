@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4fa67d7bac37b4a4d844ddb3fb3e72cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,16 +107,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc220b99140eb544beb210391347cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamager: {fileID: 1773362112128587812, guid: da5415a432dac38419376531d70065e1,
+  enemyDamager: {fileID: 2623192909609195406, guid: da5415a432dac38419376531d70065e1,
     type: 3}
-  enemyTank: {fileID: 4993789895433094854, guid: ee79144eaa76b7a48a1cc52e89902a86,
+  enemyTank: {fileID: 8968871776893842170, guid: ee79144eaa76b7a48a1cc52e89902a86,
     type: 3}
-  enemyRusher: {fileID: 1238903040540349477, guid: 3cce14b2abac7264bbdc5019d8511a26,
+  enemyRusher: {fileID: 2623192909609195406, guid: 3cce14b2abac7264bbdc5019d8511a26,
     type: 3}
   enemyHeal: {fileID: 762130183, guid: 3942bfeac139110488efc3393ccf93e3, type: 3}
   spawnRate: 0
   portalPosition: 0
-  wave: 0
+  formation: 0
+  colCount: 0
+  colSize: 0
+  range: 0
 --- !u!114 &880228396155926829
 MonoBehaviour:
   m_ObjectHideFlags: 0
