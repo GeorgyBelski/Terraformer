@@ -508,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 400
-  health: 400
+  maxHealth: 200
+  health: 200
   healthBar: {fileID: 8189187154717802135}
   healHealth: {fileID: 0}
   isHeal: 0

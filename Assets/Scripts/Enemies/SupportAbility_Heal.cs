@@ -66,7 +66,8 @@ public class SupportAbility_Heal : SupportAbility
         { 
             timerDuration -= Time.deltaTime;
             lr.SetPosition(0, castPoint.position);
-            lr.SetPosition(1, targetUnit.GetPosition());
+            if (targetUnit)
+            { lr.SetPosition(1, targetUnit.GetPosition()); }
         }
         else 
         {

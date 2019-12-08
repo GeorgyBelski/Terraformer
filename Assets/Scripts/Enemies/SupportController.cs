@@ -158,7 +158,7 @@ public class SupportController : MonoBehaviour
         }
     }
     float CalculateCenterOutFactor(bool safe) 
-    { return safe?2:threats.Count*1.2f + ((10 + (1 - thisUnit.GetHealthRatio()) * 20 * threats.Count) / transform.position.magnitude); }
+    { return safe?2:threats.Count*0.5f + ((10 + (1 - thisUnit.GetHealthRatio()) * 20 * threats.Count) / transform.position.magnitude); }
     void DefineThreats() 
     {
         var towers = TowerManager.towers;
