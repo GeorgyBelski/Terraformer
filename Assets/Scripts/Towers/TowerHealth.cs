@@ -25,17 +25,19 @@ public class TowerHealth : Damageable
         if (isHeal && healthRatio < maxRepairHealth)
         {
             //base.CalcHealthRatio();
-            print(maxRepairHealth);
+            //print(maxRepairHealth);
             base.health += (int)((maxHealth/15) * Time.deltaTime);
             
             //base.CalcHealthRatio();
         }
         else
         {
+            //print("+");
+            isHeal = false;
             if(healHealth)
                 healHealth.fillAmount = healthBar.fillAmount;
             //ealHealth.fillAmount = healthBar.fillAmount;
-            isHeal = false;
+            
         }
             
         

@@ -41,10 +41,13 @@ public class Tank : Enemy_Logic
                 //print("+");
                 isStand = false;
                 isAttack = false;
-                if (TowerManager.terraformer)
-                    stateGoToDestanation(TowerType.Terraformer);
+                if(isPriority)
+                    stateGoToDestanation(priorityTowerType);
                 else
-                    isStand = true;
+                    if (TowerManager.terraformer)
+                        stateGoToDestanation(TowerType.Terraformer);
+                    else
+                        isStand = true;
             }
             else
             {

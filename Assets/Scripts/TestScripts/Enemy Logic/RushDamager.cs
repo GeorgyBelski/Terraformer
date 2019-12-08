@@ -20,6 +20,8 @@ public class RushDamager : Enemy_Logic
 
     private Vector3 dest;
 
+
+
     public override void Attack()
     {
         if (targetTower)
@@ -75,6 +77,21 @@ public class RushDamager : Enemy_Logic
         isChargingReady = false;
         realChargingTime = 0;
         charging();
+    }
+
+    protected override void stateGoToDestanation()
+    {
+        if (isPriority)
+        {
+            base.stateGoToDestanation(priorityTowerType);
+        }
+        else
+        {
+            base.stateGoToDestanation();
+        }
+
+
+
     }
 
     public override void check()

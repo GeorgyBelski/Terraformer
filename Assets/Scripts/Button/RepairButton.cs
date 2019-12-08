@@ -14,7 +14,7 @@ public class RepairButton : MonoBehaviour
     {
         isActive = true;
         repairImage.color = thisButton.colors.selectedColor;
-        print("+");
+        //print("+");
     }
 
     // Update is called once per frame
@@ -31,12 +31,12 @@ public class RepairButton : MonoBehaviour
         {
             isActive = false;
             repairImage.color = thisButton.colors.normalColor;
-            print("-");
+            //print("-");
         }
-
-        if (isActive && Input.GetMouseButtonDown(0))
+        if (!isActive)
         {
-            thisButton.Select();// = true;
+            //thisButton.
+            repairImage.color = thisButton.colors.normalColor;
         }
     }
 }

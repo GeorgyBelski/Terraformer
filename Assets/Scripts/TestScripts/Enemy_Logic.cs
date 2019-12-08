@@ -35,6 +35,9 @@ public abstract class Enemy_Logic : MonoBehaviour
     protected float min;
     protected float tempNavAgentSpeed;
 
+    protected TowerType priorityTowerType;
+    protected bool isPriority = false;
+
     public bool IsAttack { get => isAttack; set { isAttack = value; animator.SetBool("Attack", value); } }
 
 
@@ -78,7 +81,13 @@ public abstract class Enemy_Logic : MonoBehaviour
         //Debug.Log(isAttack + " " + destTower + "ATAKING");
     }
 
-    protected void stateGoToDestanation()
+    public void setPriority(TowerType tower)
+    {
+        isPriority = true;
+        priorityTowerType = tower;
+    }
+
+    protected virtual void stateGoToDestanation()
     {
         if (TowerManager.towers.Count > 0)
         {

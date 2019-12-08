@@ -502,7 +502,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.8
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -590,6 +590,8 @@ MonoBehaviour:
   maxHealth: 1800
   health: 1800
   healthBar: {fileID: 6345749245046345774}
+  healHealth: {fileID: 0}
+  isHeal: 0
   damagePoints:
   - {fileID: 3289438994368453441}
   - {fileID: 7727160464616988651}
@@ -600,6 +602,7 @@ MonoBehaviour:
   - {fileID: 922822480189874792}
   damagePointIndex: 0
   healthRatio: 0
+  shaderMaterial: {fileID: 2100000, guid: 3de58dcecff9cec4f836b99b1ce729c0, type: 2}
   character: {fileID: 3325181776808568390}
   effectsController: {fileID: 6506509440709846526}
   type: 2
@@ -643,6 +646,7 @@ MonoBehaviour:
   vertigoPrefab: {fileID: 2853689288127697143, guid: 5dd8823983adfe14e81b48fd66930fc5,
     type: 3}
   vertigo: {fileID: 0}
+  originalNavAgentSpeed: 0
 --- !u!114 &3325181776808568390
 MonoBehaviour:
   m_ObjectHideFlags: 0
