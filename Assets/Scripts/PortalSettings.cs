@@ -130,9 +130,9 @@ public class PortalSettings : MonoBehaviour
         {
             //print("+");
             Instantiate(enemyList[enemieCountInList], new Vector3(
-                this.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 1 * enemyList.Count/7),
+                this.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 2),
                 0,
-                this.transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 1 * enemyList.Count / 5)), this.transform.rotation);
+                this.transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 2)), this.transform.rotation);
             realSpawnRate = spawnRate;
             enemieCountInList++;
         }
@@ -164,10 +164,10 @@ public class PortalSettings : MonoBehaviour
     {
         switch(form) {
             case Sqad.Formation.Square:
-                new SquadFormationSquare(enemyList[0], enemyList[1], columns, columnCount, columnsRange, 23, rotation);
+                new SquadFormationSquare(enemyList[0], enemyList[1], columns, columnCount, columnsRange, 35, rotation);
                 break;
             case Sqad.Formation.Circle:
-                new SquadFormationCircle(enemyList[0], enemyList[1], columns, columnCount, columnsRange, 23, rotation);
+                new SquadFormationCircle(enemyList[0], enemyList[1], columns, columnCount, columnsRange, 35, rotation);
                 break;
         }
         spwning = false;

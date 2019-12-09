@@ -114,7 +114,7 @@ public class Logic : MonoBehaviour
         //print(SquadFormationSquare.DegreeToRadian(pattern.portalPosition));
         randPos = Random.Range(0, 360);
         //print(randPos + " " + Mathf.Sin(randPos));
-        return new Vector3(23 * Mathf.Sin(Sqad.DegreeToRadian(pattern.portalPosition)), 1, 23 * Mathf.Cos(Sqad.DegreeToRadian(pattern.portalPosition)));
+        return new Vector3(35 * Mathf.Sin(Sqad.DegreeToRadian(pattern.portalPosition)), 1, 35 * Mathf.Cos(Sqad.DegreeToRadian(pattern.portalPosition)));
     }
 
     private List<GameObject> conutWave()
