@@ -105,6 +105,9 @@ public abstract class Damageable : MonoBehaviour
     }
     void PopUpPoint(int value, bool isHeal) 
     {
+        if (!damagePoints[damagePointIndex]) 
+        { return; }
+
         damagePoints[damagePointIndex].text = value.ToString();
 
         if (isHeal)
