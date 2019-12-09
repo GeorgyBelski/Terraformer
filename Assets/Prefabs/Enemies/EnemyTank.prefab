@@ -587,8 +587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1800
-  health: 1800
+  maxHealth: 2500
+  health: 2500
   healthBar: {fileID: 6345749245046345774}
   healHealth: {fileID: 0}
   isHeal: 0
@@ -625,7 +625,7 @@ MonoBehaviour:
   character: {fileID: 3325181776808568390}
   rotationTime: 0.4
   timerRotation: 0
-  ortationSpeed: 5
+  rotationSpeed: 5
 --- !u!114 &6506509440709846526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,15 +1437,15 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5615429418157641000, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547047885389312274, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}

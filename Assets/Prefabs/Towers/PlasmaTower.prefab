@@ -508,7 +508,7 @@ MonoBehaviour:
   towerMaterial: {fileID: 0}
   plazmaBuletSpeed: 12
   directShotAttack: 50
-  blastShotAttack: 40
+  blastShotAttack: 50
   damageRadius: 4
   isPreemptive: 1
   plazmaBulletPrefab: {fileID: 7057038046003624443, guid: 629af26e030e69f4895c5654324a72e5,
@@ -1796,12 +1796,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_Layer
       value: 0

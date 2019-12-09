@@ -133,7 +133,7 @@ public class EnemyEffectsController : MonoBehaviour
         SlowDownEffect slowdown = (SlowDownEffect)AddEffect(Effect.Type.Slowdown);
         slowdown.Set(duration, multiplayer);
         // print(navAgent.speed);
-        navAgent.speed = Mathf.Min(originalNavAgentSpeed * multiplayer, navAgent.speed);
+        navAgent.speed = Mathf.Min(0.3f, navAgent.speed);
         // print(navAgent.speed);
         enableSlowdown = false;
     }
