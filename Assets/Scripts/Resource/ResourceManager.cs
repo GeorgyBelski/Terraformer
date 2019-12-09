@@ -197,18 +197,24 @@ public class ResourceManager : MonoBehaviour
     {
         if (resource == resourceMax)
         {
-            OverclockBar.fillAmount += proceeds * Time.deltaTime / 1000;
+            OverclockBar.fillAmount += proceeds * Time.deltaTime / 400;
+            Terraformer.isOverclock = true;
         }
-        else if(OverclockBar.fillAmount > 0)
+        else if (OverclockBar.fillAmount > 0)
         {
-            OverclockBar.fillAmount -= proceeds * Time.deltaTime / 1000;
+            OverclockBar.fillAmount -= proceeds * Time.deltaTime / 400;
+            Terraformer.isOverclock = true;
         }
+        else { Terraformer.isOverclock = false; }
+
+        Terraformer.overclockFactor = OverclockBar.fillAmount;
         if (OverclockBar.fillAmount == 1) 
         { ApplyVictory(); }
     }
     public void ApplyVictory()
     {
         //  victory.gameObject.SetActive(true);
+        Terraformer.isVictory = true;
         MenuController.ShowVictory(true);
         if (EnemyManagerPro.enemies.Count != 0)
         {
