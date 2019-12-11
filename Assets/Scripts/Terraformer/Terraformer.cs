@@ -16,9 +16,14 @@ public class Terraformer : Tower
     public Transform startOverclockWave;
     public static Transform overclockWave;
 
+    private Material mt;
+    private Color baseEmissionColor;
 
     new void Start()
     {
+ 
+        mt = terraformerMesh.GetComponent<Renderer>().material;
+        baseEmissionColor = mt.GetColor("_EmissionColor");
         isOverclock = false;
         isVictory = false;
         menu.SetActive(false);
@@ -31,13 +36,25 @@ public class Terraformer : Tower
 
     void Update()
     {
+
         Overclock();
         OverclockWave();
     }
     public void Overclock() 
     {
         if (isOverclock)
-        { terraformerMesh.eulerAngles += Vector3.up * overclockSpeed * overclockFactor * Time.deltaTime; }
+        {
+
+            terraformerMesh.eulerAngles += Vector3.up * overclockSpeed * overclockFactor * Time.deltaTime;
+            
+            float emission = Mathf.PingPong(Time.time * 3 * overclockFactor, 50f * overclockFactor) + 2f;
+            print(overclockFactor);
+            Color finalColor = baseEmissionColor * Mathf.LinearToGammaSpace(emission);
+
+            mt.SetColor("_EmissionColor", finalColor);
+            if (overclockFactor == 0)
+                mt.SetColor("_EmissionColor", baseEmissionColor);
+        }
     }
     public void OverclockWave() 
     {

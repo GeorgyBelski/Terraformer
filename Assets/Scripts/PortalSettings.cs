@@ -14,6 +14,8 @@ public class PortalSettings : MonoBehaviour
     float previousFinalSize;
     Vector3 previousPosition;
     float startScale;
+
+    public SpawnEnemiesPattern pattern;
     
     private GameObject leader;
     private GameObject next;
@@ -102,17 +104,12 @@ public class PortalSettings : MonoBehaviour
 
             if (spwning)
             {
-                if (isSquad)
-                {
-                    spawnSquad();
+                if (realSpawnRate <= 0){
+                    pattern.spawnEnemyes();
+
+                    realSpawnRate = spawnRate;
                 }
-                else
-                {
-                    realSpawnRate -= Time.deltaTime;
-                    spawnEnemyes();
-                }
-                
-                
+                realSpawnRate -= Time.deltaTime;
             }
         }
     }
@@ -124,7 +121,19 @@ public class PortalSettings : MonoBehaviour
             previousLoadingTime = loadingTime;
         }
     }
-    public void spawnEnemyes()
+
+    public void deactivate()
+    {
+        spwning = false;
+        transform.localScale = Vector3.zero;
+        transform.position = Vector3.zero;
+        this.enabled = false;
+        gameObject.SetActive(false);
+        realSpawnRate = spawnRate;
+        sizeInSecond = startSizeInSecond;
+    }
+
+    /*public void spawnEnemyes()
     {
         if(realSpawnRate <= 0)
         {
@@ -159,8 +168,9 @@ public class PortalSettings : MonoBehaviour
         //}
         
     }
+    */
 
-    private void spawnSquad()
+    /*private void spawnSquad()
     {
         switch(form) {
             case Sqad.Formation.Square:
@@ -179,6 +189,7 @@ public class PortalSettings : MonoBehaviour
         sizeInSecond = startSizeInSecond;
 
     }
+    */
 
     public void setSettings(List<GameObject> list, float spawnRate)
     {

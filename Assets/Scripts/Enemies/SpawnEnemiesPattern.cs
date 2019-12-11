@@ -14,8 +14,12 @@ public class SpawnEnemiesPattern : MonoBehaviour
     public GameObject enemyRusher;
     public GameObject enemyHeal;
 
+    public PortalSettings portal;
+
     public float spawnRate;
     public float portalPosition;
+    public int portalRange = 22;
+    private int realPortalRange;
 
     private int wave;
 
@@ -25,10 +29,22 @@ public class SpawnEnemiesPattern : MonoBehaviour
     public float range;
     private WaveType patternType;
 
+
+
+    private int enemieCountInList = 0;
+    private bool spawning;
+
     private List<GameObject> list;
+
+    void Start()
+    {
+        realPortalRange = portalRange;
+    }
+
     public void setPattern(int wave)
     {
         this.wave = wave;
+        realPortalRange = portalRange + wave;
         list = new List<GameObject>();
         switch (wave)
         {
@@ -187,4 +203,63 @@ public class SpawnEnemiesPattern : MonoBehaviour
         }
             
     }
+
+    //////
+    ///-------------------------------------------
+    ///Enemy Spawning
+    ///-------------------------------------------
+    /////
+    public void spawnEnemyes()
+    {
+        switch (patternType)
+        {
+            case WaveType.Simple:
+                simpleSpawn();
+                break;
+            case WaveType.Squad:
+                squadSpawn();
+                break;
+        }
+
+    }
+
+    private void simpleSpawn()
+    {
+        Enemy enem = Instantiate(list[enemieCountInList], new Vector3(
+            portal.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / list.Count - 1))) * 2),
+            0,
+            portal.transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / list.Count - 1))) * 2)), portal.transform.rotation)
+            .GetComponent<Enemy>();
+
+        enem.maxHealth = enem.maxHealth + 100 * wave;
+        enem.health = enem.maxHealth;
+
+        enemieCountInList++;
+
+
+        if (list.Count <= enemieCountInList)
+        {
+            enemieCountInList = 0;
+            portal.deactivate();
+            //print("+");
+
+        }
+    }
+
+    private void squadSpawn()
+    {
+        switch (formation)
+        {
+            case Sqad.Formation.Square:
+                new SquadFormationSquare(list[0], list[1], colCount, colSize, range, realPortalRange, portalPosition);
+                break;
+            case Sqad.Formation.Circle:
+                new SquadFormationCircle(list[0], list[1], colCount, colSize, range, realPortalRange, portalPosition);
+                break;
+        }
+        portal.deactivate();
+    }
+
+
+
 }
