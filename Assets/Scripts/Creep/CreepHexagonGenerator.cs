@@ -82,8 +82,11 @@ public class CreepHexagonGenerator : MonoBehaviour
         timerRiseTime = new float[radius+1];
         UpdateExpansionCost();
         damagedHexagons = new List<Hexagon>();
-        CreateHexagon(0, 0);
+        UpdateCreep();
+        // Occupied by Terraformer
         GetHexagon(0, 0).SetStatus(HexCoordinatStatus.Occupied);
+        // Occupied by Terraformer
+        SelectHexagonCircle(1).ForEach(hexagon => hexagon.SetStatus(HexCoordinatStatus.Occupied));
      /*
         offset = new float[radius+1];
         
@@ -550,8 +553,11 @@ public class CreepHexagonGenerator : MonoBehaviour
                 {
                     hexagonCircle.Add(GetHexagon(circleRadius, -j));
                     hexagonCircle.Add(GetHexagon(-circleRadius, j));
-                    hexagonCircle.Add(GetHexagon(j, -circleRadius));
-                    hexagonCircle.Add(GetHexagon(-j, circleRadius));
+                    if(j < circleRadius) 
+                    { 
+                        hexagonCircle.Add(GetHexagon(j, -circleRadius));
+                        hexagonCircle.Add(GetHexagon(-j, circleRadius));
+                    }
                 }
             }
             Circles[circleRadius] = hexagonCircle;
