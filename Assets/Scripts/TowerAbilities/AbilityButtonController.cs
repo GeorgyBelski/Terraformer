@@ -28,7 +28,7 @@ public abstract class AbilityButtonController : MonoBehaviour
     protected Transform aimArea;
     Animator aimAreaAnimator;
 
-    Tower casterTower;
+    [SerializeField] Tower casterTower;
     Tower previousHighlightedTower;
     Enemy target;
     float camRayLength = 90f;
@@ -70,7 +70,8 @@ public abstract class AbilityButtonController : MonoBehaviour
             Aiming();
             if (Input.GetMouseButtonDown(0))
             {
-                
+                if (type == Type.SingleTarget && !target) { return; }
+
                 if (casterTower)
                 {
                     if (ResourceManager.RemoveResource(cost))
@@ -79,15 +80,18 @@ public abstract class AbilityButtonController : MonoBehaviour
                         currentState = State.Recharging;
                         buttonImage.color = buttonTintRecharging;
                         timerCoolDown = coolDown;
-                        //    timerCast = castTime;
-                        //    TowerManager.ClearHighlighting();
                         casterTower.isHighlighted = false;
                         previousHighlightedTower = null;
-                        ///   casterTower.CastThanderBall(aimArea.position);
-                        if (type == Type.Area)
-                        { TowerCastAreaAbility(casterTower); }
+
+                        if (type == Type.Area) 
+                        { 
+                            TowerCastAreaAbility(casterTower); 
+                        }
                         else 
-                        { TowerCastSingleTargetAbility(casterTower, target); }
+                        { 
+                            TowerCastSingleTargetAbility(casterTower, target);
+                            target = null;
+                        }
                         outLineImage.enabled = false;
                         aimingAbility = null;
                     }
@@ -179,13 +183,19 @@ public abstract class AbilityButtonController : MonoBehaviour
             }
             else if (type == Type.SingleTarget && Physics.Raycast(camRay, out RaycastHit enemyHit, camRayLength, enemy_groundMask))
             {
-                Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.yellow);
+            //    Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.yellow);
                 aimArea.position = enemyHit.collider.gameObject.transform.position;
                 EnemyManagerPro.TransformEnemyMap.TryGetValue(enemyHit.collider.transform, out target);
-                if(target) Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.yellow);
-                else Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.white);
-                Debug.Log(target);
-                DefineCasterTower();
+                if (target)
+                {
+                 //   Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.yellow);
+                    aimArea.position = enemyHit.collider.transform.position;
+                    DefineCasterTower();
+                }
+            //    if(target) Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.yellow);
+            //    else Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.white);
+            //    Debug.Log(target);
+                
             }
         }
     }
@@ -219,7 +229,6 @@ public abstract class AbilityButtonController : MonoBehaviour
 
     void ReduceTimers()
     {
-
         if (timerCoolDown <= 0)
         {
             timerCoolDown = 0;
@@ -234,21 +243,6 @@ public abstract class AbilityButtonController : MonoBehaviour
             timerCoolDown -= Time.deltaTime;
             buttonImage.fillAmount = (coolDown - timerCoolDown) / coolDown;
         }
-        /*
-        if (timerCast <= 0)
-        {
-            timerCast = 0;
-            if (currentState == State.Casting)
-            {
-                currentState = State.Recharging;
-                casterTower.EndCasting();
-            }
-        }
-        else
-        {
-            timerCast -= Time.deltaTime;
-        }
-        */
     }
     void RemoveAimArea()
     {

@@ -14,14 +14,16 @@ public class LaserTower : Tower
     public int damageAttack = 50;
     public int damageBurning = 5;
     float timerDuration;
-    [HideInInspector]
+
     public LineRenderer lr;
-    Material lrMaterial;
+    [HideInInspector]
+    public Material lrMaterial;
     [ColorUsageAttribute(true, true)]
     public Color ordinaryLaserColor1, ordinaryLaserColor2, laserSymbColor, electroSymbColor1, electroSymbColor2, plasmaSymbColor1, plasmaSymbColor2;
     [ColorUsageAttribute(true, true)]
     [HideInInspector]
     public Color currentColor1, currentColor2;
+    public float[] lrWidthKeys;
 
     public GameObject areaDamagePrefab;
     GameObject areaDamager;
@@ -30,8 +32,11 @@ public class LaserTower : Tower
 
     [Header("ScorchingRayAbility")]
     public ScorchingRayAbility scorchingRayAbility;
+    [Header("DeathBeamAbility")]
+    public DeathBeamAbility deathBeamAbility;
 
-    [Space]
+  //  [Space]
+
     [Header("UpgradeAbilityCast")]
     private bool isUpgraided;
     public LaserBlowUpCast cast;
@@ -56,6 +61,12 @@ public class LaserTower : Tower
         if (!lr)
         {
             lr = gunpoint.gameObject.AddComponent<LineRenderer>();
+        }
+
+        lrWidthKeys = new float[lr.widthCurve.keys.Length];
+        for (int i = 0; i < lrWidthKeys.Length; i++)
+        {
+            lrWidthKeys[i] = lr.widthCurve.keys[i].value;
         }
         currentColor1 = ordinaryLaserColor1;
         currentColor2 = ordinaryLaserColor2;
@@ -158,7 +169,11 @@ public class LaserTower : Tower
     {
         scorchingRayAbility.Cast(aimPosition);
     }
-
+    // Ability 2  - DeathBeam
+    public void CastDeathBeam(Enemy target)
+    {
+        deathBeamAbility.Cast(target);
+    }
     public override void EndCasting()
     {
         base.EndCasting();
