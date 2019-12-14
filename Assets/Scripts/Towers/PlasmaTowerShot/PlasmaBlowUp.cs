@@ -20,6 +20,7 @@ public class PlasmaBlowUp : MonoBehaviour
     void Start()
     {
         startScale = this.transform.localScale;
+        material = GetComponent<MeshRenderer>().materials[0];
     }
 
     // Update is called once per frame
@@ -79,7 +80,7 @@ public class PlasmaBlowUp : MonoBehaviour
         this.transform.localScale = startScale;
         if (!thisTower) 
         { return; }
-        material = GetComponent<MeshRenderer>().materials[0];
+     //   material = GetComponent<MeshRenderer>().materials[0];
 
     }
 
@@ -87,6 +88,10 @@ public class PlasmaBlowUp : MonoBehaviour
     {
         if (material)
         { material.SetColor("_EmissionColor", color); }
+        else { 
+            material =  GetComponent<MeshRenderer>().material;
+            material.SetColor("_EmissionColor", color); 
+        }
     }
 
 }

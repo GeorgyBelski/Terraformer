@@ -177,7 +177,7 @@ public abstract class AbilityButtonController : MonoBehaviour
             
             if (type == Type.Area && Physics.Raycast(camRay, out RaycastHit floorHit, camRayLength, groundMask))
             {
-                Debug.DrawLine(Camera.main.transform.position, floorHit.point, Color.cyan);
+              //  Debug.DrawLine(Camera.main.transform.position, floorHit.point, Color.cyan);
                 aimArea.position = floorHit.point;
                 DefineCasterTower();
             }
