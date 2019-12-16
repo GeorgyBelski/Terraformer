@@ -42,12 +42,6 @@ public class ScorchingRayAbility : TowerAbility
         {
             scorchingRay = Instantiate(scorchingRayPrefab, gunpoint.position, Quaternion.identity);
             animator = scorchingRay.GetComponent<Animator>();
-            //    thandetBallCollider = thandetBall.GetComponentInChildren<SphereCollider>();
-            //    thandetBallCollider.enabled = false;
-
-         //   trailMaterial = scorchingRay.GetComponentInChildren<ParticleSystemRenderer>().trailMaterial;
-            //   Debug.Log("thandetBallTrailMaterial: " + thandetBallTrailMaterial);
-          //  trailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
         }
         else
         {

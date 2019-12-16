@@ -78,7 +78,13 @@ public class TowerManager : MonoBehaviour
             availablePlasmaTowers.Remove((PlasmaTower)tower);
         }
     }
-
+    public static bool IsAvailableTowersByType(TowerType type)
+    {
+        if (type == TowerType.Electro) { return availableElectroTowers.Count > 0 ? true : false; }
+        else if (type == TowerType.Laser) { return availableLaserTowers.Count > 0 ? true : false; }
+        else if (type == TowerType.Plasma) { return availablePlasmaTowers.Count > 0 ? true : false; }
+        else { return false; }
+    }
     public static Tower GetNearestTower(Transform target, TowerType type) {
         float minDistance = float.PositiveInfinity;
         int nearestTowerIndex = -1;

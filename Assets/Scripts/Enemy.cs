@@ -54,7 +54,6 @@ public class Enemy : Damageable
 
     public override void RemoveFromList()
     {
-     //  EnemyManagerPro.enemies.Remove(this);
         EnemyManagerPro.RemoveEnemy(this);
     }
 

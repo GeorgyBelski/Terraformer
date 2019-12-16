@@ -13,6 +13,10 @@ public class Terraformer : Tower
     public static float overclockFactor=0;
     public float overclockSpeed = 20f;
     public Transform terraformerMesh;
+    public Transform ring;
+    Vector3 ringStartPosition;
+    Vector3 RingRotationY;
+    float previousRingOffset = 0f;
     public Transform startOverclockWave;
     public static Transform overclockWave;
 
@@ -26,6 +30,7 @@ public class Terraformer : Tower
         baseEmissionColor = mt.GetColor("_EmissionColor");
         isOverclock = false;
         isVictory = false;
+        ringStartPosition = ring.position;
         menu.SetActive(false);
         defeat.gameObject.SetActive(false);
         TowerManager.terraformer = this;
@@ -43,17 +48,14 @@ public class Terraformer : Tower
     public void Overclock() 
     {
         if (isOverclock)
-        {
-
-            terraformerMesh.eulerAngles += Vector3.up * overclockSpeed * overclockFactor * Time.deltaTime;
-            
-            float emission = Mathf.PingPong(Time.time * 3 * overclockFactor, 50f * overclockFactor) + 2f;
-            print(overclockFactor);
-            Color finalColor = baseEmissionColor * Mathf.LinearToGammaSpace(emission);
-
-            mt.SetColor("_EmissionColor", finalColor);
-            if (overclockFactor == 0)
-                mt.SetColor("_EmissionColor", baseEmissionColor);
+        { 
+            RingRotationY += Vector3.up * overclockSpeed * overclockFactor * Time.deltaTime;
+            ring.eulerAngles = RingRotationY + Vector3.forward * overclockFactor * 95;
+            float positionOffset = 0f;
+            float positionFactor;
+            previousRingOffset = ring.position.y - ringStartPosition.y;
+            positionFactor = 3 * 1 / (1 + overclockFactor*2);
+            ring.position = Vector3.up * (positionFactor * overclockFactor + positionOffset)+ ringStartPosition;
         }
     }
     public void OverclockWave() 
@@ -61,7 +63,6 @@ public class Terraformer : Tower
         if (isVictory)
         { 
             overclockWave.gameObject.SetActive(true);
-            terraformerMesh.eulerAngles += Vector3.up * overclockSpeed * Time.deltaTime/10;
         }
     }
 

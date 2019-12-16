@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemyManagerPro : MonoBehaviour
 {
-    public static int enemyLayerMask;
+    public static int enemyLayerMask = 1 << 12;
     public static int enemyLayer = 12;
 
     public static List<Enemy> enemies = new List<Enemy>();
 
     public static Dictionary<EnemyType, List<Enemy>> enemiesMap= new Dictionary<EnemyType, List<Enemy>>();
+    public static Dictionary<Transform, Enemy> TransformEnemyMap = new Dictionary<Transform, Enemy>();
     public int enemyCount;// for debuging
 
     public static void Restart()
@@ -19,7 +20,6 @@ public class EnemyManagerPro : MonoBehaviour
     }
     private void Start()
     {
-        enemyLayerMask = LayerMask.GetMask("Enemy");
         //enemiesMap.Add("Damager", enemiesDamage);
         //enemiesMap.Add("Healer", enemiesHealers);
         //foreach (Enemy startEnemy in startEnemies)
@@ -43,6 +43,7 @@ public class EnemyManagerPro : MonoBehaviour
         {
             enemiesMap[enemy.type].Add(enemy);
             enemies.Add(enemy);
+            
         }
         else
         {
@@ -51,6 +52,7 @@ public class EnemyManagerPro : MonoBehaviour
             enemiesMap[enemy.type].Add(enemy);
             enemies.Add(enemy);
         }
+        TransformEnemyMap.Add(enemy.transform, enemy);
         //enemiesMap.Add(name, enem);
         //print(enemiesMap[enemy.type]);
         
@@ -62,6 +64,7 @@ public class EnemyManagerPro : MonoBehaviour
         enemies.Remove(enemy);
         //enemiesMap[enem.getName].Remove(enem);
         enemiesMap[enemy.type].Remove(enemy);
+        TransformEnemyMap.Remove(enemy.transform);
     }
 
     public static bool checking(Enemy enem)
