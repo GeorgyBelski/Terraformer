@@ -225,6 +225,8 @@ public class SpawnEnemiesPattern : MonoBehaviour
 
     private void simpleSpawn()
     {
+        //print(list.Count);
+        //print(enemieCountInList);
         Enemy enem = Instantiate(list[enemieCountInList], new Vector3(
             portal.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / list.Count - 1))) * 2),
             0,

@@ -20,13 +20,15 @@ public class Terraformer : Tower
     public Transform startOverclockWave;
     public static Transform overclockWave;
 
+    //public GameObject ringObject;
+
     private Material mt;
     private Color baseEmissionColor;
 
     new void Start()
     {
  
-        mt = terraformerMesh.GetComponent<Renderer>().material;
+        mt = ring.GetComponent<Renderer>().material;
         baseEmissionColor = mt.GetColor("_EmissionColor");
         isOverclock = false;
         isVictory = false;
@@ -56,6 +58,14 @@ public class Terraformer : Tower
             previousRingOffset = ring.position.y - ringStartPosition.y;
             positionFactor = 3 * 1 / (1 + overclockFactor*2);
             ring.position = Vector3.up * (positionFactor * overclockFactor + positionOffset)+ ringStartPosition;
+
+            float emission = Mathf.PingPong(Time.time * 3 * overclockFactor, 200f * overclockFactor) + 2f;
+            print(overclockFactor);
+            Color finalColor = baseEmissionColor * Mathf.LinearToGammaSpace(emission);
+
+            mt.SetColor("_EmissionColor", finalColor);
+            if (overclockFactor == 0)
+                mt.SetColor("_EmissionColor", baseEmissionColor);
         }
     }
     public void OverclockWave() 

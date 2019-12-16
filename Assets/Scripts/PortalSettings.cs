@@ -124,6 +124,7 @@ public class PortalSettings : MonoBehaviour
 
     public void deactivate()
     {
+        //print("+");
         spwning = false;
         transform.localScale = Vector3.zero;
         transform.position = Vector3.zero;
