@@ -5374,7 +5374,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 262e9d470399fb04ebaa6663d5c98df9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d56c7d34d1add5948b39b441d51b6f53, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5404,9 +5404,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.9822925, b: 0.514151, a: 1}
-    m_PressedColor: {r: 1, g: 0.5424528, b: 0.5424528, a: 1}
+    m_NormalColor: {r: 0.740566, g: 1, b: 0.99222004, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.5330188, g: 1, b: 0.9776101, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -5567,7 +5567,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -22.4}
   m_SizeDelta: {x: 160.49, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7251683815932140010
@@ -5591,7 +5591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6119,8 +6119,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -141, y: -4.299988}
-  m_SizeDelta: {x: 160, y: 160}
+  m_AnchoredPosition: {x: -142.9, y: -6}
+  m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7906835830179616066
 CanvasRenderer:
@@ -6150,7 +6150,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: cafd52db618fa96408d838c8c8352273, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6180,9 +6180,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.9822925, b: 0.514151, a: 1}
-    m_PressedColor: {r: 1, g: 0.5424528, b: 0.5424528, a: 1}
+    m_NormalColor: {r: 0.75, g: 1, b: 0.93356085, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.5411765, g: 1, b: 0.880467, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -6268,7 +6268,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.19700001, y: 0}
   m_AnchorMax: {x: 0.19700001, y: 0}
-  m_AnchoredPosition: {x: 87.09999, y: 14.7}
+  m_AnchoredPosition: {x: 87.099976, y: 14.700012}
   m_SizeDelta: {x: 58, y: 58}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2141606768024100443
@@ -6422,7 +6422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -1.4000015}
   m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8357233567951801845
@@ -6446,7 +6446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
