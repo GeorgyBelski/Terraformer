@@ -197,12 +197,12 @@ public class ResourceManager : MonoBehaviour
     {
         if (resource == resourceMax)
         {
-            OverclockBar.fillAmount += proceeds * Time.deltaTime / 400;
+            OverclockBar.fillAmount += Mathf.Max(proceeds, 100)* Time.deltaTime / 1000;
             Terraformer.isOverclock = true;
         }
         else if (OverclockBar.fillAmount > 0)
         {
-            OverclockBar.fillAmount -= proceeds * Time.deltaTime / 400;
+            OverclockBar.fillAmount -= Mathf.Abs(proceeds) * Time.deltaTime / 1000;
             Terraformer.isOverclock = true;
         }
         else { Terraformer.isOverclock = false; }
