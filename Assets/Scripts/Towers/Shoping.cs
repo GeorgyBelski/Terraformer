@@ -67,7 +67,7 @@ public class Shoping : MonoBehaviour
         selectB(b);
         if (!realTimeTowerPlace)
         {
-            realTimeTowerPlace = Instantiate(towerPlace, Vector3.zero, this.transform.rotation);
+            realTimeTowerPlace = Instantiate(towerPlace);
             mt = realTimeTowerPlace.gameObject.GetComponent<Renderer>().material;
             towerPlacing = realTimeTowerPlace.GetComponent<TowerPlacing>();
         }

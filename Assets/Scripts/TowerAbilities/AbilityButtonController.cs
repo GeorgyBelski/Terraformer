@@ -157,7 +157,7 @@ public abstract class AbilityButtonController : MonoBehaviour
     {
         if (!aimArea)
         {
-            GameObject aimAreaGameObject = Instantiate(aimAreaPrefab, Vector3.zero, this.transform.rotation);
+            GameObject aimAreaGameObject = Instantiate(aimAreaPrefab);
             aimArea = aimAreaGameObject.transform;
             aimAreaAnimator = aimAreaGameObject.GetComponent<Animator>();
 
