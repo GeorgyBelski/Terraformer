@@ -34,7 +34,7 @@ public class ResourceManager : MonoBehaviour
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 
-    public static float RepairCost = 1f;
+    public static float TowerRepairFactor = 100f;
 
     [Header("Income")]
     public int startIncomeFromHexagon = 1;

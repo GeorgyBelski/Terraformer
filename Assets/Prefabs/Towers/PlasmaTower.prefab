@@ -543,7 +543,7 @@ MonoBehaviour:
   maxHealth: 2000
   health: 2000
   healthBar: {fileID: 5953679779999883556}
-  healHealth: {fileID: 2511632132202272032}
+  healBar: {fileID: 2511632132202272032}
   isHeal: 0
   damagePoints:
   - {fileID: 5953679780181971438}
@@ -1663,7 +1663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.20048939, g: 0.4339623, b: 0.116678536, a: 0.84705883}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

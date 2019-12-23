@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum MouseRaycastState {None, SymbiosisLooking, RepairLooking } 
 public class TowerManager : MonoBehaviour
 {
     public int availablePlazmaTowersCount;
     public int towersNumber;
+    public static MouseRaycastState mouseState = MouseRaycastState.None;
 
     public static List<Tower> towers = new List<Tower>();
 
@@ -30,6 +31,19 @@ public class TowerManager : MonoBehaviour
 
     public int symbiosisCostMultiplayer = 8;
 
+    public static void Restart()
+    {
+        towers.Clear();
+        availableElectroTowers.Clear();
+        availableLaserTowers.Clear();
+        availablePlasmaTowers.Clear();
+        transformTowerMap.Clear();
+        symbiosisTowers.Clear();
+
+        selectedTower = null;
+        highlightedTower = null;
+        towerLookingForSymbiosisPartner = null;
+    }
     private void Start()
     {
 
@@ -37,6 +51,7 @@ public class TowerManager : MonoBehaviour
     private void FixedUpdate()
     {
         LookingForSymbiosis();
+        LookingForRepairTower();
     }
     void LateUpdate()
     {
@@ -141,21 +156,32 @@ public class TowerManager : MonoBehaviour
             if (selectedTower) { selectedTower.isSelected = false; }
         }
     }
+    public static void StartLookingSimbiosisPartner(Tower tower) 
+    {
+        towerLookingForSymbiosisPartner = tower;
+        mouseState = MouseRaycastState.SymbiosisLooking;
+    }
+    public static void StartLookingRepairTower()
+    {
+        mouseState = MouseRaycastState.RepairLooking;
+    }
 
     public void LookingForSymbiosis()
     {
-        if (Input.GetMouseButtonDown(1))
+        
+        if (mouseState!= MouseRaycastState.SymbiosisLooking)
         {
+            return;
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            mouseState = MouseRaycastState.None;
             ResourceManager.DisplayCost(false);
             towerLookingForSymbiosisPartner = null;
             if (highlightedTower) { highlightedTower.isHighlighted = false; }
             highlightedTower = null;
             return;
-        }
-        if (!towerLookingForSymbiosisPartner)
-        {
-            return;
-        }
+        } 
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -174,6 +200,7 @@ public class TowerManager : MonoBehaviour
                 {
                     if (ResourceManager.RemoveResource(Symbiosis.cost))
                     {
+                        mouseState = MouseRaycastState.None;
                         ResourceManager.DisplayCost(false);
                         highlightedTower.isHighlighted = false;
                         towerLookingForSymbiosisPartner.SetSymbiosis(highlightedTower);
@@ -202,17 +229,59 @@ public class TowerManager : MonoBehaviour
         }
 
     }
-    public static void Restart()
-    {
-        towers.Clear();
-        availableElectroTowers.Clear();
-        availableLaserTowers.Clear();
-        availablePlasmaTowers.Clear();
-        transformTowerMap.Clear();
-        symbiosisTowers.Clear();
 
-        selectedTower =null;
-        highlightedTower = null;
-        towerLookingForSymbiosisPartner = null;
+    public void LookingForRepairTower()
+    {
+        if (mouseState != MouseRaycastState.RepairLooking)
+        {
+            return;
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            mouseState = MouseRaycastState.None;
+            ResourceManager.DisplayCost(false);
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+            highlightedTower = null;
+            return;
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, towerLayerMask))
+        {
+
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+
+            transformTowerMap.TryGetValue(hit.transform, out highlightedTower);
+            if (highlightedTower)
+            {
+                int towerRepairCost = (int)highlightedTower.towerHealth.CalculateRepairCost();
+                ResourceManager.DisplayCost(true, towerRepairCost);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (ResourceManager.RemoveResource(towerRepairCost))
+                    {
+                        mouseState = MouseRaycastState.None;
+                        ResourceManager.DisplayCost(false);
+                        RepairButton.isActive = false;
+                        highlightedTower.isHighlighted = false;
+                        highlightedTower.towerHealth.Repair();
+                    }
+                }
+                else
+                {
+                    highlightedTower.isHighlighted = true;
+                }
+            }
+
+        }
+        else
+        {
+            ResourceManager.DisplayCost(false);
+            if (highlightedTower) { highlightedTower.isHighlighted = false; }
+            highlightedTower = null;
+        }
+
     }
+
 }

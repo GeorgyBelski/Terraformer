@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class RepairButton : MonoBehaviour
 {
     public static bool isActive = false;
+    bool previousButtonState = isActive;
     public Image repairImage;
     public Button thisButton;
     // Start is called before the first frame update
@@ -13,8 +14,10 @@ public class RepairButton : MonoBehaviour
     public void switchOnRepair()
     {
         isActive = true;
+        previousButtonState = isActive;
         repairImage.color = thisButton.colors.selectedColor;
         //print("+");
+        TowerManager.StartLookingRepairTower();
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class RepairButton : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.F))
         {
             switchOnRepair();
-            thisButton.Select();
+            thisButton.Select();    
         }
             
 
@@ -33,10 +36,11 @@ public class RepairButton : MonoBehaviour
             repairImage.color = thisButton.colors.normalColor;
             //print("-");
         }
-        if (!isActive)
+       if (previousButtonState && !isActive)
         {
             //thisButton.
             repairImage.color = thisButton.colors.normalColor;
+            previousButtonState = isActive;
         }
     }
 }

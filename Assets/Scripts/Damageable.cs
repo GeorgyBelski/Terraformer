@@ -16,9 +16,9 @@ public abstract class Damageable : MonoBehaviour
     [Space]
     [Header("References")]
     public Image healthBar;
-    public Image healHealth;
+    public Image healBar;
     public bool isHeal;
-    protected float maxRepairHealth = 0;
+    protected float maxRepairHealthRatio = 0;
     public Text[] damagePoints = new Text[3];
     public Animator[] damagePointAnimators = new Animator[3];
     public short damagePointIndex = 0;
@@ -44,8 +44,8 @@ public abstract class Damageable : MonoBehaviour
             if (isHeal)
             {
                 //print((float)value / maxHealth);
-                maxRepairHealth -= (float)value / maxHealth;
-                healHealth.fillAmount = maxRepairHealth;
+                maxRepairHealthRatio -= (float)value / maxHealth;
+                healBar.fillAmount = maxRepairHealthRatio;
             }
               
             PopUpDamagePoint(value);
