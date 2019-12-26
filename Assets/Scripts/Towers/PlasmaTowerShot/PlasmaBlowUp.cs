@@ -16,9 +16,11 @@ public class PlasmaBlowUp : MonoBehaviour
     public Material material;
     int randomizer;
 
+
     // Start is called before the first frame update
     void Start()
     {
+
         startScale = this.transform.localScale;
         material = GetComponent<MeshRenderer>().materials[0];
     }
@@ -27,6 +29,7 @@ public class PlasmaBlowUp : MonoBehaviour
     void Update()
     {
         //print("+");
+
         transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 10, transform.localScale.y + Time.deltaTime * 0.8f, transform.localScale.z + Time.deltaTime * 10);
         if (transform.localScale.x >= radius)
         {
@@ -75,6 +78,7 @@ public class PlasmaBlowUp : MonoBehaviour
 
     public void SetSettings(float damage, float radius)
     {
+
         this.damage = damage;
         this.radius = radius;
         this.transform.localScale = startScale;

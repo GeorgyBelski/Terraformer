@@ -15,6 +15,8 @@ public class LaserTower : Tower
     public int damageBurning = 5;
     float timerDuration;
 
+
+
     public LineRenderer lr;
     [HideInInspector]
     public Material lrMaterial;
@@ -35,7 +37,9 @@ public class LaserTower : Tower
     [Header("DeathBeamAbility")]
     public DeathBeamAbility deathBeamAbility;
 
-  //  [Space]
+    //  [Space]
+
+
 
     [Header("UpgradeAbilityCast")]
     private bool isUpgraided;
@@ -47,7 +51,8 @@ public class LaserTower : Tower
 
     public float castCooldown = 20f;
     private float realCastTime;
-    
+
+
 
     private new void Start()
     {
@@ -89,6 +94,8 @@ public class LaserTower : Tower
 
             target.ApplyDamage(damageAttack, target.GetPosition(), Vector3.zero);
             AddEffects();
+
+
         }
     }
 

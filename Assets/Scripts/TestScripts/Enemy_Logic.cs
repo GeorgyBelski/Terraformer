@@ -114,6 +114,7 @@ public abstract class Enemy_Logic : MonoBehaviour
             destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
          //   destTower.position = targetTower.transform.position - fromTargetTowerToEnemy.normalized;
             emk.SetDestination((Vector3)destTower);
+            //print((Vector3)destTower);
             isGoingToDest = true;
             //isAttack = true;
             

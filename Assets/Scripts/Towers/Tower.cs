@@ -59,6 +59,11 @@ public abstract class Tower : MonoBehaviour
     Color highlightedColor;
     protected int randomizer;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public List<AudioClip> shots;
+    public List<AudioClip> abilitiesSounds;
+
     protected void Start()
     {
         TowerManager.AddTower(this);
@@ -223,6 +228,9 @@ public abstract class Tower : MonoBehaviour
         if (timerAttack <= 0 && target) {
             TowerAttack(target);
             timerAttack = cooldownAttack;
+
+            audioSource.pitch = Random.Range(0.8f, 1.8f);
+            audioSource.PlayOneShot(shots[0], 0.6f);
         }
     }
     public void RotateCannon(Vector3 targetPosition)

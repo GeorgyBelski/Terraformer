@@ -15,6 +15,10 @@ public class Enemy : Damageable
     public Animator animator;
     public SpurtFXController spurtFXController;
     public Transform chest;
+
+    public AudioSource audioSource;
+    public List<AudioClip> enemySounds;
+
     /*
    [Range(10, 1000)]
    public int maxHealth = 100;
@@ -62,6 +66,8 @@ public class Enemy : Damageable
         this.RemoveFromList();
         if (animator)
         {
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            audioSource.PlayOneShot(enemySounds[0], 0.2f);
             animator.SetBool("DeathTrigger", true);
           //  effectsController.navAgent.speed = 0;
             effectsController.navAgent.enabled = false;

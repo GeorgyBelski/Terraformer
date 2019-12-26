@@ -37,6 +37,9 @@ public class ScorchingRayAbility : TowerAbility
         //   cannon.LookAt((Vector3)thandetBallAim);
         tower.RotateCannon((Vector3)aim);
 
+        tower.audioSource.pitch = 2f;
+        tower.audioSource.PlayOneShot(tower.abilitiesSounds[2], 0.6f);
+
         Vector3 offsetFromCannon = gunpoint.position - cannon.position;
         if (!scorchingRay)
         {
@@ -71,12 +74,16 @@ public class ScorchingRayAbility : TowerAbility
         timerCast -= Time.deltaTime;
         if (timerCast <= 0)
         {
+            tower.audioSource.Stop();
             tower.EndCasting();
+            tower.audioSource.pitch = 1.5f;
+            tower.audioSource.PlayOneShot(tower.abilitiesSounds[3], 0.6f);
         }
     }
 
     public override void ShootingControl()
     {
+
         Vector3 toAim = (Vector3)aim - scorchingRay.transform.position;
         float distanceToAim = toAim.magnitude;
         if (distanceToAim > 0.15f && previousDistanceToAim > distanceToAim)
@@ -87,6 +94,9 @@ public class ScorchingRayAbility : TowerAbility
         else
         {
             scorchingRay.transform.position = (Vector3)aim;
+            AudioSource blowUp = scorchingRay.GetComponent<AudioSource>();
+            blowUp.pitch = 2f;
+            blowUp.PlayOneShot(tower.abilitiesSounds[4], 0.3f);
             animator.SetBool("isReachAim", true);
             ApplyScorchingRayEffects((Vector3)aim, effectRadius);
             aim = null;
@@ -95,6 +105,7 @@ public class ScorchingRayAbility : TowerAbility
 
     private void ApplyScorchingRayEffects(Vector3 aim, float effectRadius)
     {
+
         EnemyManagerPro.enemies.ForEach(enemy =>
         {
             if (enemy)

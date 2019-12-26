@@ -38,9 +38,17 @@ public class DeathBeamAbility : TowerAbility
     public override void CastingControl()
     {
         if (!target) 
-        { 
+        {
+            //tower.audioSource.Stop();
             CancelBeam(); 
             return; 
+        }
+
+        tower.audioSource.pitch = 0.8f;
+
+        if (!tower.audioSource.isPlaying)
+        {
+            tower.audioSource.PlayOneShot(tower.abilitiesSounds[0], 0.6f);
         }
 
         tower.RotateCannon(target.GetPosition());
@@ -50,12 +58,15 @@ public class DeathBeamAbility : TowerAbility
         {
             if (target.health > 0 && ResourceManager.resource - costPerPeriod >= 0) 
             {
+                //tower.audioSource.PlayOneShot(tower.abilitiesSounds[0], 0.6f);
+
                 timerCast = castTime;
                 target.ApplyDamage(damage, Vector3.zero, Vector3.zero);
                 ResourceManager.RemoveResource(costPerPeriod);
             }
             else
             {
+                
                 CancelBeam();
             }     
         }
@@ -65,6 +76,9 @@ public class DeathBeamAbility : TowerAbility
     {
         if (isActive) 
         {
+            tower.audioSource.Stop();
+            tower.audioSource.pitch = 1.1f;
+            tower.audioSource.PlayOneShot(tower.abilitiesSounds[1], 0.4f);
             isActive = false;
             tower.EndCasting();
             tower.enableAutoattacs = true;

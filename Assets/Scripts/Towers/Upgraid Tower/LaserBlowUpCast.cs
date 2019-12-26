@@ -14,6 +14,9 @@ public class LaserBlowUpCast : MonoBehaviour
 
     private bool isReal = false;
 
+    public AudioSource audioSource;
+    public AudioClip blowUp;
+
     public GameObject blowUpPrefab;
     // Update is called once per frame
     void Update()
@@ -24,11 +27,14 @@ public class LaserBlowUpCast : MonoBehaviour
             {
                 if (isReal)
                 {
+                    audioSource.pitch = 1f;
+                    audioSource.PlayOneShot(blowUp, 0.4f);
                     transform.localScale = new Vector3(0, transform.localScale.y, 0);
                     gameObject.SetActive(false);
                 }
                 else
                 {
+
                     Destroy(gameObject);
                 }
                 

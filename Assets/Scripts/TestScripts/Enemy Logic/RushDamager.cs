@@ -79,6 +79,7 @@ public class RushDamager : Enemy_Logic
         charging();
     }
 
+    /*
     protected override void stateGoToDestanation()
     {
         if (isPriority)
@@ -93,7 +94,7 @@ public class RushDamager : Enemy_Logic
 
 
     }
-
+    */
     public override void check()
     {
         if (isGoingToDest && isHealingJump)
@@ -105,6 +106,7 @@ public class RushDamager : Enemy_Logic
 
             if (isGoingToDest)
             {
+                //print("+");
                 dest = emk.GetDest();
                 if (Vector3.Distance(emk.GetDest(), transform.position) < jumpDistance)
                     jump(dest);
