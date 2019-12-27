@@ -47,7 +47,7 @@ public class CreepHexagonGenerator : MonoBehaviour
     int expandedRadius = 0;
     bool isCircleSelected = false;
     List<Hexagon> hexagonFirstCircle = null;
-    List<Hexagon> hexagonSecondCircle = null;
+    public List<Hexagon> hexagonSecondCircle = null;
     List<Hexagon> externalCircle = null;
     List<Hexagon>[] Circles = null;
     public static void Restart() 
@@ -208,6 +208,7 @@ public class CreepHexagonGenerator : MonoBehaviour
             hexagonGObject.transform.SetParent(parentCreep.transform);
             
             originalPosition = hexagonGObject.transform.position;
+            TerrainManager.AddHexagonImpact(this);
         }
 
         void UpdateHexagonMesh()

@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.59656084, g: 0.5992065, b: 0.577898, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -229,13 +229,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170076733}
-  m_LocalRotation: {x: 0.3268977, y: -0.8456009, z: 0.15802743, w: 0.39131108}
+  m_LocalRotation: {x: 0.16168785, y: -0.9081495, z: 0.32510334, w: -0.20839736}
   m_LocalPosition: {x: -4.7, y: 14.66, z: -27.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 31.54, y: 580.94, z: -30.236002}
+  m_LocalEulerAnglesHint: {x: 31.54, y: 505.42603, z: -30.236002}
 --- !u!114 &170076736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,7 +624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1187376394, guid: 017d5e1f7b57eab4e9d762d710209315, type: 3}
       propertyPath: radius
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6199817431043865002, guid: 017d5e1f7b57eab4e9d762d710209315,
         type: 3}
@@ -1209,9 +1209,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 1164970899}
-  mapTexture: {fileID: 0}
-  texture: {fileID: 2800000, guid: 439cbcd187e324c48b5d6318082ad05b, type: 3}
+  splatMap: {fileID: 0}
+  newSplatMap: {fileID: 2800000, guid: a64809ee6e192354890c87b5a688a175, type: 3}
+  flipVertical: 0
   image: {fileID: 1045620346}
+  creep: {fileID: 45200811}
+  impactCount: 0
   alphamapWidth: 0
   alphamapHeight: 0
 --- !u!65 &1603350489
