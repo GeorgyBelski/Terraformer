@@ -9,6 +9,7 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
     public Button thisButton;
     public bool isPointeOnTheButton = false, isPointerExit = true;
     public bool lockShowCost = false;
+    public Image highlight;
 
 
     void Start()
@@ -20,6 +21,7 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         EnableButton();
         ShowCost();
+        ShowHighlight();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -40,6 +42,8 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         if (CreepHexagonGenerator.expansionCost <= ResourceManager.resource)
         { ResourceManager.DisplayCost(false); }
+        else
+        { lockShowCost = false; }
     }
     void ShowCost()
     {
@@ -52,24 +56,39 @@ public class ExpandButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
 
     void EnableButton()
     {
-        if (CreepHexagonGenerator.creepHexagonGenerator.isExpanding || CreepHexagonGenerator.damagedHexagons.Count >0)
+        if (CreepHexagonGenerator.creepHexagonGenerator.isExpanding || CreepHexagonGenerator.damagedHexagons.Count > 0)
         {
             if (thisButton.interactable)
             {
                 thisButton.interactable = false;
                 isPointeOnTheButton = false;
                 lockShowCost = false;
+                
             }
-            
+
         }
-        else if(!thisButton.interactable)
+        else if (!thisButton.interactable)
         {
             thisButton.interactable = true;
             if (!isPointerExit)
             {
                 isPointeOnTheButton = true;
-                
+
             }
+        }
+    }
+
+    void ShowHighlight() 
+    {
+        if (CreepHexagonGenerator.expansionCost <= ResourceManager.resource)
+        {
+            if (!highlight.enabled)
+            { highlight.enabled = true; }
+        }
+        else 
+        {
+            if (highlight.enabled)
+            { highlight.enabled = false; }
         }
     }
 

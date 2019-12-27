@@ -376,7 +376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00000023841858}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -12, y: -12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8182283861305062108
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.20048939, g: 0.4339623, b: 0.116678536, a: 0.84705883}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -832,7 +832,7 @@ MonoBehaviour:
   isSymbiosisInstalled: 0
   towerMaterial: {fileID: 0}
   lightningLerpSpeed: 2
-  damageAttack: 50
+  damageAttack: 70
   lightningChargePrefab: {fileID: 5848706040537432421, guid: 6b3e30d242c0a6d4183e0364f86b5ce9,
     type: 3}
   lightningChargeParticleSys: {fileID: 0}
@@ -869,7 +869,7 @@ MonoBehaviour:
   maxHealth: 2000
   health: 2000
   healthBar: {fileID: 1888441614}
-  healHealth: {fileID: 2458046141521616985}
+  healBar: {fileID: 2458046141521616985}
   isHeal: 0
   damagePoints:
   - {fileID: 4064804577661775117}
@@ -897,7 +897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tower: {fileID: 7532716056537121323}
   castTime: 0.5
-  damage: 100
+  damage: 400
   thanderBallPrefab: {fileID: 7017228567069846747, guid: 8b1e0a5237994ac47b61a76d7786c05c,
     type: 3}
   speed: 80
@@ -968,6 +968,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 244022217}
     m_Modifications:
+    - target: {fileID: 3348572517771893589, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_Name
+      value: TowerMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 4331312378236362637, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1147,11 +1152,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3348572517771893589, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
-      propertyPath: m_Name
-      value: TowerMenu
       objectReference: {fileID: 0}
     - target: {fileID: 3348572517771893590, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
@@ -1395,6 +1395,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 244022217}
     m_Modifications:
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
+      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1514,11 +1519,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}

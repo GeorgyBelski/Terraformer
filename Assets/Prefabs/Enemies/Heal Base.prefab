@@ -523,6 +523,7 @@ MonoBehaviour:
   - {fileID: 592312484424647470}
   damagePointIndex: 0
   healthRatio: 0
+  shaderMaterial: {fileID: 2100000, guid: 3de58dcecff9cec4f836b99b1ce729c0, type: 2}
   character: {fileID: 0}
   effectsController: {fileID: 697666250140818683}
   type: 4

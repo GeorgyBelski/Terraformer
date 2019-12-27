@@ -34,7 +34,7 @@ public class ResourceManager : MonoBehaviour
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 
-    public static float RepairCost = 1f;
+    public static float TowerRepairFactor = 100f;
 
     [Header("Income")]
     public int startIncomeFromHexagon = 1;
@@ -197,18 +197,24 @@ public class ResourceManager : MonoBehaviour
     {
         if (resource == resourceMax)
         {
-            OverclockBar.fillAmount += proceeds * Time.deltaTime / 200;
+            OverclockBar.fillAmount += Mathf.Max(proceeds, 100)* Time.deltaTime / 1000;
+            Terraformer.isOverclock = true;
         }
-        else if(OverclockBar.fillAmount > 0)
+        else if (OverclockBar.fillAmount > 0)
         {
-            OverclockBar.fillAmount -= proceeds * Time.deltaTime / 200;
+            OverclockBar.fillAmount -= Mathf.Abs(proceeds) * Time.deltaTime / 1000;
+            Terraformer.isOverclock = true;
         }
+        else { Terraformer.isOverclock = false; }
+
+        Terraformer.overclockFactor = OverclockBar.fillAmount;
         if (OverclockBar.fillAmount == 1) 
         { ApplyVictory(); }
     }
     public void ApplyVictory()
     {
         //  victory.gameObject.SetActive(true);
+        Terraformer.isVictory = true;
         MenuController.ShowVictory(true);
         if (EnemyManagerPro.enemies.Count != 0)
         {

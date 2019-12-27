@@ -91,10 +91,12 @@ public abstract class Tower : MonoBehaviour
         if (enableAutoattacs)
         {
             TowerUpdate();
-            ReduceTimers();
-            HighlightTower();
-            ShowRange();
         }
+
+        ReduceTimers();
+        HighlightTower();
+        ShowRange();
+
         if (hexagon == null) { hexagon = GetHexagon();}
     }
     internal abstract void TowerUpdate();

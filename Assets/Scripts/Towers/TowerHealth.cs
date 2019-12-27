@@ -22,7 +22,7 @@ public class TowerHealth : Damageable
     {
         base.CalcHealthRatio();
 
-        if (isHeal && healthRatio < maxRepairHealth)
+        if (isHeal && healthRatio < maxRepairHealthRatio)
         {
             //base.CalcHealthRatio();
            // print(maxRepairHealth);
@@ -32,10 +32,12 @@ public class TowerHealth : Damageable
         }
         else
         {
-            if(healHealth)
-                healHealth.fillAmount = healthBar.fillAmount;
-            //ealHealth.fillAmount = healthBar.fillAmount;
+            //print("+");
             isHeal = false;
+            if(healBar)
+                healBar.fillAmount = healthBar.fillAmount;
+            //ealHealth.fillAmount = healthBar.fillAmount;
+            
         }
             
         
@@ -100,51 +102,43 @@ public class TowerHealth : Damageable
         //print(healthRatio);
         if (healthRatio < 1 && !isHeal) { 
             float resource = ResourceManager.resource;
-            float repaircost = ResourceManager.RepairCost;
-            float costNeeded = (1 - healthRatio) * 100 * repaircost;
+            float towerRepairFactor = ResourceManager.TowerRepairFactor;
+            float costNeeded = (1 - healthRatio) * towerRepairFactor;
 
             prevHealthRatio = healthRatio;
 
             if(resource > costNeeded)
             {
-                maxRepairHealth = 1;
+                maxRepairHealthRatio = 1;
             //    Debug.Log(costNeeded);
-                ResourceManager.RemoveResource(costNeeded);
+               // ResourceManager.RemoveResource(costNeeded);
             }
 
             else
             {
-                maxRepairHealth = healthRatio + resource / 100 / repaircost;
+                maxRepairHealthRatio = healthRatio + resource /towerRepairFactor;
                 ResourceManager.RemoveResource(resource);
                 //print(maxRepairHealth);
             }
 
-            healHealth.fillAmount = maxRepairHealth;
+            healBar.fillAmount = maxRepairHealthRatio;
 
 
 
             isHeal = true;
         }
     }
-    /*
-    public void Repair()
+
+    public float CalculateRepairCost() 
     {
-        float repaircost = ResourceManager.RepairCost;
-        float resourses = ResourceManager.resourceST;
-        float value = 1 - healthRatio;
-        if (resourses > 100 * value * repaircost)
-        {
-            health = maxHealth;
-            ResourceManager.removeResource(100 * value * repaircost);
-            //CalcHealthRatio();
-        }
-        else
-        {
-            healthRatio = resourses * repaircost / 100;
-            CalcHealthRatio();
-            ResourceManager.removeResource(resourses);
-        }
-        //(int)((healthRatio + value) * maxHealth);
+        float resource = ResourceManager.resource;
+        float towerRepairFactor = ResourceManager.TowerRepairFactor;
+        float costNeeded = (1 - healthRatio) * towerRepairFactor;
+
+        if (resource > costNeeded)
+        { return costNeeded; }
+        else 
+        { return resource; }
     }
-    */
+
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5274182903818910640}
   - component: {fileID: 1481642600256258099}
   - component: {fileID: 928544962118843758}
+  - component: {fileID: 4098201396251756251}
   - component: {fileID: 880228396155926829}
   m_Layer: 0
   m_Name: Logic counter
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4fa67d7bac37b4a4d844ddb3fb3e72cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,6 +95,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4098201396251756251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797863612406404595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc220b99140eb544beb210391347cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDamager: {fileID: 2623192909609195406, guid: da5415a432dac38419376531d70065e1,
+    type: 3}
+  enemyTank: {fileID: 8968871776893842170, guid: ee79144eaa76b7a48a1cc52e89902a86,
+    type: 3}
+  enemyRusher: {fileID: 2623192909609195406, guid: 3cce14b2abac7264bbdc5019d8511a26,
+    type: 3}
+  enemyHeal: {fileID: 762130183, guid: 3942bfeac139110488efc3393ccf93e3, type: 3}
+  spawnRate: 0
+  portalPosition: 0
+  formation: 0
+  colCount: 0
+  colSize: 0
+  range: 0
 --- !u!114 &880228396155926829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe001a7c70c86b646933ab643ffdb7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pattern: {fileID: 4098201396251756251}
   enemyDamager: {fileID: 2623192909609195406, guid: da5415a432dac38419376531d70065e1,
     type: 3}
   enemyTank: {fileID: 8968871776893842170, guid: ee79144eaa76b7a48a1cc52e89902a86,
@@ -113,14 +140,15 @@ MonoBehaviour:
   enemyRusher: {fileID: 2623192909609195406, guid: 3cce14b2abac7264bbdc5019d8511a26,
     type: 3}
   enemyHeal: {fileID: 762130183, guid: 3942bfeac139110488efc3393ccf93e3, type: 3}
-  enemyDamagerCount: 40
-  enemyTankCount: 70
-  enemyRusherCount: 30
-  enemyHealCount: 50
+  enemyDamagerCount: 60
+  enemyTankCount: 120
+  enemyRusherCount: 70
+  enemyHealCount: 90
   towerCount: 100
-  portal: {fileID: 292695221994719993}
-  thisPortalSettings: {fileID: 4543632779401628924}
-  difficulties: 0.8
+  startCount: 200
+  portal: {fileID: 0}
+  thisPortalSettings: {fileID: 0}
+  difficulties: 1
   betweenWavesActivity: 0
   winPoints: 2000
   timer: 15
@@ -132,6 +160,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9001248602507607981}
     m_Modifications:
+    - target: {fileID: 2984647319955248982, guid: 0442d5b659dee314885a672975f32707,
+        type: 3}
+      propertyPath: m_Name
+      value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984647319955248982, guid: 0442d5b659dee314885a672975f32707,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -1667574095672082767, guid: 0442d5b659dee314885a672975f32707,
         type: 3}
       propertyPath: m_Positions.Array.size
@@ -152,16 +190,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 665460b7f1e43e74db0cde87753ac726, type: 2}
-    - target: {fileID: 2984647319955248982, guid: 0442d5b659dee314885a672975f32707,
-        type: 3}
-      propertyPath: m_Name
-      value: Portal
-      objectReference: {fileID: 0}
-    - target: {fileID: 2984647319955248982, guid: 0442d5b659dee314885a672975f32707,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8648481368527438963, guid: 0442d5b659dee314885a672975f32707,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -219,27 +247,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0442d5b659dee314885a672975f32707, type: 3}
---- !u!1 &292695221994719993 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2984647319955248982, guid: 0442d5b659dee314885a672975f32707,
-    type: 3}
-  m_PrefabInstance: {fileID: 3270814187222343087}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6152435887907772892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8648481368527438963, guid: 0442d5b659dee314885a672975f32707,
     type: 3}
   m_PrefabInstance: {fileID: 3270814187222343087}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4543632779401628924 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -7896360608671723181, guid: 0442d5b659dee314885a672975f32707,
-    type: 3}
-  m_PrefabInstance: {fileID: 3270814187222343087}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292695221994719993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d279e23e4cafb0347a534f5126128f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

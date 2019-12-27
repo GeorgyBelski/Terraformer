@@ -31,7 +31,7 @@ public class TowerMenuController : MonoBehaviour
     bool isInstallingSymbiosis = false;
     public float breakSymbiosisHoldingTime = 0.6f;
     public float timerBreakSymbiosisHoldingTime; // Decreasing
-    public bool isHoldingClick = false;
+    public bool isHoldingSimbiosisClick = false;
     public bool isBreakingSymbiosis = false;
 
     void Start()
@@ -52,10 +52,16 @@ public class TowerMenuController : MonoBehaviour
         ShowTowerMenu();
         BreakingSymbiosis();
         InstallingSymbiosis();
-        if(RepairButton.isActive && tower.isSelected)
+        //if(RepairButton.isActive && tower.isSelected)
+
+        /*
+        if (Input.GetMouseButtonUp(0) && RepairButton.isActive && tower.isSelected)
         {
+            RepairButton.isActive = false;
+            //print("Repair");
             tower.towerHealth.Repair();
         }
+        */
     }
 
     
@@ -140,9 +146,9 @@ public class TowerMenuController : MonoBehaviour
 
     public void SymbiosisClickButton(Button clickedButton)
     {
-        if (!tower.symbiosisTower)
+        if (!tower.isSymbiosisInstalled)
         {
-            TowerManager.towerLookingForSymbiosisPartner = tower;
+            TowerManager.StartLookingSimbiosisPartner(tower);
            // Debug.Log("TowerManager.towerLookingForSymbiosisPartner = " + tower);
         }
         else
@@ -152,7 +158,7 @@ public class TowerMenuController : MonoBehaviour
     }
     void BreakingSymbiosis()
     {
-        if (isBreakingSymbiosis && isHoldingClick)
+        if (isBreakingSymbiosis && isHoldingSimbiosisClick)
         {
             timerBreakSymbiosisHoldingTime -= Time.deltaTime;
             symbiosisCircleBar.fillAmount = timerBreakSymbiosisHoldingTime / breakSymbiosisHoldingTime;
@@ -180,12 +186,12 @@ public class TowerMenuController : MonoBehaviour
 
     public void OnPointerDown()
     {
-        isHoldingClick = true;
+        isHoldingSimbiosisClick = true;
     }
 
     public void OnPointerUp()
     {
-        isHoldingClick = false;
+        isHoldingSimbiosisClick = false;
         isBreakingSymbiosis = false;
         if (timerBreakSymbiosisHoldingTime > 0)
         { CancelBreakingSymbiosis(); }
