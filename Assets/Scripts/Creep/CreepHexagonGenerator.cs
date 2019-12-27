@@ -105,9 +105,11 @@ public class CreepHexagonGenerator : MonoBehaviour
         public bool isTarget;
         CreepHexagonGenerator parentCreep;
         public GameObject hexagonGObject;
+        public static float texRes = 2014;
 
         Mesh mesh;
         Vector3[] vertices;
+        Vector2[] uvs;
         int[] triangles;
 
         float coefficient;
@@ -130,8 +132,10 @@ public class CreepHexagonGenerator : MonoBehaviour
                 MeshFilter hexagonMeshFilter = hexagonGObject.AddComponent<MeshFilter>();
                 MeshRenderer hexagonMeshRenderer = hexagonGObject.AddComponent<MeshRenderer>();
                 hexagonMeshRenderer.material = parentCreep.GetComponent<MeshRenderer>().material;
-                
-                vertices = new Vector3[12];
+
+                // vertices = new Vector3[12];
+                vertices = new Vector3[30];
+                uvs = new Vector2[vertices.Length];
                 triangles = new int[4 * 3 + 12 *3];
                 mesh = new Mesh();
                 hexagonMeshFilter.mesh = mesh;
@@ -141,10 +145,33 @@ public class CreepHexagonGenerator : MonoBehaviour
                 {
                     for (int i = 0; i < 6; i++)
                     {
-                        vertices[i + j * 6] = hexagonVertex;
+                        if (j == 0)
+                        {
+                            vertices[i + j * 6] = hexagonVertex;  
+                        }
+                        else 
+                        {
+                            vertices[i * 4 + j * 6] = hexagonVertex;                           
+                            vertices[i * 4 + 1 + j * 6] = hexagonVertex + Vector3.down;
+
+                            vertices[i * 4 +2 + j * 6] = hexagonVertex;
+                            vertices[i * 4 + 3 + j * 6] = hexagonVertex + Vector3.down;
+
+                            uvs[i * 4 + j * 6] = new Vector2(1774 / texRes, 1 - 570/ texRes);
+                            uvs[i * 4 + 1 + j * 6] = new Vector2(1362 / texRes, 1 - 1287 / texRes);
+
+                            uvs[i * 4 + 2 + j * 6] = new Vector2(1030 / texRes, 1 - 136/ texRes);
+                            uvs[i * 4 + 3 + j * 6] = new Vector2(621 / texRes, 1 - 848/ texRes);
+                        }
                         hexagonVertex = Quaternion.AngleAxis(60, Vector3.up) * hexagonVertex;
                     }
-                    hexagonVertex = Vector3.forward * coefficient + parentCreep.transform.position + Vector3.down;
+                    uvs[0] = new Vector2(1010 / texRes, 1 - 20 / texRes);
+                    uvs[1] = new Vector2(1860 / texRes, 1 - 521 / texRes);
+                    uvs[2] = new Vector2(1860 / texRes, 1 - 1500 / texRes);
+                    uvs[3] = new Vector2(1010 / texRes, 1 - 1990 / texRes);
+                    uvs[4] = new Vector2(152 / texRes, 1 - 1500 / texRes);
+                    uvs[5] = new Vector2(152 / texRes, 1 - 521 / texRes);
+                    // hexagonVertex = Vector3.forward * coefficient + parentCreep.transform.position + Vector3.down;
                 }
                 triangles[0] = 0;
                 triangles[1] = 2;
@@ -164,20 +191,21 @@ public class CreepHexagonGenerator : MonoBehaviour
 
                 for (int i = 0; i < 5; i++)
                 {
-                    triangles[12 + i * 6 + 0] = i;
-                    triangles[12 + i * 6 + 1] = i + 6;
-                    triangles[12 + i * 6 + 2] = i + 7;
-                    triangles[12 + i * 6 + 3] = i + 7;
-                    triangles[12 + i * 6 + 4] = i + 1;
-                    triangles[12 + i * 6 + 5] = i;
+                    int n = 8 + i * 4;
+                    triangles[12 + i * 6 + 0] = n;      //i;
+                    triangles[12 + i * 6 + 1] = n + 1;  //i + 6;
+                    triangles[12 + i * 6 + 2] = n + 3;  //i + 7;
+                    triangles[12 + i * 6 + 3] = n + 3;  // i + 7;
+                    triangles[12 + i * 6 + 4] = n + 2;  //i + 1;
+                    triangles[12 + i * 6 + 5] = n;      //i;
                 }
-                triangles[42] = 5;
-                triangles[43] = 11;
-                triangles[44] = 6;
+                triangles[42] = 28; //5;
+                triangles[43] = 29; //11;
+                triangles[44] = 7;  //6;
 
-                triangles[45] = 6;
-                triangles[46] = 0;
-                triangles[47] = 5;
+                triangles[45] = 7;  //6;
+                triangles[46] = 6;  //0;
+                triangles[47] = 28; //5;
 
                 UpdateHexagonMesh();
                 hexagonGObject.layer = creepLayer;
@@ -216,8 +244,10 @@ public class CreepHexagonGenerator : MonoBehaviour
             mesh.Clear();
             mesh.vertices = vertices;
             mesh.triangles = triangles;
+            mesh.uv = uvs;
             mesh.RecalculateNormals();
-            var normals = new List<Vector3>();
+
+           /* var normals = new List<Vector3>();
             for (int i = 0; i<12; i++)
             {
                 if(i<6)
@@ -225,7 +255,7 @@ public class CreepHexagonGenerator : MonoBehaviour
                 else
                     normals.Add(mesh.normals[i]);
             }
-            mesh.SetNormals(normals);
+            mesh.SetNormals(normals);*/
         }
 
         public void Delete()
