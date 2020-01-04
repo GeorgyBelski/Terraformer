@@ -136,6 +136,7 @@ public class Shoping : MonoBehaviour
 
     private void placeTower()
     {
+        uIAudioSource.PlayOneShot(uISounds[3], 0.5f);
         Instantiate(selectedTower, realTimeTowerPlace.transform.position, realTimeTowerPlace.transform.rotation);
     }
 
