@@ -21,13 +21,17 @@ public class Terraformer : Tower
     public static Transform overclockWave;
 
     //public GameObject ringObject;
+    private bool playFinalSound = true;
 
     private Material mt;
     private Color baseEmissionColor;
 
+    [Header("Ui Sound")]
+    public AudioSource uiSource;
+    public AudioClip emergencySound;
+
     new void Start()
     {
- 
         mt = ring.GetComponent<Renderer>().material;
         baseEmissionColor = mt.GetColor("_EmissionColor");
         isOverclock = false;
@@ -60,19 +64,35 @@ public class Terraformer : Tower
             ring.position = Vector3.up * (positionFactor * overclockFactor + positionOffset)+ ringStartPosition;
 
             float emission = Mathf.PingPong(Time.time * 3 * overclockFactor, 200f * overclockFactor) + 2f;
-            print(overclockFactor);
+            //print(overclockFactor);
             Color finalColor = baseEmissionColor * Mathf.LinearToGammaSpace(emission);
 
             mt.SetColor("_EmissionColor", finalColor);
             if (overclockFactor == 0)
                 mt.SetColor("_EmissionColor", baseEmissionColor);
+            //print(overclockFactor + " " + overclockSpeed);
+            audioSource.pitch = overclockFactor;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(abilitiesSounds[0], 1.5f);
+            }
+
         }
     }
     public void OverclockWave() 
     {
         if (isVictory)
-        { 
+        {
+            if (playFinalSound)
+            {
+                //audioSource.Stop();
+                audioSource.pitch = 1;
+                audioSource.PlayOneShot(abilitiesSounds[1], 0.5f);
+                playFinalSound = false;
+            }
+
             overclockWave.gameObject.SetActive(true);
+            //isVictory = false;
         }
     }
 
@@ -99,5 +119,12 @@ public class Terraformer : Tower
     public override void DisableSymbiosisUpgrade()
     {
         
+    }
+
+    public void playEmergency()
+    {
+        //audioSource.Stop();
+        uiSource.pitch = 1;
+        uiSource.PlayOneShot(emergencySound, 1f);
     }
 }

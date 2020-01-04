@@ -23,7 +23,11 @@ public class Tank : Enemy_Logic
 
     public override void Attack()
     {
-        targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
+        if (targetTower)
+        {
+            //base.Attack();
+            targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
+        }
     }
     public override void check()
     {

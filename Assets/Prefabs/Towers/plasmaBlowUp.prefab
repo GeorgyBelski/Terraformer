@@ -112,5 +112,5 @@ MonoBehaviour:
   isReadyToDestroy: 0
   timerToDestroy: 1.3
   material: {fileID: 0}
-  audioSource: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: 61b4c7f9b5f0ae1449c1a7610ae3c8cd, type: 3}
+  blowUpSound: {fileID: 5628793371876859990, guid: 49acac689c950e747a361310876ac480,
+    type: 3}

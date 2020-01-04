@@ -593,6 +593,10 @@ MonoBehaviour:
   enem: {fileID: 371407608}
   checkTime: 0.5
   isGoingToDest: 0
+  audioSource: {fileID: 1141928602904767985}
+  punches:
+  - {fileID: 8300000, guid: 0655c6370cb9a1e4489bb7a0415e66e7, type: 3}
+  - {fileID: 8300000, guid: 9e1ac66c4077e82428e3a92c6ff76629, type: 3}
   type: 0
   damageOnAttack: 100
 --- !u!114 &1392614592
@@ -615,6 +619,9 @@ MonoBehaviour:
   cooldown: 12
   timerCooldown: 0
   chargeBar: {fileID: 1508717299894689412}
+  audioSource: {fileID: 1141928602904767985}
+  sounds:
+  - {fileID: 8300000, guid: 5f95f2c991f30244fb47e8f7ffcd7d9a, type: 3}
 --- !u!82 &1141928602904767985
 AudioSource:
   m_ObjectHideFlags: 0
@@ -635,10 +642,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 15
+  MaxDistance: 45
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -671,7 +678,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -802,7 +809,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.775, y: 1.298, z: 0.278}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.25386333, y: 0.1346674, z: 0.0026324987}
+  - {x: -0.25386396, y: 0.13466758, z: 0.0026323795}
   m_RotationOffsets:
   - {x: -11.570194, y: -92.062965, z: 93.859276}
   m_AffectTranslationX: 1
@@ -1255,7 +1262,7 @@ PrefabInstance:
     - target: {fileID: 3181554843715549789, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00000026490954
+      value: 0.00000032505773
       objectReference: {fileID: 0}
     - target: {fileID: 3181554843715549789, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}
@@ -1265,7 +1272,7 @@ PrefabInstance:
     - target: {fileID: 3181554843715549789, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0009303623
+      value: -0.00093017396
       objectReference: {fileID: 0}
     - target: {fileID: 6881932852953648046, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}

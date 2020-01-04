@@ -16,6 +16,7 @@ public class Enemy : Damageable
     public SpurtFXController spurtFXController;
     public Transform chest;
 
+    [Header("Sounds")]
     public AudioSource audioSource;
     public List<AudioClip> enemySounds;
 

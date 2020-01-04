@@ -432,7 +432,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.7654, y: 1.299, z: 0.23100023}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.16658497, y: 0.09152794, z: 0.0029129982}
+  - {x: -0.16658378, y: 0.09152818, z: 0.0029129982}
   m_RotationOffsets:
   - {x: -11.570194, y: -92.062965, z: 93.859276}
   m_AffectTranslationX: 1
@@ -698,6 +698,10 @@ MonoBehaviour:
   enem: {fileID: 371407608}
   checkTime: 0.5
   isGoingToDest: 0
+  audioSource: {fileID: 2448830779500268205}
+  punches:
+  - {fileID: 8300000, guid: 50c0cc4e24d26ec4499fbb47a17fe56c, type: 3}
+  - {fileID: 8300000, guid: bab33df4cac94d1478202ec4d5b3eb72, type: 3}
   damageOnAttack: 120
   powerCristall: {fileID: 9144510625947042171}
   chargeBar: {fileID: 2846840423597991552}
@@ -706,6 +710,7 @@ MonoBehaviour:
   SpurtFXController: {fileID: 3189616932376295971}
   isChargingReady: 0
   isHealingJump: 0
+  jumpSound: {fileID: 8300000, guid: 998335de1a941f24caab57330791c971, type: 3}
 --- !u!114 &3189616932376295971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -741,10 +746,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 15
+  MaxDistance: 45
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -777,7 +782,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -997,7 +1002,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.001, y: 1.2895, z: -0.0968}
   m_RotationAtRest: {x: 23.57589, y: 128.98668, z: 154.04887}
   m_TranslationOffsets:
-  - {x: -0.0006979704, y: 0.049491167, z: -0.052347183}
+  - {x: -0.0006979522, y: 0.049491167, z: -0.05234576}
   m_RotationOffsets:
   - {x: 20.795143, y: 130.35423, z: 157.66837}
   m_AffectTranslationX: 1
@@ -1300,7 +1305,7 @@ PrefabInstance:
     - target: {fileID: 3181554843715549789, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000013623918
+      value: 0.0000012537994
       objectReference: {fileID: 0}
     - target: {fileID: 3181554843715549789, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}
@@ -1310,7 +1315,7 @@ PrefabInstance:
     - target: {fileID: 3181554843715549789, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.00358854
+      value: -0.0035879547
       objectReference: {fileID: 0}
     - target: {fileID: 6881932852953648046, guid: 51b6443009456d54fb01a37e6c1dbb39,
         type: 3}

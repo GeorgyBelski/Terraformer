@@ -40,6 +40,9 @@ public abstract class Enemy_Logic : MonoBehaviour
 
     public bool IsAttack { get => isAttack; set { isAttack = value; animator.SetBool("Attack", value); } }
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public List<AudioClip> punches;
 
     // Start is called before the first frame update
     protected void Start()
@@ -185,7 +188,12 @@ public abstract class Enemy_Logic : MonoBehaviour
 
 
 
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+        audioSource.pitch = Random.Range(0.8f, 1.3f);
+        audioSource.PlayOneShot(punches[Random.Range(0, punches.Count)], 0.4f);
+    }
+
     //{
     //targetTower.towerHealth.ApplyDamage(damage, Vector3.zero, Vector3.zero);
     //}
@@ -246,16 +254,17 @@ public abstract class Enemy_Logic : MonoBehaviour
             {
                 if (IsAttack)
                 {
-                    if (destTower != null)
+                    if (destTower == null)
                     {
                         isStand = false;
-                        IsAttack = false;
+                        IsAttack = true;
                         isGiveUp = false;
                         stateGoToDestanation();
                     }
                     else
                     {
-                        IsAttack = true;
+                        IsAttack = false;
+                        stateGoToDestanation();
                     }
                 }
                 else

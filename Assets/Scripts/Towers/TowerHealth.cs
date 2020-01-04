@@ -10,9 +10,13 @@ public class TowerHealth : Damageable
     public Color damagePointsColor = Color.red;
 
     private float prevHealthRatio;
-        
+
+    private float emergencySoundCounter = 10f;
+    private float realEmergencySoundCounter;
+
     void Start()
     {
+        realEmergencySoundCounter = 0;
         isHeal = false;
         for (int i = 0; i < damagePoints.Length; i++)
         { damagePoints[i].color = damagePointsColor; }
@@ -39,9 +43,9 @@ public class TowerHealth : Damageable
             //ealHealth.fillAmount = healthBar.fillAmount;
             
         }
-            
-        
-        
+
+
+        realEmergencySoundCounter -= Time.deltaTime;
        /* if (health == 0 && TowerManager.towers.Contains(thisTower)){
             RemoveFromList();
         }*/
@@ -52,6 +56,17 @@ public class TowerHealth : Damageable
     {
         TowerManager.RemoveTower(thisTower);
         ResourceManager.isTowersSupplyChanged = true;
+    }
+
+    public override void ApplyDamage(int value, Vector3 shootPoint, Vector3 direction)
+    {
+        if (thisTower.type == TowerType.Terraformer)
+        {
+            if(realEmergencySoundCounter <= 0)
+                ((Terraformer)thisTower).playEmergency();
+            realEmergencySoundCounter = emergencySoundCounter;
+        }
+        base.ApplyDamage(value, shootPoint, direction);
     }
 
     public override void ApplyDeath()

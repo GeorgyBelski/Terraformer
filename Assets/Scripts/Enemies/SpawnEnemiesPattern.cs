@@ -43,6 +43,7 @@ public class SpawnEnemiesPattern : MonoBehaviour
 
     public void setPattern(int wave)
     {
+        enemieCountInList = 0;
         this.wave = wave;
         realPortalRange = portalRange + wave;
         list = new List<GameObject>();
@@ -225,8 +226,10 @@ public class SpawnEnemiesPattern : MonoBehaviour
 
     private void simpleSpawn()
     {
-        //print(list.Count);
-        //print(enemieCountInList);
+
+        if (portal.deactivating)
+            return;
+
         Enemy enem = Instantiate(list[enemieCountInList], new Vector3(
             portal.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / list.Count - 1))) * 2),
             0,
@@ -238,18 +241,23 @@ public class SpawnEnemiesPattern : MonoBehaviour
 
         enemieCountInList++;
 
-
         if (list.Count <= enemieCountInList)
         {
-            enemieCountInList = 0;
+            //enemieCountInList = 0;
+
             portal.deactivate();
             //print("+");
+            //return;
 
         }
+
+
     }
 
     private void squadSpawn()
     {
+        if (portal.deactivating)
+            return;
         switch (formation)
         {
             case Sqad.Formation.Square:

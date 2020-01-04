@@ -34,6 +34,10 @@ public class TowerMenuController : MonoBehaviour
     public bool isHoldingClick = false;
     public bool isBreakingSymbiosis = false;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public List<AudioClip> sounds;
+
     void Start()
     {
       //  material = GetComponent<MeshRenderer>().material;
@@ -56,7 +60,9 @@ public class TowerMenuController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && RepairButton.isActive && tower.isSelected)
         {
-            RepairButton.isActive = false;
+            audioSource.pitch = 1;
+            audioSource.PlayOneShot(sounds[0], 0.6f);
+            //RepairButton.isActive = false;
             //print("Repair");
             tower.towerHealth.Repair();
         }
@@ -68,6 +74,8 @@ public class TowerMenuController : MonoBehaviour
     {
         if (((tower.isSelected && !TowerMenu.IsActive()) ||(!tower.isSelected && TowerMenu.IsActive())) && !RepairButton.isActive)
         {
+            //audioSource.pitch = 1;
+            //audioSource.PlayOneShot(sounds[1], 0.6f);
             TowerMenu.gameObject.SetActive(tower.isSelected);
         }
     }

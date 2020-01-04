@@ -229,8 +229,8 @@ public abstract class Tower : MonoBehaviour
             TowerAttack(target);
             timerAttack = cooldownAttack;
 
-            audioSource.pitch = Random.Range(0.8f, 1.8f);
-            audioSource.PlayOneShot(shots[0], 0.6f);
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            audioSource.PlayOneShot(shots[0], 0.3f);
         }
     }
     public void RotateCannon(Vector3 targetPosition)

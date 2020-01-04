@@ -14,6 +14,11 @@ public class CreepBreaker : MonoBehaviour
     public float cooldown = 3f;
     public float timerCooldown;
     public Image chargeBar;
+
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public List<AudioClip> sounds;
+
     void Start()
     {
         
@@ -50,6 +55,7 @@ public class CreepBreaker : MonoBehaviour
             ableToBreak = false;
             isSmashJump = false;
             timerCooldown = cooldown;
+
         }
         if (hexagon!= null) 
         {
@@ -84,7 +90,9 @@ public class CreepBreaker : MonoBehaviour
     public void SmashHexagon() // Activates in Animation
     {
         if (hexagon !=null && hexagon.GetStatus() == HexCoordinatStatus.Attend)
-        { 
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            audioSource.PlayOneShot(sounds[0], 0.4f);
             hexagon.DamageHexagon();
             hexagon.isTarget = false;
         }
