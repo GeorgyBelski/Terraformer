@@ -78,7 +78,7 @@ public class DeathBeamAbility : TowerAbility
         {
             tower.audioSource.Stop();
             tower.audioSource.pitch = 1.1f;
-            tower.audioSource.PlayOneShot(tower.abilitiesSounds[1], 0.4f);
+            tower.audioSource.PlayOneShot(tower.abilitiesSounds[1], 0.6f);
             isActive = false;
             tower.EndCasting();
             tower.enableAutoattacs = true;

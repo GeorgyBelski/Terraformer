@@ -48,7 +48,7 @@ public class ThanderBallAbility : TowerAbility
         tower.RotateCannon((Vector3)aim);
 
         tower.audioSource.pitch = 4f;
-        tower.audioSource.PlayOneShot(tower.abilitiesSounds[0], 0.6f);
+        tower.audioSource.PlayOneShot(tower.abilitiesSounds[0], 0.7f);
 
         Vector3 offsetFromCannon = gunpoint.position - cannon.position;
         if (!thandetBall)
@@ -107,7 +107,7 @@ public class ThanderBallAbility : TowerAbility
             thandetBall.transform.rotation = Quaternion.identity;
             AudioSource blowUp = thandetBall.GetComponent<AudioSource>();
             blowUp.pitch = 2f;
-            blowUp.PlayOneShot(tower.abilitiesSounds[1], 0.3f);
+            blowUp.PlayOneShot(tower.abilitiesSounds[1], 0.5f);
             thandetBallAnimator.SetBool("isReachAim", true);
             ApplyThanderBallEffects((Vector3)aim, effectRadius);
             aim = null;

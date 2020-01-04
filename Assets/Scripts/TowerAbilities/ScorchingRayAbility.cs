@@ -77,7 +77,7 @@ public class ScorchingRayAbility : TowerAbility
             tower.audioSource.Stop();
             tower.EndCasting();
             tower.audioSource.pitch = 1.5f;
-            tower.audioSource.PlayOneShot(tower.abilitiesSounds[3], 0.6f);
+            tower.audioSource.PlayOneShot(tower.abilitiesSounds[3], 0.8f);
         }
     }
 
@@ -96,7 +96,7 @@ public class ScorchingRayAbility : TowerAbility
             scorchingRay.transform.position = (Vector3)aim;
             AudioSource blowUp = scorchingRay.GetComponent<AudioSource>();
             blowUp.pitch = 2f;
-            blowUp.PlayOneShot(tower.abilitiesSounds[4], 0.3f);
+            blowUp.PlayOneShot(tower.abilitiesSounds[4], 0.4f);
             animator.SetBool("isReachAim", true);
             ApplyScorchingRayEffects((Vector3)aim, effectRadius);
             aim = null;

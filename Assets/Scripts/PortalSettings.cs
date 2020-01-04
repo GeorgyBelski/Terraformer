@@ -57,9 +57,14 @@ public class PortalSettings : MonoBehaviour
     [Header("Sounds")]
     public AudioSource audioSource;
     public List<AudioClip> sounds;
+    public AudioClip activatingSound;
+
+    public AudioSource activatingAudioSource;
+    private bool activating = false;
 
     private void Awake()
     {
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
         startScale = transform.localScale.x;
         sizeInSecond = (finalSize - startScale) / loadingTime;
         
@@ -82,6 +87,11 @@ public class PortalSettings : MonoBehaviour
     }
     void Update()
     {
+        if (activating)
+        {
+            activatingAudioSource.PlayOneShot(activatingSound, 0.5f);
+            activating = false;
+        }
         //print("+"); 
         CalculateLoadingSpeed();
         ChangeLineSpeed();
@@ -96,7 +106,7 @@ public class PortalSettings : MonoBehaviour
                 //audioSource.pitch = transform.localScale.x / finalSize;
                 audioSource.PlayOneShot(sounds[0], 0.6f);
             }
-
+            audioSource.volume = transform.localScale.x / finalSize;
             //print(transform.localScale.x + " " + size);
             if (transform.localScale.x >= finalSize && active)
             {
@@ -118,7 +128,7 @@ public class PortalSettings : MonoBehaviour
             {
                 if (realSpawnRate <= 0){
                     pattern.spawnEnemyes();
-                    audioSource.PlayOneShot(sounds[1], 1f);
+                    audioSource.PlayOneShot(sounds[1], 0.5f);
                     realSpawnRate = spawnRate;
                 }
                 realSpawnRate -= Time.deltaTime;
@@ -231,8 +241,10 @@ public class PortalSettings : MonoBehaviour
         active = true;
         this.enabled = true;
         isSquad = false;
-
+        activating = true;
         ReloadLine();
+
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
 
     public void setSettings(List<GameObject> list, int columns, int columnCount, float columnsRange, float rotation, Sqad.Formation form)
@@ -249,11 +261,13 @@ public class PortalSettings : MonoBehaviour
         this.rotation = rotation;
 
         isSquad = true;
-
+        activating = true;
         active = true;
         this.enabled = true;
 
         ReloadLine();
+
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
 
     // Loading Line
@@ -283,6 +297,7 @@ public class PortalSettings : MonoBehaviour
     }
     void SetLoadingLinePosition() 
     {
+        
         if (previousPosition != transform.position)
         {
             for (int i = 0; i < 72; i++)
@@ -303,6 +318,7 @@ public class PortalSettings : MonoBehaviour
     }
     void ReloadLine()
     {
+        
         lineSpeed = originalSpeed;
         loadingLineMaterial.SetColor("_Color", loadingLineColor);
         timerLoading = loadingTime;
