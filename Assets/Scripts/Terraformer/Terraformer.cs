@@ -74,7 +74,7 @@ public class Terraformer : Tower
             audioSource.pitch = overclockFactor;
             if (!audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(abilitiesSounds[0], 1.5f);
+                audioSource.PlayOneShot(abilitiesSounds[0], 2.5f);
             }
 
         }
