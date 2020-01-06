@@ -25,6 +25,11 @@ public abstract class AbilityButtonController : MonoBehaviour
     public Transform gunpoint;
     // public GameObject thunderball;
     public GameObject aimAreaPrefab;
+
+    [Header("Sounds")]
+    public AudioSource uIAudioSource;
+    public List<AudioClip> uISounds;
+
     protected Transform aimArea;
     Animator aimAreaAnimator;
 
@@ -36,6 +41,9 @@ public abstract class AbilityButtonController : MonoBehaviour
     int enemyMask;
     int enemy_groundMask;
   //  Vector3 mousePos;
+
+
+
 
     Image buttonImage, outLineImage;
     Button button;
@@ -97,6 +105,7 @@ public abstract class AbilityButtonController : MonoBehaviour
                     }
                     else
                     {
+                        uIAudioSource.PlayOneShot(uISounds[1], 0.6f);
                         ResourceManager.CostIsTooHighSignal();
                         Cancel();
                     }
@@ -122,7 +131,8 @@ public abstract class AbilityButtonController : MonoBehaviour
                                                                    /// </summary>
     public virtual void TowerCastSingleTargetAbility(Tower casterTower, Enemy target) { }
 
-    public void Cancel() {       
+    public void Cancel() {
+        //uIAudioSource.PlayOneShot(uISounds[1], 0.6f);
         currentState = State.Ready;
         RemoveAimArea();
         outLineImage.enabled = false;
@@ -135,6 +145,7 @@ public abstract class AbilityButtonController : MonoBehaviour
     }
     public void Activate()
     {
+        uIAudioSource.PlayOneShot(uISounds[0], 0.6f);
         //    timerCast = castTime;
         if (button.interactable == false)
         { return; }

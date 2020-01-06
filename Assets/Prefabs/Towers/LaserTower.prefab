@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 4236873006236776151}
   - component: {fileID: 5893686480769145596}
   - component: {fileID: -8775343536148839861}
+  - component: {fileID: 2713798414705665863}
   m_Layer: 13
   m_Name: LaserTower
   m_TagString: Tower
@@ -758,6 +759,15 @@ MonoBehaviour:
   towerMenuController: {fileID: 7590772555364440343}
   isSymbiosisInstalled: 0
   towerMaterial: {fileID: 0}
+  audioSource: {fileID: 2713798414705665863}
+  shots:
+  - {fileID: 8300000, guid: 453b0b0d8c2347044980c8595b3b2197, type: 3}
+  abilitiesSounds:
+  - {fileID: 8300000, guid: fc3f8aed26659ec49b525ec2df9574ef, type: 3}
+  - {fileID: 8300000, guid: a0f356d9c20df2d4f87576038e6ae59a, type: 3}
+  - {fileID: 8300000, guid: 93c4e41bef66f2d45ae8c9accb97bb95, type: 3}
+  - {fileID: 8300000, guid: d345d16b1a7970b43967d08a1c891c09, type: 3}
+  - {fileID: 8300000, guid: f3119ab1a35f1af45830a02348c0b97b, type: 3}
   beamDuration: 0.3
   damageAttack: 80
   damageBurning: 25
@@ -873,8 +883,10 @@ MonoBehaviour:
   timerSetSymbiosisTime: 0
   breakSymbiosisHoldingTime: 0.6
   timerBreakSymbiosisHoldingTime: 0
-  isHoldingClick: 0
+  isHoldingSimbiosisClick: 0
   isBreakingSymbiosis: 0
+  audioSource: {fileID: 0}
+  sounds: []
 --- !u!114 &4236873006236776151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -926,6 +938,102 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.7450001, z: 0}
   m_TimeToStationary: 0.5
+--- !u!82 &2713798414705665863
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015777778884135378}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8185675416490534824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,11 +1116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280114582322313786}
     m_Modifications:
-    - target: {fileID: 3348572517771893589, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
-      propertyPath: m_Name
-      value: TowerMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 4331312378236362637, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1185,16 +1288,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7519671253124905162, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7519671253124905162, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7519671253124905162, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7590772555364440343}
@@ -1205,43 +1298,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7519671253124905162, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.UI.Button, UnityEngine.UI
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7519671253124905162, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 2360903729482809606}
-    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 4236873006236776151}
-    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: upgradeTower
-      objectReference: {fileID: 0}
-    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
+    - target: {fileID: 7519671253124905162, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
+    - target: {fileID: 7519671253124905162, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3348572517771893589, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_Name
+      value: TowerMenu
       objectReference: {fileID: 0}
     - target: {fileID: 3348572517771893590, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
@@ -1357,6 +1435,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.5999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4236873006236776151}
+    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: upgradeTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190552554029237411, guid: d7fc1237993637444a428e1c33438285,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7910822056621435368, guid: d7fc1237993637444a428e1c33438285,
         type: 3}
@@ -1497,16 +1605,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6015777778884135390}
     m_Modifications:
-    - target: {fileID: 8429019210697089014, guid: 55d2cf7acb1628649844dc17d15a3844,
-        type: 3}
-      propertyPath: m_Name
-      value: LaserTowerCastBlowUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429019210697089014, guid: 55d2cf7acb1628649844dc17d15a3844,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8022435694985575031, guid: 55d2cf7acb1628649844dc17d15a3844,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1583,6 +1681,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8429019210697089014, guid: 55d2cf7acb1628649844dc17d15a3844,
         type: 3}
+    - target: {fileID: 8429019210697089014, guid: 55d2cf7acb1628649844dc17d15a3844,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserTowerCastBlowUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429019210697089014, guid: 55d2cf7acb1628649844dc17d15a3844,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55d2cf7acb1628649844dc17d15a3844, type: 3}
 --- !u!4 &2065179494154560868 stripped
@@ -1610,11 +1718,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280114582322313786}
     m_Modifications:
-    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Name
-      value: DamagePointsParent
-      objectReference: {fileID: 0}
     - target: {fileID: 2690422949177918072, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1734,6 +1837,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690422949177918023, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePointsParent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}

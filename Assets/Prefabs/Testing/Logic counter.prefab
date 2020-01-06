@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4fa67d7bac37b4a4d844ddb3fb3e72cf, type: 2}
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,8 +114,10 @@ MonoBehaviour:
   enemyRusher: {fileID: 2623192909609195406, guid: 3cce14b2abac7264bbdc5019d8511a26,
     type: 3}
   enemyHeal: {fileID: 762130183, guid: 3942bfeac139110488efc3393ccf93e3, type: 3}
+  portal: {fileID: 0}
   spawnRate: 0
   portalPosition: 0
+  portalRange: 22
   formation: 0
   colCount: 0
   colSize: 0
@@ -170,26 +172,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -1667574095672082767, guid: 0442d5b659dee314885a672975f32707,
-        type: 3}
-      propertyPath: m_Positions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1667574095672082767, guid: 0442d5b659dee314885a672975f32707,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1667574095672082767, guid: 0442d5b659dee314885a672975f32707,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1667574095672082767, guid: 0442d5b659dee314885a672975f32707,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 665460b7f1e43e74db0cde87753ac726, type: 2}
     - target: {fileID: 8648481368527438963, guid: 0442d5b659dee314885a672975f32707,
         type: 3}
       propertyPath: m_LocalPosition.x

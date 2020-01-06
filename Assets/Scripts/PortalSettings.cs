@@ -14,6 +14,8 @@ public class PortalSettings : MonoBehaviour
     float previousFinalSize;
     Vector3 previousPosition;
     float startScale;
+
+    public SpawnEnemiesPattern pattern;
     
     private GameObject leader;
     private GameObject next;
@@ -46,11 +48,23 @@ public class PortalSettings : MonoBehaviour
     private Sqad.Formation form;
 
     private bool isSquad = false;
+
+    public float deactivateTime = 1.5f;
+    private float deactivateTimeLeft;
+    public bool deactivating = false;
     //private loadingLineMaterial;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public List<AudioClip> sounds;
+    public AudioClip activatingSound;
+
+    public AudioSource activatingAudioSource;
+    private bool activating = false;
 
     private void Awake()
     {
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
         startScale = transform.localScale.x;
         sizeInSecond = (finalSize - startScale) / loadingTime;
         
@@ -73,6 +87,11 @@ public class PortalSettings : MonoBehaviour
     }
     void Update()
     {
+        if (activating)
+        {
+            activatingAudioSource.PlayOneShot(activatingSound, 0.5f);
+            activating = false;
+        }
         //print("+"); 
         CalculateLoadingSpeed();
         ChangeLineSpeed();
@@ -82,9 +101,14 @@ public class PortalSettings : MonoBehaviour
             //realLineSpeed = lineSpeed * transform.localScale.x / finalSize;
             //loadingLineMaterial.SetFloat("_Speed", realLineSpeed);
             transform.localScale = new Vector3(transform.localScale.x + sizeInSecond * Time.deltaTime, transform.localScale.y + sizeInSecond * Time.deltaTime, transform.localScale.z + sizeInSecond * Time.deltaTime);
-        
-        //print(transform.localScale.x + " " + size);
-            if(transform.localScale.x >= finalSize && active)
+            if (!audioSource.isPlaying)
+            {
+                //audioSource.pitch = transform.localScale.x / finalSize;
+                audioSource.PlayOneShot(sounds[0], 0.6f);
+            }
+            audioSource.volume = transform.localScale.x / finalSize;
+            //print(transform.localScale.x + " " + size);
+            if (transform.localScale.x >= finalSize && active)
             {
                 //print(sizeInSecond);
                 sizeInSecond = 0;
@@ -102,18 +126,19 @@ public class PortalSettings : MonoBehaviour
 
             if (spwning)
             {
-                if (isSquad)
-                {
-                    spawnSquad();
+                if (realSpawnRate <= 0){
+                    pattern.spawnEnemyes();
+                    audioSource.PlayOneShot(sounds[1], 0.5f);
+                    realSpawnRate = spawnRate;
                 }
-                else
-                {
-                    realSpawnRate -= Time.deltaTime;
-                    spawnEnemyes();
-                }
-                
-                
+                realSpawnRate -= Time.deltaTime;
             }
+        }
+
+        if (deactivating)
+        {
+            deactivateTimeLeft -= Time.deltaTime;
+            deactivate();
         }
     }
     void CalculateLoadingSpeed() 
@@ -124,7 +149,30 @@ public class PortalSettings : MonoBehaviour
             previousLoadingTime = loadingTime;
         }
     }
-    public void spawnEnemyes()
+
+    public void deactivate()
+    {
+        deactivating = true;
+
+        //deactivateTimeLeft -= Time.deltaTime;
+        if (deactivateTimeLeft > 0)
+        {
+            return;
+        }
+        //print("+");
+        //if(audioSource.isPlaying)
+        spwning = false;
+        transform.localScale = Vector3.zero;
+        transform.position = Vector3.zero;
+        this.enabled = false;
+        gameObject.SetActive(false);
+        realSpawnRate = spawnRate;
+        sizeInSecond = startSizeInSecond;
+        deactivating = false;
+        deactivateTimeLeft = deactivateTime;
+    }
+
+    /*public void spawnEnemyes()
     {
         if(realSpawnRate <= 0)
         {
@@ -159,8 +207,9 @@ public class PortalSettings : MonoBehaviour
         //}
         
     }
+    */
 
-    private void spawnSquad()
+    /*private void spawnSquad()
     {
         switch(form) {
             case Sqad.Formation.Square:
@@ -179,9 +228,11 @@ public class PortalSettings : MonoBehaviour
         sizeInSecond = startSizeInSecond;
 
     }
+    */
 
     public void setSettings(List<GameObject> list, float spawnRate)
     {
+        deactivateTimeLeft = deactivateTime;
         this.spawnRate = spawnRate;
         realSpawnRate = spawnRate;
         startSizeInSecond = sizeInSecond;
@@ -190,11 +241,15 @@ public class PortalSettings : MonoBehaviour
         active = true;
         this.enabled = true;
         isSquad = false;
+        activating = true;
         ReloadLine();
+
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
 
     public void setSettings(List<GameObject> list, int columns, int columnCount, float columnsRange, float rotation, Sqad.Formation form)
     {
+        deactivateTimeLeft = deactivateTime;
         realSpawnRate = spawnRate;
         startSizeInSecond = sizeInSecond;
         enemyList = list;
@@ -206,11 +261,13 @@ public class PortalSettings : MonoBehaviour
         this.rotation = rotation;
 
         isSquad = true;
-
+        activating = true;
         active = true;
         this.enabled = true;
 
         ReloadLine();
+
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
 
     // Loading Line
@@ -240,6 +297,7 @@ public class PortalSettings : MonoBehaviour
     }
     void SetLoadingLinePosition() 
     {
+        
         if (previousPosition != transform.position)
         {
             for (int i = 0; i < 72; i++)
@@ -260,6 +318,7 @@ public class PortalSettings : MonoBehaviour
     }
     void ReloadLine()
     {
+        
         lineSpeed = originalSpeed;
         loadingLineMaterial.SetColor("_Color", loadingLineColor);
         timerLoading = loadingTime;

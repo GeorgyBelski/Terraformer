@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 559022949615289608}
   - component: {fileID: 559022949615289609}
   m_Layer: 0
-  m_Name: towerManager
+  m_Name: TowerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559022949615289654}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -58,6 +58,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -90,6 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183780c1c68c4134982916da0bfe14b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTowers:
-  - {fileID: 0}
-  - {fileID: 0}
+  availablePlazmaTowersCount: 0
+  towersNumber: 0
+  symbiosisCostMultiplayer: 8
+  uIAudioSource: {fileID: 0}
+  uISounds:
+  - {fileID: 8300000, guid: 1c29f77c45e187940a63ad8400b85e1a, type: 3}
+  - {fileID: 8300000, guid: 91919b4c7edd2f3488844f06d6d8296a, type: 3}
