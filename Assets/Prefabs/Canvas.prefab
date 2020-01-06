@@ -507,7 +507,7 @@ MonoBehaviour:
   - {fileID: 605910771}
   - {fileID: 980679421}
   - {fileID: 2106448340}
-  uIAudioSource: {fileID: 0}
+  uIAudioSource: {fileID: 2443412383361191420}
   uISounds:
   - {fileID: 8300000, guid: 0398dd183e197644a9ff1453290f46b1, type: 3}
   - {fileID: 8300000, guid: 5ae9d31678e091146ab4b6c434cdfe09, type: 3}
@@ -2996,8 +2996,10 @@ MonoBehaviour:
   gunpoint: {fileID: 0}
   aimAreaPrefab: {fileID: 8193904619243790425, guid: f50310deb7799ae4e9125563ac3c3cf0,
     type: 3}
-  uIAudioSource: {fileID: 0}
-  uISounds: []
+  uIAudioSource: {fileID: 2443412383361191420}
+  uISounds:
+  - {fileID: 8300000, guid: 5c80cf34d39a1db42b0f5a6ef6e6dbbd, type: 3}
+  - {fileID: 8300000, guid: 1b6c204bbf2730443913895222bfc021, type: 3}
   casterTower: {fileID: 0}
 --- !u!1 &2902143820882433143
 GameObject:
@@ -4361,8 +4363,10 @@ MonoBehaviour:
   gunpoint: {fileID: 0}
   aimAreaPrefab: {fileID: 8193904619243790425, guid: ac476f61566b54d47bfd0c1777579646,
     type: 3}
-  uIAudioSource: {fileID: 0}
-  uISounds: []
+  uIAudioSource: {fileID: 2443412383361191420}
+  uISounds:
+  - {fileID: 8300000, guid: 5c80cf34d39a1db42b0f5a6ef6e6dbbd, type: 3}
+  - {fileID: 8300000, guid: 1b6c204bbf2730443913895222bfc021, type: 3}
   casterTower: {fileID: 0}
 --- !u!1 &4829788785480764387
 GameObject:
@@ -4709,8 +4713,10 @@ MonoBehaviour:
   gunpoint: {fileID: 0}
   aimAreaPrefab: {fileID: 8193904619243790425, guid: f50310deb7799ae4e9125563ac3c3cf0,
     type: 3}
-  uIAudioSource: {fileID: 0}
-  uISounds: []
+  uIAudioSource: {fileID: 2443412383361191420}
+  uISounds:
+  - {fileID: 8300000, guid: 5c80cf34d39a1db42b0f5a6ef6e6dbbd, type: 3}
+  - {fileID: 8300000, guid: 1b6c204bbf2730443913895222bfc021, type: 3}
   casterTower: {fileID: 0}
 --- !u!1 &5627274745976443179
 GameObject:
@@ -6982,8 +6988,10 @@ MonoBehaviour:
   gunpoint: {fileID: 0}
   aimAreaPrefab: {fileID: 8193904619243790425, guid: f50310deb7799ae4e9125563ac3c3cf0,
     type: 3}
-  uIAudioSource: {fileID: 0}
-  uISounds: []
+  uIAudioSource: {fileID: 2443412383361191420}
+  uISounds:
+  - {fileID: 8300000, guid: 5c80cf34d39a1db42b0f5a6ef6e6dbbd, type: 3}
+  - {fileID: 8300000, guid: 1b6c204bbf2730443913895222bfc021, type: 3}
   casterTower: {fileID: 0}
 --- !u!1 &9018666167024572997
 GameObject:

@@ -762,7 +762,12 @@ MonoBehaviour:
   audioSource: {fileID: 2713798414705665863}
   shots:
   - {fileID: 8300000, guid: 453b0b0d8c2347044980c8595b3b2197, type: 3}
-  abilitiesSounds: []
+  abilitiesSounds:
+  - {fileID: 8300000, guid: fc3f8aed26659ec49b525ec2df9574ef, type: 3}
+  - {fileID: 8300000, guid: a0f356d9c20df2d4f87576038e6ae59a, type: 3}
+  - {fileID: 8300000, guid: 93c4e41bef66f2d45ae8c9accb97bb95, type: 3}
+  - {fileID: 8300000, guid: d345d16b1a7970b43967d08a1c891c09, type: 3}
+  - {fileID: 8300000, guid: f3119ab1a35f1af45830a02348c0b97b, type: 3}
   beamDuration: 0.3
   damageAttack: 80
   damageBurning: 25

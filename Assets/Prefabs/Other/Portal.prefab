@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d279e23e4cafb0347a534f5126128f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingTime: 10
+  loadingTime: 7
   finalSize: 5
   pattern: {fileID: 0}
   loadingLine: {fileID: -1667574095672082767}
