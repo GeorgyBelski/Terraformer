@@ -18,8 +18,11 @@ public class HealBase : MonoBehaviour
 
     public Transform StartPoint;
     public GameObject cast;
-    //private GameObject castgm;
-    // Start is called before the first frame update
+
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public AudioClip castSound;
+
     void Start()
     {
      //   EnemyManagerPro.AddEnemy(this.GetComponent<Enemy>());
@@ -36,6 +39,9 @@ public class HealBase : MonoBehaviour
         if(realHealRate <= 0)
         {
             Instantiate(cast, StartPoint.position, StartPoint.rotation, null);
+
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.PlayOneShot(castSound, 0.4f);
             //castgm.GetComponent<HealCast>().
             realHealRate = healRate;
         }

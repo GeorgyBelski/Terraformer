@@ -85,6 +85,10 @@ public class ResourceManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown("f12"))
+        {
+            resource = 2000;
+        }
         CulculateTowersSupply();
         CalculateProceeds();
         ShowProceeds();

@@ -107,13 +107,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90888b8d537694648be4ca9b4b8d3e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plazmaBlowUp: {fileID: 5318376179407707431, guid: 19b7a3ee2c1d0884a9e831b1ae730039,
-    type: 3}
   mainDamage: 150
   speed: 1
   thisTower: {fileID: 0}
+  blow: {fileID: 0}
   trailmaterial: {fileID: 0}
   trailRenderer: {fileID: 1179185393371987871}
+  OrdinaryTrailColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!96 &1179185393371987871
 TrailRenderer:
   serializedVersion: 2

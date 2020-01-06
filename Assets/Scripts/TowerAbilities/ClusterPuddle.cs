@@ -8,8 +8,12 @@ public class ClusterPuddle : MonoBehaviour
     public float radius;
 
     private float defaultspeed;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
     void Start()
     {
+        audioSource.pitch = Random.Range(0.1f, 1.5f);
+        audioSource.PlayOneShot(audioClip, 0.15f);
         //mt = GetComponent<Renderer>().material;
     }
 

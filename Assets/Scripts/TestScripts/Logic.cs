@@ -79,15 +79,9 @@ public class Logic : MonoBehaviour
             //print("+");
             pattern.setPattern(wave);
 
-            switch (pattern.getPatType())
-            {
-                case SpawnEnemiesPattern.WaveType.Simple:
-                    thisPortalSettings.setSettings(pattern.getPattern(), pattern.spawnRate);
-                    break;
-                case SpawnEnemiesPattern.WaveType.Squad:
-                    thisPortalSettings.setSettings(pattern.getPattern(), pattern.colCount, pattern.colSize, pattern.range, pattern.portalPosition, pattern.formation);
-                    break;
-            }
+            
+            thisPortalSettings.setSettings(pattern.getPattern(), pattern.spawnRate);
+         
             
             portal.active = true;
 
@@ -114,7 +108,7 @@ public class Logic : MonoBehaviour
         //print(SquadFormationSquare.DegreeToRadian(pattern.portalPosition));
         randPos = Random.Range(0, 360);
         //print(randPos + " " + Mathf.Sin(randPos));
-        return new Vector3(35 * Mathf.Sin(Sqad.DegreeToRadian(pattern.portalPosition)), 1, 35 * Mathf.Cos(Sqad.DegreeToRadian(pattern.portalPosition)));
+        return new Vector3((pattern.portalRange + wave) * Mathf.Sin(Sqad.DegreeToRadian(pattern.portalPosition)), 1, (pattern.portalRange + wave) * Mathf.Cos(Sqad.DegreeToRadian(pattern.portalPosition)));
     }
 
     private List<GameObject> conutWave()

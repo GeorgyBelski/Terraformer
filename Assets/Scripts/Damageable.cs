@@ -36,7 +36,7 @@ public abstract class Damageable : MonoBehaviour
         CalcHealthRatio();
     }
 
-    public void ApplyDamage(int value, Vector3 shootPoint, Vector3 direction)
+    public virtual void ApplyDamage(int value, Vector3 shootPoint, Vector3 direction)
     {
         if (health > 0)
         {

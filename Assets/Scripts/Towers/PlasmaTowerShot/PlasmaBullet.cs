@@ -24,6 +24,8 @@ public class PlasmaBullet : MonoBehaviour
     public TrailRenderer trailRenderer;
     [ColorUsageAttribute(true, true)]
     public Color OrdinaryTrailColor;
+
+
     //private float time = 0;
 
 
@@ -92,11 +94,13 @@ public class PlasmaBullet : MonoBehaviour
     }
     void BlowUp() 
     {
-        if (blow) 
-        { 
+        if (blow)
+        {
+
             blow.gameObject.SetActive(true);
             blow.SetSettings(blowUpDamage, blowUpSize);
             blow.transform.position = this.transform.position;
+
         }
         //  Destroy(gameObject);
         if (thisTower)
@@ -113,6 +117,7 @@ public class PlasmaBullet : MonoBehaviour
     {
         if (other.gameObject.layer == Globals.groundLayer)
         {
+
             BlowUp();
         }
     }
