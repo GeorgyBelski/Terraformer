@@ -31,6 +31,10 @@ public class TowerManager : MonoBehaviour
 
     public int symbiosisCostMultiplayer = 8;
 
+    [Header("Sounds")]
+    public AudioSource uIAudioSource;
+    public List<AudioClip> uISounds;
+
     public static void Restart()
     {
         towers.Clear();
@@ -207,6 +211,8 @@ public class TowerManager : MonoBehaviour
                         symbiosisTowers.Add(highlightedTower);
                         symbiosisTowers.Add(towerLookingForSymbiosisPartner);
                         towerLookingForSymbiosisPartner = null;
+
+                        uIAudioSource.PlayOneShot(uISounds[1], 0.6f);
                     }
                     else
                     {
@@ -266,6 +272,8 @@ public class TowerManager : MonoBehaviour
                         RepairButton.isActive = false;
                         highlightedTower.isHighlighted = false;
                         highlightedTower.towerHealth.Repair();
+
+                        uIAudioSource.PlayOneShot(uISounds[0], 0.6f);
                     }
                 }
                 else

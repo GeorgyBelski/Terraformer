@@ -9,8 +9,10 @@ public class RepairButton : MonoBehaviour
     bool previousButtonState = isActive;
     public Image repairImage;
     public Button thisButton;
-    // Start is called before the first frame update
 
+    [Header("Sounds")]
+    public AudioSource uIAudioSource;
+    public List<AudioClip> uISounds;
     public void switchOnRepair()
     {
         isActive = true;
@@ -18,6 +20,7 @@ public class RepairButton : MonoBehaviour
         repairImage.color = thisButton.colors.selectedColor;
         //print("+");
         TowerManager.StartLookingRepairTower();
+        uIAudioSource.PlayOneShot(uISounds[0], 0.6f);
     }
 
     // Update is called once per frame

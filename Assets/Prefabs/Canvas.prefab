@@ -3990,7 +3990,7 @@ GameObject:
   - component: {fileID: 8410606151729592739}
   - component: {fileID: 1412831286190753107}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Repair_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4124,6 +4124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   repairImage: {fileID: 4024129740570722163}
   thisButton: {fileID: 8410606151729592739}
+  uIAudioSource: {fileID: 2443412383361191420}
+  uISounds:
+  - {fileID: 8300000, guid: 056b2d639352b2446a2036ad6d94e7ae, type: 3}
 --- !u!1 &4294506320537461452
 GameObject:
   m_ObjectHideFlags: 0
