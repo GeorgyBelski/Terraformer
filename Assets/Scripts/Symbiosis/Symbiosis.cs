@@ -49,6 +49,7 @@ public class Symbiosis
             var trails = tower.lightningChargeParticleSys.trails;
             trails.ribbonCount = 1;
             tower.lightningLerpSpeed = 3;
+            TowerManager.availableElectroLaserTowers.Add(tower);
         }
         else if (symbiosisTowerType == TowerType.Plasma)
         {
@@ -58,6 +59,7 @@ public class Symbiosis
             var trails = tower.lightningChargeParticleSys.trails;
             trails.ribbonCount = 1;
             tower.lightningLerpSpeed = 2;
+            TowerManager.availableElectroPlasmaTowers.Add(tower);
         }
     //    tower.isSymbiosisInstalled = false;
     }
@@ -70,6 +72,7 @@ public class Symbiosis
             tower.currentColor1 = tower.electroSymbColor1;
             tower.currentColor2 = tower.electroSymbColor2;
             tower.towerMaterial.SetColor("_Color_SymbEmition", tower.electroSymbColor2);
+            TowerManager.availableElectroLaserTowers.Add(tower);
         }
         else if (symbiosisTowerType == TowerType.Laser)
         {
@@ -82,6 +85,7 @@ public class Symbiosis
             tower.currentColor1 = tower.plasmaSymbColor1;
             tower.currentColor2 = tower.plasmaSymbColor2;
             tower.towerMaterial.SetColor("_Color_SymbEmition", tower.plasmaSymbColor2);
+            TowerManager.availableLaserPlasmaTowers.Add(tower);
 
         }
         //    tower.isSymbiosisInstalled = false;
@@ -93,11 +97,13 @@ public class Symbiosis
         {
             plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.electroSymbColor2);
             SetBulletsAndBlowUpColors(plasmaTower, plasmaTower.electroSymbTrailColor);
+            TowerManager.availableElectroPlasmaTowers.Add(plasmaTower);
         } 
         else if (symbiosisTowerType == TowerType.Laser)
         {
             plasmaTower.towerMaterial.SetColor("_Color_SymbEmition", plasmaTower.laserSymbColor2);
             SetBulletsAndBlowUpColors(plasmaTower, plasmaTower.laserSymbTrailColor);
+            TowerManager.availableLaserPlasmaTowers.Add(plasmaTower);
         }
         else if (symbiosisTowerType == TowerType.Plasma)
         {

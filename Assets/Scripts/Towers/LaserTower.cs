@@ -32,10 +32,11 @@ public class LaserTower : Tower
     public int symbiosisAreaDamage = 30;
     LaserAreaDamageController areaDamageController;
 
-    [Header("ScorchingRayAbility")]
-    public ScorchingRayAbility scorchingRayAbility;
     [Header("DeathBeamAbility")]
     public DeathBeamAbility deathBeamAbility;
+    [Header("ScorchingRayAbility")]
+    public ScorchingRayAbility scorchingRayAbility;
+    
 
     //  [Space]
 
@@ -101,7 +102,7 @@ public class LaserTower : Tower
 
     private void AddEffects()
     {
-        target.effectsController.AddBurning(BurningEffect.standardLifetime, damageBurning);
+        target.effectsController.AddBurning(Effect.burningDuration, Effect.burningDamage);
         if (symbiosisTowerType == TowerType.Electro)
         {
             randomizer = Random.Range(0, 100);
@@ -117,7 +118,7 @@ public class LaserTower : Tower
     }
     void ApplyAreaDamage() 
     {
-        areaDamageController.BurningDuration = BurningEffect.standardLifetime;
+        areaDamageController.BurningDuration = Effect.burningDuration;
         areaDamageController.damageBurning = damageBurning;
         areaDamageController.damageHit = symbiosisAreaDamage;
         areaDamager.transform.position = target.GetPosition();
@@ -161,6 +162,14 @@ public class LaserTower : Tower
     public override void DisableSymbiosisUpgrade()
     {
         SetOrdinaryLaserRay();
+        if (symbiosisTowerType == TowerType.Electro)
+        {
+            TowerManager.availableElectroLaserTowers.Remove(this);
+        }
+        else if (symbiosisTowerType == TowerType.Plasma) 
+        {
+            TowerManager.availableLaserPlasmaTowers.Remove(this);
+        }
         symbiosisTowerType = null;
     }
     void SetOrdinaryLaserRay()
@@ -171,21 +180,24 @@ public class LaserTower : Tower
         { cooldownAttack = ordinaryCooldownAttack; }
     }
 
-    // Ability 1  - ScorchingRay
-    public void CastScorchingRay(Vector3 aimPosition)
-    {
-        scorchingRayAbility.Cast(aimPosition);
-    }
-    // Ability 2  - DeathBeam
+    
+    // Ability 1  - DeathBeam
     public void CastDeathBeam(Enemy target)
     {
         deathBeamAbility.Cast(target);
     }
+
+    // Ability Laser-Plasma - ScorchingRay
+    public void CastScorchingRay(Vector3 aimPosition)
+    {
+        scorchingRayAbility.Cast(aimPosition);
+    }
+
     public override void EndCasting()
     {
         base.EndCasting();
         IsCastingAbility = false;
-        TowerManager.availableLaserTowers.Add(this);
+        //TowerManager.availableLaserTowers.Add(this);
     }
 
     public void upgrade()

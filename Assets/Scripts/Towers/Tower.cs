@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static CreepHexagonGenerator;
 
-public enum TowerType { Electro, Laser, Terraformer, Plasma };
+public enum TowerType { None, Electro, Laser, Terraformer, Plasma };
 
 public abstract class Tower : MonoBehaviour
 {

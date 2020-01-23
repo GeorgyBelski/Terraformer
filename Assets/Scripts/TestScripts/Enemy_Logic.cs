@@ -28,7 +28,7 @@ public abstract class Enemy_Logic : MonoBehaviour
 
     protected bool isRush = false;
 
-
+    public bool isCasting;
 
     protected float realcheckTime;//change!!!!!!!!!!!!!!!!!!!!!
     protected float brawe = 0; //= Random.RandomRange(0.1f, 0.7f);
@@ -99,9 +99,10 @@ public abstract class Enemy_Logic : MonoBehaviour
             // destTower = TowerManager.towers[0].transform;
             Vector3 fromTargetTowerToEnemy;
             //Debug.Log(TowerManager.towers.Count);
-            for (int i = 0; i < TowerManager.towers.Count; i++)
+            // for (int i = 0; i < TowerManager.towers.Count; i++)
+            TowerManager.towers.ForEach(tower =>
             {
-                Vector3? current_dist = TowerManager.towers[i].transform.position;
+                Vector3? current_dist = tower.transform.position;
                 
 
                 if (min > Vector3.Distance((Vector3)current_dist, transform.position))
@@ -109,9 +110,9 @@ public abstract class Enemy_Logic : MonoBehaviour
                     min = Vector3.Distance((Vector3)current_dist, transform.position);
                 //    destTower = TowerManager.towers[i].transform;
                 //    destTower.position = current_dist;
-                    targetTower = TowerManager.towers[i];
+                    targetTower = tower;
                 }
-            }
+            });
             //Debug.Log(destTower.position);
             fromTargetTowerToEnemy = transform.position - targetTower.transform.position;
             destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;

@@ -168,7 +168,7 @@ public class ElectroTower : Tower
         { target.effectsController.AddStun(stunDuration); }
         // symbiosis with LaserTower
         if (symbiosisTowerType == TowerType.Laser)
-        { target.effectsController.AddBurning(BurningEffect.standardLifetime / 2, 6); }
+        { target.effectsController.AddBurning(Effect.burningDuration / 2, Effect.burningDamage); }
         else if(symbiosisTowerType == TowerType.Plasma)
         { ApplyAreaDamage(symbiosisAreaDamage, isStun, stunDuration); }
     }
@@ -190,6 +190,14 @@ public class ElectroTower : Tower
     {
         //Debug.Log("DisableSymbiosisUpgrade");
         SetOrdinaryLightningCharge();
+        if (symbiosisTowerType == TowerType.Laser)
+        {
+            TowerManager.availableElectroLaserTowers.Remove(this);
+        }
+        else if (symbiosisTowerType == TowerType.Plasma)
+        {
+            TowerManager.availableElectroPlasmaTowers.Remove(this);
+        }
         symbiosisTowerType = null;
     }
     public void SetOrdinaryLightningCharge()
@@ -214,7 +222,7 @@ public class ElectroTower : Tower
     public override void EndCasting() {
         base.EndCasting();
         IsCastingAbility = false;
-        TowerManager.availableElectroTowers.Add(this);
+       // TowerManager.availableElectroTowers.Add(this);
     }
 
 }

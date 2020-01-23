@@ -12,6 +12,9 @@ public class ScorchingRayAbility : TowerAbility
     public float effectRadius = 2.19f;
     [HideInInspector]
     public GameObject scorchingRay;
+
+    public List<AudioClip> abilitiesSounds;
+
     Material trailMaterial;
     Animator animator;
     Vector3? aim;
@@ -32,13 +35,13 @@ public class ScorchingRayAbility : TowerAbility
     {
         base.Cast(aimPosition);
 
-        TowerManager.availableLaserTowers.Remove((LaserTower)tower);
+        //TowerManager.availableLaserTowers.Remove((LaserTower)tower);
         aim = aimPosition;
         //   cannon.LookAt((Vector3)thandetBallAim);
         tower.RotateCannon((Vector3)aim);
 
         tower.audioSource.pitch = 2f;
-        tower.audioSource.PlayOneShot(tower.abilitiesSounds[2], 0.6f);
+        tower.audioSource.PlayOneShot(abilitiesSounds[0], 0.6f);
 
         Vector3 offsetFromCannon = gunpoint.position - cannon.position;
         if (!scorchingRay)
@@ -77,7 +80,7 @@ public class ScorchingRayAbility : TowerAbility
             tower.audioSource.Stop();
             tower.EndCasting();
             tower.audioSource.pitch = 1.5f;
-            tower.audioSource.PlayOneShot(tower.abilitiesSounds[3], 0.8f);
+            tower.audioSource.PlayOneShot(abilitiesSounds[1], 0.8f);
         }
     }
 
@@ -96,7 +99,7 @@ public class ScorchingRayAbility : TowerAbility
             scorchingRay.transform.position = (Vector3)aim;
             AudioSource blowUp = scorchingRay.GetComponent<AudioSource>();
             blowUp.pitch = 2f;
-            blowUp.PlayOneShot(tower.abilitiesSounds[4], 0.4f);
+            blowUp.PlayOneShot(abilitiesSounds[2], 0.4f);
             animator.SetBool("isReachAim", true);
             ApplyScorchingRayEffects((Vector3)aim, effectRadius);
             aim = null;
@@ -112,7 +115,8 @@ public class ScorchingRayAbility : TowerAbility
                 { Vector3 distanceToEnemy = enemy.transform.position - aim;
                 if (distanceToEnemy.magnitude <= effectRadius)
                 {
-                    enemy.effectsController.AddBurning(BurningEffect.standardLifetime, ((LaserTower)tower).damageBurning);
+                    enemy.effectsController.AddBurning(Effect.burningDuration, Effect.burningDamage);
+                    enemy.effectsController.AddSlowdown(Effect.slowdownDuration, Effect.slowdownMultiplier);
                     targets.Add(enemy);
                 }
             }    

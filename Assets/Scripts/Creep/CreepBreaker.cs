@@ -14,6 +14,7 @@ public class CreepBreaker : MonoBehaviour
     public float cooldown = 3f;
     public float timerCooldown;
     public Image chargeBar;
+    public float timerBreakingCreep;
 
     [Header("Sounds")]
     public AudioSource audioSource;
@@ -29,6 +30,7 @@ public class CreepBreaker : MonoBehaviour
         DefineHexagon();
         SmashJump();
         ReduceTimer();
+        ReduceTimerBreakingCreep();
     }
 
     void ReduceTimer() 
@@ -45,25 +47,19 @@ public class CreepBreaker : MonoBehaviour
         if (chargeBar)
         { chargeBar.fillAmount = 1 - timerCooldown / cooldown; }
     }
-    void SmashJump() 
+    void ReduceTimerBreakingCreep()
     {
-        if (isSmashJump && !effectController.tpCharacter.m_Stun) 
+        if (enemyLogic.isCasting)
         {
-            enemyLogic.enabled = false;
-            animator.SetBool("SmashGround", true);
-            effectController.navAgent.speed = 0;
-            ableToBreak = false;
-            isSmashJump = false;
-            timerCooldown = cooldown;
-
-        }
-        if (hexagon!= null) 
-        {
-            //  effectController.tpCharacter.Move(hexagon.hexagonGObject.transform.position, false, false);
-            this.gameObject.transform.LookAt(hexagon.hexagonGObject.transform.position);
+            timerBreakingCreep -= Time.deltaTime;
+            if (timerBreakingCreep <= 0)
+            {
+                timerBreakingCreep = 0;
+                FinishBreakingCreep();
+            }
         }
     }
-
+    
     void DefineHexagon()
     {
         if (!ableToBreak || !enemyLogic.isGoingToDest) { return; }
@@ -85,8 +81,34 @@ public class CreepBreaker : MonoBehaviour
         }
       //  breakHexagon = false;
     }
+    void SmashJump()
+    {
+        if (isSmashJump && !effectController.tpCharacter.m_Stun)
+        {
+            //enemyLogic.enabled = false;
+            StopToBreakingCreep();
+            animator.SetBool("SmashGround", true);
+            //  effectController.navAgent.speed = 0;
+            ableToBreak = false;
+            isSmashJump = false;
+            //timerCooldown = cooldown;
 
-    
+        }
+        if (hexagon != null)
+        {
+            //  effectController.tpCharacter.Move(hexagon.hexagonGObject.transform.position, false, false);
+            this.gameObject.transform.LookAt(hexagon.hexagonGObject.transform.position);
+        }
+    }
+    public void StopToBreakingCreep()
+    {
+        enemyLogic.isCasting = true;
+        timerBreakingCreep = 2.0f;
+        animator.SetBool("Attack", false);
+        effectController.navAgent.speed = 0;
+    }
+
+
     public void SmashHexagon() // Activates in Animation
     {
         if (hexagon !=null && hexagon.GetStatus() == HexCoordinatStatus.Attend)
@@ -95,17 +117,19 @@ public class CreepBreaker : MonoBehaviour
             audioSource.PlayOneShot(sounds[0], 0.4f);
             hexagon.DamageHexagon();
             hexagon.isTarget = false;
+            timerCooldown = cooldown;
         }
         hexagon = null;
+        //animator.SetBool("SmashGround", false);
+        
+        
+    }
+    public void FinishBreakingCreep()
+    {
+        enemyLogic.isCasting = false;
+       // Debug.Log("SmashGround false");
         animator.SetBool("SmashGround", false);
-        
-        
+        effectController.navAgent.speed = effectController.originalNavAgentSpeed;
     }
 
-    public void ReturnToMove() 
-    {
-        effectController.navAgent.speed = effectController.originalNavAgentSpeed;
-        isSmashJump = false;
-        enemyLogic.enabled = true;
-    }
 }

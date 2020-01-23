@@ -2984,7 +2984,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 113
-  castTowerType: 0
+  castTowerType: 1
+  symbiosisTowerType: 0
   currentState: 0
   type: 0
   coolDown: 3
@@ -4354,7 +4355,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 119
-  castTowerType: 1
+  castTowerType: 2
+  symbiosisTowerType: 0
   currentState: 0
   type: 1
   coolDown: 3
@@ -4704,7 +4706,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 101
-  castTowerType: 3
+  castTowerType: 4
+  symbiosisTowerType: 0
   currentState: 0
   type: 0
   coolDown: 3
@@ -6551,7 +6554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.19700001, y: 0}
   m_AnchorMax: {x: 0.19700001, y: 0}
-  m_AnchoredPosition: {x: 87.09766, y: 14.700012}
+  m_AnchoredPosition: {x: 99.8, y: 14.640015}
   m_SizeDelta: {x: 58, y: 58}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2141606768024100443
@@ -6845,7 +6848,7 @@ GameObject:
   - component: {fileID: 8570450794880800509}
   - component: {fileID: 468299217}
   m_Layer: 5
-  m_Name: LaserTowerA1Button
+  m_Name: LaserPlasmaA1Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6979,7 +6982,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 115
-  castTowerType: 1
+  castTowerType: 2
+  symbiosisTowerType: 4
   currentState: 0
   type: 0
   coolDown: 3

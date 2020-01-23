@@ -42,9 +42,8 @@ public class ThanderBallAbility : TowerAbility
     {
         base.Cast(aimPosition);
 
-        TowerManager.availableElectroTowers.Remove((ElectroTower)tower);
+    //    TowerManager.availableElectroTowers.Remove((ElectroTower)tower);
         aim = aimPosition;
-        //   cannon.LookAt((Vector3)thandetBallAim);
         tower.RotateCannon((Vector3)aim);
 
         tower.audioSource.pitch = 4f;
@@ -59,7 +58,6 @@ public class ThanderBallAbility : TowerAbility
         //    thandetBallCollider.enabled = false;
 
             thandetBallTrailMaterial = thandetBall.GetComponentInChildren<ParticleSystemRenderer>().trailMaterial;
-            //   Debug.Log("thandetBallTrailMaterial: " + thandetBallTrailMaterial);
             thandetBallTrailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
         }
         else
