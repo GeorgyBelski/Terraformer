@@ -333,5 +333,6 @@ public abstract class Tower : MonoBehaviour
 
     public abstract void ActivateSymbiosisUpgrade();
     public abstract void DisableSymbiosisUpgrade();
+    public abstract void DestroyBulletsAndAbilities();
 
 }

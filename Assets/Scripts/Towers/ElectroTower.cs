@@ -46,7 +46,10 @@ public class ElectroTower : Tower
 
     [Header("ThandetBallAbility")]
     public ThanderBallAbility thanderBallAbility;
-
+    [Header("LightningStrikeAbility")]
+    public LightningStrikeAbility lightningStrikeAbility;
+    [Header("PlasmaBlastAbility")]
+    public PlasmaBlastAbility plasmaBlastAbility;
     private new void Start()
     {
         base.Start();
@@ -219,10 +222,27 @@ public class ElectroTower : Tower
         thanderBallAbility.Cast(aimPosition);
     }
 
+    // Ability Electro-Laser - LightningStrike
+    public void CastLightningStrike(Vector3 aimPosition)
+    {
+        lightningStrikeAbility.Cast(aimPosition);
+    }
+    // Ability Electro-Plasma - PlasmaBlast
+    public void CastPlasmaBlast(Vector3 aimPosition)
+    {
+        plasmaBlastAbility.Cast(aimPosition);
+    }
+
     public override void EndCasting() {
         base.EndCasting();
         IsCastingAbility = false;
        // TowerManager.availableElectroTowers.Add(this);
     }
-
+    override public void DestroyBulletsAndAbilities()
+    {
+        DestroyCharge();
+        if (lightningStrikeAbility.lightningStrike) { Destroy(lightningStrikeAbility.lightningStrike.gameObject); }
+        if (thanderBallAbility.thanderBall) { Destroy(thanderBallAbility.thanderBall.gameObject); }
+        Destroy(areaDamager);
+    }
 }

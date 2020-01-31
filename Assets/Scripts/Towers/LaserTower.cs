@@ -36,7 +36,9 @@ public class LaserTower : Tower
     public DeathBeamAbility deathBeamAbility;
     [Header("ScorchingRayAbility")]
     public ScorchingRayAbility scorchingRayAbility;
-    
+    [Header("LightningStrikeAbility")]
+    public LightningStrikeAbility lightningStrikeAbility;
+
 
     //  [Space]
 
@@ -192,6 +194,11 @@ public class LaserTower : Tower
     {
         scorchingRayAbility.Cast(aimPosition);
     }
+    // Ability Electro-Laser - LightningStrike
+    public void CastLightningStrike(Vector3 aimPosition)
+    {
+        lightningStrikeAbility.Cast(aimPosition);
+    }
 
     public override void EndCasting()
     {
@@ -199,7 +206,13 @@ public class LaserTower : Tower
         IsCastingAbility = false;
         //TowerManager.availableLaserTowers.Add(this);
     }
-
+    override public void DestroyBulletsAndAbilities() 
+    {
+        lr.enabled = false;
+        if (lightningStrikeAbility.lightningStrike) { Destroy(lightningStrikeAbility.lightningStrike.gameObject); }
+        if (scorchingRayAbility.scorchingRay) { Destroy(scorchingRayAbility.scorchingRay.gameObject); }
+        Destroy(areaDamager);
+    }
     public void upgrade()
     {
         

@@ -74,40 +74,17 @@ public class TowerHealth : Damageable
         thisTower.BreakSymbiosis();
         if (thisTower.currentVisualLink) { Destroy(thisTower.currentVisualLink.gameObject); }
         RemoveFromList();
-        //Destroy(thisTowet.gameObject);
 
         thisTower.cooldownAttack = float.PositiveInfinity;
-        //    thisTower.timerAttack = float.PositiveInfinity;
         thisTower.enableAutoattacs = false;
 
-        if (thisTower.type == TowerType.Electro)
+        if (thisTower.type == TowerType.Terraformer)
         {
-            ((ElectroTower)thisTower).DestroyCharge();
-            if (((ElectroTower)thisTower).thanderBallAbility.thandetBall)
-            { Destroy(((ElectroTower)thisTower).thanderBallAbility.thandetBall.gameObject); }
-        }
-        else if (thisTower.type == TowerType.Laser)
-        {
-            ((LaserTower)thisTower).lr.enabled = false;
-            if (((LaserTower)thisTower).scorchingRayAbility.scorchingRay)
-            { Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject); }
-        }
-        else if (thisTower.type == TowerType.Plasma) 
-        {
-            ((PlasmaTower)thisTower).DestroyBullets();
-            ((PlasmaTower)thisTower).clusterBombAbility.DestroyBullets();
-            PlasmaBlowUp blow = ((PlasmaTower)thisTower).blow;
-            if (blow.gameObject.activeSelf)
-            { blow.thisTower = null; }
-        }
-        else if (thisTower.type == TowerType.Terraformer)
-        {
-            // ((Terraformer)thisTower).menu.SetActive(true);
             MenuController.ShowMenu(true);
             MenuController.ShowDefeat(true);
-            //((Terraformer)thisTower).defeat.gameObject.SetActive(true);
             return;
         }
+        thisTower.DestroyBulletsAndAbilities();
         thisTower.hexagon.SetStatus(HexCoordinatStatus.Attend);
         Destroy(thisTower.gameObject); 
     }

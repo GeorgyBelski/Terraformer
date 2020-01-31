@@ -98,33 +98,32 @@ public class Terraformer : Tower
 
     public override void TowerAttack(Enemy target)
     {
-
     }
 
     internal override void TowerUpdate()
-    {
-        
+    {      
     }
 
     public override void EndCasting()
     {
-
     }
 
     public override void ActivateSymbiosisUpgrade()
-    {
-        
+    {    
     }
 
     public override void DisableSymbiosisUpgrade()
-    {
-        
+    {     
     }
-
+    public override void DestroyBulletsAndAbilities()
+    {
+    }
     public void playEmergency()
     {
         //audioSource.Stop();
         uiSource.pitch = 1;
         uiSource.PlayOneShot(emergencySound, 1f);
     }
+
+    
 }

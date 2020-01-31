@@ -25,6 +25,9 @@ public class PlasmaTower : Tower
     [Header("ScorchingRayAbility")]
     public ScorchingRayAbility scorchingRayAbility;
 
+    [Header("PlasmaBlastAbility")]
+    public PlasmaBlastAbility plasmaBlastAbility;
+
     [ColorUsageAttribute(true, true)]
     public Color ordinaryPlasmaBulletColor, ordinaryPlasmaTrail_BlowUpColor, plasmaSymbTrailColor , electroSymbTrailColor, electroSymbColor2, laserSymbTrailColor, laserSymbColor2;
 
@@ -204,6 +207,11 @@ public class PlasmaTower : Tower
     {
         scorchingRayAbility.Cast(aimPosition);
     }
+    // Ability Electro-Plasma - PlasmaBlast
+    public void CastPlasmaBlast(Vector3 aimPosition)
+    {
+        plasmaBlastAbility.Cast(aimPosition);
+    }
     public override void ActivateSymbiosisUpgrade()
     {
         symbiosisTowerType = Symbiosis.ActivateSymbiosisUpgrade(this);
@@ -231,5 +239,15 @@ public class PlasmaTower : Tower
             bullet.SetTrailColor(ordinaryPlasmaTrail_BlowUpColor);
         }
         blow.SetColor(ordinaryPlasmaTrail_BlowUpColor);
+    }
+    public override void DestroyBulletsAndAbilities()
+    {
+        DestroyBullets();
+        clusterBombAbility.DestroyBullets();
+        if (blow.gameObject.activeSelf)
+        { blow.thisTower = null; }
+
+        if (plasmaBlastAbility.plasmaBlast) { Destroy(plasmaBlastAbility.plasmaBlast.gameObject); }
+        if (scorchingRayAbility.scorchingRay) { Destroy(scorchingRayAbility.scorchingRay.gameObject); }
     }
 }

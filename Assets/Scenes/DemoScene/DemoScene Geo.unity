@@ -173,7 +173,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.39
+  m_Intensity: 1
   m_Range: 13.18
   m_SpotAngle: 62.31911
   m_InnerSpotAngle: 21.80208
@@ -1661,10 +1661,55 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1509523200}
-    - target: {fileID: 7182136650848910916, guid: 4bca82e3b0c02614382afc1187f7bae3,
+    - target: {fileID: 8174145929431357180, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 99.80002
+      propertyPath: m_AnchoredPosition.y
+      value: 14.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.79607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.95478576
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.7607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.91510624
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: buttonTintRecharging.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: buttonTintRecharging.g
+      value: 0.764151
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: buttonTintRecharging.b
+      value: 0.61062294
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}

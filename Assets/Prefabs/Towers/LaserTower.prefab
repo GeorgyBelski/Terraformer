@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 6998274765810947965}
   - component: {fileID: 6321010205059517553}
   - component: {fileID: 2474435889650568810}
+  - component: {fileID: 3807739110126682747}
   - component: {fileID: 7590772555364440343}
   - component: {fileID: 4236873006236776151}
   - component: {fileID: 5893686480769145596}
@@ -788,6 +789,7 @@ MonoBehaviour:
   symbiosisAreaDamage: 30
   deathBeamAbility: {fileID: 6321010205059517553}
   scorchingRayAbility: {fileID: 2474435889650568810}
+  lightningStrikeAbility: {fileID: 3807739110126682747}
   cast: {fileID: 3717215885554449417}
   castSize: 5
   castDamage: 500
@@ -864,6 +866,30 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 93c4e41bef66f2d45ae8c9accb97bb95, type: 3}
   - {fileID: 8300000, guid: d345d16b1a7970b43967d08a1c891c09, type: 3}
   - {fileID: 8300000, guid: f3119ab1a35f1af45830a02348c0b97b, type: 3}
+--- !u!114 &3807739110126682747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015777778884135378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0ec7e690bedeb4fa4851a986449011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 6015777778884135385}
+  castTime: 0.5
+  damage: 100
+  lightningStrikePrefab: {fileID: 8219149149034830646, guid: f875465946a3b954c93b45f2ccf2beb6,
+    type: 3}
+  abilityStunDuration: 3
+  effectRadius: 2.19
+  lightningStrike: {fileID: 0}
+  abilitiesSounds:
+  - {fileID: 8300000, guid: 8f0a38fc67f010a4aae0f48c6c00e47b, type: 3}
+  - {fileID: 8300000, guid: e2d42b3a79fc33e49bca02921319a71e, type: 3}
+  - {fileID: 8300000, guid: 52ea55d0706cb1a4ab992846fbd2b4d9, type: 3}
 --- !u!114 &7590772555364440343
 MonoBehaviour:
   m_ObjectHideFlags: 0

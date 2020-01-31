@@ -21,7 +21,7 @@ public class TowerManager : MonoBehaviour
     public static List<Tower> availableElectroLaserTowers = new List<Tower>();
     public static List<Tower> availableLaserPlasmaTowers = new List<Tower>();
     public static List<Tower> availableElectroPlasmaTowers = new List<Tower>();
-
+    [SerializeField] int electroPlasmaNumber;
     public static float selectedTowerRange = 1.5f;
     public static Dictionary<Transform, Tower> transformTowerMap = new Dictionary<Transform, Tower>();
     public static HashSet<Tower> symbiosisTowers = new HashSet<Tower>();
@@ -45,6 +45,11 @@ public class TowerManager : MonoBehaviour
         availableElectroTowers.Clear();
         availableLaserTowers.Clear();
         availablePlasmaTowers.Clear();
+
+        availableElectroLaserTowers.Clear();
+        availableLaserPlasmaTowers.Clear();  
+        availableElectroPlasmaTowers.Clear();
+
         transformTowerMap.Clear();
         symbiosisTowers.Clear();
 
@@ -66,6 +71,7 @@ public class TowerManager : MonoBehaviour
         SelectTower();
         availablePlazmaTowersCount = availablePlasmaTowers.Count;
         towersNumber = towers.Count;
+        electroPlasmaNumber = availableElectroPlasmaTowers.Count;
     }
 
     public static void AddTower(Tower tower)
@@ -163,7 +169,7 @@ public class TowerManager : MonoBehaviour
         }
         else if ((type1 == TowerType.Electro && type2 == TowerType.Plasma) || (type1 == TowerType.Plasma && type2 == TowerType.Electro))
         {
-            list = availableLaserPlasmaTowers;
+            list = availableElectroPlasmaTowers;
         }
 
             list.ForEach(tower =>

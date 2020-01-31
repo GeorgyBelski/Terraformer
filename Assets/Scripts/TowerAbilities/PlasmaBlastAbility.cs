@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScorchingRayAbility : TowerAbility
+public class PlasmaBlastAbility : TowerAbility
 {
-    [Header("ScorchingRay")]
-    public GameObject scorchingRayPrefab;
-
+    [Header("PlasmaBlast")]
+    public GameObject plasmaBlastPrefab;
+    public float abilityStunDuration = 2f;
+    public float abilitySlowdownDuration = 5f;
     public float speed = 20f;
     public float effectRadius = 2.19f;
     [HideInInspector]
-    public GameObject scorchingRay;
+    public GameObject plasmaBlast;
 
     public List<AudioClip> abilitiesSounds;
 
@@ -42,18 +42,18 @@ public class ScorchingRayAbility : TowerAbility
         tower.audioSource.PlayOneShot(abilitiesSounds[0], 0.6f);
 
         //Vector3 offsetFromCannon = gunpoint.position - cannon.position;
-        if (!scorchingRay)
+        if (!plasmaBlast)
         {
-            scorchingRay = Instantiate(scorchingRayPrefab, gunpoint.position, Quaternion.identity);
-            animator = scorchingRay.GetComponent<Animator>();
+            plasmaBlast = Instantiate(plasmaBlastPrefab, gunpoint.position, Quaternion.identity);
+            animator = plasmaBlast.GetComponent<Animator>();
         }
         else
         {
-            scorchingRay.transform.position = gunpoint.position;
-        //    scorchingRay.transform.rotation = cannon.rotation;
+            plasmaBlast.transform.position = gunpoint.position;
+            //    scorchingRay.transform.rotation = cannon.rotation;
             animator.SetBool("isReachAim", false);
         }
-        toAimNormalized = ((Vector3)aim - scorchingRay.transform.position).normalized;
+        toAimNormalized = ((Vector3)aim - plasmaBlast.transform.position).normalized;
 
     }
 
@@ -85,39 +85,40 @@ public class ScorchingRayAbility : TowerAbility
     public override void ShootingControl()
     {
 
-        Vector3 toAim = (Vector3)aim - scorchingRay.transform.position;
+        Vector3 toAim = (Vector3)aim - plasmaBlast.transform.position;
         float distanceToAim = toAim.magnitude;
         if (distanceToAim > 0.15f && previousDistanceToAim > distanceToAim)
         {
             previousDistanceToAim = distanceToAim;
-            scorchingRay.transform.position += toAimNormalized * speed * Time.deltaTime;
+            plasmaBlast.transform.position += toAimNormalized * speed * Time.deltaTime;
         }
         else
         {
-            scorchingRay.transform.position = (Vector3)aim;
-            AudioSource blowUp = scorchingRay.GetComponent<AudioSource>();
+            plasmaBlast.transform.position = (Vector3)aim;
+            AudioSource blowUp = plasmaBlast.GetComponent<AudioSource>();
             blowUp.pitch = 2f;
             blowUp.PlayOneShot(abilitiesSounds[2], 0.4f);
             animator.SetBool("isReachAim", true);
-            ApplyScorchingRayEffects((Vector3)aim, effectRadius);
+            ApplyPlasmaBlastEffects((Vector3)aim, effectRadius);
             aim = null;
         }
     }
 
-    private void ApplyScorchingRayEffects(Vector3 aim, float effectRadius)
+    private void ApplyPlasmaBlastEffects(Vector3 aim, float effectRadius)
     {
 
         EnemyManagerPro.enemies.ForEach(enemy =>
         {
             if (enemy)
-                { Vector3 distanceToEnemy = enemy.transform.position - aim;
+            {
+                Vector3 distanceToEnemy = enemy.transform.position - aim;
                 if (distanceToEnemy.magnitude <= effectRadius)
                 {
-                    enemy.effectsController.AddBurning(Effect.burningDuration, Effect.burningDamage);
-                    enemy.effectsController.AddSlowdown(Effect.slowdownDuration, Effect.slowdownMultiplier);
+                    enemy.effectsController.AddStun(abilityStunDuration);
+                    enemy.effectsController.AddSlowdown(abilitySlowdownDuration, Effect.slowdownMultiplier);
                     targets.Add(enemy);
                 }
-            }    
+            }
         });
         ApplyDamageToTargets(targets, damage);
     }

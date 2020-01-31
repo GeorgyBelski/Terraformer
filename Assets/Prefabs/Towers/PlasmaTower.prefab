@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 4635216721409019256}
   - component: {fileID: 277963137008030843}
   - component: {fileID: -1270261758386760797}
+  - component: {fileID: 1959420583315220348}
   - component: {fileID: 4909029387598569047}
   - component: {fileID: 4632297607463911867}
   - component: {fileID: 351380181583950062}
@@ -526,6 +527,7 @@ MonoBehaviour:
   blow: {fileID: 0}
   clusterBombAbility: {fileID: 277963137008030843}
   scorchingRayAbility: {fileID: -1270261758386760797}
+  plasmaBlastAbility: {fileID: 1959420583315220348}
   ordinaryPlasmaBulletColor: {r: 0.18037727, g: 1.9245284, b: 0, a: 1}
   ordinaryPlasmaTrail_BlowUpColor: {r: 1.3298428, g: 0.6806075, b: 0, a: 1}
   plasmaSymbTrailColor: {r: 0.98857003, g: 2.5693965, b: 0.32723448, a: 1}
@@ -641,6 +643,32 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 93c4e41bef66f2d45ae8c9accb97bb95, type: 3}
   - {fileID: 8300000, guid: d345d16b1a7970b43967d08a1c891c09, type: 3}
   - {fileID: 8300000, guid: f3119ab1a35f1af45830a02348c0b97b, type: 3}
+--- !u!114 &1959420583315220348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4185582797753693947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e2543861be52b479ff3b44e6d6dae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 5315704249322942705}
+  castTime: 0.5
+  damage: 100
+  plasmaBlastPrefab: {fileID: 8219149149034830646, guid: e1c24bb85ae25a24fa6d9d5695d00946,
+    type: 3}
+  abilityStunDuration: 2
+  abilitySlowdownDuration: 5
+  speed: 20
+  effectRadius: 2.19
+  plasmaBlast: {fileID: 0}
+  abilitiesSounds:
+  - {fileID: 8300000, guid: 8f0a38fc67f010a4aae0f48c6c00e47b, type: 3}
+  - {fileID: 8300000, guid: 7994420049af3c24f987d98371ccea88, type: 3}
+  - {fileID: 8300000, guid: 52ea55d0706cb1a4ab992846fbd2b4d9, type: 3}
 --- !u!208 &4909029387598569047
 NavMeshObstacle:
   m_ObjectHideFlags: 0
