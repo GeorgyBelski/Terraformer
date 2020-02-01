@@ -658,12 +658,12 @@ MonoBehaviour:
   tower: {fileID: 5315704249322942705}
   castTime: 0.5
   damage: 100
-  plasmaBlastPrefab: {fileID: 8219149149034830646, guid: e1c24bb85ae25a24fa6d9d5695d00946,
+  plasmaBlastPrefab: {fileID: 8219149149034830646, guid: 54a924c8d1126444b80c74986d6ad31e,
     type: 3}
-  abilityStunDuration: 2
-  abilitySlowdownDuration: 5
-  speed: 20
-  effectRadius: 2.19
+  abilityStunDuration: 1
+  abilitySlowdownDuration: 6
+  speed: 60
+  effectRadius: 3
   plasmaBlast: {fileID: 0}
   abilitiesSounds:
   - {fileID: 8300000, guid: 8f0a38fc67f010a4aae0f48c6c00e47b, type: 3}
