@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5274182903818910640}
   - component: {fileID: 1481642600256258099}
   - component: {fileID: 928544962118843758}
-  - component: {fileID: 4098201396251756251}
+  - component: {fileID: 9103292125114998808}
   - component: {fileID: 880228396155926829}
   m_Layer: 0
   m_Name: Logic counter
@@ -95,7 +95,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4098201396251756251
+--- !u!114 &9103292125114998808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2797863612406404595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc220b99140eb544beb210391347cd7, type: 3}
+  m_Script: {fileID: 11500000, guid: fc2aab176341bbe4fa803704dbf17b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDamager: {fileID: 2623192909609195406, guid: da5415a432dac38419376531d70065e1,
@@ -114,14 +114,7 @@ MonoBehaviour:
   enemyRusher: {fileID: 2623192909609195406, guid: 3cce14b2abac7264bbdc5019d8511a26,
     type: 3}
   enemyHeal: {fileID: 762130183, guid: 3942bfeac139110488efc3393ccf93e3, type: 3}
-  portal: {fileID: 0}
-  spawnRate: 0
-  portalPosition: 0
-  portalRange: 22
-  formation: 0
-  colCount: 0
-  colSize: 0
-  range: 0
+  portals: []
 --- !u!114 &880228396155926829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe001a7c70c86b646933ab643ffdb7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pattern: {fileID: 4098201396251756251}
+  pattern: {fileID: 0}
   enemyDamager: {fileID: 2623192909609195406, guid: da5415a432dac38419376531d70065e1,
     type: 3}
   enemyTank: {fileID: 8968871776893842170, guid: ee79144eaa76b7a48a1cc52e89902a86,
@@ -148,7 +141,7 @@ MonoBehaviour:
   enemyHealCount: 90
   towerCount: 100
   startCount: 200
-  portal: {fileID: 0}
+  lastPortal: {fileID: 0}
   thisPortalSettings: {fileID: 0}
   difficulties: 1
   betweenWavesActivity: 0
