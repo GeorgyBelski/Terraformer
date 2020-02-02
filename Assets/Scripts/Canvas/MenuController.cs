@@ -8,9 +8,10 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour
 {
     public Image startMenu;
-    public TextMeshProUGUI startVectory, startDefeat;
-    public static Image menu; 
-    public static TextMeshProUGUI vectory, defeat;
+    public TextMeshProUGUI startVictory, startDefeat, statrtKilledEnemies, startTaskDescription;
+    public string firstLevelDescription, secondLevelDescription, thirdLevelDescription;
+    public static Image menu;
+    public static TextMeshProUGUI victory, defeat, killedEnemies, taskDescription;
     public static bool isMenuShowed = false;
 
     [Header("Sounds")]
@@ -23,15 +24,24 @@ public class MenuController : MonoBehaviour
 
     private static bool isDefeatPlayed = false;
 
+    void Restart()
+    {
+        killedEnemies.text = "0";
+    }
     void Start()
     {
         menu = startMenu;
         audioSourceStatic = audioSource;
         defeatSound = sounds[3];
         victorySound = sounds[4];
-        
-        vectory = startVectory;
+
+        victory = startVictory;
         defeat = startDefeat;
+        killedEnemies = statrtKilledEnemies;
+        taskDescription = startTaskDescription;
+        killedEnemies.text = EnemyManagerPro.killedEnemies.ToString();
+        victory.gameObject.SetActive(false);
+        defeat.gameObject.SetActive(false);
     }
     void Update()
     {
@@ -46,16 +56,16 @@ public class MenuController : MonoBehaviour
 
         ShowMenu(isMenuShowed);
     }
-    public static void ShowMenu(bool show) 
+    public static void ShowMenu(bool show)
     {
         menu.gameObject.SetActive(show);
-        if (isMenuShowed != show) 
+        if (isMenuShowed != show)
         { isMenuShowed = show; }
     }
-    public static void ShowVictory(bool show) 
+    public static void ShowVictory(bool show)
     {
         //audioSourceStatic.PlayOneShot(victorySound, 0.6f);
-        vectory.gameObject.SetActive(show);
+        victory.gameObject.SetActive(show);
     }
     public static void ShowDefeat(bool show)
     {
@@ -68,7 +78,7 @@ public class MenuController : MonoBehaviour
 
         defeat.gameObject.SetActive(show);
     }
-    public void ExpandCreep() 
+    public void ExpandCreep()
     {
         CreepHexagonGenerator.Expand();
         if (CreepHexagonGenerator.creepHexagonGenerator.isExpanding)
@@ -84,12 +94,19 @@ public class MenuController : MonoBehaviour
         else
             audioSource.PlayOneShot(sounds[2], 0.6f);
     }
+
+    public static void RewriteKilledEnemiesCount()
+    {
+        killedEnemies.text = EnemyManagerPro.killedEnemies.ToString();
+    }
     public void RestartClick() 
     {
+        Restart();
         TowerManager.Restart();
         CreepHexagonGenerator.Restart();
         EnemyManagerPro.Restart();
         ResourceManager.Restart();
+        StopTime.Restart();
         ShowMenu(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

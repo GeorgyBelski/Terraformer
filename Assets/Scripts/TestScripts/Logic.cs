@@ -52,10 +52,10 @@ public class Logic : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            if(stopTime)
-                Time.timeScale = 1f;
+            if (stopTime)
+            { Time.timeScale = 1f; }
             else
-                Time.timeScale = 0;
+            { Time.timeScale = 0; }
 
             stopTime = !stopTime;
             //print("space key was pressed");

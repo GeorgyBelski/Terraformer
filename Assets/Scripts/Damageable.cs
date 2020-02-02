@@ -26,6 +26,8 @@ public abstract class Damageable : MonoBehaviour
 
     public float healthRatio = 1f;
 
+    bool isDead = false;
+
     void Start()
     {
         
@@ -50,10 +52,11 @@ public abstract class Damageable : MonoBehaviour
               
             PopUpDamagePoint(value);
         }
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
             health = 0;
             ApplyDeath();
+            isDead = true;
         }
     }
 

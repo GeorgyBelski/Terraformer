@@ -80,8 +80,8 @@ public class TowerHealth : Damageable
 
         if (thisTower.type == TowerType.Terraformer)
         {
-            MenuController.ShowMenu(true);
-            MenuController.ShowDefeat(true);
+            LevelManager.Defeat();
+            
             return;
         }
         thisTower.DestroyBulletsAndAbilities();
