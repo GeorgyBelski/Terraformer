@@ -7,19 +7,23 @@ public class PortalSettings : MonoBehaviour
     private List<GameObject> enemyList = new List<GameObject>();
 
     public float loadingTime = 7;
+    public float finalSize = 5;
+    public float deactivateTime = 1.5f;
+
+    public SpawnEnemiesPattern pattern;
+    public bool deactivating = false;
+
+    private SpawnEnemiesPattern.WaveType patternType;
+    private Sqad.Formation formation;
+
     float previousLoadingTime;
     float timerLoading;
     float sizeInSecond;
-    public float finalSize = 5;
     float previousFinalSize;
     Vector3 previousPosition;
     float startScale;
+    private float startSizeInSecond;
 
-    public SpawnEnemiesPattern pattern;
-    
-    private GameObject leader;
-    private GameObject next;
-    
     [Header("Loading Line")]
     public LineRenderer loadingLine;
     [ColorUsageAttribute(true, true)]
@@ -32,26 +36,23 @@ public class PortalSettings : MonoBehaviour
     float originalSpeed;
     public Material loadingLineMaterial;
 
-    private float startSizeInSecond;
+
     private bool active = false;
     private bool spwning = false;
-
+    private GameObject leader;
+    private GameObject next;
     public float spawnRate = 1f;
     private float realSpawnRate = 1f;
-
+    private float delay;
     private int enemieCountInList = 0;
-
     private int columns;
     private int columnCount;
     private float columnsRange;
     private float rotation;
     private Sqad.Formation form;
-
     private bool isSquad = false;
-
-    public float deactivateTime = 1.5f;
     private float deactivateTimeLeft;
-    public bool deactivating = false;
+
     //private loadingLineMaterial;
 
     [Header("Sounds")]
@@ -87,9 +88,16 @@ public class PortalSettings : MonoBehaviour
     }
     void Update()
     {
+        delay -= Time.deltaTime;
+
+        if (delay > 0)
+            return;
+
         if (activating)
         {
-            activatingAudioSource.PlayOneShot(activatingSound, 0.5f);
+            activatingAudioSource.PlayOneShot(activatingSound, 0.7f);
+            ReloadLine();
+            loadingLine.enabled = true;
             activating = false;
         }
         //print("+"); 
@@ -110,24 +118,17 @@ public class PortalSettings : MonoBehaviour
             //print(transform.localScale.x + " " + size);
             if (transform.localScale.x >= finalSize && active)
             {
-                //print(sizeInSecond);
                 sizeInSecond = 0;
                 active = false;
-                //gameObject.active = false;
                 spwning = true;
                 enemieCountInList = 0;
-                //spawnEnemyes();
-                //transform.localScale = Vector3.zero;
-                //transform.position = Vector3.zero;
-                //this.enabled = false;
-                //gameObject. = false
 
             }
 
             if (spwning)
             {
                 if (realSpawnRate <= 0){
-                    pattern.spawnEnemyes();
+                    spawnEnemyes();
                     audioSource.PlayOneShot(sounds[1], 0.5f);
                     realSpawnRate = spawnRate;
                 }
@@ -172,83 +173,34 @@ public class PortalSettings : MonoBehaviour
         deactivateTimeLeft = deactivateTime;
     }
 
-    /*public void spawnEnemyes()
+    public void setSettings(List<GameObject> list, float spawnRate, float delay, float portalLoadTime, float portalFinzlSize)
     {
-        if(realSpawnRate <= 0)
-        {
-            //print("+");
-            Instantiate(enemyList[enemieCountInList], new Vector3(
-                this.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 2),
-                0,
-                this.transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 2)), this.transform.rotation);
-            realSpawnRate = spawnRate;
-            enemieCountInList++;
-        }
-
-        if (enemyList.Count <= enemieCountInList)
-        {
-            spwning = false;
-            transform.localScale = Vector3.zero;
-            transform.position = Vector3.zero;
-            this.enabled = false;
-            gameObject.SetActive(false);
-            realSpawnRate = spawnRate;
-            sizeInSecond = startSizeInSecond;
-
-        }
-        
-        //print(enemyList.Count);
-        //engl = SquadFormationSquare.DegreeToRadian(engl);
-        //leader = enemyList[0];
-        //Instantiate(leader, transform.position, this.transform.rotation);
-        //for (int i = 1; i < enemyList.Count - 1; i++)
-        //{
-
-        //}
-        
-    }
-    */
-
-    /*private void spawnSquad()
-    {
-        switch(form) {
-            case Sqad.Formation.Square:
-                new SquadFormationSquare(enemyList[0], enemyList[1], columns, columnCount, columnsRange, 35, rotation);
-                break;
-            case Sqad.Formation.Circle:
-                new SquadFormationCircle(enemyList[0], enemyList[1], columns, columnCount, columnsRange, 35, rotation);
-                break;
-        }
-        spwning = false;
-        transform.localScale = Vector3.zero;
-        transform.position = Vector3.zero;
-        this.enabled = false;
-        gameObject.SetActive(false);
-        realSpawnRate = spawnRate;
-        sizeInSecond = startSizeInSecond;
-
-    }
-    */
-
-    public void setSettings(List<GameObject> list, float spawnRate)
-    {
+        //print("+"); 
         deactivateTimeLeft = deactivateTime;
         this.spawnRate = spawnRate;
+        this.delay = delay;
+        this.loadingTime = portalLoadTime;
+        this.finalSize = portalFinzlSize;
+        patternType = SpawnEnemiesPattern.WaveType.Simple;
+
         realSpawnRate = spawnRate;
         startSizeInSecond = sizeInSecond;
         enemyList = list;
+        transform.localScale = Vector3.zero;
+        loadingLine.enabled = false;
 
         active = true;
         this.enabled = true;
         isSquad = false;
         activating = true;
-        ReloadLine();
+
 
         //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
 
     public void setSettings(List<GameObject> list, int columns, int columnCount, float columnsRange, float rotation, Sqad.Formation form)
     {
+        
         deactivateTimeLeft = deactivateTime;
         realSpawnRate = spawnRate;
         startSizeInSecond = sizeInSecond;
@@ -270,7 +222,72 @@ public class PortalSettings : MonoBehaviour
         //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
 
-    // Loading Line
+    public void spawnEnemyes()
+    {
+        switch (patternType)
+        {
+            case SpawnEnemiesPattern.WaveType.Simple:
+                simpleSpawn();
+                break;
+            case SpawnEnemiesPattern.WaveType.Squad:
+                squadSpawn();
+                break;
+        }
+
+    }
+
+    private void simpleSpawn()
+    {
+
+        if (deactivating)
+            return;
+
+        /*
+         * Enemy enem = Instantiate(enemyList[enemieCountInList], new Vector3(
+            transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 2),
+            0,
+            transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 2)), transform.rotation)
+            .GetComponent<Enemy>();
+            */
+        Enemy enem = Instantiate(enemyList[enemieCountInList], new Vector3(
+        transform.position.x,
+        0,
+        transform.position.z), transform.rotation)
+        .GetComponent<Enemy>();
+
+        //enem.maxHealth = enem.maxHealth + 100 * wave;
+        //enem.health = enem.maxHealth;
+
+        enemieCountInList++;
+
+        if (enemyList.Count <= enemieCountInList)
+        {
+            //enemieCountInList = 0;
+
+            deactivate();
+            //print("+");
+            //return;
+
+        }
+
+
+    }
+
+    private void squadSpawn()
+    {
+        if (deactivating)
+            return;
+        switch (formation)
+        {
+            case Sqad.Formation.Square:
+                //new SquadFormationSquare(list[0], list[1], columns, columnCount, columnsRange, realPortalRange, portalPosition);
+                break;
+            case Sqad.Formation.Circle:
+                //new SquadFormationCircle(list[0], list[1], columns, columnCount, columnsRange, realPortalRange, portalPosition);
+                break;
+        }
+        deactivate();
+    }
 
     void ShowFinalSize()
     {

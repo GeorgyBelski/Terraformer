@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnEnemiesPattern : MonoBehaviour
+public abstract class SpawnEnemiesPattern : MonoBehaviour
 {
     public enum WaveType
     {
@@ -14,176 +14,60 @@ public class SpawnEnemiesPattern : MonoBehaviour
     public GameObject enemyRusher;
     public GameObject enemyHeal;
 
-    public PortalSettings portal;
+    public List<PortalSettings> portals;
 
-    public float spawnRate;
-    public float portalPosition;
-    public int portalRange = 22;
-    private int realPortalRange;
+    protected float spawnRate;
+    protected float portalPosition;
+    protected float portalEnglePosition;
+    protected float delay;
+    protected int portalRange = 22;
+    protected int realPortalRange;
+    protected float portalLoadTime;
+    protected float portalFinzlSize;
 
-    private int wave;
+    public int maxWaves;
+    public int wave;
 
-    public Sqad.Formation formation;
-    public int colCount;
-    public int colSize;
-    public float range;
-    private WaveType patternType;
+    protected Sqad.Formation formation;
+    protected WaveType patternType;
+    protected int colCount;
+    protected int colSize;
+    protected float range;
 
+    protected int enemieCountInList = 0;
+    protected bool spawning;
 
-
-    private int enemieCountInList = 0;
-    private bool spawning;
-
-    private List<GameObject> list;
+    protected List<GameObject> list;
 
     void Start()
     {
         realPortalRange = portalRange;
     }
 
-    public void setPattern(int wave)
+    public abstract void setPattern(int wave);
+
+    
+
+    protected void addEnemy(int count, GameObject enem)
     {
-        enemieCountInList = 0;
-        this.wave = wave;
-        realPortalRange = portalRange + wave;
-        list = new List<GameObject>();
-        switch (wave)
+        for (int i = 0; i < count; i++)
         {
-            case 1:
-                patternType = WaveType.Simple;
-                /*
-                patternType = WaveType.Squad;
-                formation = Sqad.Formation.Circle;
-                colCount = 1;
-                colSize = 9;
-                range = 3;
-                list.Add(enemyTank);
-                list.Add(enemyDamager);
-                */
-                addEnemy(4, enemyDamager);
-                spawnRate = 1f;
-                portalPosition = 0;
-                break;
-            case 2:
-                
-                addEnemy(5, enemyDamager);
-                addEnemy(1, enemyHeal);
-                break;
-            case 3:
-                patternType = WaveType.Squad;
-                formation = Sqad.Formation.Square;
-                colCount = 2;
-                colSize = 4;
-                range = 1;
-                list.Add(enemyRusher);
-                list.Add(enemyRusher);
-                //addEnemy(7, enemyRusher);
-                //addEnemy(1, enemyHeal);
-                //spawnRate = 0.5f;
-                break;
-            case 4:
-                patternType = WaveType.Squad;
-                formation = Sqad.Formation.Square;
-                colCount = 3;
-                colSize = 3;
-                range = 0.7f;
-                list.Add(enemyTank);
-                list.Add(enemyDamager);
-                portalPosition = 90;
-
-                break;
-            case 5:
-                patternType = WaveType.Simple;
-                spawnRate = 1f;
-                //enemyRusher.setPriority(TowerType.Terraformer);
-                addEnemy(15, enemyDamager);
-                addEnemy(2, enemyHeal);
-                break;
-            case 6:
-                patternType = WaveType.Squad;
-                formation = Sqad.Formation.Square;
-                colCount = 3;
-                colSize = 4;
-                range = 1;
-                list.Add(enemyTank);
-                list.Add(enemyRusher);
-                spawnRate = 0.5f;
-                break;
-            case 7:
-                patternType = WaveType.Simple;
-                //addEnemy(3, enemyTank);
-                addEnemy(15, enemyDamager);
-                addEnemy(10, enemyRusher);
-                addEnemy(2, enemyHeal);
-                spawnRate = 0.3f;
-                break;
-            case 8:
-                patternType = WaveType.Squad;
-                formation = Sqad.Formation.Circle;
-                colCount = 1;
-                colSize = 5;
-                range = 4;
-                list.Add(enemyTank);
-                list.Add(enemyTank);
-                //addEnemy(6, enemyTank);
-                //addEnemy(3, enemyRusher);
-                //addEnemy(1, enemyHeal);
-                spawnRate = 0.5f;
-                portalPosition = 270;
-                break;
-            case 9:
-                patternType = WaveType.Simple;
-                addEnemy(22, enemyRusher);
-                //addEnemy(3, enemyRusher);
-                addEnemy(1, enemyHeal);
-                spawnRate = 0.2f;
-                portalPosition = 120;
-                break;
-
-            case 10:
-                patternType = WaveType.Squad;
-                formation = Sqad.Formation.Square;
-                colCount = 4;
-                colSize = 6;
-                range = 1;
-                list.Add(enemyTank);
-                list.Add(enemyRusher);
-                portalPosition = 120;
-                break;
-
-            case 11:
-                patternType = WaveType.Simple;
-                addEnemy(12, enemyRusher);
-                addEnemy(2, enemyHeal);
-                addEnemy(12, enemyDamager);
-                addEnemy(12, enemyRusher);
-                //addEnemy(22, enemyRusher);
-                //addEnemy(3, enemyRusher);
-                addEnemy(2, enemyHeal);
-                spawnRate = 0.5f;
-                portalPosition = 180;
-                break;
-
-            case 12:
-                patternType = WaveType.Squad;
-                formation = Sqad.Formation.Square;
-                colCount = 3;
-                colSize = 4;
-                range = 2;
-                list.Add(enemyTank);
-                list.Add(enemyTank);
-                portalPosition = 250;
-                break;
-            default:
-                addEnemy(5 * wave, enemyDamager.gameObject);
-                break;
-
+            list.Add(enem);
         }
+            
+    }
 
+    protected void spawnPortal(PortalSettings portal)
+    {
+        //print("+");
+        portal.gameObject.active = true;
+        portal.transform.position = countVector();
+        portal.setSettings(list, spawnRate, delay, portalLoadTime, portalFinzlSize);
+    }
 
-        //List<Enemy> list = new List<Enemy>();
-
-        //return list;
+    private Vector3 countVector()
+    {
+        return new Vector3(portalPosition * Mathf.Sin(Sqad.DegreeToRadian(portalEnglePosition)), 1, portalPosition * Mathf.Cos(Sqad.DegreeToRadian(portalEnglePosition)));
     }
 
     public List<GameObject> getPattern()
@@ -195,22 +79,12 @@ public class SpawnEnemiesPattern : MonoBehaviour
     {
         return patternType;
     }
-
-    private void addEnemy(int count, GameObject enem)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            list.Add(enem);
-        }
-            
-    }
-
     //////
     ///-------------------------------------------
     ///Enemy Spawning
     ///-------------------------------------------
     /////
-    public void spawnEnemyes()
+ /*   public void spawnEnemyes()
     {
         switch (patternType)
         {
@@ -270,6 +144,6 @@ public class SpawnEnemiesPattern : MonoBehaviour
         portal.deactivate();
     }
 
-
+    */
 
 }

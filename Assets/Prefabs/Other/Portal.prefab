@@ -120,7 +120,7 @@ MonoBehaviour:
   deactivating: 0
   audioSource: {fileID: 8549715623223235176}
   sounds:
-  - {fileID: 8300000, guid: aed2e3aad75dc4945871a25c2cc92e44, type: 3}
+  - {fileID: 8300000, guid: 2104f7c1138c6b448a38d86cd674432d, type: 3}
   - {fileID: 8300000, guid: 0927d5deb75423a46a70191c485baab6, type: 3}
   activatingSound: {fileID: 8300000, guid: 8932e14c293b3a14a9e0a4c3ccb29802, type: 3}
   activatingAudioSource: {fileID: 4177337446699749237}
