@@ -67,9 +67,16 @@ public class Logic : MonoBehaviour
         }
         else
         {
+            if (pattern.wave >= pattern.maxWaves)
+            {
+                timerText.text = "Fin";
+                return;
+            }
             realTimer -= Time.deltaTime;
             timerText.text = "Next Wave in " + realTimer.ToString("0.0");
         }
+
+       
 
 
         if (realTimer <= 0)

@@ -175,7 +175,7 @@ public class PortalSettings : MonoBehaviour
 
     public void setSettings(List<GameObject> list, float spawnRate, float delay, float portalLoadTime, float portalFinzlSize)
     {
-        print("+"); 
+        //print("+"); 
         deactivateTimeLeft = deactivateTime;
         this.spawnRate = spawnRate;
         this.delay = delay;

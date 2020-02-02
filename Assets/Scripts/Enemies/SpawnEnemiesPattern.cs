@@ -25,7 +25,8 @@ public abstract class SpawnEnemiesPattern : MonoBehaviour
     protected float portalLoadTime;
     protected float portalFinzlSize;
 
-    protected int wave;
+    public int maxWaves;
+    public int wave;
 
     protected Sqad.Formation formation;
     protected WaveType patternType;

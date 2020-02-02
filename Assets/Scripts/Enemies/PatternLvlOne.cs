@@ -186,101 +186,7 @@ public class PatternLvlOne : SpawnEnemiesPattern
                     delay = 20;
                     spawnPortal(portals[4]);
                     break;
-                case 4:
-                    patternType = WaveType.Squad;
-                    formation = Sqad.Formation.Square;
-                    colCount = 3;
-                    colSize = 3;
-                    range = 0.7f;
-                    list.Add(enemyTank);
-                    list.Add(enemyDamager);
-                    portalPosition = 90;
-
-                    break;
-                case 5:
-                    patternType = WaveType.Simple;
-                    spawnRate = 1f;
-                    //enemyRusher.setPriority(TowerType.Terraformer);
-                    addEnemy(15, enemyDamager);
-                    addEnemy(2, enemyHeal);
-                    break;
-                case 6:
-                    patternType = WaveType.Squad;
-                    formation = Sqad.Formation.Square;
-                    colCount = 3;
-                    colSize = 4;
-                    range = 1;
-                    list.Add(enemyTank);
-                    list.Add(enemyRusher);
-                    spawnRate = 0.5f;
-                    break;
-                case 7:
-                    patternType = WaveType.Simple;
-                    //addEnemy(3, enemyTank);
-                    addEnemy(15, enemyDamager);
-                    addEnemy(10, enemyRusher);
-                    addEnemy(2, enemyHeal);
-                    spawnRate = 0.3f;
-                    break;
-                case 8:
-                    patternType = WaveType.Squad;
-                    formation = Sqad.Formation.Circle;
-                    colCount = 1;
-                    colSize = 5;
-                    range = 4;
-                    list.Add(enemyTank);
-                    list.Add(enemyTank);
-                    //addEnemy(6, enemyTank);
-                    //addEnemy(3, enemyRusher);
-                    //addEnemy(1, enemyHeal);
-                    spawnRate = 0.5f;
-                    portalPosition = 270;
-                    break;
-                case 9:
-                    patternType = WaveType.Simple;
-                    addEnemy(22, enemyRusher);
-                    //addEnemy(3, enemyRusher);
-                    addEnemy(1, enemyHeal);
-                    spawnRate = 0.2f;
-                    portalPosition = 120;
-                    break;
-
-                case 10:
-                    patternType = WaveType.Squad;
-                    formation = Sqad.Formation.Square;
-                    colCount = 4;
-                    colSize = 6;
-                    range = 1;
-                    list.Add(enemyTank);
-                    list.Add(enemyRusher);
-                    portalPosition = 120;
-                    break;
-
-                case 11:
-                    patternType = WaveType.Simple;
-                    addEnemy(12, enemyRusher);
-                    addEnemy(2, enemyHeal);
-                    addEnemy(12, enemyDamager);
-                    addEnemy(12, enemyRusher);
-                    //addEnemy(22, enemyRusher);
-                    //addEnemy(3, enemyRusher);
-                    addEnemy(2, enemyHeal);
-                    spawnRate = 0.5f;
-                    portalPosition = 180;
-                    break;
-
-                case 12:
-                    patternType = WaveType.Squad;
-                    formation = Sqad.Formation.Square;
-                    colCount = 3;
-                    colSize = 4;
-                    range = 2;
-                    list.Add(enemyTank);
-                    list.Add(enemyTank);
-                    portalPosition = 250;
-                    break;
                 default:
-                    addEnemy(5 * wave, enemyDamager.gameObject);
                     break;
 
             }
@@ -289,8 +195,8 @@ public class PatternLvlOne : SpawnEnemiesPattern
 
     // Start is called before the first frame update
     void Start()
-    { 
-
+    {
+        maxWaves = 3;
     }
 
     // Update is called once per frame
