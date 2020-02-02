@@ -11,7 +11,7 @@ public class ThanderBallAbility : TowerAbility
     public float effectRadius = 2.19f;
     public float abilityStunDuration = 3f;
     [HideInInspector]
-    public GameObject thandetBall;
+    public GameObject thanderBall;
     Material thandetBallTrailMaterial;
     Animator thandetBallAnimator;
     SphereCollider thandetBallCollider;
@@ -42,33 +42,31 @@ public class ThanderBallAbility : TowerAbility
     {
         base.Cast(aimPosition);
 
-        TowerManager.availableElectroTowers.Remove((ElectroTower)tower);
+    //    TowerManager.availableElectroTowers.Remove((ElectroTower)tower);
         aim = aimPosition;
-        //   cannon.LookAt((Vector3)thandetBallAim);
         tower.RotateCannon((Vector3)aim);
 
         tower.audioSource.pitch = 4f;
         tower.audioSource.PlayOneShot(tower.abilitiesSounds[0], 0.7f);
 
         Vector3 offsetFromCannon = gunpoint.position - cannon.position;
-        if (!thandetBall)
+        if (!thanderBall)
         {
-            thandetBall = Instantiate(thanderBallPrefab, gunpoint.position + offsetFromCannon / 2, cannon.rotation);
-            thandetBallAnimator = thandetBall.GetComponentInChildren<Animator>();
+            thanderBall = Instantiate(thanderBallPrefab, gunpoint.position + offsetFromCannon / 2, cannon.rotation);
+            thandetBallAnimator = thanderBall.GetComponentInChildren<Animator>();
         //    thandetBallCollider = thandetBall.GetComponentInChildren<SphereCollider>();
         //    thandetBallCollider.enabled = false;
 
-            thandetBallTrailMaterial = thandetBall.GetComponentInChildren<ParticleSystemRenderer>().trailMaterial;
-            //   Debug.Log("thandetBallTrailMaterial: " + thandetBallTrailMaterial);
+            thandetBallTrailMaterial = thanderBall.GetComponentInChildren<ParticleSystemRenderer>().trailMaterial;
             thandetBallTrailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
         }
         else
         {
-            thandetBall.transform.position = gunpoint.position + offsetFromCannon / 2;
-            thandetBall.transform.rotation = cannon.rotation;
+            thanderBall.transform.position = gunpoint.position + offsetFromCannon / 2;
+            thanderBall.transform.rotation = cannon.rotation;
             thandetBallAnimator.SetBool("isReachAim", false);
         }
-        toAimNormalized = ((Vector3)aim - thandetBall.transform.position).normalized;
+        toAimNormalized = ((Vector3)aim - thanderBall.transform.position).normalized;
 
     }
 
@@ -83,7 +81,7 @@ public class ThanderBallAbility : TowerAbility
     public override void CastingControl()
     {
         Vector3 ofsetFromCannon = gunpoint.position - cannon.position;
-        thandetBall.transform.position += ofsetFromCannon * speed * Time.deltaTime / 32;
+        thanderBall.transform.position += ofsetFromCannon * speed * Time.deltaTime / 32;
         previousDistanceToAim = float.PositiveInfinity;
         timerCast -= Time.deltaTime;
         if (timerCast <= 0)
@@ -94,18 +92,18 @@ public class ThanderBallAbility : TowerAbility
 
     public override void ShootingControl()
     {
-        Vector3 toAim = (Vector3)aim - thandetBall.transform.position;
+        Vector3 toAim = (Vector3)aim - thanderBall.transform.position;
         float distanceToAim = toAim.magnitude;
         if (distanceToAim > 0.15f && previousDistanceToAim > distanceToAim)
         {
             previousDistanceToAim = distanceToAim;
-            thandetBall.transform.position += toAimNormalized * speed * Time.deltaTime;
+            thanderBall.transform.position += toAimNormalized * speed * Time.deltaTime;
         }
         else
         {
-            thandetBall.transform.position = (Vector3)aim;
-            thandetBall.transform.rotation = Quaternion.identity;
-            AudioSource blowUp = thandetBall.GetComponent<AudioSource>();
+            thanderBall.transform.position = (Vector3)aim;
+            thanderBall.transform.rotation = Quaternion.identity;
+            AudioSource blowUp = thanderBall.GetComponent<AudioSource>();
             blowUp.pitch = 2f;
             blowUp.PlayOneShot(tower.abilitiesSounds[1], 0.5f);
             thandetBallAnimator.SetBool("isReachAim", true);

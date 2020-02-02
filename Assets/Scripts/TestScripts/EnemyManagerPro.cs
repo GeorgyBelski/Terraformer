@@ -13,10 +13,12 @@ public class EnemyManagerPro : MonoBehaviour
     public static Dictionary<Transform, Enemy> TransformEnemyMap = new Dictionary<Transform, Enemy>();
     public int enemyCount;// for debuging
 
+    public static int killedEnemies = 0;
     public static void Restart()
     {
         enemies.Clear();
         enemiesMap.Clear();
+        killedEnemies = 0;
     }
     private void Start()
     {
@@ -61,10 +63,20 @@ public class EnemyManagerPro : MonoBehaviour
 
     public static void RemoveEnemy(Enemy enemy)
     {
+    //  if (enemies.Contains(enemy))
+    //  {
         enemies.Remove(enemy);
         //enemiesMap[enem.getName].Remove(enem);
         enemiesMap[enemy.type].Remove(enemy);
         TransformEnemyMap.Remove(enemy.transform);
+
+        if (enemy.type != EnemyType.Totem)
+        {
+            killedEnemies++;
+            MenuController.RewriteKilledEnemiesCount();
+            LevelManager.CheckFirstLevelCondition();
+        }
+    // }
     }
 
     public static bool checking(Enemy enem)

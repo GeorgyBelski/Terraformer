@@ -14,10 +14,14 @@ public class TowerManager : MonoBehaviour
     public static Tower terraformer { get; set; }
    // public Terraformer terraformer
 
-    public static List<ElectroTower> availableElectroTowers = new List<ElectroTower>();
-    public static List<LaserTower> availableLaserTowers = new List<LaserTower>();
-    public static List<PlasmaTower> availablePlasmaTowers = new List<PlasmaTower>();
+    public static List<Tower> availableElectroTowers = new List<Tower>();
+    public static List<Tower> availableLaserTowers = new List<Tower>();
+    public static List<Tower> availablePlasmaTowers = new List<Tower>();
 
+    public static List<Tower> availableElectroLaserTowers = new List<Tower>();
+    public static List<Tower> availableLaserPlasmaTowers = new List<Tower>();
+    public static List<Tower> availableElectroPlasmaTowers = new List<Tower>();
+    [SerializeField] int electroPlasmaNumber;
     public static float selectedTowerRange = 1.5f;
     public static Dictionary<Transform, Tower> transformTowerMap = new Dictionary<Transform, Tower>();
     public static HashSet<Tower> symbiosisTowers = new HashSet<Tower>();
@@ -41,6 +45,11 @@ public class TowerManager : MonoBehaviour
         availableElectroTowers.Clear();
         availableLaserTowers.Clear();
         availablePlasmaTowers.Clear();
+
+        availableElectroLaserTowers.Clear();
+        availableLaserPlasmaTowers.Clear();  
+        availableElectroPlasmaTowers.Clear();
+
         transformTowerMap.Clear();
         symbiosisTowers.Clear();
 
@@ -62,6 +71,7 @@ public class TowerManager : MonoBehaviour
         SelectTower();
         availablePlazmaTowersCount = availablePlasmaTowers.Count;
         towersNumber = towers.Count;
+        electroPlasmaNumber = availableElectroPlasmaTowers.Count;
     }
 
     public static void AddTower(Tower tower)
@@ -106,23 +116,91 @@ public class TowerManager : MonoBehaviour
     }
     public static Tower GetNearestTower(Transform target, TowerType type) {
         float minDistance = float.PositiveInfinity;
-        int nearestTowerIndex = -1;
-        for (int i = 0; i < TowerManager.towers.Count; i++)
+        Tower nearest = null;
+        //  int nearestTowerIndex = -1;
+        // for (int i = 0; i < TowerManager.towers.Count; i++)
+        towers.ForEach(tower =>  
         {
-            if (TowerManager.towers[i].type == type && TowerManager.towers[i].IsCastingAbility == false)
+            if (tower.type == type && tower.IsCastingAbility == false)
             {
-                Vector3 toTarget = target.position - TowerManager.towers[i].transform.position;
+                Vector3 toTarget = target.position - tower.transform.position;
                 float distance = toTarget.magnitude;
                 if (distance < minDistance) {
                     minDistance = distance;
-                    nearestTowerIndex = i;
+                    nearest = tower;
                 }
             }
+        });
+
+        //  return TowerManager.towers[nearestTowerIndex];
+        return nearest;
+      
+    }
+
+    public static Tower GetNeaterstAvailableTower(Transform target, TowerType type1, TowerType? type2 = null)
+    {
+        float minDistance = float.PositiveInfinity;
+        Tower nearest = null;
+        List<Tower> list = null;
+        if (type2 == null || type2 == TowerType.None)
+        {
+            if (type1 == TowerType.Electro)
+            {
+                list = availableElectroTowers;
+            }
+            else if (type1 == TowerType.Laser)
+            {
+                list = availableLaserTowers;
+            }
+            else if (type1 == TowerType.Plasma)
+            {
+                list = availablePlasmaTowers;
+            }
+
+
         }
-        if (nearestTowerIndex == -1) {
-            return null;
+        else if ((type1 == TowerType.Electro && type2 == TowerType.Laser) || (type1 == TowerType.Laser && type2 == TowerType.Electro))
+        {
+            list = availableElectroLaserTowers;
         }
-        return TowerManager.towers[nearestTowerIndex];
+        else if ((type1 == TowerType.Laser && type2 == TowerType.Plasma) || (type1 == TowerType.Plasma && type2 == TowerType.Laser))
+        {
+            list = availableLaserPlasmaTowers;
+        }
+        else if ((type1 == TowerType.Electro && type2 == TowerType.Plasma) || (type1 == TowerType.Plasma && type2 == TowerType.Electro))
+        {
+            list = availableElectroPlasmaTowers;
+        }
+
+            list.ForEach(tower =>
+            {
+                if (!tower.IsCastingAbility)
+                {
+                    Vector3 toTarget = target.position - tower.transform.position;
+                    float distance = toTarget.magnitude;
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        nearest = tower;
+                    }
+                }
+            });
+        return nearest;
+    }
+    static float CompareDistance(Transform target, Tower tower,Tower nearest, float minDistance) 
+    {
+        float distance = float.PositiveInfinity;
+        if (!tower.IsCastingAbility)
+        {
+            Vector3 toTarget = target.position - tower.transform.position;
+            distance = toTarget.magnitude;
+            if (distance < minDistance)
+            {
+                nearest = tower;
+                return distance;
+            }
+        }
+        return minDistance;
     }
 
     public static void ClearHighlighting() {

@@ -23,7 +23,8 @@ public class ResourceManager : MonoBehaviour
     public Image resourcefiller;
     public Image incomefiller;
     public Image OverclockBar;
-    public TextMeshProUGUI victory;
+    public static bool isDefeat = false;
+ //   public TextMeshProUGUI victory;
 
     public static float resource;
     public static float resourceMax;
@@ -51,7 +52,7 @@ public class ResourceManager : MonoBehaviour
 
     public static void Restart() 
     {
-        isTowersSupplyChanged = true;
+        isTowersSupplyChanged = true;      
     }
 
     //private static float income;
@@ -63,7 +64,7 @@ public class ResourceManager : MonoBehaviour
     {
         resource = StartResource;
         resourceMax = StartMaxresource;
-
+        
         resourceCounterST = resourceCounter;
         resourceCost = resourceCostReference;
         if (resourceCost)
@@ -80,7 +81,8 @@ public class ResourceManager : MonoBehaviour
 
         incomeColor = resourceProceeds.faceColor;
         OverclockBar.fillAmount = 0;
-        victory.gameObject.SetActive(false);
+        isDefeat = false;
+     //   victory.gameObject.SetActive(false);
     }
 
     void Update()
@@ -116,6 +118,9 @@ public class ResourceManager : MonoBehaviour
     }
     void CalculateProceeds()
     {
+        if (isDefeat) 
+        { proceeds = 0; return; }
+
         proceeds = ResourceManager.income - towersSupply;
         if (proceeds <= 0 && signOfPreviosProceeds)
         {
@@ -148,8 +153,12 @@ public class ResourceManager : MonoBehaviour
         }
         resource += count;
         if (resource > resourceMax)
-        { resource = resourceMax;}  
+        { 
+            resource = resourceMax;   
+        }
+        LevelManager.CheckSecondLevelCondition();
         fillResourceFiller();
+
     }
 
     public static bool RemoveResource(float count)
@@ -213,9 +222,15 @@ public class ResourceManager : MonoBehaviour
 
         Terraformer.overclockFactor = OverclockBar.fillAmount;
         if (OverclockBar.fillAmount == 1) 
-        { ApplyVictory(); }
+        { LevelManager.Victory(); }// 3 level
     }
-    public void ApplyVictory()
+
+    public static void ApplyDefeat() 
+    {
+        isDefeat = true;
+        resource = 0;
+    }
+    /*public void ApplyVictory()
     {
         //  victory.gameObject.SetActive(true);
         Terraformer.isVictory = true;
@@ -225,11 +240,6 @@ public class ResourceManager : MonoBehaviour
             var enemy = EnemyManagerPro.enemies.ToArray()[0];
             enemy.ApplyDamage(enemy.maxHealth, Vector3.zero, Vector3.zero);
         }
-        /*
-        foreach (var enemy in EnemyManagerPro.enemies) {
-            if (enemy)
-            { enemy.ApplyDamage(enemy.maxHealth, Vector3.zero, Vector3.zero); }
-        }
-        */
-    }
+
+    }*/
 }

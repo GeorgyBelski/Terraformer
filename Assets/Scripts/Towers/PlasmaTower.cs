@@ -19,7 +19,14 @@ public class PlasmaTower : Tower
     public GameObject plazmaBlowUpPrefab;
     public PlasmaBlowUp blow;
 
+    [Header("ClusterBombAbility")]
     public PlasmaClusterBombAbility clusterBombAbility;
+
+    [Header("ScorchingRayAbility")]
+    public ScorchingRayAbility scorchingRayAbility;
+
+    [Header("PlasmaBlastAbility")]
+    public PlasmaBlastAbility plasmaBlastAbility;
 
     [ColorUsageAttribute(true, true)]
     public Color ordinaryPlasmaBulletColor, ordinaryPlasmaTrail_BlowUpColor, plasmaSymbTrailColor , electroSymbTrailColor, electroSymbColor2, laserSymbTrailColor, laserSymbColor2;
@@ -159,7 +166,7 @@ public class PlasmaTower : Tower
     {
         base.EndCasting();
         IsCastingAbility = false;
-        TowerManager.availablePlasmaTowers.Add(this);
+     //   TowerManager.availablePlasmaTowers.Add(this);
     }
 
     internal override void TowerUpdate()
@@ -189,13 +196,22 @@ public class PlasmaTower : Tower
             { Destroy(blow.gameObject); }
         }
     }
-
+    // Ability Plasma - ClusterBomb
     public void CastClusterBomb(Vector3 aimPosition)
     {
         clusterBombAbility.Cast(aimPosition);
         
     }
-
+    // Ability Laser-Plasma - ScorchingRay
+    public void CastScorchingRay(Vector3 aimPosition)
+    {
+        scorchingRayAbility.Cast(aimPosition);
+    }
+    // Ability Electro-Plasma - PlasmaBlast
+    public void CastPlasmaBlast(Vector3 aimPosition)
+    {
+        plasmaBlastAbility.Cast(aimPosition);
+    }
     public override void ActivateSymbiosisUpgrade()
     {
         symbiosisTowerType = Symbiosis.ActivateSymbiosisUpgrade(this);
@@ -204,6 +220,14 @@ public class PlasmaTower : Tower
     public override void DisableSymbiosisUpgrade()
     {
         SetOrdinaryPlasmaShots();
+        if (symbiosisTowerType == TowerType.Electro)
+        {
+            TowerManager.availableElectroPlasmaTowers.Remove(this);
+        }
+        else if (symbiosisTowerType == TowerType.Laser)
+        {
+            TowerManager.availableLaserPlasmaTowers.Remove(this);
+        }
         symbiosisTowerType = null;
     }
     void SetOrdinaryPlasmaShots() 
@@ -215,5 +239,15 @@ public class PlasmaTower : Tower
             bullet.SetTrailColor(ordinaryPlasmaTrail_BlowUpColor);
         }
         blow.SetColor(ordinaryPlasmaTrail_BlowUpColor);
+    }
+    public override void DestroyBulletsAndAbilities()
+    {
+        DestroyBullets();
+        clusterBombAbility.DestroyBullets();
+        if (blow.gameObject.activeSelf)
+        { blow.thisTower = null; }
+
+        if (plasmaBlastAbility.plasmaBlast) { Destroy(plasmaBlastAbility.plasmaBlast.gameObject); }
+        if (scorchingRayAbility.scorchingRay) { Destroy(scorchingRayAbility.scorchingRay.gameObject); }
     }
 }

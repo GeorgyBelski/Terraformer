@@ -6,10 +6,11 @@ using UnityEngine;
 public class Terraformer : Tower
 {
     [Header("Menu")]
-    public GameObject menu;
-    public TextMeshProUGUI defeat;
+    //public GameObject menu;
+    //   public TextMeshProUGUI defeat;
+    public static Terraformer terraformer;
     public static bool isOverclock = false;
-    public static bool isVictory = false;
+    public static bool isVictoryWave = false;
     public static float overclockFactor=0;
     public float overclockSpeed = 20f;
     public Transform terraformerMesh;
@@ -32,13 +33,14 @@ public class Terraformer : Tower
 
     new void Start()
     {
+        terraformer = this;
         mt = ring.GetComponent<Renderer>().material;
         baseEmissionColor = mt.GetColor("_EmissionColor");
         isOverclock = false;
-        isVictory = false;
+        isVictoryWave = false;
         ringStartPosition = ring.position;
-        menu.SetActive(false);
-        defeat.gameObject.SetActive(false);
+    //    menu.SetActive(false);
+     //   defeat.gameObject.SetActive(false);
         TowerManager.terraformer = this;
         TowerManager.AddTower(this);
         overclockWave = startOverclockWave;
@@ -81,7 +83,7 @@ public class Terraformer : Tower
     }
     public void OverclockWave() 
     {
-        if (isVictory)
+        if (isVictoryWave)
         {
             if (playFinalSound)
             {
@@ -90,41 +92,44 @@ public class Terraformer : Tower
                 audioSource.PlayOneShot(abilitiesSounds[1], 0.5f);
                 playFinalSound = false;
             }
-
+            
             overclockWave.gameObject.SetActive(true);
             //isVictory = false;
         }
     }
+    public void IntermediateVictory() 
+    {
+        towerHealth.health = towerHealth.maxHealth;
+    }
 
     public override void TowerAttack(Enemy target)
     {
-
     }
 
     internal override void TowerUpdate()
-    {
-        
+    {      
     }
 
     public override void EndCasting()
     {
-
     }
 
     public override void ActivateSymbiosisUpgrade()
-    {
-        
+    {    
     }
 
     public override void DisableSymbiosisUpgrade()
-    {
-        
+    {     
     }
-
+    public override void DestroyBulletsAndAbilities()
+    {
+    }
     public void playEmergency()
     {
         //audioSource.Stop();
         uiSource.pitch = 1;
         uiSource.PlayOneShot(emergencySound, 1f);
     }
+
+    
 }

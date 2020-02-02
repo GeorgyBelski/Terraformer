@@ -72,7 +72,7 @@ public class PlasmaBlowUp : MonoBehaviour
             { return; }
             if (thisTower.symbiosisTowerType == TowerType.Laser)
             {
-                enemy.effectsController.AddBurning(BurningEffect.standardLifetime / 2, ((LaserTower)thisTower.symbiosisTower).damageBurning);
+                enemy.effectsController.AddBurning(Effect.burningDuration / 2, ((LaserTower)thisTower.symbiosisTower).damageBurning);
             }
             else if (thisTower.symbiosisTowerType == TowerType.Electro)
             {

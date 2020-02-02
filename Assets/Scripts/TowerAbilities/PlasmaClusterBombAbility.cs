@@ -110,7 +110,7 @@ public class PlasmaClusterBombAbility : TowerAbility
     {
 
         base.Cast(aimPosition);
-        TowerManager.availablePlasmaTowers.Remove((PlasmaTower)tower);
+     //   TowerManager.availablePlasmaTowers.Remove((PlasmaTower)tower);
         aim = aimPosition;
 
         speed = Vector3.Distance(aimPosition, gunpoint.position)/1.2f;

@@ -9,6 +9,7 @@ public abstract class AbilityButtonController : MonoBehaviour
     public enum Type { Area, SingleTarget};
     public KeyCode key;
     public TowerType castTowerType;
+    public TowerType symbiosisTowerType;
     public State currentState = State.Ready;
     public Type type;
     //   public float castTime = 2.0f;
@@ -46,7 +47,7 @@ public abstract class AbilityButtonController : MonoBehaviour
 
 
     Image buttonImage, outLineImage;
-    Button button;
+    protected Button button;
 
     void Start()
     {
@@ -147,7 +148,7 @@ public abstract class AbilityButtonController : MonoBehaviour
     {
         uIAudioSource.PlayOneShot(uISounds[0], 0.6f);
         //    timerCast = castTime;
-        if (button.interactable == false)
+        if (!button.interactable)
         { return; }
 
         if (currentState == State.Ready)
@@ -190,7 +191,7 @@ public abstract class AbilityButtonController : MonoBehaviour
             {
               //  Debug.DrawLine(Camera.main.transform.position, floorHit.point, Color.cyan);
                 aimArea.position = floorHit.point;
-                DefineCasterTower();
+                DefineCasterTower(symbiosisTowerType);
             }
             else if (type == Type.SingleTarget && Physics.Raycast(camRay, out RaycastHit enemyHit, camRayLength, enemy_groundMask))
             {
@@ -201,7 +202,7 @@ public abstract class AbilityButtonController : MonoBehaviour
                 {
                  //   Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.yellow);
                     aimArea.position = enemyHit.collider.transform.position;
-                    DefineCasterTower();
+                    DefineCasterTower(symbiosisTowerType);
                 }
             //    if(target) Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.yellow);
             //    else Debug.DrawLine(Camera.main.transform.position, enemyHit.point, Color.white);
@@ -210,32 +211,19 @@ public abstract class AbilityButtonController : MonoBehaviour
             }
         }
     }
-    void DefineCasterTower() 
+    void DefineCasterTower(TowerType symbiosisType) 
     {
-        Tower nearestTower = TowerManager.GetNearestTower(aimArea, castTowerType);
-        if (nearestTower == null)
+        casterTower = TowerManager.GetNeaterstAvailableTower(aimArea, castTowerType, symbiosisType);
+        if (casterTower == null)
         { Cancel(); }
-        else if (nearestTower == previousHighlightedTower)
+        else if (casterTower == previousHighlightedTower)
         { return; }
-        if (castTowerType == TowerType.Electro)
-        {
-            casterTower = (ElectroTower)nearestTower;
-        }
-        else if (castTowerType == TowerType.Laser)
-        {
-            casterTower = (LaserTower)nearestTower;
-        }
-        else if (castTowerType == TowerType.Plasma)
-        {
-            casterTower = (PlasmaTower)nearestTower;
-        }
+        
 
-        if (casterTower && casterTower != previousHighlightedTower)
-        {
-            casterTower.isHighlighted = true;
-            if (previousHighlightedTower) { previousHighlightedTower.isHighlighted = false; }
-            previousHighlightedTower = casterTower;
-        }
+        casterTower.isHighlighted = true;
+        if (previousHighlightedTower) { previousHighlightedTower.isHighlighted = false; }
+        previousHighlightedTower = casterTower;
+
     }
 
     void ReduceTimers()
@@ -265,9 +253,10 @@ public abstract class AbilityButtonController : MonoBehaviour
         }
     }
 
-    void ButtonAvailabilityControl()
+    protected virtual void ButtonAvailabilityControl()
     {
         int availableTowersCount = 0;
+
         if (castTowerType == TowerType.Electro)
         {
             availableTowersCount = TowerManager.availableElectroTowers.Count;

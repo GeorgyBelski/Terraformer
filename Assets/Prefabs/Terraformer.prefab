@@ -1460,6 +1460,7 @@ GameObject:
   - component: {fileID: 3236513020866106310}
   - component: {fileID: 3236513020560041565}
   - component: {fileID: 3236513020560041562}
+  - component: {fileID: 1303048163774208299}
   - component: {fileID: 1142897424575519165}
   - component: {fileID: 1632830116}
   - component: {fileID: 1632830117}
@@ -1517,7 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28026d9b5f703c4a969ed92d2f77c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 3
   enableAutoattacs: 1
   range: 0
   rangeColor: {r: 0, g: 0, b: 0, a: 0}
@@ -1544,8 +1545,6 @@ MonoBehaviour:
   abilitiesSounds:
   - {fileID: 8300000, guid: 7e6aeba29a188a7479ec3f07bf1943d4, type: 3}
   - {fileID: 8300000, guid: b271ea51307002e4092a70dc58840840, type: 3}
-  menu: {fileID: 0}
-  defeat: {fileID: 0}
   overclockSpeed: 2000
   terraformerMesh: {fileID: 3236513019428737676}
   ring: {fileID: 6186102620379041187}
@@ -1581,6 +1580,25 @@ MonoBehaviour:
   healthRatio: 0
   thisTower: {fileID: 3236513020560041565}
   damagePointsColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &1303048163774208299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3236513020866106311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7a6678ab5235a4c96f43047884dae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelNumber: 3
+  firstLevelEnemyCount: 20
+  resourceVictoryCondition: 1000
+  taskDescription: {fileID: 0}
+  firstLevelDescription: '> Exterminate 20 enemies'
+  secondLevelDescription: '> Collect 1000 resource units'
+  thirdLevelDescription: '> Collect 2000 resource units'
 --- !u!114 &1142897424575519165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,6 +1999,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329226291428954005, guid: d71ea2185cffa2e4fb7041c0731a6fed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7701119216240502193, guid: d71ea2185cffa2e4fb7041c0731a6fed,
         type: 3}
       propertyPath: m_RootOrder
@@ -1995,21 +2028,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567034604858737495, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528884369442422909, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 1329226291428954005, guid: d71ea2185cffa2e4fb7041c0731a6fed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71ea2185cffa2e4fb7041c0731a6fed, type: 3}
@@ -2121,11 +2139,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -5684868951745258883, guid: 896c8687e0300fc45ba85c2b63ae7d70,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 671f09ecb85857348adbad4681a26f44, type: 2}
     - target: {fileID: -8010558922879037789, guid: 896c8687e0300fc45ba85c2b63ae7d70,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2136,6 +2149,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5684868951745258883, guid: 896c8687e0300fc45ba85c2b63ae7d70,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 671f09ecb85857348adbad4681a26f44, type: 2}
     - target: {fileID: 7627201832915488969, guid: 896c8687e0300fc45ba85c2b63ae7d70,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static CreepHexagonGenerator;
 
-public enum TowerType { Electro, Laser, Terraformer, Plasma };
+public enum TowerType { None, Electro, Laser, Terraformer, Plasma };
 
 public abstract class Tower : MonoBehaviour
 {
@@ -77,7 +77,7 @@ public abstract class Tower : MonoBehaviour
         rangeline.material = rangeLineMaterial;
         rangeline.material.SetColor("_BaseColor", rangeColor);
         rangeline.textureMode = LineTextureMode.RepeatPerSegment;
-        rangeline.widthMultiplier = 0.05f;
+        rangeline.widthMultiplier = 0.1f;
         rangeline.loop = true;
 
         towerMaterial = GetComponent<MeshRenderer>().material;
@@ -333,5 +333,6 @@ public abstract class Tower : MonoBehaviour
 
     public abstract void ActivateSymbiosisUpgrade();
     public abstract void DisableSymbiosisUpgrade();
+    public abstract void DestroyBulletsAndAbilities();
 
 }

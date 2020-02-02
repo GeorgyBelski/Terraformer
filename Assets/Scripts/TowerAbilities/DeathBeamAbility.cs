@@ -28,7 +28,7 @@ public class DeathBeamAbility : TowerAbility
         tower.enableAutoattacs = false;
         tower.IsCastingAbility = true;
         timerCast = castTime;
-        TowerManager.availableLaserTowers.Remove((LaserTower)tower);
+      //  TowerManager.availableLaserTowers.Remove((LaserTower)tower);
         ((LaserTower)tower).lr.material = beamMaterial;
         ((LaserTower)tower).lr.enabled = true;
         ((LaserTower)tower).lr.widthMultiplier = 1;

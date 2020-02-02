@@ -320,7 +320,7 @@ public class CreepHexagonGenerator : MonoBehaviour
     }
     void UpdateExpansionCost()
     {
-        expansionCost = 6 * (buildCost + radius) * (radius + 1);
+        expansionCost = 6 * (buildCost + radius*3) * (radius + 1);
     }
     void UpdateRepairingCost()
     {
