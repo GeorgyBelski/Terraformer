@@ -62,7 +62,16 @@ public abstract class SpawnEnemiesPattern : MonoBehaviour
         //print("+");
         portal.gameObject.active = true;
         portal.transform.position = countVector();
-        portal.setSettings(list, spawnRate, delay, portalLoadTime, portalFinzlSize);
+        switch (patternType)
+        {
+            case WaveType.Simple:
+               portal.setSettings(list, spawnRate, delay, portalLoadTime, portalFinzlSize);
+                break;
+            case WaveType.Squad:
+                portal.setSettings(list, colCount, colSize, range, formation, delay, portalLoadTime, portalFinzlSize, portalEnglePosition, portalPosition);
+                break;
+        }
+    
     }
 
     private Vector3 countVector()

@@ -25,7 +25,7 @@ public class Logic : MonoBehaviour
     private int wave = 1;
 
     public GameObject lastPortal;
-    public PortalSettings thisPortalSettings;
+ //   public PortalSettings thisPortalSettings;
     public float difficulties = 1;
 
     public bool betweenWavesActivity = false;
@@ -74,6 +74,11 @@ public class Logic : MonoBehaviour
             }
             realTimer -= Time.deltaTime;
             timerText.text = "Next Wave in " + realTimer.ToString("0.0");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            wave++;
         }
 
        
