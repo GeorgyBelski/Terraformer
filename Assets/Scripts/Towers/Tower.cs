@@ -77,7 +77,7 @@ public abstract class Tower : MonoBehaviour
         rangeline.material = rangeLineMaterial;
         rangeline.material.SetColor("_BaseColor", rangeColor);
         rangeline.textureMode = LineTextureMode.RepeatPerSegment;
-        rangeline.widthMultiplier = 0.05f;
+        rangeline.widthMultiplier = 0.1f;
         rangeline.loop = true;
 
         towerMaterial = GetComponent<MeshRenderer>().material;
