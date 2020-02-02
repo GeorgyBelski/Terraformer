@@ -9,7 +9,7 @@ public class PlasmaBlastAbility : TowerAbility
     public float abilityStunDuration = 2f;
     public float abilitySlowdownDuration = 5f;
     public float speed = 20f;
-    public float effectRadius = 2.19f;
+    public float effectRadius = 3.0f;
     [HideInInspector]
     public GameObject plasmaBlast;
 

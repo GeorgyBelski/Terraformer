@@ -78,7 +78,7 @@ public class SupportAbility_Heal : SupportAbility
     public void ApplyHealRay() // Call from animation
     {
         targetUnit.ApplyHeal(150);
-        Debug.DrawLine(transform.position + Vector3.up * 1.8f, targetUnit.GetPosition(), Color.white, 0.5f);
+        //Debug.DrawLine(transform.position + Vector3.up * 1.8f, targetUnit.GetPosition(), Color.white, 0.5f);
         lr.enabled = true;
         timerDuration = duration;
 
