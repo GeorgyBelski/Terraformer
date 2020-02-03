@@ -148,14 +148,23 @@ public class Shoping : MonoBehaviour
             uIAudioSource.PlayOneShot(uISounds[1], 0.6f);
             return;
         }
-        if (Input.GetKeyUp(KeyCode.Alpha1))
+        if (Input.GetKeyUp(KeyCode.Alpha1) && buttons.Count >= 1)
+        {
             SelectElectroTower(buttons[0]);
+        }
+            
 
-        if (Input.GetKeyUp(KeyCode.Alpha2))
+        if (Input.GetKeyUp(KeyCode.Alpha2) && buttons.Count >= 2)
+        {
             SelectLazerTower(buttons[1]);
+        }
 
-        if (Input.GetKeyUp(KeyCode.Alpha3))
+
+        if (Input.GetKeyUp(KeyCode.Alpha3) && buttons.Count >= 3)
+        {
             SelectPlasmaTower(buttons[2]);
+        }
+
 
         if (isPlacing)
         {

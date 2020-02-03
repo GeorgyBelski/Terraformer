@@ -24,7 +24,7 @@ public class Logic : MonoBehaviour
 
     private int wave = 1;
 
-    public GameObject portal;
+    public GameObject lastPortal;
     public PortalSettings thisPortalSettings;
     public float difficulties = 1;
 
@@ -44,7 +44,7 @@ public class Logic : MonoBehaviour
 
     void Start()
     {
-        portal.active = false;
+        //pattern.portals[4].gameObject.active = false;
         realTimer = timer / 2;
     }
 
@@ -61,15 +61,22 @@ public class Logic : MonoBehaviour
             //print("space key was pressed");
         }
 
-        if (portal.active)
+        if (lastPortal.active)
         {
             timerText.text = "Active Wave " + (wave - 1);
         }
         else
         {
+            if (pattern.wave >= pattern.maxWaves)
+            {
+                timerText.text = "Fin";
+                return;
+            }
             realTimer -= Time.deltaTime;
-            timerText.text = realTimer.ToString("0.0");
+            timerText.text = "Next Wave in " + realTimer.ToString("0.0");
         }
+
+       
 
 
         if (realTimer <= 0)
@@ -78,37 +85,21 @@ public class Logic : MonoBehaviour
            
             //print("+");
             pattern.setPattern(wave);
-
-            
-            thisPortalSettings.setSettings(pattern.getPattern(), pattern.spawnRate);
-         
-            
-            portal.active = true;
-
-            
-            
+            //thisPortalSettings.setSettings(pattern.getPattern(), pattern.spawnRate);
+            //lastPortal.active = true;
             //print(SquadFormationSquare.DegreeToRadian(pattern.portalPosition));
             //print(Mathf.Sin(2));
-
-            portal.transform.position = countVector();
+            //lastPortal.transform.position = countVector();
             wave++;
 
   
             //=================================
             //new SquadFormationSquare(enemyTank, enemyDamager, 2, 4, 1f, 25, 0);
             //new SquadFormationCircle(enemyTank, enemyDamager, 1, 10, 2, 25, randPos);
-            realTimer = timer + wave / difficulties;
+            realTimer = timer + wave * 5;
         }
 
         
-    }
-
-    private Vector3 countVector()
-    {
-        //print(SquadFormationSquare.DegreeToRadian(pattern.portalPosition));
-        randPos = Random.Range(0, 360);
-        //print(randPos + " " + Mathf.Sin(randPos));
-        return new Vector3((pattern.portalRange + wave) * Mathf.Sin(Sqad.DegreeToRadian(pattern.portalPosition)), 1, (pattern.portalRange + wave) * Mathf.Cos(Sqad.DegreeToRadian(pattern.portalPosition)));
     }
 
     private List<GameObject> conutWave()
