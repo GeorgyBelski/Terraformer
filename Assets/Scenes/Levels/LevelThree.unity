@@ -1439,6 +1439,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_text
+      value: '> Exterminate 25 enemies'
+      objectReference: {fileID: 0}
     - target: {fileID: 2902143820882433139, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1544,6 +1574,36 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2902143820882433136, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1509523200}
+    - target: {fileID: 2902143821281523185, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 166.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902143821281523185, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 93.29999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902143821281523185, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174145929431357180, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 14.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 6782762081953793084, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -13.899994
+      objectReference: {fileID: 0}
     - target: {fileID: 605910770, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -1600,81 +1660,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2902143820882433136, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1509523200}
-    - target: {fileID: 8174145929431357180, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 14.600006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 0.79607844
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 0.95478576
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_Colors.m_PressedColor.r
-      value: 0.7607843
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_Colors.m_PressedColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_Colors.m_PressedColor.b
-      value: 0.91510624
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: buttonTintRecharging.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: buttonTintRecharging.g
-      value: 0.764151
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: buttonTintRecharging.b
-      value: 0.61062294
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902143821281523185, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 166.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902143821281523185, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 93.29999
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902143821281523185, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6782762081953793084, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -13.899994
-      objectReference: {fileID: 0}
     - target: {fileID: 7515444792507736772, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
       propertyPath: m_IsActive
@@ -1730,35 +1715,50 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 24
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.79607844
       objectReference: {fileID: 0}
-    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
+      propertyPath: m_Colors.m_NormalColor.g
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
-      propertyPath: m_textInfo.pageCount
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.95478576
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.7607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1320599212485700730, guid: 4bca82e3b0c02614382afc1187f7bae3,
+    - target: {fileID: 4376857450312028116, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
-      propertyPath: m_text
-      value: '> Exterminate 25 enemies'
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.91510624
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: buttonTintRecharging.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: buttonTintRecharging.g
+      value: 0.764151
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006071773893363447, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: buttonTintRecharging.b
+      value: 0.61062294
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}
@@ -1913,6 +1913,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 45200811}
+    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
+        type: 3}
+      propertyPath: firstLevelEnemyCount
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
+        type: 3}
+      propertyPath: taskDescription
+      value: 
+      objectReference: {fileID: 1248216836}
+    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
+        type: 3}
+      propertyPath: levelNumber
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
+        type: 3}
+      propertyPath: firstLevelDescription
+      value: '> Exterminate 25 enemies'
+      objectReference: {fileID: 0}
     - target: {fileID: 3236513020560041565, guid: 26137252f19587844a5f0b289b71b71e,
         type: 3}
       propertyPath: menu
@@ -1951,26 +1971,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
-        type: 3}
-      propertyPath: firstLevelEnemyCount
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
-        type: 3}
-      propertyPath: taskDescription
-      value: 
-      objectReference: {fileID: 1248216836}
-    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
-        type: 3}
-      propertyPath: levelNumber
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
-        type: 3}
-      propertyPath: firstLevelDescription
-      value: '> Exterminate 25 enemies'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26137252f19587844a5f0b289b71b71e, type: 3}
