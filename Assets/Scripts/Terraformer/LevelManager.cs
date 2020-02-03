@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
 
     public static int level;
     public int firstLevelEnemyCount = 20;
-    public static int killedEnemyCount =20;
+    public static int killedEnemyCount =25;
     public int resourceVictoryCondition = 700;
     public static int resourceCondition = 1000;
     static bool isNewAtmosphere;

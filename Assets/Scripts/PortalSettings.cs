@@ -49,6 +49,7 @@ public class PortalSettings : MonoBehaviour
     private int columnCount;
     private float columnsRange;
     private float rotation;
+    private float position;
     private Sqad.Formation form;
     private bool isSquad = false;
     private float deactivateTimeLeft;
@@ -181,6 +182,8 @@ public class PortalSettings : MonoBehaviour
         this.delay = delay;
         this.loadingTime = portalLoadTime;
         this.finalSize = portalFinzlSize;
+
+        //this.
         patternType = SpawnEnemiesPattern.WaveType.Simple;
 
         realSpawnRate = spawnRate;
@@ -198,26 +201,34 @@ public class PortalSettings : MonoBehaviour
         //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
 
-    public void setSettings(List<GameObject> list, int columns, int columnCount, float columnsRange, float rotation, Sqad.Formation form)
+    public void setSettings(List<GameObject> list, int columns, int columnCount, float columnsRange, Sqad.Formation form, float delay, float portalLoadTime, float portalFinzlSize, float rotation, float position)
     {
         
         deactivateTimeLeft = deactivateTime;
         realSpawnRate = spawnRate;
         startSizeInSecond = sizeInSecond;
         enemyList = list;
+        loadingLine.enabled = false;
+        transform.localScale = Vector3.zero;
+        this.loadingTime = portalLoadTime;
+        this.finalSize = portalFinzlSize;
+        this.rotation = rotation;
+        this.position = position;
+
+        patternType = SpawnEnemiesPattern.WaveType.Squad;
 
         this.columns = columns;
         this.columnCount = columnCount;
         this.columnsRange = columnsRange;
         this.form = form;
-        this.rotation = rotation;
+        //this.rotation = rotation;
 
         isSquad = true;
         activating = true;
         active = true;
         this.enabled = true;
 
-        ReloadLine();
+        //ReloadLine();
 
         //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
@@ -277,13 +288,13 @@ public class PortalSettings : MonoBehaviour
     {
         if (deactivating)
             return;
-        switch (formation)
+        switch (form)
         {
             case Sqad.Formation.Square:
-                //new SquadFormationSquare(list[0], list[1], columns, columnCount, columnsRange, realPortalRange, portalPosition);
+                new SquadFormationSquare(enemyList[0], enemyList[1], columns, columnCount, columnsRange, (int)position, rotation);
                 break;
             case Sqad.Formation.Circle:
-                //new SquadFormationCircle(list[0], list[1], columns, columnCount, columnsRange, realPortalRange, portalPosition);
+                new SquadFormationCircle(enemyList[0], enemyList[1], columns, columnCount, columnsRange, (int)position, rotation);
                 break;
         }
         deactivate();
