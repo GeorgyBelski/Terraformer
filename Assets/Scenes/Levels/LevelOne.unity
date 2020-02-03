@@ -1799,6 +1799,16 @@ PrefabInstance:
       propertyPath: levelNumber
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
+        type: 3}
+      propertyPath: firstLevelEnemyCount
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303048163774208299, guid: 26137252f19587844a5f0b289b71b71e,
+        type: 3}
+      propertyPath: firstLevelDescription
+      value: '> Exterminate 25 enemies'
+      objectReference: {fileID: 0}
     - target: {fileID: 3236513020560041565, guid: 26137252f19587844a5f0b289b71b71e,
         type: 3}
       propertyPath: menu

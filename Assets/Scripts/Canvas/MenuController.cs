@@ -113,6 +113,7 @@ public class MenuController : MonoBehaviour
 
     public void QuitClick() 
     {
-        Application.Quit();
+        //Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
 }
