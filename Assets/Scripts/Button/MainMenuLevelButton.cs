@@ -10,6 +10,7 @@ public class MainMenuLevelButton : MonoBehaviour, IPointerEnterHandler, IPointer
 {
     public LevelButtonType type;
     public GameObject description;
+    public static bool firstSceneLoading = true;
     private void Start()
     {
         if (type != LevelButtonType.Quit)
@@ -28,15 +29,31 @@ public class MainMenuLevelButton : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void Level1() 
     {
+        
         SceneManager.LoadScene("LevelOne");
+        RestrtScene();
     }
     public void Level2()
     {
+        
         SceneManager.LoadScene("LevelTwo");
+        RestrtScene();
     }
     public void Level3()
     {
         SceneManager.LoadScene("LevelThree");
+        RestrtScene();
+    }
+    void RestrtScene() 
+    {
+        if (!firstSceneLoading)
+        {
+            MenuController.Restart(true);
+        }
+        else 
+        {
+            firstSceneLoading = false;
+        }
     }
 
     public void QuitClick()

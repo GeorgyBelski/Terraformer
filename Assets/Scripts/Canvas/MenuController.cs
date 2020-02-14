@@ -24,10 +24,6 @@ public class MenuController : MonoBehaviour
 
     private static bool isDefeatPlayed = false;
 
-    void Restart()
-    {
-        killedEnemies.text = "0";
-    }
     void Start()
     {
         menu = startMenu;
@@ -99,21 +95,27 @@ public class MenuController : MonoBehaviour
     {
         killedEnemies.text = EnemyManagerPro.killedEnemies.ToString();
     }
-    public void RestartClick() 
+    public static void Restart(bool fromMainMeu) 
     {
-        Restart();
+        killedEnemies.text = "0";
         TowerManager.Restart();
         CreepHexagonGenerator.Restart();
         EnemyManagerPro.Restart();
         ResourceManager.Restart();
         StopTime.Restart();
-        ShowMenu(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //ShowMenu(false);
+        isMenuShowed = false;
+        if (!fromMainMeu)
+        { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
     }
-
+    public void RestartClick() 
+    {
+        Restart(false);
+    }
     public void QuitClick() 
     {
         //Application.Quit();
+        //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene("MainMenu");
     }
 }
