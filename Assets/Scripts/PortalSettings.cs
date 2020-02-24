@@ -19,7 +19,7 @@ public class PortalSettings : MonoBehaviour
     float previousLoadingTime;
     float timerLoading;
     float sizeInSecond;
-    float previousFinalSize;
+    [SerializeField]float previousFinalSize;
     Vector3 previousPosition;
     float startScale;
     private float startSizeInSecond;
@@ -303,7 +303,7 @@ public class PortalSettings : MonoBehaviour
     void ShowFinalSize()
     {
 
-        if (previousFinalSize != finalSize)
+        if (previousFinalSize != finalSize || previousPosition != transform.position)
         {
             Vector3 compass = finalSize / 2 * Vector3.forward;
             for (int i = 0; i < 72; i++)
@@ -316,10 +316,10 @@ public class PortalSettings : MonoBehaviour
             previousFinalSize = finalSize;
             previousPosition = transform.position;
         }
-        else 
+        /*else
         {
-            SetLoadingLinePosition();
-        }
+            SetLoadingLinePosition();         
+        }*/
         timerLoading -= Time.deltaTime;
       //  ChangeLineSpeed();
     }
