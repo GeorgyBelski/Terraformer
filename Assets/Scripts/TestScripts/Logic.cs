@@ -69,6 +69,7 @@ public class Logic : MonoBehaviour
         {
             if (pattern.wave >= pattern.maxWaves)
             {
+                print(pattern.wave + " " + pattern.maxWaves);
                 timerText.text = "Fin";
                 return;
             }
@@ -101,7 +102,7 @@ public class Logic : MonoBehaviour
             //=================================
             //new SquadFormationSquare(enemyTank, enemyDamager, 2, 4, 1f, 25, 0);
             //new SquadFormationCircle(enemyTank, enemyDamager, 1, 10, 2, 25, randPos);
-            realTimer = timer + wave * 5;
+            realTimer = timer;
         }
 
         

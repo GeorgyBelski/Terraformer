@@ -621,7 +621,6 @@ public class PatternLvlThree : SpawnEnemiesPattern
 // Start is called before the first frame update
 void Start()
 {
-    maxWaves = 3;
 }
 
 // Update is called once per frame
