@@ -69,7 +69,7 @@ public class Logic : MonoBehaviour
         {
             if (pattern.wave >= pattern.maxWaves)
             {
-                print(pattern.wave + " " + pattern.maxWaves);
+                //print(pattern.wave + " " + pattern.maxWaves);
                 timerText.text = "Fin";
                 return;
             }
