@@ -153,11 +153,10 @@ MonoBehaviour:
   towerCount: 100
   startCount: 200
   lastPortal: {fileID: 439698539299015053}
-  thisPortalSettings: {fileID: 0}
   difficulties: 1
   betweenWavesActivity: 0
   winPoints: 2000
-  timer: 15
+  timer: 7
   timerText: {fileID: 0}
 --- !u!1001 &150241380436806671
 PrefabInstance:
@@ -176,11 +175,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7896360608671723181, guid: 0442d5b659dee314885a672975f32707,
-        type: 3}
-      propertyPath: sounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2104f7c1138c6b448a38d86cd674432d, type: 3}
     - target: {fileID: 8648481368527438963, guid: 0442d5b659dee314885a672975f32707,
         type: 3}
       propertyPath: m_LocalPosition.x

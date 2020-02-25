@@ -26,8 +26,8 @@ public class RushDamager : Enemy_Logic
     {
         if (targetTower)
         {
-            audioSource.volume = 0.6f;
-            //base.Attack();
+            audioSource.pitch = Random.Range(1f, 1.6f);
+            base.Attack();
             targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
         }
     }

@@ -96,6 +96,7 @@ public class PortalSettings : MonoBehaviour
 
         if (activating)
         {
+            activatingAudioSource.pitch = Random.Range(0.9f, 1.1f);
             activatingAudioSource.PlayOneShot(activatingSound, 0.7f);
             ReloadLine();
             loadingLine.enabled = true;
