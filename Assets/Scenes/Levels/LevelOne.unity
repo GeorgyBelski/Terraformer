@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.5590691, g: 0.594208, b: 0.63515866, a: 1}
+  m_IndirectSpecularColor: {r: 0.6399497, g: 0.65741205, b: 0.69171286, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -271,18 +271,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &485153875 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -7896360608671723181, guid: 0442d5b659dee314885a672975f32707,
-    type: 3}
-  m_PrefabInstance: {fileID: 1382355657}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d279e23e4cafb0347a534f5126128f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &903036201 stripped
@@ -1109,11 +1097,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
         type: 3}
-      propertyPath: thisPortalSettings
-      value: 
-      objectReference: {fileID: 485153875}
-    - target: {fileID: 880228396155926829, guid: 70bfa4e3df0bb554c919837948630b18,
-        type: 3}
       propertyPath: timerText
       value: 
       objectReference: {fileID: 1778637544}
@@ -1560,26 +1543,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2902143820328577049, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902143820328577049, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902143820328577049, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902143820328577049, guid: 4bca82e3b0c02614382afc1187f7bae3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3317507606035637035, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
       propertyPath: m_IsActive
@@ -1689,6 +1652,10 @@ PrefabInstance:
       propertyPath: buttonTintRecharging.b
       value: 0.61062294
       objectReference: {fileID: 0}
+    - target: {fileID: 1778637542, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6668139807647218495, guid: 4bca82e3b0c02614382afc1187f7bae3,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1725,6 +1692,26 @@ PrefabInstance:
     - target: {fileID: 1778637543, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902143820328577049, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902143820328577049, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902143820328577049, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902143820328577049, guid: 4bca82e3b0c02614382afc1187f7bae3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bca82e3b0c02614382afc1187f7bae3, type: 3}

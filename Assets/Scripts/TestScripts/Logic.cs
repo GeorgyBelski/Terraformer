@@ -45,7 +45,7 @@ public class Logic : MonoBehaviour
     void Start()
     {
         //pattern.portals[4].gameObject.active = false;
-        realTimer = timer / 2;
+        realTimer = timer;
     }
 
     void Update()

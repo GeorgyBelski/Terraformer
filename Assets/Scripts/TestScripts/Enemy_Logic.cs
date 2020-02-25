@@ -42,7 +42,7 @@ public abstract class Enemy_Logic : MonoBehaviour
 
     [Header("Sounds")]
     public AudioSource audioSource;
-    public List<AudioClip> punches;
+    public AudioClip kick;
 
     // Start is called before the first frame update
     protected void Start()
@@ -191,8 +191,8 @@ public abstract class Enemy_Logic : MonoBehaviour
 
     public virtual void Attack()
     {
-        audioSource.pitch = Random.Range(0.8f, 1.3f);
-        audioSource.PlayOneShot(punches[Random.Range(0, punches.Count)], 0.4f);
+        //audioSource.pitch = Random.Range(0.7f, 1.2f);
+        audioSource.PlayOneShot(kick, 0.4f);
     }
 
     //{

@@ -701,9 +701,7 @@ MonoBehaviour:
   isGoingToDest: 0
   isCasting: 0
   audioSource: {fileID: 2448830779500268205}
-  punches:
-  - {fileID: 8300000, guid: 50c0cc4e24d26ec4499fbb47a17fe56c, type: 3}
-  - {fileID: 8300000, guid: bab33df4cac94d1478202ec4d5b3eb72, type: 3}
+  kick: {fileID: 8300000, guid: 4cfc665bf4bed2f4e81458fe4c518e75, type: 3}
   damageOnAttack: 120
   powerCristall: {fileID: 9144510625947042171}
   chargeBar: {fileID: 2846840423597991552}

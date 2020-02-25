@@ -698,9 +698,7 @@ MonoBehaviour:
   isGoingToDest: 0
   isCasting: 0
   audioSource: {fileID: 8302675748834937703}
-  punches:
-  - {fileID: 8300000, guid: 2d72b8722966c5b4cb4f3ba2b5143e56, type: 3}
-  - {fileID: 8300000, guid: c252f6d348e2e4a4bb71201399ede543, type: 3}
+  kick: {fileID: 8300000, guid: 8ad53cecee2b4ef4c89ac63268c43033, type: 3}
   type: 1
   damageOnAttack: 200
 --- !u!82 &8302675748834937703
