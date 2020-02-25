@@ -33,6 +33,9 @@ public class LevelManager : MonoBehaviour
 
     void SetTaskDescription()
     {
+        if(!taskDescription)
+        { return; }
+
         if (level == 1)
         {
             taskDescription.text = firstLevelDescription;
