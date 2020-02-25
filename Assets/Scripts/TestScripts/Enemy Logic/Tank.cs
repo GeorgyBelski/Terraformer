@@ -25,7 +25,8 @@ public class Tank : Enemy_Logic
     {
         if (targetTower)
         {
-            //base.Attack();
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            base.Attack();
             targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
         }
     }

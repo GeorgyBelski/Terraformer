@@ -15,6 +15,7 @@ public class Terraformer : Tower
     public float overclockSpeed = 20f;
     public Transform terraformerMesh;
     public Transform ring;
+
     Vector3 ringStartPosition;
     Vector3 RingRotationY;
     float previousRingOffset = 0f;
@@ -26,6 +27,8 @@ public class Terraformer : Tower
 
     private Material mt;
     private Color baseEmissionColor;
+    private bool finalSoundActive = true;
+    private float prevOverclockFactor = 0;
 
     [Header("Ui Sound")]
     public AudioSource uiSource;
@@ -78,24 +81,39 @@ public class Terraformer : Tower
             {
                 audioSource.PlayOneShot(abilitiesSounds[0], 2.5f);
             }
-
+            
         }
     }
     public void OverclockWave() 
     {
+        if (!finalSoundActive && prevOverclockFactor > overclockFactor)
+        {
+            audioSource.Stop();
+            finalSoundActive = true;
+        }
+        if(overclockFactor > 0.5f && finalSoundActive)
+        {
+            finalSoundActive = false;
+            audioSource.PlayOneShot(abilitiesSounds[2], 2.5f);
+        }
+
+
+            
+
         if (isVictoryWave)
         {
             if (playFinalSound)
             {
                 //audioSource.Stop();
                 audioSource.pitch = 1;
-                audioSource.PlayOneShot(abilitiesSounds[1], 0.5f);
+                audioSource.PlayOneShot(abilitiesSounds[1], 2f);
                 playFinalSound = false;
             }
             
             overclockWave.gameObject.SetActive(true);
             //isVictory = false;
         }
+        prevOverclockFactor = overclockFactor;
     }
     public void IntermediateVictory() 
     {

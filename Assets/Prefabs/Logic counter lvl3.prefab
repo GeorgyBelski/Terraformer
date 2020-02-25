@@ -156,7 +156,7 @@ MonoBehaviour:
   difficulties: 1
   betweenWavesActivity: 0
   winPoints: 2000
-  timer: 15
+  timer: 7
   timerText: {fileID: 0}
 --- !u!1001 &6610818488436655398
 PrefabInstance:
