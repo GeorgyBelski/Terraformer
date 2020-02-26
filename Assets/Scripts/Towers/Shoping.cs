@@ -84,9 +84,9 @@ public class Shoping : MonoBehaviour
 
     public void SelectElectroTower(Button b)
     {
-     //   if (isPlacing)
-     //       Cancel();
-
+        //   if (isPlacing)
+        //       Cancel();
+        RangeDisplay.range = 8;
         selectedTower = electroTower;
         currPrice = electroTowerPrice;
         SelectTower(b);
@@ -94,9 +94,9 @@ public class Shoping : MonoBehaviour
 
     public void SelectLazerTower(Button b)
     {
-     //   if (isPlacing)
-     //       Cancel();
-
+        //   if (isPlacing)
+        //       Cancel();
+        RangeDisplay.range = 10;
         selectedTower = laserTower;
         currPrice = lazerTowerPrice;
         SelectTower(b);
@@ -104,9 +104,9 @@ public class Shoping : MonoBehaviour
 
     public void SelectPlasmaTower(Button b)
     {
-     //   if (isPlacing)
-     //       Cancel();
-
+        //   if (isPlacing)
+        //       Cancel();
+        RangeDisplay.range = 14;
         selectedTower = plasmaTower;
         currPrice = plasmaTowerPrice;
         SelectTower(b);
@@ -137,7 +137,7 @@ public class Shoping : MonoBehaviour
     private void placeTower()
     {
         uIAudioSource.PlayOneShot(uISounds[3], 0.5f);
-        Instantiate(selectedTower, realTimeTowerPlace.transform.position, realTimeTowerPlace.transform.rotation);
+        Instantiate(selectedTower, realTimeTowerPlace.transform.position, selectedTower.transform.rotation);
     }
 
     void Update()
@@ -146,23 +146,27 @@ public class Shoping : MonoBehaviour
         {
             Cancel();
             uIAudioSource.PlayOneShot(uISounds[1], 0.6f);
+            
             return;
         }
         if (Input.GetKeyUp(KeyCode.Alpha1) && buttons.Count >= 1)
         {
             SelectElectroTower(buttons[0]);
+            
         }
             
 
         if (Input.GetKeyUp(KeyCode.Alpha2) && buttons.Count >= 2)
         {
             SelectLazerTower(buttons[1]);
+            
         }
 
 
         if (Input.GetKeyUp(KeyCode.Alpha3) && buttons.Count >= 3)
         {
             SelectPlasmaTower(buttons[2]);
+            
         }
 
 
