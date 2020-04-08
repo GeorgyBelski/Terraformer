@@ -47,6 +47,10 @@ public class Shoping : MonoBehaviour
     private Material mt;
     Color transparentRed, transparentGreen;
 
+    [Header("Sounds")]
+    public AudioSource uIAudioSource;
+    public List<AudioClip> uISounds;
+
     //public NavMeshAgent agent;
 
     void Start()
@@ -63,11 +67,13 @@ public class Shoping : MonoBehaviour
 
     public void SelectTower(Button b)
     {
+        //uIAudioSource.pitch = //Random.Range(0.1f, 1.5f);
+        uIAudioSource.PlayOneShot(uISounds[0], 0.6f);
         isPlacing = true;
         selectB(b);
         if (!realTimeTowerPlace)
         {
-            realTimeTowerPlace = Instantiate(towerPlace, Vector3.zero, this.transform.rotation);
+            realTimeTowerPlace = Instantiate(towerPlace);
             mt = realTimeTowerPlace.gameObject.GetComponent<Renderer>().material;
             towerPlacing = realTimeTowerPlace.GetComponent<TowerPlacing>();
         }
@@ -78,9 +84,9 @@ public class Shoping : MonoBehaviour
 
     public void SelectElectroTower(Button b)
     {
-     //   if (isPlacing)
-     //       Cancel();
-
+        //   if (isPlacing)
+        //       Cancel();
+        RangeDisplay.range = 8;
         selectedTower = electroTower;
         currPrice = electroTowerPrice;
         SelectTower(b);
@@ -88,9 +94,9 @@ public class Shoping : MonoBehaviour
 
     public void SelectLazerTower(Button b)
     {
-     //   if (isPlacing)
-     //       Cancel();
-
+        //   if (isPlacing)
+        //       Cancel();
+        RangeDisplay.range = 10;
         selectedTower = laserTower;
         currPrice = lazerTowerPrice;
         SelectTower(b);
@@ -98,9 +104,9 @@ public class Shoping : MonoBehaviour
 
     public void SelectPlasmaTower(Button b)
     {
-     //   if (isPlacing)
-     //       Cancel();
-
+        //   if (isPlacing)
+        //       Cancel();
+        RangeDisplay.range = 14;
         selectedTower = plasmaTower;
         currPrice = plasmaTowerPrice;
         SelectTower(b);
@@ -130,7 +136,8 @@ public class Shoping : MonoBehaviour
 
     private void placeTower()
     {
-        Instantiate(selectedTower, realTimeTowerPlace.transform.position, realTimeTowerPlace.transform.rotation);
+        uIAudioSource.PlayOneShot(uISounds[3], 0.5f);
+        Instantiate(selectedTower, realTimeTowerPlace.transform.position, selectedTower.transform.rotation);
     }
 
     void Update()
@@ -138,24 +145,36 @@ public class Shoping : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && isPlacing == true)
         {
             Cancel();
+            uIAudioSource.PlayOneShot(uISounds[1], 0.6f);
+            
             return;
         }
-        if (Input.GetKeyUp(KeyCode.Alpha1))
+        if (Input.GetKeyUp(KeyCode.Alpha1) && buttons.Count >= 1)
+        {
             SelectElectroTower(buttons[0]);
+            
+        }
+            
 
-        if (Input.GetKeyUp(KeyCode.Alpha2))
+        if (Input.GetKeyUp(KeyCode.Alpha2) && buttons.Count >= 2)
+        {
             SelectLazerTower(buttons[1]);
+            
+        }
 
-        if (Input.GetKeyUp(KeyCode.Alpha3))
+
+        if (Input.GetKeyUp(KeyCode.Alpha3) && buttons.Count >= 3)
+        {
             SelectPlasmaTower(buttons[2]);
+            
+        }
+
 
         if (isPlacing)
         {
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(camRay, out RaycastHit floorHit, camRayLength, creep_GroundMask))
             {
-
-                //   realTimeTowerPlace.transform.position = new Vector3(System.Convert.ToInt32(floorHit.point.x), floorHit.point.y, System.Convert.ToInt32(floorHit.point.z));
                 isAbleToBuild = false;
                 realTimeTowerPlace.transform.position = floorHit.point;
                 if (floorHit.collider.gameObject.layer == CreepHexagonGenerator.creepLayer)
@@ -181,11 +200,13 @@ public class Shoping : MonoBehaviour
                     mt.SetColor("_BaseColor", transparentGreen);
                 }
 
+                if(Input.GetMouseButtonDown(0) && (!isAbleToBuild || ResourceManager.resource <= currPrice))
+                    uIAudioSource.PlayOneShot(uISounds[2], 0.6f);
+
                 if (Input.GetMouseButtonDown(0) && isAbleToBuild && ResourceManager.resource >= currPrice)
                 {
                     ResourceManager.RemoveResource(currPrice);
                     placeTower();
-                 //   hexagon.SetStatus(HexCoordinatStatus.Occupied);
                     Cancel();
                 }
                 else if (ResourceManager.resource < currPrice)
@@ -198,6 +219,7 @@ public class Shoping : MonoBehaviour
 
     public void Cancel()
     {
+ 
         isPlacing = false;
         selectB(bSelected);
         realTimeTowerPlace.SetActive(false);

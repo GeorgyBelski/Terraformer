@@ -4,6 +4,10 @@ using UnityEngine;
 
 public abstract class Effect
 {
+    public static int burningDamage = 25;
+    public static float burningDuration = 2f;
+    public static float slowdownMultiplier = 0.5f;
+    public static float slowdownDuration = 2f;
     public enum Type {Burning, Stan, Slowdown};
     public Type type;
 

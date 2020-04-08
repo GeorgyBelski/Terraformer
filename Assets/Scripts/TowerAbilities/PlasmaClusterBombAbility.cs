@@ -93,6 +93,8 @@ public class PlasmaClusterBombAbility : TowerAbility
                 //bullet.setSettings(directShotAttack, speed, blastShotAttack, damageRadius, tower.target, gunpoint.transform.position, new Vector3(speed * Random.Range(0.6f, 1.6f) * cosTheta * dir.x, speed * Random.Range(0.6f, 1.6f) * sinTheta, speed * Random.Range(0.6f, 1.6f) * cosTheta * dir.y));
                 shootingCount--;
                 realRate = rateOfShooting;
+                tower.audioSource.pitch = 2f;
+                tower.audioSource.PlayOneShot(tower.abilitiesSounds[0], 0.6f);
             }
         }
 
@@ -108,7 +110,7 @@ public class PlasmaClusterBombAbility : TowerAbility
     {
 
         base.Cast(aimPosition);
-        TowerManager.availablePlasmaTowers.Remove((PlasmaTower)tower);
+     //   TowerManager.availablePlasmaTowers.Remove((PlasmaTower)tower);
         aim = aimPosition;
 
         speed = Vector3.Distance(aimPosition, gunpoint.position)/1.2f;

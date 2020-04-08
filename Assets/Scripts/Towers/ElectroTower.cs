@@ -46,7 +46,10 @@ public class ElectroTower : Tower
 
     [Header("ThandetBallAbility")]
     public ThanderBallAbility thanderBallAbility;
-
+    [Header("LightningStrikeAbility")]
+    public LightningStrikeAbility lightningStrikeAbility;
+    [Header("PlasmaBlastAbility")]
+    public PlasmaBlastAbility plasmaBlastAbility;
     private new void Start()
     {
         base.Start();
@@ -168,7 +171,7 @@ public class ElectroTower : Tower
         { target.effectsController.AddStun(stunDuration); }
         // symbiosis with LaserTower
         if (symbiosisTowerType == TowerType.Laser)
-        { target.effectsController.AddBurning(BurningEffect.standardLifetime / 2, 6); }
+        { target.effectsController.AddBurning(Effect.burningDuration / 2, Effect.burningDamage); }
         else if(symbiosisTowerType == TowerType.Plasma)
         { ApplyAreaDamage(symbiosisAreaDamage, isStun, stunDuration); }
     }
@@ -190,6 +193,14 @@ public class ElectroTower : Tower
     {
         //Debug.Log("DisableSymbiosisUpgrade");
         SetOrdinaryLightningCharge();
+        if (symbiosisTowerType == TowerType.Laser)
+        {
+            TowerManager.availableElectroLaserTowers.Remove(this);
+        }
+        else if (symbiosisTowerType == TowerType.Plasma)
+        {
+            TowerManager.availableElectroPlasmaTowers.Remove(this);
+        }
         symbiosisTowerType = null;
     }
     public void SetOrdinaryLightningCharge()
@@ -211,10 +222,27 @@ public class ElectroTower : Tower
         thanderBallAbility.Cast(aimPosition);
     }
 
+    // Ability Electro-Laser - LightningStrike
+    public void CastLightningStrike(Vector3 aimPosition)
+    {
+        lightningStrikeAbility.Cast(aimPosition);
+    }
+    // Ability Electro-Plasma - PlasmaBlast
+    public void CastPlasmaBlast(Vector3 aimPosition)
+    {
+        plasmaBlastAbility.Cast(aimPosition);
+    }
+
     public override void EndCasting() {
         base.EndCasting();
         IsCastingAbility = false;
-        TowerManager.availableElectroTowers.Add(this);
+       // TowerManager.availableElectroTowers.Add(this);
     }
-
+    override public void DestroyBulletsAndAbilities()
+    {
+        DestroyCharge();
+        if (lightningStrikeAbility.lightningStrike) { Destroy(lightningStrikeAbility.lightningStrike.gameObject); }
+        if (thanderBallAbility.thanderBall) { Destroy(thanderBallAbility.thanderBall.gameObject); }
+        Destroy(areaDamager);
+    }
 }

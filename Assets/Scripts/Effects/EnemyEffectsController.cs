@@ -19,6 +19,7 @@ public class EnemyEffectsController : MonoBehaviour
     public GameObject vertigoPrefab;
     public GameObject vertigo;
     public float originalNavAgentSpeed;
+    [SerializeField] float speedMultiplier =1f;
     //private float basicSpeed;
 
     ParticleSystem flameParticleSystem;
@@ -73,9 +74,9 @@ public class EnemyEffectsController : MonoBehaviour
         {
             navAgent.speed = 0;
         }
-        else if (effect.type == Effect.Type.Slowdown)
+        else if (effect.type == Effect.Type.Slowdown && speedMultiplier == 1)
         {
-
+            speedMultiplier = ((SlowDownEffect)effect).slowdownMultiplayer;
         }
     }
 
@@ -92,12 +93,13 @@ public class EnemyEffectsController : MonoBehaviour
           //  tpCharacter.m_AnimSpeedMultiplier = 1f;
           //  tpCharacter.m_StationaryTurnSpeed = 180f;
             tpCharacter.m_Stun = false;
-            navAgent.speed = originalNavAgentSpeed;
+            navAgent.speed = originalNavAgentSpeed * speedMultiplier;
         }
         else if (effect.type == Effect.Type.Slowdown)
         {
             enableSlowdown = true;
             navAgent.speed = originalNavAgentSpeed;
+            speedMultiplier = 1;
         }
     }
     private Effect AddEffect(Effect.Type type) {
@@ -133,7 +135,7 @@ public class EnemyEffectsController : MonoBehaviour
         SlowDownEffect slowdown = (SlowDownEffect)AddEffect(Effect.Type.Slowdown);
         slowdown.Set(duration, multiplayer);
         // print(navAgent.speed);
-        navAgent.speed = Mathf.Min(originalNavAgentSpeed * multiplayer, navAgent.speed);
+        navAgent.speed = Mathf.Min(0.3f, navAgent.speed);
         // print(navAgent.speed);
         enableSlowdown = false;
     }

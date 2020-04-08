@@ -8,13 +8,18 @@ public enum EnemyType { Solder, Healer, Tank, Jumper, Totem};
 
 public class Enemy : Damageable
 {
-    
+    public Material shaderMaterial;
     public ThirdPersonCharacter character;
     public EnemyEffectsController effectsController;
     public EnemyType type;
     public Animator animator;
     public SpurtFXController spurtFXController;
     public Transform chest;
+
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public List<AudioClip> enemySounds;
+
     /*
    [Range(10, 1000)]
    public int maxHealth = 100;
@@ -35,6 +40,10 @@ public class Enemy : Damageable
 */
     void Start()
     {
+        healthBar.material = Instantiate(shaderMaterial);
+        shaderMaterial = healthBar.material;
+        //shaderMaterial = healthBar.;
+        shaderMaterial.SetFloat("_Steps", maxHealth/200);
         // capsuleCenter = GetComponent<CapsuleCollider>().center;
         if (!EnemyManagerPro.enemies.Contains(this)) {
             //   EnemyManagerPro.enemies.Add(this);
@@ -50,7 +59,6 @@ public class Enemy : Damageable
 
     public override void RemoveFromList()
     {
-     //  EnemyManagerPro.enemies.Remove(this);
         EnemyManagerPro.RemoveEnemy(this);
     }
 
@@ -59,6 +67,8 @@ public class Enemy : Damageable
         this.RemoveFromList();
         if (animator)
         {
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            audioSource.PlayOneShot(enemySounds[0], 0.2f);
             animator.SetBool("DeathTrigger", true);
           //  effectsController.navAgent.speed = 0;
             effectsController.navAgent.enabled = false;

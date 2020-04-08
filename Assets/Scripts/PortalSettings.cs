@@ -7,33 +7,69 @@ public class PortalSettings : MonoBehaviour
     private List<GameObject> enemyList = new List<GameObject>();
 
     public float loadingTime = 7;
+    public float finalSize = 5;
+    public float deactivateTime = 1.5f;
+
+    public SpawnEnemiesPattern pattern;
+    public bool deactivating = false;
+
+    private SpawnEnemiesPattern.WaveType patternType;
+    private Sqad.Formation formation;
+
     float previousLoadingTime;
     float timerLoading;
     float sizeInSecond;
-    public float finalSize = 5;
-    float previousFinalSize;
+    [SerializeField]float previousFinalSize;
     Vector3 previousPosition;
     float startScale;
-    
-    private GameObject leader;
-    private GameObject next;
-    
+    private float startSizeInSecond;
+
     [Header("Loading Line")]
     public LineRenderer loadingLine;
     [ColorUsageAttribute(true, true)]
     public Color loadingLineColor;
     public float lineSpeed = 2f;
+
+    private float realLineSpeed;
+
     float previousLineSpeed;
     float originalSpeed;
     public Material loadingLineMaterial;
 
-    private bool spawn = false;
-    
+
+    private bool active = false;
+    private bool spwning = false;
+    private GameObject leader;
+    private GameObject next;
+    public float spawnRate = 1f;
+    private float realSpawnRate = 1f;
+    private float delay;
+    private int enemieCountInList = 0;
+    private int columns;
+    private int columnCount;
+    private float columnsRange;
+    private float rotation;
+    private float position;
+    private Sqad.Formation form;
+    private bool isSquad = false;
+    private float deactivateTimeLeft;
+
+    //private loadingLineMaterial;
+
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public List<AudioClip> sounds;
+    public AudioClip activatingSound;
+
+    public AudioSource activatingAudioSource;
+    private bool activating = false;
 
     private void Awake()
     {
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
         startScale = transform.localScale.x;
         sizeInSecond = (finalSize - startScale) / loadingTime;
+        
         previousLoadingTime = loadingTime;
         loadingLine.positionCount = 72;
         loadingLineMaterial = loadingLine.materials[0];
@@ -53,25 +89,59 @@ public class PortalSettings : MonoBehaviour
     }
     void Update()
     {
+        delay -= Time.deltaTime;
+
+        if (delay > 0)
+            return;
+
+        if (activating)
+        {
+            activatingAudioSource.pitch = Random.Range(0.9f, 1.1f);
+            activatingAudioSource.PlayOneShot(activatingSound, 0.7f);
+            ReloadLine();
+            loadingLine.enabled = true;
+            activating = false;
+        }
         //print("+"); 
         CalculateLoadingSpeed();
         ChangeLineSpeed();
         if (this.enabled)
         {
+            //print(realLineSpeed);
+            //realLineSpeed = lineSpeed * transform.localScale.x / finalSize;
+            //loadingLineMaterial.SetFloat("_Speed", realLineSpeed);
             transform.localScale = new Vector3(transform.localScale.x + sizeInSecond * Time.deltaTime, transform.localScale.y + sizeInSecond * Time.deltaTime, transform.localScale.z + sizeInSecond * Time.deltaTime);
-        
-        //print(transform.localScale.x + " " + size);
-            if(transform.localScale.x >= finalSize && spawn)
+            if (!audioSource.isPlaying)
             {
-                spawn = false;
-                //gameObject.active = false;
-                spawnEnemyes();
-                transform.localScale = Vector3.zero;
-                transform.position = Vector3.zero;
-                this.enabled = false;
-                //gameObject. = false
+                //audioSource.pitch = transform.localScale.x / finalSize;
+                audioSource.PlayOneShot(sounds[0], 0.6f);
+            }
+            audioSource.volume = transform.localScale.x / finalSize;
+            //print(transform.localScale.x + " " + size);
+            if (transform.localScale.x >= finalSize && active)
+            {
+                sizeInSecond = 0;
+                active = false;
+                spwning = true;
+                enemieCountInList = 0;
 
             }
+
+            if (spwning)
+            {
+                if (realSpawnRate <= 0){
+                    spawnEnemyes();
+                    audioSource.PlayOneShot(sounds[1], 0.5f);
+                    realSpawnRate = spawnRate;
+                }
+                realSpawnRate -= Time.deltaTime;
+            }
+        }
+
+        if (deactivating)
+        {
+            deactivateTimeLeft -= Time.deltaTime;
+            deactivate();
         }
     }
     void CalculateLoadingSpeed() 
@@ -82,39 +152,159 @@ public class PortalSettings : MonoBehaviour
             previousLoadingTime = loadingTime;
         }
     }
-    public void spawnEnemyes()
+
+    public void deactivate()
     {
-        //print(enemyList.Count);
-        //engl = SquadFormationSquare.DegreeToRadian(engl);
-        leader = enemyList[0];
-        Instantiate(leader, transform.position, this.transform.rotation);
-        for (int i = 1; i < enemyList.Count - 1; i++)
+        deactivating = true;
+
+        //deactivateTimeLeft -= Time.deltaTime;
+        if (deactivateTimeLeft > 0)
         {
-            Instantiate(enemyList[i], new Vector3(
-                this.transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(i * (360 / enemyList.Count - 1))) * 1 * enemyList.Count/5),
-                0,
-                this.transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(i * (360 / enemyList.Count - 1))) * 1 * enemyList.Count / 5)), leader.transform.rotation);
+            return;
         }
+        //print("+");
+        //if(audioSource.isPlaying)
+        spwning = false;
+        transform.localScale = Vector3.zero;
+        transform.position = Vector3.zero;
+        this.enabled = false;
         gameObject.SetActive(false);
+        realSpawnRate = spawnRate;
+        sizeInSecond = startSizeInSecond;
+        deactivating = false;
+        deactivateTimeLeft = deactivateTime;
     }
 
-    public void setSettings(List<GameObject> list)
+    public void setSettings(List<GameObject> list, float spawnRate, float delay, float portalLoadTime, float portalFinzlSize)
     {
+        //print("+"); 
+        deactivateTimeLeft = deactivateTime;
+        this.spawnRate = spawnRate;
+        this.delay = delay;
+        this.loadingTime = portalLoadTime;
+        this.finalSize = portalFinzlSize;
+
+        //this.
+        patternType = SpawnEnemiesPattern.WaveType.Simple;
+
+        realSpawnRate = spawnRate;
+        startSizeInSecond = sizeInSecond;
         enemyList = list;
-        //size = list.Count;
-        //print(size);
-        spawn = true;
+        transform.localScale = Vector3.zero;
+        loadingLine.enabled = false;
+
+        active = true;
+        this.enabled = true;
+        isSquad = false;
+        activating = true;
+
+
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
+    }
+
+    public void setSettings(List<GameObject> list, int columns, int columnCount, float columnsRange, Sqad.Formation form, float delay, float portalLoadTime, float portalFinzlSize, float rotation, float position)
+    {
+        
+        deactivateTimeLeft = deactivateTime;
+        realSpawnRate = spawnRate;
+        startSizeInSecond = sizeInSecond;
+        enemyList = list;
+        loadingLine.enabled = false;
+        transform.localScale = Vector3.zero;
+        this.loadingTime = portalLoadTime;
+        this.finalSize = portalFinzlSize;
+        this.rotation = rotation;
+        this.position = position;
+
+        patternType = SpawnEnemiesPattern.WaveType.Squad;
+
+        this.columns = columns;
+        this.columnCount = columnCount;
+        this.columnsRange = columnsRange;
+        this.form = form;
+        //this.rotation = rotation;
+
+        isSquad = true;
+        activating = true;
+        active = true;
         this.enabled = true;
 
-        ReloadLine();
+        //ReloadLine();
+
+        //audioSource.PlayOneShot(activatingSound, 0.5f);
     }
 
-    // Loading Line
+    public void spawnEnemyes()
+    {
+        switch (patternType)
+        {
+            case SpawnEnemiesPattern.WaveType.Simple:
+                simpleSpawn();
+                break;
+            case SpawnEnemiesPattern.WaveType.Squad:
+                squadSpawn();
+                break;
+        }
+
+    }
+
+    private void simpleSpawn()
+    {
+
+        if (deactivating)
+            return;
+
+        /*
+         * Enemy enem = Instantiate(enemyList[enemieCountInList], new Vector3(
+            transform.position.x + (Mathf.Sin(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 2),
+            0,
+            transform.position.z + (Mathf.Cos(SquadFormationSquare.DegreeToRadian(enemieCountInList * (360 / enemyList.Count - 1))) * 2)), transform.rotation)
+            .GetComponent<Enemy>();
+            */
+        Enemy enem = Instantiate(enemyList[enemieCountInList], new Vector3(
+        transform.position.x,
+        0,
+        transform.position.z), transform.rotation)
+        .GetComponent<Enemy>();
+
+        //enem.maxHealth = enem.maxHealth + 100 * wave;
+        //enem.health = enem.maxHealth;
+
+        enemieCountInList++;
+
+        if (enemyList.Count <= enemieCountInList)
+        {
+            //enemieCountInList = 0;
+
+            deactivate();
+            //print("+");
+            //return;
+
+        }
+
+
+    }
+
+    private void squadSpawn()
+    {
+        if (deactivating)
+            return;
+        switch (form)
+        {
+            case Sqad.Formation.Square:
+                new SquadFormationSquare(enemyList[0], enemyList[1], columns, columnCount, columnsRange, (int)position, rotation);
+                break;
+            case Sqad.Formation.Circle:
+                new SquadFormationCircle(enemyList[0], enemyList[1], columns, columnCount, columnsRange, (int)position, rotation);
+                break;
+        }
+        deactivate();
+    }
 
     void ShowFinalSize()
     {
 
-        if (previousFinalSize != finalSize)
+        if (previousFinalSize != finalSize || previousPosition != transform.position)
         {
             Vector3 compass = finalSize / 2 * Vector3.forward;
             for (int i = 0; i < 72; i++)
@@ -127,15 +317,16 @@ public class PortalSettings : MonoBehaviour
             previousFinalSize = finalSize;
             previousPosition = transform.position;
         }
-        else 
+        /*else
         {
-            SetLoadingLinePosition();
-        }
+            SetLoadingLinePosition();         
+        }*/
         timerLoading -= Time.deltaTime;
       //  ChangeLineSpeed();
     }
     void SetLoadingLinePosition() 
     {
+        
         if (previousPosition != transform.position)
         {
             for (int i = 0; i < 72; i++)
@@ -156,6 +347,7 @@ public class PortalSettings : MonoBehaviour
     }
     void ReloadLine()
     {
+        
         lineSpeed = originalSpeed;
         loadingLineMaterial.SetColor("_Color", loadingLineColor);
         timerLoading = loadingTime;

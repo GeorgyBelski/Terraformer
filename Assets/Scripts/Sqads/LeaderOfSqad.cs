@@ -40,7 +40,7 @@ public class LeaderOfSqad : Enemy_Logic
 
     public void setLeaderSquad(List<PartOfSquad> squad)
     {
-        
+        //print(squad.Count);
         this.Squad = squad;
         isLeader = true;
         for (int i = 0; i < Squad.Count; i++)
@@ -53,6 +53,7 @@ public class LeaderOfSqad : Enemy_Logic
 
     public void removeFromSquad(PartOfSquad part)
     {
+        
         if(Squad.Contains(part))
             this.Squad.Remove(part);
     }
@@ -88,11 +89,12 @@ public class LeaderOfSqad : Enemy_Logic
         {
             //print("+");
             disabledEnemyLogic.enabled = true;
-            
-            
-            for (int i = 0; i < Squad.Count; i++)
+
+            int count = Squad.Count;
+            for (int i = 0; i < count; i++)
             {
-                Squad[i].cancelSquad();
+                //print("+");
+                Squad[0].cancelSquad();
             }
             isLeader = false;
             Squad = null;

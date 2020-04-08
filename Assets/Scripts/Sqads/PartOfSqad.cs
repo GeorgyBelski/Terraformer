@@ -59,6 +59,7 @@ public class PartOfSquad : Enemy_Logic
 
     public void cancelSquad()
     {
+        //print("=");
         emk.agent.speed = tempNavAgentSpeed;
         isSquad = false;
         leader.removeFromSquad(this);

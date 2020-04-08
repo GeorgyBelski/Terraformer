@@ -20,10 +20,16 @@ public class RushDamager : Enemy_Logic
 
     private Vector3 dest;
 
+    public AudioClip jumpSound;
+
     public override void Attack()
     {
         if (targetTower)
-        { targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero); }
+        {
+            audioSource.pitch = Random.Range(1f, 1.6f);
+            base.Attack();
+            targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
+        }
     }
 
     // Start is called before the first frame update
@@ -70,6 +76,9 @@ public class RushDamager : Enemy_Logic
 
     void jump(Vector3 jumpPos)
     {
+        audioSource.pitch = Random.Range(0.9f, 1.2f);
+        audioSource.PlayOneShot(jumpSound, 0.5f);
+
         SpurtFXController.ShowSpurtWave(dest);
         transform.position = dest;
         isChargingReady = false;
@@ -77,6 +86,22 @@ public class RushDamager : Enemy_Logic
         charging();
     }
 
+    /*
+    protected override void stateGoToDestanation()
+    {
+        if (isPriority)
+        {
+            base.stateGoToDestanation(priorityTowerType);
+        }
+        else
+        {
+            base.stateGoToDestanation();
+        }
+
+
+
+    }
+    */
     public override void check()
     {
         if (isGoingToDest && isHealingJump)
@@ -88,6 +113,7 @@ public class RushDamager : Enemy_Logic
 
             if (isGoingToDest)
             {
+                //print("+");
                 dest = emk.GetDest();
                 if (Vector3.Distance(emk.GetDest(), transform.position) < jumpDistance)
                     jump(dest);

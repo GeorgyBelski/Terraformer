@@ -28,15 +28,21 @@ public abstract class Enemy_Logic : MonoBehaviour
 
     protected bool isRush = false;
 
-
+    public bool isCasting;
 
     protected float realcheckTime;//change!!!!!!!!!!!!!!!!!!!!!
     protected float brawe = 0; //= Random.RandomRange(0.1f, 0.7f);
     protected float min;
     protected float tempNavAgentSpeed;
 
+    protected TowerType priorityTowerType;
+    protected bool isPriority = false;
+
     public bool IsAttack { get => isAttack; set { isAttack = value; animator.SetBool("Attack", value); } }
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public AudioClip kick;
 
     // Start is called before the first frame update
     protected void Start()
@@ -78,7 +84,13 @@ public abstract class Enemy_Logic : MonoBehaviour
         //Debug.Log(isAttack + " " + destTower + "ATAKING");
     }
 
-    protected void stateGoToDestanation()
+    public void setPriority(TowerType tower)
+    {
+        isPriority = true;
+        priorityTowerType = tower;
+    }
+
+    protected virtual void stateGoToDestanation()
     {
         if (TowerManager.towers.Count > 0)
         {
@@ -87,9 +99,10 @@ public abstract class Enemy_Logic : MonoBehaviour
             // destTower = TowerManager.towers[0].transform;
             Vector3 fromTargetTowerToEnemy;
             //Debug.Log(TowerManager.towers.Count);
-            for (int i = 0; i < TowerManager.towers.Count; i++)
+            // for (int i = 0; i < TowerManager.towers.Count; i++)
+            TowerManager.towers.ForEach(tower =>
             {
-                Vector3? current_dist = TowerManager.towers[i].transform.position;
+                Vector3? current_dist = tower.transform.position;
                 
 
                 if (min > Vector3.Distance((Vector3)current_dist, transform.position))
@@ -97,14 +110,15 @@ public abstract class Enemy_Logic : MonoBehaviour
                     min = Vector3.Distance((Vector3)current_dist, transform.position);
                 //    destTower = TowerManager.towers[i].transform;
                 //    destTower.position = current_dist;
-                    targetTower = TowerManager.towers[i];
+                    targetTower = tower;
                 }
-            }
+            });
             //Debug.Log(destTower.position);
             fromTargetTowerToEnemy = transform.position - targetTower.transform.position;
             destTower = targetTower.transform.position + fromTargetTowerToEnemy.normalized;
          //   destTower.position = targetTower.transform.position - fromTargetTowerToEnemy.normalized;
             emk.SetDestination((Vector3)destTower);
+            //print((Vector3)destTower);
             isGoingToDest = true;
             //isAttack = true;
             
@@ -175,7 +189,12 @@ public abstract class Enemy_Logic : MonoBehaviour
 
 
 
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+        //audioSource.pitch = Random.Range(0.7f, 1.2f);
+        audioSource.PlayOneShot(kick, 0.4f);
+    }
+
     //{
     //targetTower.towerHealth.ApplyDamage(damage, Vector3.zero, Vector3.zero);
     //}
@@ -236,16 +255,17 @@ public abstract class Enemy_Logic : MonoBehaviour
             {
                 if (IsAttack)
                 {
-                    if (destTower != null)
+                    if (destTower == null)
                     {
                         isStand = false;
-                        IsAttack = false;
+                        IsAttack = true;
                         isGiveUp = false;
                         stateGoToDestanation();
                     }
                     else
                     {
-                        IsAttack = true;
+                        IsAttack = false;
+                        stateGoToDestanation();
                     }
                 }
                 else

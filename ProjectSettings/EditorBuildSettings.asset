@@ -14,10 +14,22 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/New Folder/SampleScene_NavMesh - Copy V2.unity
     guid: a135903e9ee2c104dbbffa299b2eca8a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DemoScene/DemoScene.unity
     guid: c58d9d127d2704c4994f4b8239b79073
   - enabled: 0
     path: Assets/Scenes/SampleScene_Geo_Clear.unity
     guid: d6d4a28c86a6d2a438db3eebad142a38
+  - enabled: 1
+    path: Assets/Scenes/Levels/MainMenu.unity
+    guid: 91ed8bd039386c748a8f3e71a5e7dfd7
+  - enabled: 1
+    path: Assets/Scenes/Levels/LevelOne.unity
+    guid: 390628c56785d4143bee71bdc47bbf66
+  - enabled: 1
+    path: Assets/Scenes/Levels/LevelTwo.unity
+    guid: 547eadb98a53e1b4183bbcad0325bcc8
+  - enabled: 1
+    path: Assets/Scenes/Levels/LevelThree.unity
+    guid: 284df1c6747d8db418e48bbf8a651282
   m_configObjects: {}

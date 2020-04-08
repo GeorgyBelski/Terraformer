@@ -8,7 +8,7 @@ public class CameraMoveController : MonoBehaviour
     public Vector2 panoramaLimit = new Vector2(20,20);
     [Range(0, 20)]
     public float panoramaSpeed = 10f;
-
+    public bool isEnableBorderTouchMove = false;
     public float borderThickness = 10;
     
     Vector3 focusPointPosition;
@@ -77,7 +77,7 @@ public class CameraMoveController : MonoBehaviour
             Vector3? hit = GetHitGroundPoint();
             if (hit != null)
             {
-                mousPreviousGroundPosition = (Vector3)hit;
+                mousPreviousGroundPosition = new Vector3( ((Vector3)hit).x , 0 , ((Vector3)hit).z);
                 mousCurrentGroundPosition = mousPreviousGroundPosition;
                 isMovingByDrag = true;
             }
@@ -90,7 +90,7 @@ public class CameraMoveController : MonoBehaviour
             {
                 // cameraFocusPoint.position +=  mousPreviousGroundPosition - (Vector3)hit;
                 // mousPreviousGroundPosition = (Vector3)hit;
-                mousCurrentGroundPosition = (Vector3)hit;
+                mousCurrentGroundPosition = new Vector3(((Vector3)hit).x, 0, ((Vector3)hit).z);
                 if (!isMovingByDrag) {
                     mousPreviousGroundPosition = mousCurrentGroundPosition;
                     isMovingByDrag = true;
@@ -135,6 +135,8 @@ public class CameraMoveController : MonoBehaviour
     }
     void MoveByTouchingBorders()
     {
+        if(!isEnableBorderTouchMove)
+        { return; }
 
         mousPosition = Input.mousePosition;
 

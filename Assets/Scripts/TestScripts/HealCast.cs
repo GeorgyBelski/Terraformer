@@ -20,7 +20,7 @@ public class HealCast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = new Vector3(transform.localScale.x + 0.25f, transform.localScale.y, transform.localScale.z + 0.25f);
+        transform.localScale = new Vector3(transform.localScale.x + 10 * Time.deltaTime, transform.localScale.y, transform.localScale.z + 10 * Time.deltaTime);
         if(transform.localScale.x >= diameter)
         {
             Destroy(gameObject);
@@ -28,7 +28,7 @@ public class HealCast : MonoBehaviour
         //mt.color.a -= 1;
         //Debug.Log(mt.color.r);
         //mt.color = new Color(mt.color.r + 1, mt.color.g, mt.color.b, mt.color.a - 4); // Interesting effect
-        mt.color = new Color(mt.color.r, mt.color.g, mt.color.b, mt.color.a - 0.25f / diameter);
+        mt.color = new Color(mt.color.r, mt.color.g, mt.color.b, mt.color.a - 8f * Time.deltaTime / diameter);
         if (mt.color.a <= 0)
             Destroy(gameObject);
     }

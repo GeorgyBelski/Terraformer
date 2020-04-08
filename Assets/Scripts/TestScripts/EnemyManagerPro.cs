@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class EnemyManagerPro : MonoBehaviour
 {
-    public static int enemyLayerMask;
+    public static int enemyLayerMask = 1 << 12;
     public static int enemyLayer = 12;
-    // public List<Enemy> startEnemies = new List<Enemy>();
-    //public static List<Enemy> enemiesDamage = new List<Enemy>();
-    //public static List<Enemy> enemiesHealers = new List<Enemy>();
+
     public static List<Enemy> enemies = new List<Enemy>();
-    //public static List<HealBase> healBases = new List<HealBase>();
 
     public static Dictionary<EnemyType, List<Enemy>> enemiesMap= new Dictionary<EnemyType, List<Enemy>>();
-    public int enemyCount;
+    public static Dictionary<Transform, Enemy> TransformEnemyMap = new Dictionary<Transform, Enemy>();
+    public int enemyCount;// for debuging
+
+    public static int killedEnemies = 0;
+    public static void Restart()
+    {
+        enemies.Clear();
+        enemiesMap.Clear();
+        killedEnemies = 0;
+    }
     private void Start()
     {
-        enemyLayerMask = LayerMask.GetMask("Enemy");
         //enemiesMap.Add("Damager", enemiesDamage);
         //enemiesMap.Add("Healer", enemiesHealers);
         //foreach (Enemy startEnemy in startEnemies)
@@ -40,6 +45,7 @@ public class EnemyManagerPro : MonoBehaviour
         {
             enemiesMap[enemy.type].Add(enemy);
             enemies.Add(enemy);
+            
         }
         else
         {
@@ -48,6 +54,7 @@ public class EnemyManagerPro : MonoBehaviour
             enemiesMap[enemy.type].Add(enemy);
             enemies.Add(enemy);
         }
+        TransformEnemyMap.Add(enemy.transform, enemy);
         //enemiesMap.Add(name, enem);
         //print(enemiesMap[enemy.type]);
         
@@ -56,9 +63,20 @@ public class EnemyManagerPro : MonoBehaviour
 
     public static void RemoveEnemy(Enemy enemy)
     {
+    //  if (enemies.Contains(enemy))
+    //  {
         enemies.Remove(enemy);
         //enemiesMap[enem.getName].Remove(enem);
         enemiesMap[enemy.type].Remove(enemy);
+        TransformEnemyMap.Remove(enemy.transform);
+
+        if (enemy.type != EnemyType.Totem)
+        {
+            killedEnemies++;
+            MenuController.RewriteKilledEnemiesCount();
+            LevelManager.CheckFirstLevelCondition();
+        }
+    // }
     }
 
     public static bool checking(Enemy enem)

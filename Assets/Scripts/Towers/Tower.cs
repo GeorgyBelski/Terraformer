@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static CreepHexagonGenerator;
 
-public enum TowerType { Electro, Laser, Terraformer, Plasma };
+public enum TowerType { None, Electro, Laser, Terraformer, Plasma };
 
 public abstract class Tower : MonoBehaviour
 {
@@ -59,6 +59,11 @@ public abstract class Tower : MonoBehaviour
     Color highlightedColor;
     protected int randomizer;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public List<AudioClip> shots;
+    public List<AudioClip> abilitiesSounds;
+
     protected void Start()
     {
         TowerManager.AddTower(this);
@@ -91,10 +96,12 @@ public abstract class Tower : MonoBehaviour
         if (enableAutoattacs)
         {
             TowerUpdate();
-            ReduceTimers();
-            HighlightTower();
-            ShowRange();
         }
+
+        ReduceTimers();
+        HighlightTower();
+        ShowRange();
+
         if (hexagon == null) { hexagon = GetHexagon();}
     }
     internal abstract void TowerUpdate();
@@ -221,6 +228,9 @@ public abstract class Tower : MonoBehaviour
         if (timerAttack <= 0 && target) {
             TowerAttack(target);
             timerAttack = cooldownAttack;
+
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            audioSource.PlayOneShot(shots[0], 0.3f);
         }
     }
     public void RotateCannon(Vector3 targetPosition)
@@ -323,5 +333,6 @@ public abstract class Tower : MonoBehaviour
 
     public abstract void ActivateSymbiosisUpgrade();
     public abstract void DisableSymbiosisUpgrade();
+    public abstract void DestroyBulletsAndAbilities();
 
 }

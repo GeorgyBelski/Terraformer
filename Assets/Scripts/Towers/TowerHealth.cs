@@ -10,9 +10,13 @@ public class TowerHealth : Damageable
     public Color damagePointsColor = Color.red;
 
     private float prevHealthRatio;
-        
+
+    private float emergencySoundCounter = 10f;
+    private float realEmergencySoundCounter;
+
     void Start()
     {
+        realEmergencySoundCounter = 0;
         isHeal = false;
         for (int i = 0; i < damagePoints.Length; i++)
         { damagePoints[i].color = damagePointsColor; }
@@ -22,7 +26,7 @@ public class TowerHealth : Damageable
     {
         base.CalcHealthRatio();
 
-        if (isHeal && healthRatio < maxRepairHealth)
+        if (isHeal && healthRatio < maxRepairHealthRatio)
         {
             //base.CalcHealthRatio();
            // print(maxRepairHealth);
@@ -32,14 +36,16 @@ public class TowerHealth : Damageable
         }
         else
         {
-            if(healHealth)
-                healHealth.fillAmount = healthBar.fillAmount;
-            //ealHealth.fillAmount = healthBar.fillAmount;
+            //print("+");
             isHeal = false;
-        }
+            if(healBar)
+                healBar.fillAmount = healthBar.fillAmount;
+            //ealHealth.fillAmount = healthBar.fillAmount;
             
-        
-        
+        }
+
+
+        realEmergencySoundCounter -= Time.deltaTime;
        /* if (health == 0 && TowerManager.towers.Contains(thisTower)){
             RemoveFromList();
         }*/
@@ -52,43 +58,33 @@ public class TowerHealth : Damageable
         ResourceManager.isTowersSupplyChanged = true;
     }
 
+    public override void ApplyDamage(int value, Vector3 shootPoint, Vector3 direction)
+    {
+        if (thisTower.type == TowerType.Terraformer)
+        {
+            if(realEmergencySoundCounter <= 0)
+                ((Terraformer)thisTower).playEmergency();
+            realEmergencySoundCounter = emergencySoundCounter;
+        }
+        base.ApplyDamage(value, shootPoint, direction);
+    }
+
     public override void ApplyDeath()
     { 
         thisTower.BreakSymbiosis();
         if (thisTower.currentVisualLink) { Destroy(thisTower.currentVisualLink.gameObject); }
         RemoveFromList();
-        //Destroy(thisTowet.gameObject);
 
         thisTower.cooldownAttack = float.PositiveInfinity;
-        //    thisTower.timerAttack = float.PositiveInfinity;
         thisTower.enableAutoattacs = false;
 
-        if (thisTower.type == TowerType.Electro)
+        if (thisTower.type == TowerType.Terraformer)
         {
-            ((ElectroTower)thisTower).DestroyCharge();
-            if (((ElectroTower)thisTower).thanderBallAbility.thandetBall)
-            { Destroy(((ElectroTower)thisTower).thanderBallAbility.thandetBall.gameObject); }
-        }
-        else if (thisTower.type == TowerType.Laser)
-        {
-            ((LaserTower)thisTower).lr.enabled = false;
-            if (((LaserTower)thisTower).scorchingRayAbility.scorchingRay)
-            { Destroy(((LaserTower)thisTower).scorchingRayAbility.scorchingRay.gameObject); }
-        }
-        else if (thisTower.type == TowerType.Plasma) 
-        {
-            ((PlasmaTower)thisTower).DestroyBullets();
-            ((PlasmaTower)thisTower).clusterBombAbility.DestroyBullets();
-            PlasmaBlowUp blow = ((PlasmaTower)thisTower).blow;
-            if (blow.gameObject.activeSelf)
-            { blow.thisTower = null; }
-        }
-        else if (thisTower.type == TowerType.Terraformer)
-        {
-            ((Terraformer)thisTower).menu.SetActive(true);
-            ((Terraformer)thisTower).defeat.gameObject.SetActive(true);
+            LevelManager.Defeat();
+            
             return;
         }
+        thisTower.DestroyBulletsAndAbilities();
         thisTower.hexagon.SetStatus(HexCoordinatStatus.Attend);
         Destroy(thisTower.gameObject); 
     }
@@ -98,51 +94,43 @@ public class TowerHealth : Damageable
         //print(healthRatio);
         if (healthRatio < 1 && !isHeal) { 
             float resource = ResourceManager.resource;
-            float repaircost = ResourceManager.RepairCost;
-            float costNeeded = (1 - healthRatio) * 100 * repaircost;
+            float towerRepairFactor = ResourceManager.TowerRepairFactor;
+            float costNeeded = (1 - healthRatio) * towerRepairFactor;
 
             prevHealthRatio = healthRatio;
 
             if(resource > costNeeded)
             {
-                maxRepairHealth = 1;
+                maxRepairHealthRatio = 1;
             //    Debug.Log(costNeeded);
-                ResourceManager.RemoveResource(costNeeded);
+               // ResourceManager.RemoveResource(costNeeded);
             }
 
             else
             {
-                maxRepairHealth = healthRatio + resource / 100 / repaircost;
+                maxRepairHealthRatio = healthRatio + resource /towerRepairFactor;
                 ResourceManager.RemoveResource(resource);
                 //print(maxRepairHealth);
             }
 
-            healHealth.fillAmount = maxRepairHealth;
+            healBar.fillAmount = maxRepairHealthRatio;
 
 
 
             isHeal = true;
         }
     }
-    /*
-    public void Repair()
+
+    public float CalculateRepairCost() 
     {
-        float repaircost = ResourceManager.RepairCost;
-        float resourses = ResourceManager.resourceST;
-        float value = 1 - healthRatio;
-        if (resourses > 100 * value * repaircost)
-        {
-            health = maxHealth;
-            ResourceManager.removeResource(100 * value * repaircost);
-            //CalcHealthRatio();
-        }
-        else
-        {
-            healthRatio = resourses * repaircost / 100;
-            CalcHealthRatio();
-            ResourceManager.removeResource(resourses);
-        }
-        //(int)((healthRatio + value) * maxHealth);
+        float resource = ResourceManager.resource;
+        float towerRepairFactor = ResourceManager.TowerRepairFactor;
+        float costNeeded = (1 - healthRatio) * towerRepairFactor;
+
+        if (resource > costNeeded)
+        { return costNeeded; }
+        else 
+        { return resource; }
     }
-    */
+
 }

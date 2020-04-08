@@ -16,23 +16,38 @@ public class PlasmaBlowUp : MonoBehaviour
     public Material material;
     int randomizer;
 
+    public GameObject blowUpSound;
+    //public AudioSource audioSource;
+    //public AudioClip blowUpSound; 
+
     // Start is called before the first frame update
     void Start()
     {
+        //audioSource.pitch = Random.Range(1.5f, 1.9f);
+        //audioSource.PlayOneShot(blowUpSound, 0.3f);
+
         startScale = this.transform.localScale;
+        material = GetComponent<MeshRenderer>().materials[0];
     }
 
     // Update is called once per frame
     void Update()
     {
         //print("+");
+
         transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 10, transform.localScale.y + Time.deltaTime * 0.8f, transform.localScale.z + Time.deltaTime * 10);
         if (transform.localScale.x >= radius)
         {
             if (thisTower)
-            { this.gameObject.SetActive(false); }
+            {
+                
+                this.gameObject.SetActive(false);
+            }
             else
-            { Destroy(gameObject); }
+            {
+                //this.enabled = false;
+                Destroy(gameObject);
+            }
         }
 
         //mt.color = new Color(mt.color.r, mt.color.g, mt.color.b, mt.color.a - 0.25f / radius);
@@ -57,7 +72,7 @@ public class PlasmaBlowUp : MonoBehaviour
             { return; }
             if (thisTower.symbiosisTowerType == TowerType.Laser)
             {
-                enemy.effectsController.AddBurning(BurningEffect.standardLifetime / 2, ((LaserTower)thisTower.symbiosisTower).damageBurning);
+                enemy.effectsController.AddBurning(Effect.burningDuration / 2, ((LaserTower)thisTower.symbiosisTower).damageBurning);
             }
             else if (thisTower.symbiosisTowerType == TowerType.Electro)
             {
@@ -74,12 +89,13 @@ public class PlasmaBlowUp : MonoBehaviour
 
     public void SetSettings(float damage, float radius)
     {
+        Instantiate(blowUpSound, transform.position, transform.rotation);
         this.damage = damage;
         this.radius = radius;
         this.transform.localScale = startScale;
         if (!thisTower) 
         { return; }
-        material = GetComponent<MeshRenderer>().materials[0];
+     //   material = GetComponent<MeshRenderer>().materials[0];
 
     }
 
@@ -87,6 +103,10 @@ public class PlasmaBlowUp : MonoBehaviour
     {
         if (material)
         { material.SetColor("_EmissionColor", color); }
+        else { 
+            material =  GetComponent<MeshRenderer>().material;
+            material.SetColor("_EmissionColor", color); 
+        }
     }
 
 }

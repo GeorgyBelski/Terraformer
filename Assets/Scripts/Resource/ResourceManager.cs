@@ -22,6 +22,9 @@ public class ResourceManager : MonoBehaviour
     int previousProceeds;
     public Image resourcefiller;
     public Image incomefiller;
+    public Image OverclockBar;
+    public static bool isDefeat = false;
+ //   public TextMeshProUGUI victory;
 
     public static float resource;
     public static float resourceMax;
@@ -32,7 +35,7 @@ public class ResourceManager : MonoBehaviour
     public static Image resourcefillerST;
     public static Image incomeFilerST;
 
-    public static float RepairCost = 1f;
+    public static float TowerRepairFactor = 100f;
 
     [Header("Income")]
     public int startIncomeFromHexagon = 1;
@@ -46,8 +49,11 @@ public class ResourceManager : MonoBehaviour
     [Header("Costs")]
     public int basicTowerSupply = 2;
     public int simbiosisTowerSupply = 1;
-    
 
+    public static void Restart() 
+    {
+        isTowersSupplyChanged = true;      
+    }
 
     //private static float income;
     //        {
@@ -58,7 +64,7 @@ public class ResourceManager : MonoBehaviour
     {
         resource = StartResource;
         resourceMax = StartMaxresource;
-
+        
         resourceCounterST = resourceCounter;
         resourceCost = resourceCostReference;
         if (resourceCost)
@@ -74,14 +80,22 @@ public class ResourceManager : MonoBehaviour
         billingPeriod = startBillingPeriod;
 
         incomeColor = resourceProceeds.faceColor;
+        OverclockBar.fillAmount = 0;
+        isDefeat = false;
+     //   victory.gameObject.SetActive(false);
     }
 
     void Update()
     {
+        if (Input.GetKeyDown("f12"))
+        {
+            resource = 2000;
+        }
         CulculateTowersSupply();
         CalculateProceeds();
         ShowProceeds();
         ApplyProceeds();
+        OverclockTerraformer();
     }
     void CulculateTowersSupply()
     {
@@ -104,6 +118,9 @@ public class ResourceManager : MonoBehaviour
     }
     void CalculateProceeds()
     {
+        if (isDefeat) 
+        { proceeds = 0; return; }
+
         proceeds = ResourceManager.income - towersSupply;
         if (proceeds <= 0 && signOfPreviosProceeds)
         {
@@ -136,8 +153,12 @@ public class ResourceManager : MonoBehaviour
         }
         resource += count;
         if (resource > resourceMax)
-        { resource = resourceMax;}  
+        { 
+            resource = resourceMax;   
+        }
+        LevelManager.CheckSecondLevelCondition();
         fillResourceFiller();
+
     }
 
     public static bool RemoveResource(float count)
@@ -154,7 +175,7 @@ public class ResourceManager : MonoBehaviour
     {
         //print("+");
         resourcefillerST.fillAmount = resource / resourceMax;
-        resourceCounterST.text = resource.ToString();
+        resourceCounterST.text = resource.ToString("F0");
     }
 
     private static void fillIncomeFiller()
@@ -184,4 +205,41 @@ public class ResourceManager : MonoBehaviour
     {
         resourceCostAnimator.SetBool("tooHigh", false);
     }
+
+    public void OverclockTerraformer()
+    {
+        if (resource == resourceMax)
+        {
+            OverclockBar.fillAmount += Mathf.Max(proceeds, 100)* Time.deltaTime / 1000;
+            Terraformer.isOverclock = true;
+        }
+        else if (OverclockBar.fillAmount > 0)
+        {
+            OverclockBar.fillAmount -= Mathf.Abs(proceeds) * Time.deltaTime / 1000;
+            Terraformer.isOverclock = true;
+        }
+        else { Terraformer.isOverclock = false; }
+
+        Terraformer.overclockFactor = OverclockBar.fillAmount;
+        if (OverclockBar.fillAmount == 1) 
+        { LevelManager.Victory(); }// 3 level
+    }
+
+    public static void ApplyDefeat() 
+    {
+        isDefeat = true;
+        resource = 0;
+    }
+    /*public void ApplyVictory()
+    {
+        //  victory.gameObject.SetActive(true);
+        Terraformer.isVictory = true;
+        MenuController.ShowVictory(true);
+        if (EnemyManagerPro.enemies.Count != 0)
+        {
+            var enemy = EnemyManagerPro.enemies.ToArray()[0];
+            enemy.ApplyDamage(enemy.maxHealth, Vector3.zero, Vector3.zero);
+        }
+
+    }*/
 }

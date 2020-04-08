@@ -6,6 +6,7 @@ using UnityEngine;
 public class Logic : MonoBehaviour
 {
 
+    public SpawnEnemiesPattern pattern;
 
     public GameObject enemyDamager;
     public GameObject enemyTank;
@@ -21,10 +22,10 @@ public class Logic : MonoBehaviour
 
     public float startCount = 200;
 
-    private float wave = 0;
+    private int wave = 1;
 
-    public GameObject portal;
-    public PortalSettings thisPortalSettings;
+    public GameObject lastPortal;
+ //   public PortalSettings thisPortalSettings;
     public float difficulties = 1;
 
     public bool betweenWavesActivity = false;
@@ -37,34 +38,74 @@ public class Logic : MonoBehaviour
     private float totalCount;
     private List<GameObject> list;
 
+    private bool stopTime = false;
+
     private float randPos;
 
     void Start()
     {
-        portal.active = false;
-        realTimer = timer / 2;
+        //pattern.portals[4].gameObject.active = false;
+        realTimer = timer;
     }
 
     void Update()
     {
-        realTimer -= Time.deltaTime;
-        timerText.text = realTimer.ToString("0.0");
+        if (Input.GetKeyDown("space"))
+        {
+            if (stopTime)
+            { Time.timeScale = 1f; }
+            else
+            { Time.timeScale = 0; }
+
+            stopTime = !stopTime;
+            //print("space key was pressed");
+        }
+
+        if (lastPortal.active)
+        {
+            timerText.text = "Active Wave " + (wave - 1);
+        }
+        else
+        {
+            if (pattern.wave >= pattern.maxWaves)
+            {
+                //print(pattern.wave + " " + pattern.maxWaves);
+                timerText.text = "Fin";
+                return;
+            }
+            realTimer -= Time.deltaTime;
+            timerText.text = "Next Wave in " + realTimer.ToString("0.0");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            wave++;
+        }
+
+       
+
+
         if (realTimer <= 0)
         {
+            //========== Sapwn Logick ============//
+           
             //print("+");
-            portal.transform.position = countVector();
-            portal.active = true;
-
-            thisPortalSettings.setSettings(conutWave());
+            pattern.setPattern(wave);
+            //thisPortalSettings.setSettings(pattern.getPattern(), pattern.spawnRate);
+            //lastPortal.active = true;
+            //print(SquadFormationSquare.DegreeToRadian(pattern.portalPosition));
+            //print(Mathf.Sin(2));
+            //lastPortal.transform.position = countVector();
             wave++;
-            realTimer = timer + wave / difficulties;
-        }
-    }
 
-    private Vector3 countVector()
-    {
-        randPos = Random.Range(0f, 60f);
-        return new Vector3(23 + wave * Mathf.Sin(randPos), 1, 23 + wave * Mathf.Cos(randPos));
+  
+            //=================================
+            //new SquadFormationSquare(enemyTank, enemyDamager, 2, 4, 1f, 25, 0);
+            //new SquadFormationCircle(enemyTank, enemyDamager, 1, 10, 2, 25, randPos);
+            realTimer = timer;
+        }
+
+        
     }
 
     private List<GameObject> conutWave()

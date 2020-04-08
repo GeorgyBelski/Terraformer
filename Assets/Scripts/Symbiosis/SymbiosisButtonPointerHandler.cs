@@ -10,10 +10,12 @@ public class SymbiosisButtonPointerHandler : MonoBehaviour, IPointerDownHandler,
     public TowerMenuController towerMenuController;
     public Button thisSymiosisButton;
 
-    public UnityEvent onClick;
+    public UnityEvent onClick; // SymbiosisClickButton(Button clickedButton)
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left) { return; }
+
         towerMenuController.OnPointerDown();
         onClick.Invoke();
     }

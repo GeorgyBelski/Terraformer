@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 4158117497877208495}
   - component: {fileID: 762130184}
   - component: {fileID: 7932900423740752727}
+  - component: {fileID: 1826154746526864777}
   m_Layer: 12
   m_Name: Healer
   m_TagString: Untagged
@@ -153,7 +154,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 1.75
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -204,8 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb14cc1a6e5e29a41aa4dbf1701bbeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
-  health: 500
+  maxHealth: 600
+  health: 600
   healthBar: {fileID: 1609642471}
   healHealth: {fileID: 0}
   isHeal: 0
@@ -219,12 +220,16 @@ MonoBehaviour:
   - {fileID: 8621118192098088666}
   damagePointIndex: 2
   healthRatio: 0
+  shaderMaterial: {fileID: 2100000, guid: 3de58dcecff9cec4f836b99b1ce729c0, type: 2}
   character: {fileID: 762130184}
   effectsController: {fileID: 7932900423740752727}
   type: 1
   animator: {fileID: 762130185}
   spurtFXController: {fileID: 0}
   chest: {fileID: 4632162293913989569}
+  audioSource: {fileID: 1826154746526864777}
+  enemySounds:
+  - {fileID: 8300000, guid: a4f2741d06a069e47a8f0ffc7bc58ee8, type: 3}
 --- !u!114 &762130189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +402,102 @@ MonoBehaviour:
     type: 3}
   vertigo: {fileID: 0}
   originalNavAgentSpeed: 0
+--- !u!82 &1826154746526864777
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762130183}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 15
+  MaxDistance: 45
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1440081790
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 3de58dcecff9cec4f836b99b1ce729c0, type: 2}
   m_Color: {r: 1, g: 0, b: 0.15346527, a: 0.7058824}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
@@ -1145,36 +1246,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Anubis_Healer01
       objectReference: {fileID: 0}
-    - target: {fileID: -9050095477880005426, guid: af99a686761c4454896184ae8447fbfa,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -9050095477880005426, guid: af99a686761c4454896184ae8447fbfa,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -9050095477880005426, guid: af99a686761c4454896184ae8447fbfa,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.017339706
-      objectReference: {fileID: 0}
-    - target: {fileID: -9050095477880005426, guid: af99a686761c4454896184ae8447fbfa,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -9050095477880005426, guid: af99a686761c4454896184ae8447fbfa,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: af99a686761c4454896184ae8447fbfa,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: af99a686761c4454896184ae8447fbfa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1255,17 +1326,32 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.010020256
       objectReference: {fileID: 0}
-    - target: {fileID: 987705126721722885, guid: af99a686761c4454896184ae8447fbfa,
+    - target: {fileID: -9050095477880005426, guid: af99a686761c4454896184ae8447fbfa,
         type: 3}
-      propertyPath: m_LocalRotation.y
+      propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 987705126721722885, guid: af99a686761c4454896184ae8447fbfa,
+    - target: {fileID: -9050095477880005426, guid: af99a686761c4454896184ae8447fbfa,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.6947378
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -9050095477880005426, guid: af99a686761c4454896184ae8447fbfa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.017339706
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: af99a686761c4454896184ae8447fbfa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2406916848136235212, guid: af99a686761c4454896184ae8447fbfa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0813a51e0f3dc0d4d922ec0e8fa43633, type: 2}
+    - target: {fileID: 7681348884995570781, guid: af99a686761c4454896184ae8447fbfa,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1275,11 +1361,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1a957aa1a9dca314987dfbbc741782ec, type: 2}
-    - target: {fileID: 7681348884995570781, guid: af99a686761c4454896184ae8447fbfa,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0813a51e0f3dc0d4d922ec0e8fa43633, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af99a686761c4454896184ae8447fbfa, type: 3}
 --- !u!4 &6693911278705448118 stripped

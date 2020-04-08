@@ -23,7 +23,12 @@ public class Tank : Enemy_Logic
 
     public override void Attack()
     {
-        targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
+        if (targetTower)
+        {
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            base.Attack();
+            targetTower.towerHealth.ApplyDamage(damageOnAttack, Vector3.zero, Vector3.zero);
+        }
     }
     public override void check()
     {
@@ -41,10 +46,13 @@ public class Tank : Enemy_Logic
                 //print("+");
                 isStand = false;
                 isAttack = false;
-                if (TowerManager.terraformer)
-                    stateGoToDestanation(TowerType.Terraformer);
+                if(isPriority)
+                    stateGoToDestanation(priorityTowerType);
                 else
-                    isStand = true;
+                    if (TowerManager.terraformer)
+                        stateGoToDestanation(TowerType.Terraformer);
+                    else
+                        isStand = true;
             }
             else
             {

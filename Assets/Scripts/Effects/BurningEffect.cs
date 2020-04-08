@@ -6,7 +6,7 @@ public class BurningEffect : Effect
 {
     public int damage; // in half a second
     public float timerDamage = 0.3f;
-    public static float standardLifetime = 2f;
+  //  public static float standardLifetime = 2f;
 
     public BurningEffect() {
         this.type = Effect.Type.Burning;

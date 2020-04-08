@@ -12,6 +12,9 @@ public class ScorchingRayAbility : TowerAbility
     public float effectRadius = 2.19f;
     [HideInInspector]
     public GameObject scorchingRay;
+
+    public List<AudioClip> abilitiesSounds;
+
     Material trailMaterial;
     Animator animator;
     Vector3? aim;
@@ -32,22 +35,17 @@ public class ScorchingRayAbility : TowerAbility
     {
         base.Cast(aimPosition);
 
-        TowerManager.availableLaserTowers.Remove((LaserTower)tower);
         aim = aimPosition;
-        //   cannon.LookAt((Vector3)thandetBallAim);
         tower.RotateCannon((Vector3)aim);
 
-        Vector3 offsetFromCannon = gunpoint.position - cannon.position;
+        tower.audioSource.pitch = 2f;
+        tower.audioSource.PlayOneShot(abilitiesSounds[0], 0.6f);
+
+        //Vector3 offsetFromCannon = gunpoint.position - cannon.position;
         if (!scorchingRay)
         {
             scorchingRay = Instantiate(scorchingRayPrefab, gunpoint.position, Quaternion.identity);
             animator = scorchingRay.GetComponent<Animator>();
-            //    thandetBallCollider = thandetBall.GetComponentInChildren<SphereCollider>();
-            //    thandetBallCollider.enabled = false;
-
-         //   trailMaterial = scorchingRay.GetComponentInChildren<ParticleSystemRenderer>().trailMaterial;
-            //   Debug.Log("thandetBallTrailMaterial: " + thandetBallTrailMaterial);
-          //  trailMaterial.SetColor("_BaseColor", new Color(5, 5, 5, 1));
         }
         else
         {
@@ -77,12 +75,16 @@ public class ScorchingRayAbility : TowerAbility
         timerCast -= Time.deltaTime;
         if (timerCast <= 0)
         {
+            tower.audioSource.Stop();
             tower.EndCasting();
+            tower.audioSource.pitch = 1.5f;
+            tower.audioSource.PlayOneShot(abilitiesSounds[1], 0.8f);
         }
     }
 
     public override void ShootingControl()
     {
+
         Vector3 toAim = (Vector3)aim - scorchingRay.transform.position;
         float distanceToAim = toAim.magnitude;
         if (distanceToAim > 0.15f && previousDistanceToAim > distanceToAim)
@@ -93,6 +95,9 @@ public class ScorchingRayAbility : TowerAbility
         else
         {
             scorchingRay.transform.position = (Vector3)aim;
+            AudioSource blowUp = scorchingRay.GetComponent<AudioSource>();
+            blowUp.pitch = 2f;
+            blowUp.PlayOneShot(abilitiesSounds[2], 0.4f);
             animator.SetBool("isReachAim", true);
             ApplyScorchingRayEffects((Vector3)aim, effectRadius);
             aim = null;
@@ -101,13 +106,15 @@ public class ScorchingRayAbility : TowerAbility
 
     private void ApplyScorchingRayEffects(Vector3 aim, float effectRadius)
     {
+
         EnemyManagerPro.enemies.ForEach(enemy =>
         {
             if (enemy)
                 { Vector3 distanceToEnemy = enemy.transform.position - aim;
                 if (distanceToEnemy.magnitude <= effectRadius)
                 {
-                    enemy.effectsController.AddBurning(BurningEffect.standardLifetime, ((LaserTower)tower).damageBurning);
+                    enemy.effectsController.AddBurning(Effect.burningDuration, Effect.burningDamage);
+                    enemy.effectsController.AddSlowdown(Effect.slowdownDuration, Effect.slowdownMultiplier);
                     targets.Add(enemy);
                 }
             }    
