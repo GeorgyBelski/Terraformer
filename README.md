@@ -1,6 +1,9 @@
 # Terraformer
 Repository for a student Tower defense game project
 
+Gameplay vidio:
+https://drive.google.com/open?id=1bgXMJHn02s6uVmH6DNHBPl3oo3BJk9Az
+
 ## Laser Tower:
 
 AutoAttacks, Ability, Symbiosis between two Laser Towers  
